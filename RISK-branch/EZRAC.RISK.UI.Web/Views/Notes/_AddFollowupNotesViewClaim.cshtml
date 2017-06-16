@@ -1,0 +1,32 @@
+﻿
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.NotesViewModel
+
+<div class="modal fade cla-modpopup in" id="update-followup-date-Pop" role="dialog" style="display: block; padding-left: 17px;vertical-align:middle;position:absolute">
+    <div class="modal-dialog" style="width:480px;height:600px !important">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">Reason for change</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="bold">Notes</div><br />
+                    <div>
+                        @Html.TextAreaFor(x => x.Description, new { style = "width:100%;height:200px;", id = "followupNoteDescription" })
+                    </div>
+                    <div id="errorDescription" class="errorMsg"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="update-followup-date" class="btn btn1 pull-left top5 right20" data-dismiss="modal">UPDATE</button>
+                <button id="cancel" class="btn btn2 pull-left top5" data-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="claimId" />
+
+    <input type="hidden" id="follow-update" />
+</div>
+
+

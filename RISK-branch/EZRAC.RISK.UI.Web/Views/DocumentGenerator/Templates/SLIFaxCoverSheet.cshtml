@@ -1,0 +1,180 @@
+﻿
+@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.NationalCasualtyInsuranceCoverViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID 106379</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.HeaderViewModel.Company.Address<br />
+                    @Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.HeaderViewModel.RiskUserEmail<br />
+                Phone:  @Model.HeaderViewModel.Company.Phone<br />
+                Fax:    @Model.HeaderViewModel.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+   
+           
+
+                @if (!string.IsNullOrEmpty(Model.PolicyNumber))
+                {
+                     <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top" width="50%" style="font-weight:bold">
+                *<br />Knight Management Insurance Services, LLC<br />
+                4751 Wilshire Blvd, Suite 111<br />
+                Los Angeles, CA 90010<br />
+                Phone: 888-333-8198 Fax: 323-954-5330
+
+            </td>
+            <td valign="top" width="50%">
+                *<br />From:  Risk Management Services<br />
+                <div>Policy #: @Model.PolicyNumber </div>
+            </td>
+                    </tr>
+
+                    <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">THIS IS FOR LIABILITY NOTIFICATION ONLY!</td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                *<br />
+                <div style="font-weight:bold">Attention:  Rental Liability Claims</div>
+                Attached is the information required to set up a new claim with your company. If you require any other information, please call.
+                <strong>When the claims are set up, please e-mail or fax the claim number to our office.</strong>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                *<br />
+                <div style="font-weight:bold">Date:  @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)</div>
+                    
+                    Number of Pages Sent:
+</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <table border="1" align="left">
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                        <td style="font-weight:bold">Claim #:</td>
+                        <td>@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</td>
+                    </tr>
+                    @foreach (var item in @Model.Drivers)
+                    {
+                        if (item.DriverType == 1)
+                        {
+                            <tr>
+                                <td style="font-weight:bold">Renter Name: </td>
+                                <td>@item.Name</td>
+                            </tr>
+
+                            <tr>
+                                <td style="font-weight:bold">Insurance:</td>
+                                <td>@item.InsuranceViewModel.InsuranceCompanyName</td>
+                            </tr>
+                        }
+                        if (item.DriverType == 2)
+                        {
+                            <tr>
+                                <td style="font-weight:bold">Additional Driver Name: </td>
+                                <td>@item.Name</td>
+                            </tr>
+
+                            <tr>
+                                <td style="font-weight:bold">Add Driver Insurance:</td>
+                                <td>@item.InsuranceViewModel.InsuranceCompanyName</td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td style="font-weight:bold">Date of Loss:</td>
+                        <td>@Model.HeaderViewModel.DateOfLoss</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Unit Number:</td>
+                        <td>@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Tag Number:</td>
+                        <td>@Model.HeaderViewModel.VehicleViewModel.TagNumber</td>
+                    </tr>
+                    @foreach (var item in @Model.Drivers)
+                    {
+                        if (item.DriverType == 3)
+                        {
+                            <tr>
+                                <td style="font-weight:bold">Third Party Name: </td>
+                                <td>@item.Name</td>
+                            </tr>
+
+                            <tr>
+                                <td style="font-weight:bold">Insurance:</td>
+                                <td>@item.InsuranceViewModel.InsuranceCompanyName</td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </td>
+        </tr>
+    </table>
+                }
+                else
+                {
+                    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td valign="top" width="50%" style="font-weight:bold">
+                *<br />Knight Management Insurance Services, LLC<br />
+                4751 Wilshire Blvd, Suite 111<br />
+                Los Angeles, CA 90010<br />
+                Phone: 888-333-8198 Fax: 323-954-5330
+
+            </td>
+                    <td valign="top" width="50%">
+                *<br />From:  Risk Management Services<br />
+                    <div> Sorry, there is no SLI policy associated with this opening location. </div>
+                        </td>
+            </tr>
+                        </table>
+                    
+                }
+
+</body>
+</html>
+

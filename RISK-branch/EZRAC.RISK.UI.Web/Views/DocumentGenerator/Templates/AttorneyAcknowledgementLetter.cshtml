@@ -1,0 +1,96 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />
+                    Risk Management Services<br />
+                    @Model.Company.Address <br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top">*<br /><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td width="33%" align="right" valign="top">
+                <div>
+                    *<br />
+                    Email:  @Model.RiskUserEmail<br />
+                    Phone:  @Model.Company.Phone<br />
+                    Fax:    @Model.Company.Fax
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+
+                <div>
+                    *<br />
+                    Morgan & Morgan, LLC<br />
+                    123 Orlando Avenue<br />
+                    Orlando, FL 12345
+                </div>
+            </td>
+
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                   @DateTime.Now.ToString(EZRAC.Risk.UI.Web.Helper.Constants.CrmsDateFormates.MMDDYYYY)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <div align="center">
+                    *<br />Renter:    @Model.DriverViewModel.Name<br />Claim #:    @String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)<br />Unit #:    @Model.VehicleViewModel.UnitNumber<br />Date of Loss:    @Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)<br /><br />
+                </div>
+                Attorney Morgan,<br /><br />
+                This letter will serve to acknowledge the letter of representation we received from your office on August 1, 2014. At this time we have forwarded this information to National Casualty for review as they are responsible for handling our liability claims. Please direct all future correspondence to their attention. They can be reached at 800-555-5555.<br /><br />
+                Should you have any questions or require anything further, please contact me at the below number. Thank you.
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <div style="font-size:small">
+                    *<br />Sincerely,<br />
+                    @Model.RiskUserFullName<br />
+                    Risk Management Services<br />
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+</body>
+</html>

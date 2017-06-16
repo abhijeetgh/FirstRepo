@@ -1,0 +1,90 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@{
+    Layout = null;
+}
+
+@using EZRAC.Risk.UI.Web.Helper;
+@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Claims.RiskFileModel>
+
+<div class="grey-border-1 top15 ">
+    <table class="grey-white-table dark-blue-header complete complete-width  bordered-table paginated-table ">
+        <tr class="white-color">
+            <th>
+                <div class="display-inline">Category </div>
+            </th>
+            <th>
+                <div class="display-inline">Files </div>
+            </th>           
+            <th class="center-align"> Action </th>
+        </tr>
+       
+@foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryName</td>
+            <td>
+                @foreach (var file in item.FileList)
+                {
+                     
+    <span style="display:inline-block;width:45%">
+        @Html.ActionLink(@file.FileName, "Download", new { id = @file.Id })
+
+        @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteFiles))
+        {
+               @Ajax.MyActionLink("<span class=\"ico-close\" title='Delete'>&nbsp;</span>", "Delete", "", new { id = @file.Id},
+                new AjaxOptions()
+                {
+                    HttpMethod = "Delete",
+                    Confirm = "Are you sure you want to delete this file?",
+                    OnComplete = "onAjaxComplete",
+                    OnFailure = "onErrorHandler(xhr)"
+                })
+        }
+        
+     
+       </span>
+                }
+               
+            </td>         
+            <td align="center">
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteFiles))
+                {
+                     @Ajax.MyActionLink("<span class=\"ico-delete\" title='Delete'>&nbsp;</span>", "DeleteCategory", "delete-action", new { id = item.CategoryId },
+                new AjaxOptions()
+                {
+                    HttpMethod = "Delete",
+                    Confirm = "Are you sure you want to delete this group?",
+                    OnComplete = "onAjaxComplete",
+                    OnFailure = "onErrorHandler(xhr)"
+                })
+                }
+                else
+                {
+
+                    <a class="left20 opacity-light cursor-default"><span class="ico-delete" title="Delete">&nbsp;</span></a>
+
+                }
+            </td>
+        </tr>        
+    }
+
+        @if (!Model.Any())
+        {
+            <tr><td colspan="3" class="text-center">Picture/Files are not available</td></tr>
+        }    
+    </table>
+</div>  
+<script>
+    $(document).ready(function () {
+        $('.delete-action').each(function (index, value) {
+            var url = $(this).attr('href');
+            var claimId = $('#ClaimID').val();
+            $(this).attr('href', url + '?claimId=' + claimId);
+        });
+    });  
+
+    function onAjaxComplete() {        
+        var claimId = $('#ClaimID').val();
+        GetFilesDetail();
+    }
+</script>

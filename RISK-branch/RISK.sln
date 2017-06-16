@@ -1,0 +1,135 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Infrastructure", "0.Infrastructure", "{066F631E-214A-4798-B228-13F5B3139A10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Domain", "1.Domain", "{825BA3A1-94CA-45DE-BD6A-EA94134D1C6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Service", "2.Service", "{036F4841-0C6A-42C9-94FD-BCFCBF06FC75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.PresentationLayer", "4.PresentationLayer", "{949853A6-DFA3-460A-BFF6-DB8ADF6AA079}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Tests", "6.Tests", "{792FCB48-FCE7-4037-8ABE-F7D58EE0ADFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Risk.UI.Web", "EZRAC.Risk.UI.Web\EZRAC.Risk.UI.Web.csproj", "{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.RISK.Services.Contracts", "EZRAC.RISK.Services.Contracts\EZRAC.RISK.Services.Contracts.csproj", "{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.RISK.Services.Implementation", "EZRAC.RISK.Services.Implementation\EZRAC.RISK.Services.Implementation.csproj", "{AAD054F2-25B4-495A-9DCE-CAB0617EC5B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.RISK.Domain", "EZRAC.RISK.Domain\EZRAC.RISK.Domain.csproj", "{862F9A10-9EC6-48B8-AC8D-15F390B3932A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.RISK.EntityFramework", "EZRAC.RISK.EntityFramework\EZRAC.RISK.EntityFramework.csproj", "{787FEDF3-FEF8-455A-A9EB-59570A1F47FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.RISK.QueryService", "EZRAC.RISK.QueryService\EZRAC.RISK.QueryService.csproj", "{F3D14F69-B949-4962-9EAD-DE4EAA6D649A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "TestClient\TestClient.csproj", "{0394F756-4B80-4F19-A74E-F454376686E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Utils", "5.Utils", "{94A46E00-85D6-473A-8118-8F1917344F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.RISK.Util", "EZRAC.RISK.Util\EZRAC.RISK.Util.csproj", "{EDD1AF64-7769-4853-8761-A9B832C7D40E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Risk.Services.Test", "UnitTestProject\EZRAC.Risk.Services.Test.csproj", "{16005ED1-D4FF-47B3-A52B-75A72618DE0B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/tfs/ez-rent-a-car
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EZRAC.Risk.UI.Web\\EZRAC.Risk.UI.Web.csproj
+		SccProjectTopLevelParentUniqueName1 = RISK.sln
+		SccProjectName1 = EZRAC.Risk.UI.Web
+		SccLocalPath1 = EZRAC.Risk.UI.Web
+		SccProjectUniqueName2 = TestClient\\TestClient.csproj
+		SccProjectTopLevelParentUniqueName2 = RISK.sln
+		SccProjectName2 = TestClient
+		SccLocalPath2 = TestClient
+		SccProjectUniqueName3 = EZRAC.RISK.EntityFramework\\EZRAC.RISK.EntityFramework.csproj
+		SccProjectTopLevelParentUniqueName3 = RISK.sln
+		SccProjectName3 = EZRAC.RISK.EntityFramework
+		SccLocalPath3 = EZRAC.RISK.EntityFramework
+		SccProjectUniqueName4 = EZRAC.RISK.QueryService\\EZRAC.RISK.QueryService.csproj
+		SccProjectTopLevelParentUniqueName4 = RISK.sln
+		SccProjectName4 = EZRAC.RISK.QueryService
+		SccLocalPath4 = EZRAC.RISK.QueryService
+		SccProjectUniqueName5 = EZRAC.RISK.Domain\\EZRAC.RISK.Domain.csproj
+		SccProjectTopLevelParentUniqueName5 = RISK.sln
+		SccProjectName5 = EZRAC.RISK.Domain
+		SccLocalPath5 = EZRAC.RISK.Domain
+		SccProjectUniqueName6 = EZRAC.RISK.Util\\EZRAC.RISK.Util.csproj
+		SccProjectTopLevelParentUniqueName6 = RISK.sln
+		SccProjectName6 = EZRAC.RISK.Util
+		SccLocalPath6 = EZRAC.RISK.Util
+		SccProjectUniqueName7 = EZRAC.RISK.Services.Contracts\\EZRAC.RISK.Services.Contracts.csproj
+		SccProjectTopLevelParentUniqueName7 = RISK.sln
+		SccProjectName7 = EZRAC.RISK.Services.Contracts
+		SccLocalPath7 = EZRAC.RISK.Services.Contracts
+		SccProjectUniqueName8 = EZRAC.RISK.Services.Implementation\\EZRAC.RISK.Services.Implementation.csproj
+		SccProjectTopLevelParentUniqueName8 = RISK.sln
+		SccProjectName8 = EZRAC.RISK.Services.Implementation
+		SccLocalPath8 = EZRAC.RISK.Services.Implementation
+		SccProjectUniqueName9 = UnitTestProject\\EZRAC.Risk.Services.Test.csproj
+		SccProjectTopLevelParentUniqueName9 = RISK.sln
+		SccProjectName9 = UnitTestProject
+		SccLocalPath9 = UnitTestProject
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD054F2-25B4-495A-9DCE-CAB0617EC5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD054F2-25B4-495A-9DCE-CAB0617EC5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD054F2-25B4-495A-9DCE-CAB0617EC5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD054F2-25B4-495A-9DCE-CAB0617EC5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862F9A10-9EC6-48B8-AC8D-15F390B3932A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862F9A10-9EC6-48B8-AC8D-15F390B3932A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862F9A10-9EC6-48B8-AC8D-15F390B3932A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862F9A10-9EC6-48B8-AC8D-15F390B3932A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787FEDF3-FEF8-455A-A9EB-59570A1F47FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787FEDF3-FEF8-455A-A9EB-59570A1F47FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787FEDF3-FEF8-455A-A9EB-59570A1F47FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787FEDF3-FEF8-455A-A9EB-59570A1F47FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D14F69-B949-4962-9EAD-DE4EAA6D649A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D14F69-B949-4962-9EAD-DE4EAA6D649A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D14F69-B949-4962-9EAD-DE4EAA6D649A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D14F69-B949-4962-9EAD-DE4EAA6D649A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0394F756-4B80-4F19-A74E-F454376686E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0394F756-4B80-4F19-A74E-F454376686E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0394F756-4B80-4F19-A74E-F454376686E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0394F756-4B80-4F19-A74E-F454376686E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD1AF64-7769-4853-8761-A9B832C7D40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD1AF64-7769-4853-8761-A9B832C7D40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD1AF64-7769-4853-8761-A9B832C7D40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD1AF64-7769-4853-8761-A9B832C7D40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16005ED1-D4FF-47B3-A52B-75A72618DE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16005ED1-D4FF-47B3-A52B-75A72618DE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16005ED1-D4FF-47B3-A52B-75A72618DE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16005ED1-D4FF-47B3-A52B-75A72618DE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{787FEDF3-FEF8-455A-A9EB-59570A1F47FD} = {066F631E-214A-4798-B228-13F5B3139A10}
+		{F3D14F69-B949-4962-9EAD-DE4EAA6D649A} = {066F631E-214A-4798-B228-13F5B3139A10}
+		{862F9A10-9EC6-48B8-AC8D-15F390B3932A} = {825BA3A1-94CA-45DE-BD6A-EA94134D1C6D}
+		{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E} = {036F4841-0C6A-42C9-94FD-BCFCBF06FC75}
+		{AAD054F2-25B4-495A-9DCE-CAB0617EC5B9} = {036F4841-0C6A-42C9-94FD-BCFCBF06FC75}
+		{16005ED1-D4FF-47B3-A52B-75A72618DE0B} = {036F4841-0C6A-42C9-94FD-BCFCBF06FC75}
+		{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47} = {949853A6-DFA3-460A-BFF6-DB8ADF6AA079}
+		{0394F756-4B80-4F19-A74E-F454376686E7} = {792FCB48-FCE7-4037-8ABE-F7D58EE0ADFF}
+		{EDD1AF64-7769-4853-8761-A9B832C7D40E} = {94A46E00-85D6-473A-8118-8F1917344F7A}
+	EndGlobalSection
+EndGlobal

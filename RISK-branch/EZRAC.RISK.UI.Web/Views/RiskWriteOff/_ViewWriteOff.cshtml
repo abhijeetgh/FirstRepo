@@ -1,0 +1,54 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.WriteOffViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<table class="table table-striped add-items " id="writeOffTable">
+    <thead>
+        <tr>
+            <th>
+                <div class="display-inline">Type of WriteOff</div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">Amount $</div>
+            </th>
+            <th class="align-right"><div class="display-inline">Action </div> </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var writeOff in Model.WriteOffs)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(b => writeOff.WriteOffType)</td>
+                <td class="align-right">@Html.DisplayFor(b => writeOff.Amount)</td>
+                <td>
+                    <div class="align-right right10">
+                        @*@Ajax.MyActionLink("<span class='ico-delete'>&nbsp;</span>", "DeleteWriteOff", "delete-action left20", new { Id = writeOff.WriteOffId, ClaimId = Model.ClaimId },
+                            new AjaxOptions { UpdateTargetId = "view-billing" })*@
+
+                        <a class="delete-action left20" data-url="@Url.Action("DeleteWriteOff")" onclick="DeleteWriteOff(this,@writeOff.WriteOffId,@Model.ClaimId)" href="javascript:void(0);" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+
+
+@Html.HiddenFor(x => x.TotalWriteOff, new { @id = "writeoff" })
+@Html.HiddenFor(x => x.TotalDue, new { @id = "due" })
+    </tbody>
+
+    @*<tfoot>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="align-right"><strong>@Html.DisplayNameFor(model => model.TotalBilling) : $</strong><strong id="footer-total-billing">@Html.DisplayFor(model => model.TotalBilling)</strong></td>
+                <td>&nbsp;</td>
+            </tr>
+        </tfoot>*@
+</table>
+@*<script src="~/Scripts/appScripts/view-billing.js"></script>*@
+

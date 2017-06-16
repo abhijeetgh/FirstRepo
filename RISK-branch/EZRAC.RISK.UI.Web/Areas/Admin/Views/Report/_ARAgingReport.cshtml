@@ -1,0 +1,203 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Reports.ARAgingCustomReportViewModel>
+
+<div id="ReportResult">
+    <div class="col-xs-12">
+        @*<div class="report-box">
+            <h4>Summary</h4>
+            <p><span><strong>Locations</strong></span>&nbsp;<span id="LocationNames"> vaniya, john01</span></p>
+            <p><span><strong>Report Date</strong></span>&nbsp;<span id="ReportDate"></span></p>
+            <p><span><strong>As Of Date</strong></span> &nbsp;<span id="SummaryAsOfDate"></span></p>
+        </div>*@
+        <a href="@Url.Action("GenerateExportFile", "Report")" class="export-btn pull-right top20"><span class="exporticon">&nbsp;</span><strong>Export</strong></a>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="grey-border-1 top15">
+
+            @{
+                if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {  
+                        <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr>
+                                    <td id="reportlocation" colspan="9">
+                                        <span class="bold">@item.Location <input type="hidden" id="@item.LocationId" /></span>
+                                    </td>
+                                </tr>
+                                <tr class="white-color">
+
+                                    <th>
+                                        <div class="display-inline">Contract / Claim Number </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Renter</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Unit Number</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Assigned To</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Loss Date</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Billed</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amount Due</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Days</div>
+                                    </th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var aRAgingReport in item.ARAgingReportViewModel)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", aRAgingReport.ContractNo, aRAgingReport.CompanyAbbr, aRAgingReport.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = aRAgingReport.Claim })  <input type="hidden" value="@aRAgingReport.Claim" id="ClaimId" /></td>
+                                        <td> @aRAgingReport.Renter </td>
+                                        <td> @aRAgingReport.UnitNumber</td>
+                                        <td> @aRAgingReport.AssignedTo </td>
+                                        <td> @aRAgingReport.DateOfLoss </td>
+                                        <td> $@aRAgingReport.TotalBilled</td>
+                                        <td> $@aRAgingReport.TotalCollected </td>
+                                        <td> $@aRAgingReport.TotalDue </td>
+                                        <td> @aRAgingReport.NoOfDays </td>
+                                        
+                                    </tr>
+                                }
+                                <tr class="ReportSummaryTotal">
+                                    <td colspan="5">Total Claims: @item.TotalClaims</td>                                                                  
+                                    <td colspan="4">Total Receivables: $@item.TotalReceivables</td>   
+                                                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    }
+                }
+                 else
+                {
+                      <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr class="white-color">
+
+                                    <th>
+                                        <div class="display-inline">Contract / Claim Number </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Renter</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Unit Number</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Assigned To</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Loss Date</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Billed</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amount Due</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Days</div>
+                                    </th>
+                                    
+                                </tr>
+                                </thead>
+                          <tbody>
+                              <tr>
+                                  <td colspan="8" align="center">
+                                      Records are not available
+                                  </td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                                  <td style="display:none"></td>
+                              </tr>
+                          </tbody>
+                        </table>
+                  
+                }
+            }
+            @*<div class="padding-horizontal-15">
+                    <div class=" font-12 row grey-background">
+                        <div class="float-left">
+                            <ul class="pagination-list bottom0 top5 ">
+                                <li class="pagination-list-item ">
+                                    <a aria-label="Previous" href="javascript:void(0);">
+                                        <div class="arrow-left"></div>
+                                    </a>
+                                </li>
+                                <li class="pagination-list-item active"> <a href="javascript:void(0);">1</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">2</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">3</a> </li>
+                                <li class="pagination-list-item">
+                                    <a aria-label="Next" href="javascript:void(0);">
+                                        <div class="arrow-right"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="float-left left20 top3">
+                            <div class=" bottom10 top10">
+                                <span>Showing </span> <span>
+                                    <select class="show-record">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </span> <span>Of 100 Records</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //$.extend(true, $.fn.dataTable.defaults, {
+        //    "searching": true,
+        //    "ordering": true,
+        //    "paging": false,
+        //    "info": false,
+        //    "destroy": true
+        //    //"scrollY": "200px",
+
+        //});
+        //$("#ReportResult table").DataTable({
+        //    columnDefs: [
+        //    {
+        //        "orderable": false,
+        //    }
+        //    ],
+        //    "order": [[0, "asc"]],
+        //    "language": {
+        //        "emptyTable": "Records are not available"
+        //    }
+        //});
+        $(".dataTables_filter").css("display", "none");
+        //$(".export-btn").click(function () {           
+        //    window.location = 'Report/GenerateExportFile';
+        //});
+    });
+</script>

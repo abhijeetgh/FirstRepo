@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Claims.DamageViewModel>
+@using EZRAC.Risk.UI.Web.Helper
+<thead>
+    <tr>
+        <th style="display:none"></th>
+        <th>
+            <div class="display-inline">Section </div>
+        </th>
+        <th>
+            <div class="display-inline">Details </div>
+        </th>
+        <th>
+            <div class="display-inline">Action </div>
+            <a href="javascript:void(0);" class="display-inline"></a>
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td id="damageId" style="display:none">@item.DamageId</td>
+            <td>@item.SelectedSection</td>
+            <td>@item.Details</td>
+            <td>
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeletedDamages))
+            {
+                <a class="delete-action left20 delete-damage" href="javascript:void(0);" data-url="@Url.Action("DeleteDamage", "Damage")" id="deleteDamage" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+            }
+            else
+            {
+
+                <a class="delete-action left20 opacity-light cursor-default" href="javascript:void(0);" id="deleteDamage" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+            }
+                
+            
+            </td>
+        </tr>
+    }
+</tbody>
+
+<script src="@Url.Content("~/Scripts/appScripts/damage-table-info.js")"></script>
+
+
+

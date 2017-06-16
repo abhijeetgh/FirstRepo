@@ -1,0 +1,98 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core", "EZRAC.Core\EZRAC.Core.csproj", "{0F4E389C-DD2D-48D9-B428-80D84CF85873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core.Data.EntityFramework", "EZRAC.Core.Data.EntityFramework\EZRAC.Core.Data.EntityFramework.csproj", "{52154570-3BCD-4363-90B3-DE8E9D262E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient", "TestClient\TestClient.csproj", "{2615CF77-55BF-48CC-9534-614315C5A75F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core.Logging.Log4Net", "EZRAC.Core.Logging.Log4Net\EZRAC.Core.Logging.Log4Net.csproj", "{24C172DC-4F83-47E3-A122-C25CACB22526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core.Email", "EZRAC.Core.Email\EZRAC.Core.Email.csproj", "{B3983EBC-3BD5-4933-8890-576615F6729B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core.Caching.ContextCache", "EZRAC.Core.Caching.ContextCache\EZRAC.Core.Caching.ContextCache.csproj", "{5994F25D-A9CF-4B4F-9278-C5F4647B71EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core.Util", "EZRAC.Core.Util\EZRAC.Core.Util.csproj", "{AD91D8C5-D8DB-4372-A9F6-CE820A6F63B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZRAC.Core.FileGenerator", "EZRAC.Core.PDFGenerator\EZRAC.Core.FileGenerator.csproj", "{4C72F134-7A25-4034-AAD7-86675681E8BC}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/tfs/ez-rent-a-car
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EZRAC.Core.Data.EntityFramework\\EZRAC.Core.Data.EntityFramework.csproj
+		SccProjectName1 = EZRAC.Core.Data.EntityFramework
+		SccLocalPath1 = EZRAC.Core.Data.EntityFramework
+		SccProjectUniqueName2 = EZRAC.Core\\EZRAC.Core.csproj
+		SccProjectName2 = EZRAC.Core
+		SccLocalPath2 = EZRAC.Core
+		SccProjectUniqueName3 = TestClient\\TestClient.csproj
+		SccProjectName3 = TestClient
+		SccLocalPath3 = TestClient
+		SccProjectUniqueName4 = EZRAC.Core.Logging.Log4Net\\EZRAC.Core.Logging.Log4Net.csproj
+		SccProjectName4 = EZRAC.Core.Logging.Log4Net
+		SccLocalPath4 = EZRAC.Core.Logging.Log4Net
+		SccProjectUniqueName5 = EZRAC.Core.Email\\EZRAC.Core.Email.csproj
+		SccProjectName5 = EZRAC.Core.Email
+		SccLocalPath5 = EZRAC.Core.Email
+		SccProjectUniqueName6 = EZRAC.Core.Caching.ContextCache\\EZRAC.Core.Caching.ContextCache.csproj
+		SccProjectName6 = EZRAC.Core.Caching.ContextCache
+		SccLocalPath6 = EZRAC.Core.Caching.ContextCache
+		SccProjectUniqueName7 = EZRAC.Core.Util\\EZRAC.Core.Util.csproj
+		SccProjectName7 = EZRAC.Core.Util
+		SccLocalPath7 = EZRAC.Core.Util
+		SccProjectUniqueName8 = EZRAC.Core.PDFGenerator\\EZRAC.Core.FileGenerator.csproj
+		SccProjectName8 = EZRAC.Core.PDFGenerator
+		SccLocalPath8 = EZRAC.Core.PDFGenerator
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F4E389C-DD2D-48D9-B428-80D84CF85873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F4E389C-DD2D-48D9-B428-80D84CF85873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F4E389C-DD2D-48D9-B428-80D84CF85873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F4E389C-DD2D-48D9-B428-80D84CF85873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52154570-3BCD-4363-90B3-DE8E9D262E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52154570-3BCD-4363-90B3-DE8E9D262E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52154570-3BCD-4363-90B3-DE8E9D262E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52154570-3BCD-4363-90B3-DE8E9D262E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2615CF77-55BF-48CC-9534-614315C5A75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2615CF77-55BF-48CC-9534-614315C5A75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2615CF77-55BF-48CC-9534-614315C5A75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2615CF77-55BF-48CC-9534-614315C5A75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C172DC-4F83-47E3-A122-C25CACB22526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C172DC-4F83-47E3-A122-C25CACB22526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C172DC-4F83-47E3-A122-C25CACB22526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C172DC-4F83-47E3-A122-C25CACB22526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3983EBC-3BD5-4933-8890-576615F6729B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3983EBC-3BD5-4933-8890-576615F6729B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3983EBC-3BD5-4933-8890-576615F6729B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3983EBC-3BD5-4933-8890-576615F6729B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5994F25D-A9CF-4B4F-9278-C5F4647B71EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5994F25D-A9CF-4B4F-9278-C5F4647B71EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5994F25D-A9CF-4B4F-9278-C5F4647B71EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5994F25D-A9CF-4B4F-9278-C5F4647B71EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD91D8C5-D8DB-4372-A9F6-CE820A6F63B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD91D8C5-D8DB-4372-A9F6-CE820A6F63B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD91D8C5-D8DB-4372-A9F6-CE820A6F63B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD91D8C5-D8DB-4372-A9F6-CE820A6F63B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C72F134-7A25-4034-AAD7-86675681E8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C72F134-7A25-4034-AAD7-86675681E8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C72F134-7A25-4034-AAD7-86675681E8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C72F134-7A25-4034-AAD7-86675681E8BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\EnterpriseLibrary.ExceptionHandling.5.0.505.0\lib\NET35;packages\EntLibContrib.ExceptionHandling.5.0.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
+	EndGlobalSection
+EndGlobal

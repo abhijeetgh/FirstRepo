@@ -1,0 +1,194 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimInfoHeaderViewModel
+@using EZRAC.Risk.UI.Web.Helper;
+@{
+    ViewBag.Title = "View Claim";
+}
+<!-- breadcrumb -->
+<div class="container-fluid" id="breadcrumb">
+    <div class="row cla-breadCrumb">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("GetClaimList")"><i class="glyphicon glyphicon-home"></i></a> </li>
+            <li>@Html.ActionLink("Claims", "GetClaimList", "Claims")
+            <li class="active">Claim Info</li>
+        </ol>
+    </div>
+</div>
+<!-- main container -->
+<div class="container-fluid">
+    <div class="row" id="save-claim-form-row">
+
+        <h1 class="col-xs-8 cla-pagetitle">
+            Claim For :
+            @if (!String.IsNullOrEmpty(Model.CompanyAbbr))
+            {
+                @Html.Raw(String.Format("{0}-{1}", Model.CompanyAbbr, Model.ClaimID))
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.ClaimID)
+
+            }
+
+            @if (!String.IsNullOrEmpty(Model.ContractNumber))
+            {
+
+                @Html.Raw(String.Format(", {0}", Model.ContractNumber))
+            }
+
+
+            <span style="margin-left:75px">Total Due: $ <span class="totalDue">@Model.TotalDue</span></span>
+            @if (@Model.IsCollectable)
+            {
+                <span id="collectable" class=" left20">Collectable</span>
+                <span id="non-collectable" class="display-none left20">Non-Collectable</span>
+            }
+            else
+            {
+
+                <span id="collectable" class=" display-none left20">Collectable</span>
+                <span id="non-collectable" class="left20">Non-Collectable</span>
+            }
+
+        </h1>
+        <div class="col-xs-4">
+            <ul class="add-update-icon relative">
+
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DocumentGenerator))
+                {
+                    <li><a href="javascript:void(0);" data-toggle="modal"><span class="add comm-prop" title="Document Generator" data-url="@Url.Action("Index","DocumentGenerator")" id="document-generator"></span></a></li>
+                }
+
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EmailGenerator))
+                {
+                    <li class="vertical-nav-devider"> <a href="javascript:void(0);" data-toggle="modal" data-url="@Url.Action("Index", "EmailGenerator", new { claimId = Model.ClaimID })" id="email-generator"><span class="update comm-prop" title="Email Generator"></span></a> </li>
+                }
+
+                <li class="vertical-nav-devider dropdown">
+                    @*<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="report comm-prop"></span></a>*@
+                    <a class="dropdown-toggle" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown">
+                        <span class="notes-icon float-left" title="Notes">&nbsp;</span>
+                    </a>
+
+                    <ul class="dropdown-menu pull-right  tooltip-up-arrow notes-area top15 popup-width" id="notes-id"></ul>
+                </li>
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.ClaimEvent))
+                {
+                    <li class="vertical-nav-devider"><a href="javascript:void(0);" data-url="@Url.Action("Index", "ClaimEvents", new { ClaimId = Model.ClaimID , CompAbbr= Model.CompanyAbbr}) " data-toggle="modal" id="claimEvents"><span class="time comm-prop" title="Claim Events"></span></a></li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-xs-12 update-claim-form top05" id="claim-header-secton">
+
+            @{Html.RenderPartial("_ClaimHeaderInfo", Model);}
+
+
+        </div>
+
+    </div>
+    <!-- tab-wrapper -->
+    <div class="row tab-wrapper">
+        <div class="col-sm-12">
+            @{
+
+                AjaxOptions ajaxOptions = new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", LoadingElementId = "claim-info-wait", OnFailure = "onErrorHandler(xhr)" };
+            }
+
+            <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-tabs-horizontal">
+                <li class="active">@Ajax.ActionLink("Claim Info", "ViewBasicInfoClaim", "ClaimBasicInfo", new { id = Model.ClaimID }, ajaxOptions, new { @id = "claimBasicInfo", @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+                <li>@Ajax.ActionLink("Driver & Insurance Info", "Index", "DriverAndIncInfo", new { claimId = Model.ClaimID }, ajaxOptions, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+
+                <li>@Ajax.ActionLink("Damage", "GetDamage", "Damage", new { claimNumber = @Model.ClaimID }, ajaxOptions, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+                <li>@Ajax.ActionLink("Pictures / Files", "Index", "RiskFiles", new { claimNumber = @Model.ClaimID }, ajaxOptions, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+                @*<li><a href="#result-panel" data-toggle="tab">Billing</a></li>*@
+                <li>@Ajax.ActionLink("Billing", "Index", "Billing", new { Id = @Model.ClaimID }, ajaxOptions, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+
+                <li>@Ajax.ActionLink("Payments", "GetPayments", "Payments", new { claimNumber = @Model.ClaimID }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" }, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+
+                @*<li>@Ajax.ActionLink("Salvage", "GetSalvage", "Salvage", new { claimNumber = @Model.ClaimID }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" }, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>*@
+                <li>@Ajax.ActionLink("Notes", "GetNotesTable", "Notes", new { claimNumber = @Model.ClaimID, page = 1, sortBy = "Date", sortOrder = true, recordCountToDisplay = 5 }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" }, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+
+
+                @*<li>@Ajax.ActionLink("Documents Received / Events", "Index", "DocumentsReceived", new { id = @Model.ClaimID }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" }, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>*@
+
+                @if (SecurityHelper.IsAuthorizedForTracking())
+                {
+                    <li>@Ajax.ActionLink("Tracker", "Index", "ClaimTracking", new { type = Convert.ToInt64(Constants.TrackerType.AuthorizationSupport), claimId = @Model.ClaimID }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" }, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+                }
+                <li>@Ajax.ActionLink("WriteOff", "GetWriteOff", "RiskWriteOff", new { claimNumber = @Model.ClaimID }, ajaxOptions, new { @class = "claimInfoTabs", @data_toggle = "tab" })</li>
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteClaim))
+                {
+                    <li class="vertical-nav-divider-viewClaim pull-right">
+                        <a class="dropdown-toggle border-none" title="Delete Claim" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="deleteClaim" data-redirecturl="@Url.Action("GetClaimList","Claims")" data-url="@Url.Action("DeleteClaim","Claims")" data-id="@Model.ClaimID">
+                            <span class="ico-delete float-left">&nbsp;</span>
+                        </a>
+                    </li>
+                }
+
+                <li class="vertical-nav-divider-viewClaim pull-right approveReject">
+
+                    <a class="dropdown-toggle border-none" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="rejectClaimForViewClaim" data-url="@Url.Action("RejectClaim", "Claims")" data-reject-url="@Url.Action("RejectClaimNoteForViewClaim", "Notes")" data-id="@Model.ClaimID" title="Reject">
+                        <span class="incorrect-icon-small float-left" style="width:21px">&nbsp;</span>
+                    </a>
+                </li>
+                <li class="pull-right approveReject">
+                    <a class="dropdown-toggle border-none" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="approveClaimForViewClaim" data-approve-url="@Url.Action("ApprovalClaimNoteForViewClaim", "Notes")" data-id="@Model.ClaimID" title="Approve">
+                        <span class="correct-icon-small float-left" style="width:21px">&nbsp;</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content container-fluid">
+                <div role="tabpanel" class="tab-pane  fade in  active " id="result-panel">
+
+                    @*@{Html.RenderPartial("_ClaimBasicInfo", Model);}*@
+
+                    @*@{Html.RenderAction("ViewBasicInfoClaim", "ClaimBasicInfo", new { id = Model.ClaimID });}*@
+                    <div id="claim-info-wait" style="display: none; margin-left: 500px"><img class="ajax-loader" src="~/Images/ajax_loader_blue_large.gif" /></div>
+                </div>
+
+                @*<div role="tabpanel" class="tab-pane driver-insurance-info" id="htab2"></div>
+                    <div role="tabpanel" class="tab-pane" id="htab3"> </div>
+                    <div role="tabpanel" class="tab-pane" id="htab4"> </div>
+                    <div role="tabpanel" class="tab-pane" id="htab5"> </div>
+                    <div role="tabpanel" class="tab-pane" id="htab6"> </div>
+                    <div role="tabpanel" class="tab-pane" id="htab7"> </div>
+                    <div role="tabpanel" class="tab-pane" id="htab8"> </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popup"></div>
+
+
+
+@Html.Partial("_ClaimsUrl")
+<input type="hidden" id="claimIdForNotes" value="@Model.ClaimID" />
+<script src="~/Scripts/appScripts/view-claim.js"></script>
+<script src="~/Scripts/appScripts/quick-notes.js"></script>
+<script src="~/Scripts/jquery.shorten.js"></script>
+
+<script>
+    $("#document-generator").on("click", function () {
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "GET",
+            cache: false,
+            success: function (data) {
+                //$("#documentGen").modal("destroy");
+
+                $("#documentGen").remove();
+
+                $(".cla-footer").after(data);
+
+                $("#documentGen").modal("show");
+            },
+            error: onErrorHandler,
+        });
+
+
+    });
+
+</script>

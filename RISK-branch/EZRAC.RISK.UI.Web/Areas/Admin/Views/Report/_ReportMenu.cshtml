@@ -1,0 +1,76 @@
+﻿
+@{
+
+    //AjaxOptions ajaxOptions = new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" };
+}
+
+<div id="mtab1" >
+    <div class="report-leftcol-heading">
+        &nbsp;&nbsp;&nbsp;&nbsp;Report Type
+        @*<img class="collapse" src='@Url.Content("~/Images/Search-collapse.png")' alt="collapse" />*@
+        <img class="toggle" src='@Url.Content("~/Images/Search-toggle.jpg")' alt="toggle" />
+    </div>
+   
+    <div class="col-xs-12">
+        <div class="report-search-wrapper">
+            <div class="center-align input-type-search-icon input-icon">
+                <input type="text" placeholder="Search Report" size="50" id="reportMenuSearch" class="col-xs-12 search-text-box">
+            </div>
+        </div>
+    </div>
+    @*@Ajax.ActionLink("Status", "GetCurrentGridData", new { page = 1, sortBy = "Status", sortOrder = Model.SortOrder, recordCountToDisply = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })*@
+    @*@Ajax.ActionLink("Claim Status", "GetClaimStatusList", "ClaimStatus", new { area = "Admin" }, ajaxOptions, new { @id = "claimStatusLink", @class = "navOptionSelected navOptions" })*@
+    <div class="" id="reportLeftPanel">
+        <div class="col-xs-12">
+            <div class="doctypegen-searchbox-warapper">
+                <div id="menu">
+                    <ul class="doctypegen-searchbox" id="ReportType">
+                        @{
+                            foreach (var item in ViewBag.reportList)
+                            {
+                                <li class="bold">@item.ReportCategoryName</li>
+                                foreach (var itemreport in item.RiskReports)
+                                {
+                                    string riskReportName = itemreport.RiskReportName;
+                                    string riskReportKey = itemreport.RiskReportKey;
+
+                                    <li class="reportitem">&nbsp; @Ajax.ActionLink(riskReportName, "GetReportFormByKey", new { reportKey = riskReportKey, reportText = riskReportName }, new AjaxOptions
+                                                 {
+                                                     OnSuccess = "GetReportCriteria(data)", @*UpdateTargetId = "ReportSearchCriteria",*@ OnFailure = "onErrorHandler(xhr)"
+                                                 })  </li>
+                                }
+                            }
+                        }
+                    </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        if ($("#ReportType").find(".reportitem a").length > 1) {
+            $("#ReportType").find(".reportitem a").eq(0).click();
+            $("#ReportType").find(".reportitem").eq(0).addClass("selected");
+        }
+
+        $('#reportMenuSearch').keyup(function () {
+            var valThis = this.value.toLowerCase(),
+                lenght = this.value.length;
+            //'<b>' + text.substr(0, lenght) + '</b>' +
+            $('.doctypegen-searchbox > li').each(function () {
+                var text = $(this).text(),
+                    html = $(this).html(),
+                    textL = text.toLowerCase(),
+                    htmlR = text.substr(0, lenght) + text.substr(lenght);
+                (textL.indexOf(valThis) >= 0) ? $(this).html(html).show() : $(this).hide();
+                $(this).css("width", "316px");              
+            });
+
+        });
+        $('#menu ul li a').click(function (ev) {
+            $('#menu ul li').removeClass('selected');
+            $(ev.currentTarget).parent('li').addClass('selected');
+        });
+    })
+</script>

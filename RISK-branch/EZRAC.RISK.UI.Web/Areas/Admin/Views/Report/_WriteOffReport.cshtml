@@ -1,0 +1,208 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Reports.WriteOffCustomReportViewModel>
+
+<div id="ReportResult">
+    <div class="col-xs-12">
+        @*<div class="report-box">
+            <h4>Summary</h4>
+            <p><span><strong>Date Range</strong></span> &nbsp;<span id="SummaryDateRange"></span></p>
+            <p><span><strong>Locations</strong></span>&nbsp;<span id="LocationNames"> vaniya, john01</span></p>
+            <p><span><strong>Report Date</strong></span>&nbsp;<span id="ReportDate"></span></p>
+        </div>*@
+        <a href="@Url.Action("GenerateExportFile", "Report")" class="export-btn pull-right top20"><span class="exporticon">&nbsp;</span><strong>Export</strong></a>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="grey-border-1 top15">
+
+            @{
+                if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {   
+                        <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr>
+                                    <td id="reportlocation" colspan="4">
+                                        <span class="bold">@item.Location <input type="hidden" id="@item.LocationId" /></span>
+                                    </td>
+                                </tr>
+                                <tr class="white-color">
+                                    <th>
+                                        <div class="display-inline">Closed Date</div>                                        
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Contract / Claim Number </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Unit Number</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Renter</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Total Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Total Due</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Closed Reason</div>
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var writeofreport in item.writeOffReportViewModel)
+                                {
+                                    <tr>
+                                        <td> @writeofreport.ClosedDate</td>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", writeofreport.ContractNo, writeofreport.CompanyAbbr, writeofreport.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = writeofreport.Claim })  <input type="hidden" value="@writeofreport.Claim" id="ClaimId" /></td>
+                                        <td> @writeofreport.UnitNumber</td>
+                                        <td> @writeofreport.Renter </td>
+                                        <td> $@writeofreport.TotalCollected</td>
+                                        <td> $@writeofreport.TotalDue </td>
+                                        <td> @writeofreport.ClosedReason </td>
+                                    </tr>
+                                }
+                                <tr class="ReportSummaryTotal">
+                                    <td colspan="3">Location Total, @item.LocationTotal</td>
+                                    <td>@item.FinalRenterTotal</td>
+                                    <td>$@item.FinalTotalCollected</td>
+                                    <td colspan="2">$@item.FinalTotalDue</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    }
+                     <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr>
+                                    <td id="reportlocation" colspan="4">
+                                        <span class="bold">Report Summary</span>
+                                    </td>
+                                </tr>
+                                <tr class="white-color">
+                                    <th>
+                                        <div class="display-inline">Location</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amount Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amount Due </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Claims</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Location</td>
+                                        <td>$@item.FinalTotalCollected</td>
+                                        <td>$@item.FinalTotalDue</td>
+                                        <td> @item.FinalTotalClaims</td>
+                                    </tr>
+                                }
+                                <tr class="ReportSummaryTotal">
+                                    <td>Totals</td>
+                                    <td>
+                                        @{ decimal finalCollected = Model.Select(x => Convert.ToDecimal(x.FinalTotalCollected)).ToList().Sum(); }
+                                    $ @finalCollected
+                                </td>
+                                <td>
+                                    @{ decimal finalDue = Model.Select(x => Convert.ToDecimal(x.FinalTotalDue)).ToList().Sum(); }
+                                    $ @finalDue
+                                </td>
+                                <td>
+                                    @{ decimal finalClaims = Model.Select(x => Convert.ToDecimal(x.FinalTotalClaims)).ToList().Sum(); }
+                                    $ @finalClaims
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                }
+                else
+                {
+                      <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr class="white-color">
+                                    <th>
+                                        <div class="display-inline">Closed Date</div>                                        
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Contract / Claim Number </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Unit Number</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Renter</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Total Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Total Due</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Closed Reason</div>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                          <tbody>
+                              <tr>
+                                  <td colspan="7" align="center">
+                                      Records are not available
+                                  </td>
+                              </tr>
+                          </tbody>
+                        </table>
+                  
+                }
+            }
+            @*<div class="padding-horizontal-15">
+                    <div class=" font-12 row grey-background">
+                        <div class="float-left">
+                            <ul class="pagination-list bottom0 top5 ">
+                                <li class="pagination-list-item ">
+                                    <a aria-label="Previous" href="javascript:void(0);">
+                                        <div class="arrow-left"></div>
+                                    </a>
+                                </li>
+                                <li class="pagination-list-item active"> <a href="javascript:void(0);">1</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">2</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">3</a> </li>
+                                <li class="pagination-list-item">
+                                    <a aria-label="Next" href="javascript:void(0);">
+                                        <div class="arrow-right"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="float-left left20 top3">
+                            <div class=" bottom10 top10">
+                                <span>Showing </span> <span>
+                                    <select class="show-record">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </span> <span>Of 100 Records</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //$(".export-btn").click(function () {
+        //    window.location = 'Report/GenerateExportFile';
+        //});
+    });
+</script>

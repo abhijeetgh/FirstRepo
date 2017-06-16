@@ -1,0 +1,91 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                Phone:  @Model.Company.Phone
+
+            </td>
+        </tr>
+    </table>
+    <br /><br />
+    <table>
+        <tr>
+            <td align="left" style="font-weight:bold" width="50%">
+                *<br />@Model.DriverViewModel.Name<br />
+                @Model.DriverViewModel.Address<br />
+                @Model.DriverViewModel.City,  @Model.DriverViewModel.State  @Model.DriverViewModel.Zip
+            </td>
+            <td align="right" style="font-weight:bold" width="50%">
+                @DateTime.Now.ToString(EZRAC.Risk.UI.Web.Helper.Constants.CrmsDateFormates.MMDDYYYY)
+            </td>
+        </tr>
+    </table>
+    <br />
+    Dear @Model.DriverViewModel.Name:<br /><br />
+    Re: Toll Violation<br /><br />
+    <table border="1" align="center">
+        <tr>
+            <td style="font-weight:bold" width="30%" align="left">Our Claim Number</td>
+            <td style="font-weight:bold" width="25%" align="left">Unit Number</td>
+            <td style="font-weight:bold" width="25%" align="left">Date of Loss</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold" align="left">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+            <td style="font-weight:bold" align="left">@Model.VehicleViewModel.UnitNumber</td>
+            <td style="font-weight:bold" align="left">@String.Format("{0}", Model.DateOfLoss.HasValue ? Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : "NA")</td>
+        </tr>
+    </table>
+    <br /><br />
+    @if (Model.TreatAsCaliforniaTicket)
+    {
+        <div>
+            This letter is to inform you that you received a traffic, unpaid toll or parking violation while our vehicle was in your possession.
+            We have not paid the traffic violation; you are still responsible to pay the violation to the city and state listed on the attached ticket.
+            If you require any additional information, please contact our office at the number shown at the top of this letter.
+        </div>
+        <br />
+    }
+    else
+    {
+        <div>
+            This letter is to inform you owe $50.00 administrative fee plus applicable taxes to E-Z Rent-A-Car.  Your credit card has been declined.<br /><br />
+
+            Per your rental contract with our company, this fee is the result of processing the traffic, unpaid toll or parking violation for our vehicle that was
+            incurred while in your possession.  Please find all the supporting documentation enclosed.<br />
+            We have not paid the traffic violation, unpaid toll or parking violation; you are still responsible to pay the violation to the city and state listed on the attached ticket.
+        </div>
+        <br />
+        if (Model.DateOfLastPayment.HasValue)
+        {
+            <div>  This fee must be paid within 30 days to avoid this account being referred to a collection agency.</div><br />
+        }
+        <div>
+            If you require any additional information, please contact our office at the number shown at the top of this letter.<br /><br />
+            Please refer to the Terms and Conditions listed on the back of your rental contract under item 7(f):  "all parking, toll and traffic fines, penalities, citations, forfeitures, court costs, towing and storage charges and other expenses involving the Vehicle assessed against us or the Vehicle during this rental; if you fail to pay such a parking, traffic or toll charge to the charging authority, you will pay us all fees owed to the charging authority plus our administrative fee of $50 for each such charge."<br /><br />
+            To request an electronic receipt, please visit our website at https://www.e-zrentacar.com/ez_rental_receipt.asp. <br />
+        </div>
+    }
+    <br /><br /><br /><br /><br /><br /><br />
+    Kind Regards,<br />
+    Customer Service Representative<br />
+    <div style="font-weight:bold">VIOLATION DECLINED CARD</div>
+</body>
+</html>

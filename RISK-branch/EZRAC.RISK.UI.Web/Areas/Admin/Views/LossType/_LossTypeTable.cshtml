@@ -1,0 +1,37 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.LossTypeViewModel>
+@using EZRAC.Risk.UI.Web.Helper
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="lossTypeDataTable" style="max-height:500px;overflow:scroll">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Loss Type</div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Description</div>
+            </th>
+            <th class="">
+                <div class="th-min-height">Delete</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="cursor:pointer">
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("LossTypeDetail","LossType")">@item.LossType</td>
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("LossTypeDetail","LossType")">@item.Description </td>
+                <td class="claim-status-coloumn"><a class="delete-action" title="Delete" href="javascript:void(0);" data-url="@Url.Action("DeleteLossType", "LossType")" data-id="@item.Id" data-url-validation="@Url.Action("IsLossTypeUsed","LossType")"><span class='ico-delete'>&nbsp;</span></a></td>
+                    @*@Ajax.MyActionLink("<span class=\"ico-delete\" title='Delete'>&nbsp;</span>", "IsLossTypeUsed", "LossType", "delete-action"+ @item.Id, new { id = item.Id, area = "Admin" },
+                new AjaxOptions()
+                {
+                    HttpMethod = "Get",
+                    OnSuccess = "successDelete(data)"
+                })*@
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/LossTypes/loss-types-table.js")"></script>

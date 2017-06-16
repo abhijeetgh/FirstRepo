@@ -1,0 +1,48 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.TicketAffidavitViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <div align="center"><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></div>
+    <center><h3 style="align-content:center">AFFIDAVIT</h3></center>
+    <strong>Be it acknowledged,</strong>that Dawn Campbell of Orlando, Florida, the undersigned deonnet, being of legal age, does hereby and under oath as follows:<br /><br />
+    THE VEHICLE WITH THE LICENSE PLATE NUMBER @Model.HeaderViewModel.VehicleViewModel.TagNumber, WAS ON RENT/LEASE TO @Model.HeaderViewModel.DriverViewModel.Name
+    AT THE TIME OF VIOLATION, CUSTOMER RENTED ON @( Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.PickupDate.ToString() : string.Empty )AND RETURNED ON @(Model.HeaderViewModel.Contract != null? Model.HeaderViewModel.Contract.ReturnDate.ToString() : string.Empty ). Below is the renter's/violator's 
+    full name and address, phone number, driver's license number, along with a copy
+    of renter's/violator's rental agreement.
+    <center>
+        @Model.HeaderViewModel.DriverViewModel.Name<br />
+        @Model.HeaderViewModel.DriverViewModel.Address<br />
+        @Model.HeaderViewModel.DriverViewModel.City @Model.HeaderViewModel.DriverViewModel.State @Model.HeaderViewModel.DriverViewModel.Zip<br />
+        DL # - @Model.HeaderViewModel.DriverViewModel.LicenceNumber, State - @Model.HeaderViewModel.DriverViewModel.LicenceState<br />
+        DOB - @String.Format("{0}", Model.HeaderViewModel.DriverViewModel.DOB.HasValue ? Model.HeaderViewModel.DriverViewModel.DOB.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : String.Empty)<br />
+    </center>
+    And I affirm the foregoing is true except as to statements made upon information and belief, and as to those I believe them to be true.
+    Witness my hand under the penalties of perjury this @DateTime.Now.Day day of
+    @DateTime.Now.ToString(Constants.CrmsDateFormates.MMMM)&nbsp;@DateTime.Now.Year.<br /><br /><br />
+    <div align="right">
+        ___________________________<br />
+        Signature<br />
+        Central Florida Paint and Body<br />
+        2003 McCoy Road Suite A Orlando, FL 32809
+    </div>
+    <h3>STATE OF FLORIDA, COUNTY OF ORANGE</h3>
+    On__________________________before me, <u>Dawn Campbell</u>, personally appeared, personally known to me (or proved to me on the basis of satisfactory evidence) to be the person(s) whose name(s) is/are
+    subscribed to the within and that by his/her/their signature(s) on the instrument the person(s), or the entity upon behalf of which the person(s) acted, executed
+    the instrument.<br /><br />
+    <strong>WITNESS my hand and official seal</strong><br /><br />
+    Signature_________________________________<br />
+    <table>
+        <tr>
+            <td width="50%">Type of ID <u>PERSONALLY KNOWN</u></td>
+            <td width="50%" align="right"><strong>2003 McCoy Road Suite A, Orlando, FL 32809
+    407-674-1006 &nbsp;&nbsp;Fax: 407-438-1096
+</strong></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.Company.Abbr - @Model.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.RiskUserEmail<br />
+                Phone:  @Model.Company.Phone<br />
+                Fax:    @Model.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.DriverViewModel.Name<br />
+                    @Model.DriverViewModel.Address<br />
+                    @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                </div>
+            </td>
+
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />@DateTime.Now.ToString(EZRAC.Risk.UI.Web.Helper.Constants.CrmsDateFormates.MMDDYYYY)
+                    </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">Dear @Model.DriverViewModel.Name:</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">Re: Traffic/Parking Violation</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <center>
+                    <table border="1" width="85%">
+                        <tr><td colspan="3"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Our Claim Number</td>
+                            <td style="font-weight:bold">Unit Number</td>
+                            <td style="font-weight:bold">Date of Loss</td>
+                        </tr>
+                        <tr>
+                            <td>@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+                            <td>@Model.VehicleViewModel.UnitNumber</td>
+                            <td>@String.Format("{0}", Model.DateOfLoss.HasValue ? Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : String.Empty)</td>
+                        </tr>
+                    </table>
+                </center>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                @if (Model.DateOfLastPayment != null)
+                {
+                    <div> *<br />This letter is to inform you that a $50.00 administrative fee plus applicable taxes has been assessed.</div>
+                }
+                else
+                {
+                   <div>  *<br />This letter is to inform you that a $50.00 administrative fee plus applicable taxes has been charged to your credit card.</div>
+                }
+                Per your rental contract with our company, this fee is the result of processing the traffic or parking violation for our vehicle that was
+                incurred while in your possession.  Please find all the supporting documentation enclosed.<br /><br />
+                <span style="background-color:#ffff00;">We have not paid the traffic violation; you are still responsible to pay the violation to the city and state listed on the attached ticket.</span><br />
+
+                @if (Model.DateOfLastPayment != null)
+                {
+                    <div> This fee must be paid within 30 days to avoid this account being referred to a collection agency.</div>
+                }
+                else
+                {
+                    <div>If you require any additional information, please contact our office at the number shown at the top of this letter.</div>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2" style="font-size:small">
+                *<br />Kind Regards,<br />
+                Customer Service Representative
+            </td>
+        </tr>
+
+        <tr><td colspan="2" style="font-weight:bold">TICKET</td></tr>
+    </table>
+
+
+
+
+</body>
+
+</html>

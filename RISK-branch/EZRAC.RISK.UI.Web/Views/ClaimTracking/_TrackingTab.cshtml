@@ -1,0 +1,53 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimTrackingViewModel
+@using EZRAC.Risk.UI.Web.Helper;
+@using EZRAC.RISK.Util.Common;
+<div class="container-fluid">
+    <div class="row">
+        <div class="tracking-leftcol panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Event Category</h3>
+            </header>
+            <div class="col-xs-12">
+            </div>
+            <div class="col-xs-12">
+                <div class="tracking-selector">
+                    <ul class="tracking-selector-list nav nav-pills nav-stacked">
+
+                        @foreach (var item in Model.TrackingCategories)
+                        {
+                            if (SecurityHelper.IsAuthorized(item.Key))
+                            {
+                                <li>@Ajax.ActionLink(item.Category, "GetEventTrack", "ClaimTracking", new { type = Convert.ToInt64(item.Id), claimId = Model.ClaimId }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "trackerDiv", InsertionMode = InsertionMode.Replace, OnFailure = "onErrorHandler(xhr)" }, new { @class = "trackerTypes" })</li>
+                            }
+                            
+                        }
+                     </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tracking-rightcol tab-content">
+            <div id="authSup" class="tab-pane fade in active">
+                <div class="col-xs-12" style="padding-right:0px;">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <header class="panel-heading">
+                                <h3 class="panel-title" id="gridHeader">Authorization Support</h3>
+                            </header>
+                            <div id="trackerDiv">
+                               @Html.Partial("_TrackerGrid",Model)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+@Html.HiddenFor(x => x.TimeTaken)
+<script src="@Url.Content("~/Scripts/appScripts/tracker.js")"></script>
+<script>
+    $(document).ready(function () {
+        $('ul.tracking-selector-list li:first a').trigger('click');
+    });
+
+</script>

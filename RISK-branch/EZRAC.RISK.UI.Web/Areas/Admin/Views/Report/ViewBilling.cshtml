@@ -1,0 +1,55 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.BillingViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+
+<div class="modal fade cla-modpopup" id="billings" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">Billings</h4>
+            </div>
+            <div class="modal-body" style="max-height: 686px;overflow-y: scroll;">
+
+                <table class="table table-striped add-items" id="view-billing">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="display-inline">@Html.DisplayNameFor(model => model.SelectedBillingTypeId)</div>
+                            </th>
+                            <th class="align-right">
+                                <div class="display-inline">@Html.DisplayNameFor(model => model.Amount) $</div>
+                            </th>
+                            <th class="align-right">
+                                <div class="display-inline">@Html.DisplayNameFor(model => model.Discount) %</div>
+                            </th>
+                            <th class="align-right">
+                                <div class="display-inline">@Html.DisplayNameFor(model => model.Billings.FirstOrDefault().SubTotal) $</div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var billing in Model.Billings)
+                        {
+
+                            <tr>
+                                <td>@Html.DisplayFor(b => billing.BillingTypeDesc)</td>
+                                <td class="align-right">@Html.DisplayFor(b => billing.Amount)</td>
+                                <td class="align-right">@Html.DisplayFor(b => billing.Discount)</td>
+                                <td class="align-right">@Html.DisplayFor(b => billing.SubTotal)</td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

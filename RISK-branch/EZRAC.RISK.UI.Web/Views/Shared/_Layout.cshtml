@@ -1,0 +1,96 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@using EZRAC.RISK.Util.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css/bootstrap/datepicker")*@
+    @Styles.Render("~/Content/css/jquery-ui")
+    @Styles.Render("~/Content/css/select")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    
+    <header class="header">
+        <nav id="myNavbar" class="navbar navbar-default" role="navigation">
+            <!-- Navbar with Toggle -->
+            <div class="container-fluid">
+                <div class="navbar-header"> <a class="navbar-brand" href="javascript:void(0);"><img src="@Url.Content("~/Images/logo.png")" width=" 141" height="18" /></a> </div>
+                <!-- Links for Navbar -->
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="nav navbar-nav main-nav">
+                        <li class="active">@Html.ActionLink("Claims", "GetClaimList", "Claims", new { area = "" }, null)</li>
+                        @if (SecurityHelper.IsAdminAccess())
+                        {
+                            <li>@Html.ActionLink("Admin", "Index", "ClaimStatus", new { area = "Admin" }, null)</li>
+                        }
+                        
+                        @if (SecurityHelper.IsAuthorizedForReports())
+                        { 
+                            <li class="reports">@Html.ActionLink("Reports", "Index", "Report", new { area = "Admin" }, null)</li>
+                        }
+                  
+                    </ul>
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <ul class="nav navbar-nav navbar-right user-nav">
+                                <li><a href="javascript:void(0);">@User.Identity.Name</a></li>
+                                <li class="userIcon"><a href="javascript:void(0);"><img src="@Url.Content("~/Images/userIcon.png")" width="38" height="38"></a></li>
+                                <li class="vertical-nav-devider"><a href="javascript:document.getElementById('logoutForm').submit();">Logout</a></li>
+                            </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    <div class="clearfix bottom-clearspace"></div>
+    <!-- Footer -->
+    <footer class="cla-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6"><span class="footer-text bold"> AEZ CLAIM MANAGEMENT </span></div>
+            </div>
+        </div>
+    </footer>
+    <div class="popup_bg_master" style="display:none;"></div>
+    <div id="alertbox" style="" class="ui-draggable ui-draggable-handle">
+        <div class="popup-top">
+            <img src="~/images/Close.png" id="closepopup" class="pull-right cursor-pointer" alt="close">
+            <div class="clear"></div>
+        </div>
+        <div class="padding-bottom-15 padding-horizontal-15 padding-left-15 padding-right-15 padding-top-15 padding-vertical-15"  >
+            <div id="ConfirmText" class="col-xs-12">Are You Sure you want to discard this changes?</div>
+            <div class="pull-right " style="margin:10px 10px">
+                <input type="button" class="btn btn1 " id="ConfirmOk" value="OK" />
+                <input type="button" class="btn btn2" id="ConfirmCancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap/select")
+    @*@Scripts.Render("~/bundles/bootstrap/datepicker")*@
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/appLevelScript")
+
+    <script>
+        var loginUrl = "@Url.Action("Login", "Account", new { area=string.Empty})";
+    </script>
+</body>
+</html>

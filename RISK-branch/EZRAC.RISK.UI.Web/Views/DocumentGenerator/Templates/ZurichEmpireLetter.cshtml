@@ -1,0 +1,180 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.NationalCasualtyInsuranceCoverViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.HeaderViewModel.Company.Abbr - @Model.HeaderViewModel.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <!--table border="0" width="100%">
+    <tr>
+       <td align="center" valign="top"><img src="images/bslogo.png" border="0" /></td>
+    </tr>
+    </table-->
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />
+                    Risk Management Services<br />
+                    @Model.HeaderViewModel.Company.Address<br />
+                    @Model.HeaderViewModel.Company.City,@Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top">*<br /><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></td>
+            <td width="33%" align="right" valign="top">
+                <div>
+                    *<br />
+                    Email:  @Model.HeaderViewModel.RiskUserEmail<br />
+                    Phone:  @Model.HeaderViewModel.Company.Phone<br />
+                    Fax:    @Model.HeaderViewModel.Company.Fax
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+
+                <div style="font-weight:bold">
+                    *<br />
+                    Empire Fire & Marine/Zurich<br />
+                    13810 FNB Parkway<br />
+                    Omaha, NE 68154<br />
+                    Phone: 402.963.5000<br />
+                Fax: 402.963.5329
+                </div>
+            </td>
+
+            <td width="50%" align="right" valign="top">
+                <div>
+                    *<br />
+                    From:  Risk Management Services<br />
+                    Policy #: @Model.PolicyNumber<br />
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="border-style: solid">
+                <div>
+                    *<br />THIS IS FOR LIABILITY NOTIFICATION ONLY!
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" width="100%">
+                <div style="font-weight:bold">
+                    *<br />
+                    Attention: New Claims Department<br />
+                </div>
+                Attached is the information required to set up a new claim with your company.  If you require any other information, please call.
+                When the claims are set up, please e-mail or fax the claim number to our office.<br /><br />
+                <div style="font-weight:bold">
+                    Date: 12/14/2015<br />
+                    Date: @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)<br />
+                </div>
+                Number of Pages Sent:_____________________
+                <table width="80%" border="1">
+                    <tr>
+                        <td style="border:none">Claim #:</td>
+                        <td style="border:none">106497 / DFW-12345</td>
+                    </tr>
+                    <tr>
+                        <td>Claim #: </td>
+                        <td>@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</td>
+                    </tr>
+                    @if (Model.Drivers != null && Model.Drivers.Any()) {
+                        foreach (var item in @Model.Drivers)
+                        {
+                            if (item.DriverType == 1)
+                            {
+                                <tr>
+                                    <td style="font-weight:bold">Renter Name: </td>
+                                    <td>@item.Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="font-weight:bold">Insurance:</td>
+                                    <td>@item.InsuranceViewModel.InsuranceCompanyName</td>
+                                </tr>
+                            }
+                        }
+                        foreach (var item in @Model.Drivers)
+                        {
+                            if (item.DriverType == 2)
+                            {
+                                <tr>
+                                    <td style="font-weight:bold">Additional Driver Name: </td>
+                                    <td>@item.Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="font-weight:bold">Add Driver Insurance:</td>
+                                    <td>@item.InsuranceViewModel.InsuranceCompanyName</td>
+                                </tr>
+                            }
+                        }
+                    }
+                    <tr>
+                        <td style="font-weight:bold">Date of Loss: </td>
+                        <td>@Model.HeaderViewModel.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Unit Number:</td>
+                        <td>@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Tag Number:</td>
+                        <td>@Model.HeaderViewModel.VehicleViewModel.TagNumber</td>
+                    </tr>
+                    @if (Model.Drivers != null && Model.Drivers.Any())
+                    {
+                        foreach (var item in @Model.Drivers)
+                        {
+                            if (item.DriverType == 3)
+                            {
+                                <tr>
+                                    <td style="font-weight:bold">3rd Party Name:</td>
+                                    <td>@item.Name </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="font-weight:bold">3rd Party Insurance:</td>
+                                    <td>@Model.HeaderViewModel.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </table>
+                <br /><br /><br />
+                Comments:
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

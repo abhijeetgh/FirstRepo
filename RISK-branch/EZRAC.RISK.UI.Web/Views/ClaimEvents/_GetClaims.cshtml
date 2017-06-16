@@ -1,0 +1,45 @@
+﻿@model IList<EZRAC.Risk.UI.Web.ViewModels.Claims.UserActionLogViewModel>
+    <div class=" cla-form">
+        <div class="relative admin-search">
+            <div class="center-align input-type-search-icon input-icon">
+                <input type="text" id="searchText" placeholder="Search" class="form-control input-type-search" style="margin-bottom:8px;">
+            </div>
+        </div>        
+        <div class="grey-border-1">
+            <table id="tblClaimEvents" class="grey-white-table dark-blue-header  complete-width bordered-table">
+                <thead>
+                    <tr class="white-color">
+                        <th>
+                            <div class="display-inline">Date</div>                            
+                        </th>
+                        @*<th>
+                    <div class="display-inline">Claim No.</div>
+                    <a href="javascript:void(0);" class="display-inline arrow-down sorter"></a>
+                </th>*@
+                        <th>
+                            <div class="display-inline">Name</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">User Name</div>                            
+                        </th>
+                        <th>
+                            <div class="display-inline">Description</div>                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Date</td>
+                            @*<td>@item.ClaimId</td>*@
+                            <td>@item.Name</td>
+                            <td>@item.UserName</td>
+                            <td>@item.UserAction</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>           
+        </div>
+    </div>
+<script src="@Url.Content("~/Scripts/appScripts/ClaimEvents.js")" type="text/javascript"></script>

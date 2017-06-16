@@ -1,0 +1,128 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />
+                    Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top">*<br /><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td width="33%" align="right" valign="top">
+                <div>
+                    *<br />
+                    Email:  @Model.RiskUserEmail<br />
+                    Phone:  @Model.Company.Phone<br />
+                    Fax:    @Model.Company.Fax
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.DriverViewModel.Name<br />
+                    @Model.DriverViewModel.Address<br />
+                @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                </div>
+            </td>
+
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                    @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY) 
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="left">
+                <div style="font-weight:bold">
+                    *<br />Claim #: @String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)&nbsp;&nbsp;&nbsp;&nbsp;Unit #:@Model.VehicleViewModel.UnitNumber
+                </div>
+            </td>
+            <td align="right"><div style="font-weight:bold">*<br />Date of Loss: @Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</div></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    *<br />Dear Renter:<br /><br />
+                    This risk management department has been forwarded a claim for damages to the vehicle you rented.
+                    You will be receiving information regarding this accident/incident as soon as we receive an estimate from an independent appraiser.
+                    Please tell us how you would like to proceed with this claim:<br /><br />
+                    ____________Bill me directly.<br /><hr />______________Bill my insurance company.<br /><br />
+
+                    If you would like us to bill your insurance company, please provide them with our claim number at the top of this letter. 
+                    After you have set up a claim with your insurance company, please provide us with the information below.<br /><br />
+
+                    Name of Company:____________________________________<br />
+                    Address:___________________________________<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________________________<br />
+                    Rep Name:__________________________________   Phone and Ext.:_________________<br />
+                    Ins. Claim #:______________________________<br />
+                    Policy Number:_____________________________<br /><hr />
+                    
+                    ___________Bill my credit card.<br /><br />
+
+                    If you would like us to bill your credit card please call them. 
+                    After contacting your credit card company, please provide us with the information below.<br /><br />
+
+                    Type of Card:______________________________   Rep Name:___________________________<br />
+                    Account Number:____________________________   Phone and Ext.:_____________________<br />
+                    Expiration Date:___________________________<br /><hr />
+
+                    Please contact our office within 7 days of the date of this letter; otherwise, 
+                    we will have no other option but to bill you directly. You may contact our office by phone - 
+                    @Model.Company.Phone, M-F 8 AM - 3 PM EST, fax - @Model.Company.Fax, email - @Model.RiskUserEmail or send 
+                    this form back via US mail.                                                                          
+
+
+                </div>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <div style="font-size:small">
+                    *<br />Kind Regards,<br />
+                    @Model.RiskUserFullName <br />
+                    Risk Management Services<br />
+                </div>
+                <div style="font-weight:bold">INTROLTR</div>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+</body>
+</html>

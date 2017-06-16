@@ -1,0 +1,121 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@model EZRAC.Risk.UI.Web.Helper.NotesPageHelper<EZRAC.Risk.UI.Web.ViewModels.Claims.NotesViewModel>
+@using EZRAC.RISK.Util.Common;
+<script src="~/Scripts/jquery.shorten.js"></script>
+<script src="~/Scripts/appScripts/notes-table.js"></script>
+<script>
+    $(".show-record option").each(function () {
+        if (this.value.toString() == '@Model.RecordsToShow') {
+            $(this).attr("selected", "selected");
+        }
+    });
+</script>
+<table id="notesInfoTable" class="grey-white-table dark-blue-header complete complete-width  bordered-table paginated-table  ">
+    <tr class="white-color">
+        <th>
+            <div class="display-inline">@Ajax.ActionLink("Note Id", "GetCurrentNotesGridData", new { claimNumber = Model.NotesViewModel.ClaimId, page = 1, sortBy = "Id", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "notesPageNo" }) </div>
+            @EZRAC.Risk.UI.Web.Helper.CustomHtmlHelper.SortOrderMark(Model.SortBy, "Id", Model.SortOrder)
+        </th>
+        <th>
+            <div class="display-inline">@Ajax.ActionLink("Date", "GetCurrentNotesGridData", new { claimNumber = Model.NotesViewModel.ClaimId, page = 1, sortBy = "Date", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "notesPageNo" }) </div>
+            @EZRAC.Risk.UI.Web.Helper.CustomHtmlHelper.SortOrderMark(Model.SortBy, "Date", Model.SortOrder)
+        </th>
+        <th>
+            <div class="display-inline">@Ajax.ActionLink("User Name", "GetCurrentNotesGridData", new { claimNumber = Model.NotesViewModel.ClaimId, page = 1, sortBy = "UpdatedBy", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "notesPageNo" })  </div>
+            @EZRAC.Risk.UI.Web.Helper.CustomHtmlHelper.SortOrderMark(Model.SortBy, "UpdatedBy", Model.SortOrder)
+        </th>
+        <th>
+            <div class="display-inline">@Ajax.ActionLink("Category", "GetCurrentNotesGridData", new { claimNumber = Model.NotesViewModel.ClaimId, page = 1, sortBy = "NoteTypeDescription", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "notesPageNo" }) </div>
+            @EZRAC.Risk.UI.Web.Helper.CustomHtmlHelper.SortOrderMark(Model.SortBy, "NoteTypeDescription", Model.SortOrder)
+        </th>
+        <th> Notes </th>
+        <th> Privileged </th>
+        <th> Action</th>
+        
+    </tr>
+    @foreach (var item in Model.NotesViewModel.Notes)
+    {
+        <tr>
+            <td id="noteId" data-url="@Url.Action("DetaildNote","Notes")">@item.NoteId</td>
+            <td>@item.Date.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+            <td>@item.UpdatedBy</td>
+            <td>@item.SelectedNoteType</td>
+            <td class="notesDescription" style="max-width: 500px;"><pre class="notesPre">@item.Description</pre></td>
+            <td class="notesDescription" style="max-width: 500px;"><pre class="notesPre">@item.IsPrivilege.ToString()</pre></td>
+            @if (SecurityHelper.IsAuthorized(ClaimsConstant.DeleteNotes))
+            {
+                <td><a class="delete-action left20 delete-notes" href="javascript:void(0);" title="Delete"><span class="ico-delete">&nbsp;</span></a></td>
+            }else{
+                    <td><a class="delete-action left20 opacity-light cursor-default" href="javascript:void(0);" title="Delete"><span class="ico-delete">&nbsp;</span></a></td>
+            }
+        </tr>
+    }
+    @if (!Model.NotesViewModel.Notes.Any())
+    {
+        <tr><td colspan="6" class="text-center">Notes are not available</td></tr>
+    }
+
+</table>
+@if (Model.TotalRecordCount > 0)
+{
+<div class="padding-horizontal-15">
+    <div class=" font-12 row grey-background">
+        <div class="float-left">
+            <ul class="pagination-list bottom0 top5 ">
+                @if (Model.TotalRecordCount > 5)
+                {
+                    <li class="pagination-list-item ">
+                        @*<a href="javascript:void(0);" aria-label="Previous">
+                           <div class=arrow-left></div>
+                        </a>*@
+                        @Ajax.MyActionLink("<div class=arrow-left></div>", "GetCurrentNotesGridData", "notesPageNo border-none", new { claimNumber = Model.NotesViewModel.ClaimId, page = (Model.CurrentPage == 1) ? Model.CurrentPage : Model.CurrentPage - 1, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx", searchText = "xxx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" })
+                    </li>
+                    for (int i = 1; i <= Model.NumberOfPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <li class="pagination-list-item active"><a>@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="pagination-list-item"> @Ajax.ActionLink(i.ToString(), "GetCurrentNotesGridData", new { claimNumber = Model.NotesViewModel.ClaimId, page = @i, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx", searchText = "xxx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "notesPageNo" })</li>
+                        }
+                    }
+                    <li class="pagination-list-item">
+                        @*<a href="javascript:void(0);" aria-label="Next">
+                           <div class=arrow-right></div>
+                        </a>*@
+                        @Ajax.MyActionLink("<div class=arrow-right></div>", "GetCurrentNotesGridData", "notesPageNo border-none", new { claimNumber = Model.NotesViewModel.ClaimId, page = (Model.CurrentPage == Model.NumberOfPages) ? Model.CurrentPage : Model.CurrentPage + 1, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx", searchText = "xxx" }, new AjaxOptions { UpdateTargetId = "gridContainer", OnFailure = "onErrorHandler(xhr)" })
+                    </li>
+                }
+            </ul>
+        </div>        
+        <div class="row padding-right-20">
+            <div class=" bottom10 top10">
+                @if (Model.TotalRecordCount > 5)
+                {
+                    <span>Items per Page </span>
+                    <span>
+                        <select class="show-record">
+                            <option value="0">All</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </span>
+                }
+                <span class="pull-right"> @Model.PageInfo</span>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<input type="hidden" id="notesPageNo" value="@Model.CurrentPage" />
+<input type="hidden" id="notesSortBy" value="@Model.SortBy" />
+<input type="hidden" id="recordsToShow" value="@Model.RecordsToShow" />
+<input type="hidden" id="sortOrder" value="@Model.SortOrder" />
+<input type="hidden" id="noteclaimId" value="@Model.NotesViewModel.ClaimId " />
+

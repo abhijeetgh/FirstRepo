@@ -1,0 +1,37 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+  
+</head>
+<body style="font-family:'Times New Roman'">
+    <table>
+        <tr><td><div style="font-weight:bold">*<br />CUSTOMER SERVICE INFORMATION:</div></td></tr>
+        <tr>
+            <td>
+                *<br/>
+                Date Complaint Received: @(Model.DateOfLoss.HasValue ? Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : string.Empty )<br />Contract #:  @Model.Contract.ContractNumber<br />Renter: @Model.DriverViewModel.Name<br />
+                Unit #: @Model.VehicleViewModel.UnitNumber<br />Vehicle:  @Model.VehicleViewModel.Year @Model.VehicleViewModel.Make @Model.VehicleViewModel.Model<br />
+                VIN:  @Model.VehicleViewModel.VIN<br />Mileage / Location:  @Model.VehicleViewModel.Mileage / @Model.VehicleViewModel.Location<br />
+                Disputed Amount:  $________________
+            </td>
+        </tr>
+        <tr><td>*<br />Agent Comments:<br /></td></tr>
+        <tr><td>*<br />______________________________________________________________________________________________________________________________________<br /><br /></td></tr>
+        <tr><td>*<br />______________________________________________________________________________________________________________________________________<br /><br /></td></tr>
+        <tr><td>*<br />______________________________________________________________________________________________________________________________________<br /><br /></td></tr>
+        <tr><td>Gave to Chris for Review on: @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td></tr>
+        <tr><td>Initials:________________________</td></tr>
+        <tr><td>*<br />______________________________________________________________________________________________________________________________________<br /><br /></td></tr>
+        <tr><td><div style="font-weight:bold">*<br />Refund Authorization</div></td></tr>
+        <tr><td>Risk Manager:  Chris Colarusso</td></tr>
+        <tr><td>*<br />Initials:________________________</td></tr>
+        <tr><td>*<br />Refund Amount:  $________________________</td></tr>
+        <tr><td>*<br />Date:________________________</td></tr>
+    </table>
+</body>
+</html>
+

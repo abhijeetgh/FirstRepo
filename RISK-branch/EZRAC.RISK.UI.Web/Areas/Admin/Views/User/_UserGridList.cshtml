@@ -1,0 +1,101 @@
+﻿@model  IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.UserViewModel>
+
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table w99" >
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> First Name </div>
+            </th>
+            <th class=""> 
+                <div class="th-min-height align-text-left margin-left-admin"> Last Name </div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> User Name </div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Role </div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Status </div>
+            </th>
+            <th class="">
+                <div class="th-min-height"> Delete </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <input type="hidden" id="userID" class="userID" value="@item.Id" />
+                    <td style="cursor: pointer;" class="claim-status-coloumn field align-text-left">@item.FirstName</td>
+                    <td style="cursor: pointer;" class="claim-status-coloumn field align-text-left">@item.LastName </td>
+                    <td style="cursor: pointer;" class="claim-status-coloumn field align-text-left">@item.UserName </td>
+                    <td style="cursor: pointer;" class="claim-status-coloumn field align-text-left">@item.UserRole </td>
+                    <td class="claim-status-coloumn align-text-left">
+                       @{
+                            if (item.IsActive)
+                            { 
+                                <span>Active</span>
+                            }
+                            else
+                            { 
+                                <span>InActive</span>
+                            }
+                       }                
+                    </td>
+
+                    <td class="claim-status-coloumn">
+                        <a style="cursor: pointer;" class="delete-action" title="Delete" href="javascript:void(0);"><span class="ico-delete">&nbsp;</span></a>
+
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+
+        $(document).find('.main-nav li').removeClass('active');
+        $(document).find('.main-nav li').eq(1).addClass('active');
+
+        selectedUserProfile();
+        $.extend(true, $.fn.dataTable.defaults, {
+            "searching": true,
+            "ordering": true,
+            "paging": false,
+            "info": false,
+            "destroy": true
+            //"scrollY": "200px",
+            
+        });
+
+        $('#UserList table').DataTable({
+            columnDefs: [
+            {
+                "orderable": false, "targets": [-1, 4],
+            }
+            ],
+            "order": [[0, "asc"]],
+            "language": {
+                "emptyTable": "Users are not available"
+            }
+        });
+        $(".dataTables_filter").css("display", "none");
+
+        $("#userSearch").keyup(function () {
+            $('#UserList table').DataTable().search($('#userSearch').val()).draw();
+        });
+
+        ClearSearchFilter();
+        function ClearSearchFilter() {
+            if ($('#userSearch').length > 0) {
+                $('#userSearch').val('');
+            }
+        }
+    });
+</script>

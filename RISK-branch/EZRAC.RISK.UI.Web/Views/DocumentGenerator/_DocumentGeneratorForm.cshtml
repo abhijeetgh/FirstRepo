@@ -1,0 +1,160 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentGeneratorViewModel
+@using EZRAC.RISK.Util.Common
+@using EZRAC.Risk.UI.Web.Helper
+<div class="col-xs-8 doctypegen-rightcol">
+    <h5>@Model.Title</h5>
+    
+   @using( @Html.BeginForm("GenerateDocument", "DocumentGenerator",FormMethod.Get, new { @class="cla-form", role="form",id="documentGeneratorForm",Target="_blank"})){
+    @*<form class="cla-form" role="form">*@
+        <div class="form-group">
+            <label class="control-label"><strong>Driver Info</strong></label>
+            @Html.DropDownListFor(x => x.SelectedDriverId, Model.Drivers, "-- Select --", new { @class = "form-control ncl-slect selectpicker bs-select-hidden", title = "Please select", data_live_search = "true",id="documentGenratorDrivers" })
+            @Html.ValidationMessageFor(x => x.SelectedDriverId, null, new { style = "padding-left:75px" })
+        </div>
+    <table class="grey-white-table dark-blue-header complete complete-width claim-table borderedDocument-table" id="documentGeneratorTable">
+            <tbody>
+                @if (DocumentGeneratorHelper.IsBillingsRequired(@Convert.ToInt32(Model.DocumentTypeId)))
+                {
+                    if (Model.Billings != null && Model.Billings.Billings != null && Model.Billings.Billings.Any())
+                    {
+                        <tr class="white-color">
+                            <th class='align-left'> <input type="checkbox" class="borderedAll-table-checkbox check-box-all" checked="checked" /> Charge Description </th>
+                            <th class='claim-status-coloumn align-left'> Bill Amount $ </th>
+                            <th class='contract-coloumn align-left'> Discount </th>
+                        </tr>
+                        foreach (var item in Model.Billings.Billings)
+                        {
+                            <tr>
+                                <td>
+                                <input type="checkbox" name="SelectedBillings" class="borderedAll-table-checkbox check-box" checked="checked" value="@item.Id" data-amount="@item.Amount" data-discount="@item.Discount" />
+                                    @item.BillingTypeDesc
+                                </td>
+                                <td>@item.Amount</td>
+                                <td>@item.Discount</td>
+                            </tr>
+                        }
+                    }
+                }
+                @if (@Model.DocumentTypeId == DocumentTypes.Payment_Plan)
+                {
+                    <tr>
+                        <td>Total Number of months<span class="mandetory-star">*</span></td>
+                        <td colspan="2">
+                            @Html.TextBoxFor(x => x.NumberOfMonths, new { @class = "form-control input-type-search doc-generator" })
+                            @Html.ValidationMessageFor(x => x.NumberOfMonths)
+                        </td>
+                    </tr>
+                }
+                @if (@Model.DocumentTypeId == DocumentTypes.Ticket_Admin_Fee || Model.DocumentTypeId == DocumentTypes.Violation_Admin_Fee ||
+                                                                                               Model.DocumentTypeId == DocumentTypes.Violation_Admin_Fee_Decline)
+                {
+
+                    <tr>
+                        <td>Treat as California Ticket ?</td>
+                        <td colspan="2">
+                            @Html.CheckBoxFor(x => x.TreatAsCaliforniaTicket, new { @class = "doc-generator" })
+                            @Html.ValidationMessageFor(x => x.TreatAsCaliforniaTicket)
+                        </td>
+                    </tr>
+                }
+                
+                @if (Model.DocumentTypeId == DocumentTypes.Salvage_Bid_Accepted)
+                {
+                    <tr>
+                        <td>Salvage Bid Amount</td>
+                        <td colspan="2">
+                            @Html.TextBoxFor(x => x.SalvageBidAmount, new { @class = "form-control input-type-search doc-generator" })
+                            @Html.ValidationMessageFor(x => x.SalvageBidAmount)
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <div>
+            <button type="submit" class="btn btn1 pull-left top20">Generate Document</button>
+            <a class="pull-left top30 reset-button2" href="javascript:void(0);" id="reset-doc-generator">
+                <span class="col-xs-1 reset-image"></span>Reset All
+            </a>
+        </div>
+       if (DocumentGeneratorHelper.IsBillingsRequired(@Convert.ToInt32(Model.DocumentTypeId)))
+       {
+        <div>
+            <table class="dark-blue-header complete complete-width claim-table borderedDocument-table bottom10" id="totalsTable">
+                <tr>
+                    <td class="fixed-width-450" style="width:450px;">Total Billings</td>
+                    <td>$<span id="spanTotalBill">@Model.TotalBill</span></td>
+                </tr>
+                <tr>
+                    <td class="fixed-width-450" style="width:450px;">Total Payments</td>
+                    <td>$<span id="spanTotalPayment">@Model.TotalPayment</span></td>
+                </tr>
+                <tr>
+                    <td class="fixed-width-450" style="width:450px;">Total Due</td>
+                    <td>$<span id="spanTotaldue">@Model.TotalDue</span></td>
+                </tr>
+            </table>
+        </div>
+       }
+       @Html.HiddenFor(x => x.ClaimId)
+       @Html.HiddenFor(x => x.DocumentTypeId)
+       //Html.Hidden("billamount", Model.Billings != null && Model.Billings.Billings != null ? Model.Billings.Billings.Sum(x => x.Amount*(1-(x.Discount/100))) : default(double), new { id = "totalBilling" });
+   }
+    @*</form>*@
+</div>
+    @if (DocumentGeneratorHelper.IsBillingsRequired(@Convert.ToInt32(Model.DocumentTypeId)))
+    {
+        <div style="position:absolute; bottom:-21px; right:10px">Note : Choose the charges to show on document.</div>
+    }
+<script>
+    $.validator.setDefaults({
+        ignore: []
+    });
+
+    $.validator.unobtrusive.parse("#documentGeneratorForm");
+
+    $(".selectpicker").selectpicker({});
+
+    $(".check-box-all").change(function () {
+        $("#documentGeneratorTable .check-box").prop("checked", $(this).prop('checked'));
+        calculateTotalBill();
+    });
+
+    $("#reset-doc-generator").click(function () {
+        $(".check-box-all,.check-box,.doc-generator").prop("checked", true);
+        $("#documentGenratorDrivers").selectpicker('val', "");
+        $(".doc-generator").val("");
+        $(".field-validation-error span").text("");
+        calculateTotalBill();
+    });
+
+    $(".check-box").change(function () {
+        calculateTotalBill();
+        if (!$(this).prop('checked')) {
+            $(".check-box-all").prop("checked", $(this).prop('checked'));
+        }
+        else {
+            if ($(".check-box").length == $(".check-box:checked").length)
+            $(".check-box-all").prop("checked", $(this).prop('checked'));
+        }
+    });
+
+    function calculateTotalBill()
+    {
+        var totalBill = 0;
+        $("#documentGeneratorTable .check-box:checked").each(function (index, element) {
+            var element = $(element);
+            var amount = parseFloat(element.attr("data-amount"));
+            var discount = parseFloat(element.attr("data-discount"));
+            if (discount != 0) {
+                totalBill = totalBill + amount * (1 - (element.attr("data-discount") / 100));
+            } else {
+                totalBill = totalBill + amount;
+            }
+        });
+        $("#spanTotalBill").text(totalBill);
+        var totalPayment = parseFloat($("#spanTotalPayment").text());
+        var totalDue = totalBill - totalPayment > 0 ? (totalBill - totalPayment).toFixed(2) : 0;
+        $("#spanTotaldue").text(totalDue);
+    }
+</script>

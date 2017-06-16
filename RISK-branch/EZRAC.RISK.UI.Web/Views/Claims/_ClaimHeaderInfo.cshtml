@@ -1,0 +1,98 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimInfoHeaderViewModel
+
+@using EZRAC.Risk.UI.Web.Helper
+
+    @using (Ajax.BeginForm("SaveClaimHeaderInfo", "Claims", FormMethod.Post, new AjaxOptions { LoadingElementId = "wait", UpdateTargetId = "claim-header-secton", InsertionMode = InsertionMode.Replace, OnFailure = "onErrorHandler(xhr)" }, 
+                    new { @id = "frm-save-claim-header", @class = "form-inline cla-form", @role = "form" }))
+    {
+          @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Status, new { @class = "control-label" })
+            <span class="mandetory-star">*</span>
+            @Html.DropDownListFor(model => model.SelectedStatusId, Model.Status, new { @class = "form-control ncl-slect selectpicker", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.SelectedStatusId)
+
+        </div>
+        <div class="form-group inline-form-space">
+
+            @Html.LabelFor(model => model.SelectedAssignedUserId, new { @class = "control-label" })  <span class="mandetory-star">*</span>
+            @Html.DropDownListFor(model => model.SelectedAssignedUserId, Model.Users, new { @class = "form-control ncl-slect selectpicker", @data_live_search = "true" })
+            @Html.ValidationMessageFor(model => model.SelectedAssignedUserId)
+
+        </div>
+        <div class="form-group inline-form-space">
+            @Html.LabelFor(model => model.FollowupDate, new { @class = "control-label" })  <span class="mandetory-star">*</span>
+            <div class="sandbox-container">
+
+                <input id="followup-date" name="FollowupDate" type="text" readonly="readonly" value='@Html.DisplayFor(model => model.FollowupDate)' class="form-control sand-datepicker datepicker-followupdate" />
+            @*@Html.TextBoxFor(model => model.FollowupDate, new { @class = "form-control sand-datepicker datepickerFollowUpdate" })*@
+
+           @Html.ValidationMessageFor(model => model.FollowupDate)
+
+
+            </div>
+        </div>
+        <div class="form-group inline-form-space">
+
+            @Html.LabelFor(model => model.SelectedApprover, new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.SelectedApprover, Model.ApprovalUsers, "-- Select --",
+                                                                            new { @class = "form-control ncl-slect selectpicker", @data_live_search = "true" })
+           
+            @Html.ValidationMessageFor(model => model.SelectedApprover)
+
+        </div>
+        
+        @Html.Hidden("ClaimID", Model.ClaimID);
+
+        if (Model.FollowupDate.HasValue)
+        {
+            @Html.Hidden("originalFollowUpDate", Model.FollowupDate.Value.ToShortDateString());
+        }
+
+
+        <input type="hidden" id="followupDateChangeFlag" value="true" />
+
+    <input type="hidden" id="add-followup-url" data-url="@Url.Action("AddFollowupNotesViewClaim", "Notes")" />
+
+        <div class="form-group inline-form-space">
+            <button type="submit" class="btn btn1 padding-horizontal-30" title="Save">SAVE</button>
+
+
+        </div>
+    @*<div class="pull-right partial-ryt">
+
+        <ul class="add-update-icon relative padding-horizontal-0">
+            @if (Model.HasAccessToApprove) { 
+            <li>
+
+                    <a class="dropdown-toggle" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="approveClaimForViewClaim" data-url="@Url.Action("ApproveClaim", "Claims")" data-id="@Model.ClaimID" title="Approve">
+                    <span class="correct-icon-small float-left" style="width:21px">&nbsp;</span>
+                </a>
+            </li>
+            <li class="vertical-nav-devider">
+
+                    <a class="dropdown-toggle" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="rejectClaimForViewClaim" data-url="@Url.Action("RejectClaim", "Claims")" data-reject-url="@Url.Action("RejectClaimNoteForViewClaim", "Notes")" data-id="@Model.ClaimID" title="Reject">
+                    <span class="incorrect-icon-small float-left" style="width:21px">&nbsp;</span>
+                </a>
+            </li>
+            }
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteClaim))
+            {
+            <li class ="vertical-nav-devider">
+                <a class="dropdown-toggle" title="Delete Claim" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="deleteClaim" data-redirecturl="@Url.Action("GetClaimList","Claims")" data-url="@Url.Action("DeleteClaim","Claims")" data-id="@Model.ClaimID">
+                    <span class="ico-delete float-left">&nbsp;</span>
+                </a>
+            </li>
+            }
+        </ul>
+
+    </div>*@
+         <div id="wait" style="display:none;"><img class="ajax-loader" src="~/Images/ajax_loader_blue_large.gif" /></div>
+        
+     
+        @Html.HiddenFor(x => x.HasAccessToApprove, new { id="hasAccessToApprove" });
+    }
+
+
+<script src="~/Scripts/appScripts/claim-header-info.js"></script>

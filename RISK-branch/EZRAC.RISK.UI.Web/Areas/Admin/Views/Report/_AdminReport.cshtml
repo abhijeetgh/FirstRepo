@@ -1,0 +1,284 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Reports.AdminReportViewModel
+<div id="ReportResult">
+    <div class="col-xs-12">
+        @*<div class="report-box">
+            <h4>Summary</h4>
+            <p><span><strong>Date Range</strong></span> &nbsp;<span id="SummaryDateRange"></span></p>
+            <p><span><strong>Users</strong></span>&nbsp;<span id="Usernames"> vaniya, john01</span></p>
+            <p><span><strong>Report Date</strong>&nbsp; @Model.ReportDate</span></p>
+        </div>*@
+        <a href="@Url.Action("GenerateExportFile", "Report")" class="export-btn pull-right top20"><span class="exporticon">&nbsp;</span><strong>Export</strong></a>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="grey-border-1 top15">
+            @{
+                if (Model.ReportTypeKey == "calldates")
+                {
+                    <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                        <thead>
+                            <tr class="white-color">
+                                <th>
+                                    <div class="display-inline">Contract / Claim Number</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">User</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Next Call Date </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Driver</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null && Model.ReportClaimViewModels != null)
+                            {
+                                foreach (var item in Model.ReportClaimViewModels)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", item.Contract, item.CompanyAbbr, item.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = item.Claim })<input type="hidden" id="claimid" value="@item.Claim" /></td>
+                                        <td> @item.UserDetail </td>
+                                        <td> @item.FollowUpDate </td>
+                                        <td> @item.DriverName </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                }
+                if (Model.ReportTypeKey == "assignedcontracts")
+                {
+                    <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                        <thead>
+                            <tr class="white-color">
+                                <th>
+                                    <div class="display-inline">Contract / Claim Number</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">User</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Open Date </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Status </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Driver</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null && Model.ReportClaimViewModels != null)
+                            {
+                                foreach (var item in Model.ReportClaimViewModels)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", item.Contract, item.CompanyAbbr, item.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = item.Claim })<input type="hidden" id="claimid" value="@item.Claim" /></td>
+                                        <td> @item.UserDetail </td>
+                                        <td> @item.OpenDate </td>
+                                        <td> @item.Status </td>
+                                        <td> @item.DriverName </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                }
+                if (Model.ReportTypeKey == "customerservice")
+                {
+                    <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                        <thead>
+                            <tr class="white-color">
+                                <th>
+                                    <div class="display-inline">Contract / Claim Number</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Open Date </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Status </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Driver</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null && Model.ReportClaimViewModels != null)
+                            {
+                                foreach (var item in Model.ReportClaimViewModels)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", item.Contract, item.CompanyAbbr, item.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = item.Claim })<input type="hidden" id="claimid" value="@item.Claim" /></td>
+                                        <td> @item.OpenDate </td>
+                                        <td> @item.Status </td>
+                                        <td> @item.DriverName </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                }
+                if (Model.ReportTypeKey == "useractivity")
+                {
+                    <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                        <thead>
+                            <tr class="white-color">
+                                <th>
+                                    <div class="display-inline">Contract / Claim Number</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">User</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Date </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Action </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null && Model.UserActionLogViewModel != null)
+                            {
+                                foreach (var item in Model.UserActionLogViewModel)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", item.ContractNo, item.CompanyAbbr, item.ClaimId), "ViewClaim", new { @area = "", @Controller = "claims", id = item.ClaimId })<input type="hidden" id="claimid" value="@item.ClaimId" /></td>
+                                        <td> @item.Name</td>
+                                        <td> @item.Date </td>
+                                        <td> @item.UserAction </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                }
+                if (Model.ReportTypeKey == "pendingamountdue")
+                {
+                    <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                        <thead>
+                            <tr class="white-color">
+                                <th>
+                                    <div class="display-inline">Contract / Claim Number</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Location </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Estimate </div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Other Charges</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Total Charges</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Total Payments</div>
+                                </th>
+                                <th>
+                                    <div class="display-inline">Balance</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null && Model.PaymentViewModels != null)
+                            {
+                                foreach (var item in Model.PaymentViewModels)
+                                {
+                                    <tr>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", item.Contract, item.CompanyAbbr, item.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = item.Claim })<input type="hidden" id="claimid" value="@item.Claim" /></td>
+                                        <td> @item.Location </td>
+                                        <td> @item.Estimated </td>
+                                        <td> @item.OtherChanrges </td>
+                                        <td> @item.Charges </td>
+                                        <td> @item.Payments </td>
+                                        <td> @item.Balance </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                }
+            }
+
+            @*<div class="padding-horizontal-15">
+                    <div class=" font-12 row grey-background">
+                        <div class="float-left">
+                            <ul class="pagination-list bottom0 top5 ">
+                                <li class="pagination-list-item ">
+                                    <a aria-label="Previous" href="javascript:void(0);">
+                                        <div class="arrow-left"></div>
+                                    </a>
+                                </li>
+                                <li class="pagination-list-item active"> <a href="javascript:void(0);">1</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">2</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">3</a> </li>
+                                <li class="pagination-list-item">
+                                    <a aria-label="Next" href="javascript:void(0);">
+                                        <div class="arrow-right"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="float-left left20 top3">
+                            <div class=" bottom10 top10">
+                                <span>Showing </span> <span>
+                                    <select class="show-record">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </span> <span>Of 100 Records</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.extend(true, $.fn.dataTable.defaults, {
+            "searching": true,
+            "ordering": true,
+            "paging": true,
+            "info": false,
+            "destroy": true
+            //"scrollY": "200px",
+
+        });
+        $("#ReportResult table").DataTable({
+            columnDefs: [
+            {
+                "orderable": false,
+            }
+            ],
+            "order": [[0, "asc"]],
+            "dom": '<"top"i>rt<"bottom"flp><"clear">',
+            "language": {
+                "lengthMenu": "Display _MENU_ records",
+                "emptyTable": "Records are not available"
+            }
+        });
+        $(".dataTables_filter").css("display", "none");
+        //$(".export-btn").click(function () {           
+        //    window.location = 'Report/GenerateExportFile';
+        //});
+    });
+</script>

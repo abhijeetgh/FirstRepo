@@ -1,0 +1,309 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Reports.ReportCriteriaViewModel
+@using EZRAC.RISK.Util.Common
+<div class="row" style="padding-left: 8px; margin-right: -8px;">
+    <div class="col-xs-12" id="ReportSearchCriteria">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h1 class="panel-title" id="reportCaption">
+                    <span data-target="#myDiv" data-toggle="collapse" class="glyphicon glyphicon-minus-sign cursor-pointer"></span>
+                    <span class="left10">@Model.ReportText</span>
+                </h1>
+            </header>
+            <div class="collapse in" id="myDiv">
+                <div class="report-form">
+                    @*<form class="form-inline cla-form" role="form">*@
+                    @using (Ajax.BeginForm("GenerateReport", new { Controller = "Report" }, new AjaxOptions
+        {
+            OnSuccess = "GetReportResult(data)",@* UpdateTargetId = "UserList",*@ HttpMethod = "Post",
+            OnFailure = "onErrorHandler(xhr)"
+        }, new { @class = "form-inline cla-form", @id = "report-info-form" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.TagPlatereports)
+                            {
+
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label right10"><strong>Tag Number<label class="mandetory-star ask">*</label></strong></label>
+                                    @Html.TextBoxFor(x => x.TagNumber, new { @class = "form-control " })
+                                </div>
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Adminreports)
+                            {
+                                <div class="form-group inline-form-space" style="margin-left: 10px;">
+                                    <label class="control-label right10"><strong>Report Type<label class="mandetory-star ask">*</label></strong></label>
+                                    @if (Model.ReportTypeList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.ReportTypeKey, Model.ReportTypeList, "Please select", new { @class = "form-control IsActiveFormControl", @data_live_search = "true" })
+                                    }
+                                </div>
+                            }
+                            <!--Date range-->
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Basicreports || Model.ReportKey == ReportConstants.ReportKey.Adminreports || Model.ReportKey == ReportConstants.ReportKey.Writeoffreport || Model.ReportKey == ReportConstants.ReportKey.Collectionreport || Model.ReportKey == ReportConstants.ReportKey.Accountsreceivablereport || Model.ReportKey == ReportConstants.ReportKey.Chargebacklossreport || Model.ReportKey == ReportConstants.ReportKey.Vehicledamagesectionreport || Model.ReportKey == ReportConstants.ReportKey.Adminfeecommissionreport || Model.ReportKey == ReportConstants.ReportKey.Crispininvoice || Model.ReportKey == ReportConstants.ReportKey.Depositdatereport || Model.ReportKey == ReportConstants.ReportKey.Chargesreport || Model.ReportKey == ReportConstants.ReportKey.ExportClaimsReport)
+                            {
+                                if (Model.ReportKey == ReportConstants.ReportKey.Basicreports)
+                                {
+                                    <div class="form-group inline-form-space" style="margin-left: 10px;">
+                                        <label class="control-label right10"><strong>Date Type<label class="mandetory-star ask">*</label></strong></label>
+                                        @if (Model.ReportTypeList != null)
+                                        {
+                                            @Html.DropDownListFor(m => m.DateTypeKey, Model.DateTypeList, "Please select", new { @class = "form-control IsActiveFormControl", @data_live_search = "true" })
+                                        }
+                                    </div>
+
+                                }
+
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label right10"><strong>From</strong></label>
+                                    <div class="sandbox-container">
+                                        @Html.TextBoxFor(x => x.FromDate, new { @readonly = "readonly", @id = "FromDate", @placeholder = "From", @class = "form-control IsActiveFormControl sand-datepicker display-inline-block  ReportDatepickerFrom" })
+                                    </div>
+                                </div>
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label right10" style="width:auto"><strong>To</strong></label>
+                                    <div class="sandbox-container">
+                                        @Html.TextBoxFor(x => x.ToDate, new { @readonly = "readonly", @id = "ToDate", @placeholder = "To", @class = "form-control IsActiveFormControl sand-datepicker display-inline-block  ReportDatepickerTo" })
+                                    </div>
+                                </div>
+
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Agingreport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label right10"><strong>As Of Date</strong></label>
+                                    <div class="sandbox-container">
+                                        @Html.TextBoxFor(x => x.AsOfDate, new { @readonly = "readonly", @id = "AsOfDate", @class = "form-control IsActiveFormControl sand-datepicker display-inline-block  ReportDatepickerTo" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label right10"><strong>Aging Days</strong></label>
+                                    <div class="sandbox-container">
+                                        @Html.DropDownListFor(m => m.AgingDays, Model.AgingDaysList, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Adminreports || Model.ReportKey == ReportConstants.ReportKey.Collectionreport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10"><strong>@((Model.ReportKey == ReportConstants.ReportKey.Adminreports) ? "Users" : "Agent")</strong></label>
+                                    @if (Model.UserList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.UserIds, Model.UserList, null, new { @class = "form-control IsActiveFormControl multiple-select-box", @multiple = "multiple", @data_live_search = "true" })
+                                    }
+                                </div>
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Basicreports || Model.ReportKey == ReportConstants.ReportKey.Vehicledamagesectionreport || Model.ReportKey == ReportConstants.ReportKey.Vehiclestobereleasedreport || Model.ReportKey == ReportConstants.ReportKey.Stolenrecoveredreport || Model.ReportKey == ReportConstants.ReportKey.Chargebacklossreport || Model.ReportKey == ReportConstants.ReportKey.Agingreport || Model.ReportKey == ReportConstants.ReportKey.Accountsreceivablereport || Model.ReportKey == ReportConstants.ReportKey.Collectionreport || Model.ReportKey == ReportConstants.ReportKey.Writeoffreport || Model.ReportKey == ReportConstants.ReportKey.Adminfeecommissionreport || Model.ReportKey == ReportConstants.ReportKey.Chargesreport)
+                            {
+
+
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10 location"><strong>Locations<label class="mandetory-star ask">*</label></strong></label>
+                                    @if (Model.LocationList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.LocationIds, Model.LocationList, null, new { @class = "form-control IsActiveFormControl multiple-select-box", @multiple = "multiple", @data_live_search = "true" })
+                                    }
+                                </div>
+
+
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Vehicledamagesectionreport || Model.ReportKey == ReportConstants.ReportKey.Vehiclestobereleasedreport || Model.ReportKey == ReportConstants.ReportKey.Stolenrecoveredreport || Model.ReportKey == ReportConstants.ReportKey.Chargebacklossreport || Model.ReportKey == ReportConstants.ReportKey.Agingreport || Model.ReportKey == ReportConstants.ReportKey.Accountsreceivablereport || Model.ReportKey == ReportConstants.ReportKey.Writeoffreport || Model.ReportKey == ReportConstants.ReportKey.Adminreports)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10"><strong>Claim Status</strong></label>
+                                    @if (Model.ClaimStatusList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.ClaimStatusIds, Model.ClaimStatusList, null, new { @class = "form-control IsActiveFormControl multiple-select-box", @multiple = "multiple", @data_live_search = "true" })
+                                    }
+                                </div>
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Vehiclestobereleasedreport || Model.ReportKey == ReportConstants.ReportKey.Writeoffreport || Model.ReportKey == ReportConstants.ReportKey.Agingreport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10"><strong>Loss Types</strong></label>
+                                    @if (Model.LocationList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.LossTypeIds, Model.LossTypeList, null, new { @class = "form-control IsActiveFormControl multiple-select-box", @multiple = "multiple", @data_live_search = "true" })
+                                    }
+                                </div>
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Vehicledamagesectionreport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10"><strong>Vehicle Section</strong></label>
+                                    @if (Model.VehicalDamageList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.VehicalDamageIds, Model.VehicalDamageList, null, new { @class = "form-control IsActiveFormControl multiple-select-box", @multiple = "multiple", @data_live_search = "true" })
+                                    }
+                                </div>
+                            }
+
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Depositdatereport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10"><strong>@((Model.ReportKey == "depositdatereport") ? "Payment Type" : "Paid From")</strong></label>
+                                    @if (Model.PaymentTypeList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.PaymentTypeId, Model.PaymentTypeList, null, new { @class = "form-control IsActiveFormControl multiple-select-box", @multiple = "multiple", @data_live_search = "true" })
+                                    }
+                                </div>
+                            }
+                            <div class="col-xs-12">
+                                @if (Model.ReportKey == ReportConstants.ReportKey.Basicreports)
+                                {
+                                    <div class="form-group" style="margin-left: -4px;">
+                                        <label class="control-label right10 status"><strong>Status</strong></label>
+
+                                        @Html.DropDownListFor(m => m.Status, new[] {
+                                                                new SelectListItem() { Text="All", Value = "0" },
+                                                                new SelectListItem() { Text="Open", Value = "1" },
+                                                                new SelectListItem() { Text="Close", Value = "2" }
+                                                               }, new { @class = "form-control" })
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Chargesreport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10 charges"><strong>@((Model.ReportKey == "chargesreport") ? "Charge Type" : "Paid From")</strong></label>
+                                    @if (Model.ChargeTypeList != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.ChargeTypeId, Model.ChargeTypeList, "Please select", new { @class = "form-control IsActiveFormControl", @data_live_search = "true" })
+                                    }
+                                </div>
+
+
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label pull-left right10 charges"><strong>Include Claims with charges</strong></label>
+                                    @if (Model.GreaterThanLessThan != null)
+                                    {
+                                        @Html.DropDownListFor(m => m.GreaterThanLessThan, new[]{
+                                                                new SelectListItem() { Text="Please select", Value = "2" },
+                                                                new SelectListItem() { Text="Greater Than", Value = "0" },
+                                                                new SelectListItem() { Text="Less Than", Value = "1" }, }, new { @class = "form-control" })
+
+                                        @Html.TextBoxFor(m => m.GreaterThanLessThanValue, new { @class = "form-control" })
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Collectionreport)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label"></label>&nbsp;
+                                    @Html.CheckBoxFor(m => m.IncludeTicket) Include Ticket&nbsp;
+                                    @Html.CheckBoxFor(m => m.IncludeCollection) Include Collection
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Basicreports)
+                            {
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label"></label>&nbsp;
+                                    @Html.CheckBoxFor(m => m.IncludeTicket) Include Ticket&nbsp;
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.Adminfeecommissionreport)
+                            {
+                                <div class="form-group inline-form-space" style="margin-left: 11px;">
+                                    <label class="control-label right10 status"><strong>Type</strong></label>
+
+                                    @Html.DropDownListFor(m => m.TicketOrViolations, new[] {
+                                                                new SelectListItem() { Text="All", Value = "" },
+                                                                new SelectListItem() { Text="Tickets", Value = "TIX" },
+                                                                new SelectListItem() { Text="Violations", Value = "VT" }
+
+                                                               }, new { @class = "form-control" })
+
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-12">
+                            @if (Model.ReportKey == ReportConstants.ReportKey.ExportClaimsReport)
+                            {
+                                <div class="form-group inline-form-space" style="margin-left: 11px;">
+                                    <label class="control-label right10 status"><strong>Type</strong></label>
+                                    @Html.DropDownListFor(m => m.ExportType, new[] {
+                                                                new SelectListItem() { Text="All", Value = "0" },
+                                                                new SelectListItem() { Text="ODD", Value = "1" },
+                                                                new SelectListItem() { Text="EVEN", Value = "2" }
+                                                               }, new { @class = "form-control" })
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-12">
+                            @Html.HiddenFor(model => model.ReportKey, new { @id = "CurrentReportKey" })
+                            @if (Model.ReportKey == ReportConstants.ReportKey.ExportClaimsReport)
+                            {
+                                <input type="button" id="GenerateExportAllClaims" class="btn btn1 pull-left padding-horizontal-30 report-submit-btn reset" value="Export CSV Report" />
+                            }
+                            else
+                            {
+                                <input type="submit" id="GenerateFormSubmit" class="btn btn1 pull-left padding-horizontal-30 report-submit-btn reset" value="Generate Report" />
+                            }
+                            <a class="pull-left top10" href="javascript:void(0);" id="ResetReportCriteria"> <span class="col-xs-1 reset-image"></span>Reset All </a>
+                        </div>
+                    }
+                    @*</form>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#ReportTypeKey").change(function () { $('.report-form').find('#FromDate,#ToDate,#UserIds,#ClaimStatusIds').val('') });
+
+        $("#DateTypeKey").change(function () { $('.report-form').find('#FromDate,#ToDate,#LocationIds').val('') });
+
+        $("#DateTypeKey").change(function () {
+            $('#Status').val('0');
+        });
+
+
+        $("#ReportSearchCriteria #ResetReportCriteria").on("click", function () {
+            $("#ReportType .selected a").click();
+            //$("#ReportSearchCriteria select option:selected").prop("selected", false);
+            //$("#ReportSearchCriteria input:text").val("");
+        });
+        $("#FromDate,#ToDate,#AsOfDate").datepicker({
+            autoclose: true,
+        }).on("click", function () {
+            $(this).datepicker('show');
+        });
+        $("#GenerateFormSubmit").on("click", function () {
+            var flag = validationReportCriteria();
+            return flag;
+        });
+        $("#GenerateExportAllClaims").on("click", function () {
+            ExportAllClaims();
+        });
+
+        $('.collapse').on('shown.bs.collapse', function () {
+            $(this).parent().find(".glyphicon-plus-sign").removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+        }).on('hidden.bs.collapse', function () {
+            $(this).parent().find(".glyphicon-minus-sign").removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
+        });
+    })
+</script>

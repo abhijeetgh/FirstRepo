@@ -1,0 +1,112 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />
+                    Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top">*<br /><img src="@Model.Company.Logopath" width="80" height="50"></td>
+            <td width="33%" align="right" valign="top">
+                <div>
+                    *<br />
+                    Email:  @Model.RiskUserEmail<br />
+                    Phone:  @Model.Company.Phone<br />
+                    Fax:    @Model.Company.Fax
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.DriverViewModel.Name<br />
+                    @Model.DriverViewModel.Address<br />
+                    @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                </div>
+            </td>
+
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                   @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <div style="font-weight:bold">
+                    *<br />Claim #:&nbsp;&nbsp;&nbsp;&nbsp; @String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)
+                    <br /><br />
+                </div>
+                <div style="font-weight:bold;text-decoration:underline;">
+                    *<br /><center>OUTSTANDING ACCOUNT</center><br /><br />
+                </div>
+                    Dear&nbsp;@Model.DriverViewModel.Name,<br /><br />
+                    We are writing concerning the amount of <b>@Model.TotalDue.ToString("C2")</b> which was past due amount on your Rental Agreement . Please see attached invoice.<br /><br />
+                    We demand that payment of the full amount be paid to us within 10 business days.<br /><br />
+                If you wish to prevent this, please contact the undersigned as a matter of urgency and settle your account before the above date.
+                    
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <div style="font-size:small">
+                    *<br />Regards,<br />
+                    @Model.RiskUserFullName <br />
+                    Risk Management Services<br />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="font-size:small">
+                    *<br /><br /><br />If any legal action is taken and results in judgment against you, a Writ of Execution may be issued against your attachable assets. Any legal action taken may result in additional expenses, including service of process and other court costs; thereby increasing your debt and overall financial obligation. In addition, the agreement between you and E-Z Rent-A-Car contains an attorney's fees clause which specifies that the prevailing party to any action concerning this debt will be entitled to reasonable attorney's fees in addition to any other award granted. If the car rental company needs to resort to legal action to collect this debt, a request will be made that you be held liable for all such attorney's fees incurred.<br />
+                    AR DL1-RTR
+                </div>
+            </td>
+        </tr>
+
+
+    </table>
+
+
+
+
+</body>
+</html>

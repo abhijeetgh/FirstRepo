@@ -1,0 +1,82 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentsReceived.DocumentsReceivedViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+@*<link href="@Url.Content("~/Content/dataTable.css")" rel="stylesheet" />*@
+
+@*<script src="@Url.Content("~/Scripts/jquery-dataTable.js")" type="text/javascript"></script>*@
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">
+                    Documents Received / Events
+                </h3>
+            </header>
+            <div class="panel-body">
+
+                
+
+                    @using (Ajax.BeginForm("EditDocumentsReceived", "DocumentsReceived", new AjaxOptions { HttpMethod = "POST", OnSuccess = "documentsReceivedSuccessful(data)", OnFailure = "onErrorHandler(xhr)" }, new { @class = "form-inline cla-form", role = "form", id = "edit-documents-received-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <table class="table table-striped add-items" id="view-billing">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="display-inline">Document Types</div>
+                                    </th>
+
+                                    <th class="align-right"><div class="display-inline">Action </div> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*<tr>
+                                    <td>Police Report</td>
+                                    <td class="align-right">@Html.EditorFor(model => model.PoliceReport)</td>
+                                </tr>
+                                <tr>
+                                    <td>Claim Folder</td>
+                                    <td class="align-right">@Html.EditorFor(model => model.ClaimFolder)</td>
+                                </tr>*@
+                                <tr>
+                                    <td>Estimate Received</td>
+                                    <td class="align-right">@Html.EditorFor(model => model.EstimateReceived)</td>
+                                </tr>
+                                <tr>
+                                    <td> Estimate Approved</td>
+                                    <td class="align-right">@Html.EditorFor(model => model.EstimateApproved)</td>
+                                </tr>
+
+
+                            </tbody>
+
+                            @*</table>*@
+                        </table>
+                        @Html.HiddenFor(model => model.ClaimId);
+                        <div id="documentsReceivedStatus" class="saveSuccess"></div>
+
+                        if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditDocumentsReceived))
+                        {
+
+                            <button id="addDocumentsInfo" type="submit" class="btn btn1 top25 padding-horizontal-30">SAVE</button>
+                        }
+                    }
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function documentsReceivedSuccessful(data) {
+        if (data.IsSuccess) {
+            //debugger;
+            $("#documentsReceivedStatus").text("Documents received information saved successfully");
+        }
+        else
+            $("#documentsReceivedStatus").text("Documents received information save failed");
+    }
+
+</script>

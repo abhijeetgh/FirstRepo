@@ -1,0 +1,48 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.PaymentsViewModel
+@using EZRAC.Risk.UI.Web.Helper;
+<script src="@Url.Content("~/Scripts/appScripts/payment-table-info.js")" type="text/javascript"></script>
+
+<div class="modal fade cla-modpopup" id="payments" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">Payments</h4>
+            </div>
+            <div class="modal-body" style="max-height: 686px;overflow-y: scroll;">
+                <table class=" table table-striped add-items " id=" paymentstable">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="display-inline">Payments From</div>
+                        </th>
+                        <th class="align-right">
+                            <div class="display-inline">Amount $ </div>
+                        </th>
+                        <th class="align-right">
+                            <div class="display-inline">Received Date </div>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Payments)
+                    {
+                        <tr>
+                            <td>@item.SelectedPaymentFrom</td>
+                            <td class="align-right">@item.Amount</td>
+                            <td class="align-right">@item.ReceivedDate.ToString(@Constants.CrmsDateFormates.MMDDYYYY)</td>
+
+                            @Html.Hidden("PaymentId", @item.PaymentId, new { @id = "paymentId" })
+                        </tr>
+                    }
+
+                </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+

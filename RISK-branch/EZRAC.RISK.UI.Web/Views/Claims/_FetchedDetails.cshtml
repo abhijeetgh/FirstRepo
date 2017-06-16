@@ -1,0 +1,139 @@
+﻿@using EZRAC.RISK.Services.Contracts.Dtos;
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.FetchDetailsViewModel
+<script src="@Url.Content("~/Scripts/appScripts/fetched-details.js")"></script>
+<div class="well cla-well cla-well col-xs-12">
+    <div class="close-container" title="Close"></div>
+    <h4 class="col-xs-10 contractnoTitle">@Html.DisplayFor(model => model.ContractNo)</h4>
+    <div data-target="#FetchedContractInfo" data-toggle="collapse" class="col-xs-2 close-container" title="Close"></div>
+    <div class="col-xs-4">
+        <section class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Contract Information</h3>
+            </header>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>Contract No.</td>
+                        <td>@Html.DisplayFor(model => model.ContractNo)</td>
+                    </tr>
+                    <tr>
+                        <td>Date In</td>
+                        <td id="contract-date-in">@Html.DisplayFor(model => model.DateIn)</td>
+                    </tr>
+                    <tr>
+                        <td>Date Out</td>
+                        <td id="contract-date-out">@Html.DisplayFor(model => model.DateOut)</td>
+                    </tr>
+                    <tr>
+                        <td>Original Date</td>
+                        <td>@Html.DisplayFor(model => model.OriginalDate)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <div class="col-xs-4">
+        <section class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Driver Information</h3>
+            </header>
+            <table class="table table-striped">
+                <tr>
+                    <td>Last Name</td>
+                    <td>@Html.DisplayFor(model => model.LastName)</td>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td>@Html.DisplayFor(model => model.FirstName)</td>
+                </tr>
+                <tr>
+                    <td>DOB</td>
+                    <td>@Html.DisplayFor(model => model.DOB)</td>
+                </tr>
+                <tr>
+                    <td>Licence No.</td>
+                    <td>@Html.DisplayFor(model => model.LicenceNo)</td>
+                </tr>
+            </table>
+        </section>
+    </div>
+    <div class="col-xs-4">
+        <section class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Vehicle Information</h3>
+            </header>
+            <table class="table table-striped">
+                <tr>
+                    <td>Unit No.</td>
+                    <td> <input type="radio" checked="checked" name="UnitNumber" value="@Model.UnitNo" /> @Html.DisplayFor(model => model.UnitNo)</td>
+                </tr>
+
+                <tr>
+                    <td>Purchase Type</td>
+                    <td> @Html.DisplayFor(model => model.PurchaseType)</td>
+                </tr>
+
+                @if (@Model.SwappedVehicles != null && Model.SwappedVehicles.Count<string>() > 1)
+                {
+                    <tr>
+                        <td>Swapped Vehicles</td>
+                        <td>
+                            @foreach (var unitNumber in @Model.SwappedVehicles)
+                            {
+                                if (!unitNumber.Equals(Model.UnitNo))
+                                {
+                                    <div> <input type="radio" name="UnitNumber" value="@unitNumber" /> <span>@unitNumber</span></div>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                else
+                {
+
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    
+                }
+                @*If units are less than three we show a place holder row*@
+                @if (Model.SwappedVehicles.Count<string>() < 3)
+                {
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                }
+                
+
+
+            </table>
+        </section>
+    </div>
+    <div class="col-xs-12">
+        @if (Model.ClaimsOnContract !=null && Model.ClaimsOnContract.Count<ClaimDto>()>0)
+        {
+            
+        <p>There is at least one other existing claim on this contract/unit. Please review these claim first:</p>
+         var attributes = new Dictionary<string, object>();
+         attributes.Add("id", "link1");
+
+        foreach (var item in Model.ClaimsOnContract)
+        {
+            string companyAbbrAndClaimId = !String.IsNullOrEmpty(item.CompanyAbbr) ? String.Format("{0}-{1}", item.CompanyAbbr.ToUpper(), item.Id) : item.Id.ToString();
+            
+            <p>@Html.ActionLink(companyAbbrAndClaimId, "ViewClaim", new { id = item.Id }, new { target = "_blank" }), @item.ContractNo - @item.SelectedLossTypeDescription </p>
+        }
+        }
+        
+        <p>
+            <input type="checkbox" id="verifiedContractDetails">
+            &nbsp; I have verified the details <br/>
+            <label id="verifyContractValidation" style="display:none" class="field-validation-error">Please verify details</label>
+        </p>
+    </div>
+</div>
+
+@Html.HiddenFor(model => model.LocationId)
+<input type="hidden" name="SelectedLocation" value="@Model.LocationId" >

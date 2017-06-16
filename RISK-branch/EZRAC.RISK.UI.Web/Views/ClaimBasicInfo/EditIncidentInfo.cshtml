@@ -1,0 +1,142 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.IncidentInfoViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<section class="panel panel-default complete-height  bottom0">
+
+    @using (Ajax.BeginForm("EditIncidentInfo", new { }, new AjaxOptions { UpdateTargetId = "incident-info", HttpMethod = "Post", OnFailure = "onErrorHandler(xhr)" }, new { @class = " bottom5  claim-info-form-editable", @id = "incident-info-form" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <header class="panel-heading">
+            <h3 class="panel-title">
+                Incident Information
+                <span class="pull-right">
+
+                    <a href="javascript:void(0);" onclick="$('#incident-info-form').submit();" class="inline-group save-icon-btn right10">
+                        <span class="pull-right top3">SAVE</span>
+                    </a>
+
+                    @Ajax.MyActionLink("<span class='form-label'>CANCEL</span>", "ViewIncidentInfo", "display-inline  cancel-icon-btn top3", new { incidentId = Model.Id },
+                                                       new AjaxOptions { UpdateTargetId = "incident-info", OnFailure = "onErrorHandler(xhr)" })
+
+                </span>
+
+            </h3>
+        </header>
+
+        <div class="top10 padding-horizontal-15">
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.LossDate)</label>
+                </div>
+                <div class="col-xs-3 padding-left-0 ">
+                    <div class="sandbox-container">
+
+                        @if (Model.LossDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.LossDate, Model.LossDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepicker", disabled="disabled",id = "loss-date" })
+                            @Html.ValidationMessageFor(model => model.LossDate)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.LossDate, new { @class = "form-control sand-datepicker datepicker", disabled = "disabled", id = "loss-date" })
+                            @Html.ValidationMessageFor(model => model.LossDate)
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.SelectedLocationId)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 bootstrap-dropdown-container">
+
+                    @Html.DropDownListFor(model => model.SelectedLocationId, Model.Locations, "-- Select --", new { @class = "form-control ncl-slect selectpicker bs-select-hidden", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.SelectedLocationId)
+
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.SelectedPoliceAgencyId)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 bootstrap-dropdown-container">
+
+                    @Html.DropDownListFor(model => model.SelectedPoliceAgencyId, Model.PoliceAgencies, "-- Select --", new { @class = "form-control ncl-slect selectpicker bs-select-hidden", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.SelectedPoliceAgencyId)
+                    @*@if (SecurityHelper.IsAdminAccess()) { 
+                    <div class="float-left left7 top3 right5">
+                        <button type="button" data-url="@Url.Action("Index", "PoliceAgency", new {area="admin" })" id="addPoliceAgency" class="plus-background add-insurance-company"></button>
+                    </div>
+                    <div class=" padding-left-0 padding-right-0 top7"> Add Police Agency </div>
+                    }*@
+                </div>
+            </div>
+
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label for="firstname">@Html.DisplayNameFor(model => model.CaseNumber)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown">
+
+                    @Html.TextBoxFor(model => model.CaseNumber, new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label for="firstname">@Html.DisplayNameFor(model => model.RenterFault)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown">
+
+                    @Html.CheckBoxFor(model => model.RenterFault, new { @class = "middle" })
+
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label for="firstname">@Html.DisplayNameFor(model => model.ThirdPartyFault)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown">
+
+                    @Html.CheckBoxFor(model => model.ThirdPartyFault, new { @class = "middle" })
+
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.ReportedDate)</label>
+                </div>
+                <div class="col-xs-3 padding-left-0 ">
+                    <div class="sandbox-container">
+
+                        @if (Model.ReportedDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.ReportedDate, Model.ReportedDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepicker" })
+                            @Html.ValidationMessageFor(model => model.ReportedDate)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.ReportedDate, new { @class = "form-control sand-datepicker datepicker" })
+                            @Html.ValidationMessageFor(model => model.ReportedDate)
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Id)
+        </div>
+    }
+
+</section>
+
+<script src="~/Scripts/appScripts/incident.js"></script>

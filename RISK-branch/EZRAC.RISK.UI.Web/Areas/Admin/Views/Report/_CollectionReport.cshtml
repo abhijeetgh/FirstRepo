@@ -1,0 +1,276 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Reports.CollectionCustomReportViewModel>
+
+<div id="ReportResult">
+    <div class="col-xs-12">
+        @*<div class="report-box">
+            <h4>Summary</h4>
+            <p><span><strong>Date Range</strong></span> &nbsp;<span id="SummaryDateRange"></span></p>
+            <p><span><strong>Locations</strong></span>&nbsp;<span id="LocationNames"> vaniya, john01</span></p>
+            <p><span><strong>Report Date</strong></span>&nbsp;<span id="ReportDate"></span></p>
+            </div>*@
+        <a href="@Url.Action("GenerateExportFile", "Report")" class="export-btn pull-right top20"><span class="exporticon">&nbsp;</span><strong>Export</strong></a>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="grey-border-1 top15">
+
+            @{
+                if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr>
+                                    <td id="reportlocation" colspan="13">
+                                        <span class="bold">@item.Location <input type="hidden" id="@item.LocationId" /></span>
+                                    </td>
+                                </tr>
+                                <tr class="white-color">
+                                    <th>
+                                        <div class="display-inline">Pay Date</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Contract / Claim Number </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Renter</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amt. Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Pay From</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Est. Damage</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Loss Of Use</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Admin Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Dimin Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">App/Other Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Subro Total</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">WriteOff Total</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Status</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Agent</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var collection in item.collectionReportViewModel)
+                                {
+                                    <tr>
+                                        <td>  @collection.PayDate</td>
+                                        <td>@Html.ActionLink(String.Format("{0} / {1}-{2}", collection.ContractNo, collection.CompanyAbbr, collection.ClaimId), "ViewClaim", new { @area = "", @Controller = "claims", id = collection.ClaimId })  <input type="hidden" value="@collection.ClaimId" id="ClaimId" /></td>
+                                        <td>  @collection.Renter </td>
+                                        <td> $@collection.Collected </td>
+                                        <td>  @collection.PayFrom </td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.Damage)) ? '$' + collection.Damage : collection.Damage) </td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.LossOfUse)) ? '$' + collection.LossOfUse : collection.LossOfUse)</td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.AdminFee)) ? '$' + collection.AdminFee : collection.AdminFee)  </td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.DiminFee)) ? '$' + collection.DiminFee : collection.DiminFee)  </td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.OtherFee)) ? '$' + collection.OtherFee : collection.OtherFee)  </td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.SubroTotal)) ? '$' + collection.SubroTotal : collection.SubroTotal)  </td>
+                                        <td> @((!string.IsNullOrEmpty(@collection.WriteOffTotal)) ? '$' + collection.WriteOffTotal : collection.WriteOffTotal)  </td>
+                                        <td>  @collection.Status </td>
+                                        <td>  @collection.Agent </td>
+                                    </tr>
+                                }
+                                <tr class="ReportSummaryTotal">
+                                    <td colspan="3">Location Total, @item.LocationTotal</td>
+                                    <td>$@item.FinalTotalCollected</td>
+                                    <td></td>
+                                    <td>$@item.FinalTotalDamage</td>
+                                    <td>$@item.FinalTotalLossOfUse</td>
+                                    <td>$@item.FinalTotalAdminFee</td>
+                                    <td>$@item.FinalTotalDiminFee</td>
+                                    <td>$@item.FinalTotalOtherFee</td>
+                                    <td>@((!string.IsNullOrEmpty(@item.FinalTotalSubroTotal)) ? '$' + item.FinalTotalSubroTotal : item.FinalTotalSubroTotal)</td>
+                                    <td>$@item.FinalTotalWriteOffTotal</td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    }
+                    <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr>
+                                    <td id="reportlocation" colspan="4">
+                                        <span class="bold">Report Summary</span>
+                                    </td>
+                                </tr>
+                                <tr class="white-color">
+                                    <th>
+                                        <div class="display-inline">Location</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amount Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Est. Damage</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Loss Of Use</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Admin Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Dimin Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">App/Other Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Subro Total</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">WriteOff Total</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Closed</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Pending</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Location</td>
+                                        <td>$@item.FinalTotalCollected</td>
+                                        <td>$@item.FinalTotalDamage</td>
+                                        <td>$@item.FinalTotalLossOfUse</td>
+                                        <td>$@item.FinalTotalAdminFee</td>
+                                        <td>$@item.FinalTotalDiminFee</td>
+                                        <td>$@item.FinalTotalOtherFee</td>
+                                        <td>$@item.FinalTotalSubroTotal</td>
+                                        <td>$@item.FinalTotalWriteOffTotal</td>
+                                        <td>$@item.FinalTotalClosed</td>
+                                        <td>$@item.FinalTotalPending</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                }
+                   else
+                {
+                       <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                            <thead>
+                                <tr class="white-color">
+                                    <th>
+                                        <div class="display-inline">Pay Date</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Contract / Claim Number </div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Renter</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Amt. Collected</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Pay From</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Est. Damage</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Loss Of Use</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Admin Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Dimin Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">App/Other Fee</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Subro Total</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Status</div>
+                                    </th>
+                                    <th>
+                                        <div class="display-inline">Agent</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                           <tbody>
+                               <tr>
+                                   <td colspan="13" align="center">
+                                       Records are not available
+                                   </td>
+                               </tr>
+                           </tbody>
+                           </table>
+                  
+                }
+            }
+            @*<div class="padding-horizontal-15">
+                    <div class=" font-12 row grey-background">
+                        <div class="float-left">
+                            <ul class="pagination-list bottom0 top5 ">
+                                <li class="pagination-list-item ">
+                                    <a aria-label="Previous" href="javascript:void(0);">
+                                        <div class="arrow-left"></div>
+                                    </a>
+                                </li>
+                                <li class="pagination-list-item active"> <a href="javascript:void(0);">1</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">2</a> </li>
+                                <li class="pagination-list-item"> <a href="javascript:void(0);">3</a> </li>
+                                <li class="pagination-list-item">
+                                    <a aria-label="Next" href="javascript:void(0);">
+                                        <div class="arrow-right"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="float-left left20 top3">
+                            <div class=" bottom10 top10">
+                                <span>Showing </span> <span>
+                                    <select class="show-record">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </span> <span>Of 100 Records</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        //$(".export-btn").click(function () {
+        //    window.location = 'Report/GenerateExportFile';
+        //});
+
+    })
+
+</script>
+

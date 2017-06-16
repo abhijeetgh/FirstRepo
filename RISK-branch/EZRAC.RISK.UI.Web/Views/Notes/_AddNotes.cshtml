@@ -1,0 +1,48 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.NotesViewModel
+
+
+@using (@Ajax.BeginForm("AddQuickNotes", "Notes", new { }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "gridContainer", OnSuccess = "clearValues", OnFailure = "onErrorHandler(xhr)" }, new { @class = "form-inline cla-form", @role = "form", @id = "addNotesForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div>
+            <label class="control-label bold">Type</label>
+        </div>
+        @Html.DropDownListFor(model => model.SelectedNoteTypeId, Model.NotesType, "--Select--", new { @id = "noteTypes", @class = "form-control ncl-slect  top5 selectpicker", @data_live_search = "true" })
+        @Html.ValidationMessageFor(model => model.SelectedNoteTypeId) 
+        @*@Html.ValidationMessageFor(model => model.NotesType)*@   
+    </div>
+    <div class="form-group inline-form-space">
+        <div>
+            <label class="control-label bold">Notes</label>
+        </div>
+
+        @Html.TextAreaFor(model => model.Description, new { @id="description", @class = "form-control cla-textarea top5", @rows = "5" ,style="width:850px;height:300px"})
+        @Html.ValidationMessageFor(model => model.Description)
+        @if (Model.NoteAssignedToLoggedInUser) { 
+        <div class="clear">
+            @Html.CheckBoxFor(model => model.SendNotification, new { @id = "sendEmailNotification",disabled="disabled" })
+            Send Email Notification
+        </div>
+        }
+        else { 
+        <div class="clear">
+            @Html.CheckBoxFor(model => model.SendNotification, new { @id = "sendEmailNotification" })
+            Send Email Notification
+        </div>
+        }
+        <div class="clear">
+            @Html.CheckBoxFor(model => model.IsPrivilege, new { @id = "IsPrivilege" })
+            Privileged
+        </div>
+        <div>
+            <button type="submit" class="btn orange-button top10 btn-large-width ">SAVE</button>
+            <button type="reset" id="resetForm" class="btn btn2 top10 left15  btn-large-width ">RESET</button>
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.ClaimId)
+    @Html.HiddenFor(model => model.IsNotesTab)
+    @Html.HiddenFor(model=> model.SelectedNoteType)
+}
+
+<script src="~/Scripts/appScripts/add-notes.js"></script>

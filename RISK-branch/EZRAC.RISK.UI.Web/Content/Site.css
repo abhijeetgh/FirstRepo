@@ -1,0 +1,1592 @@
+﻿@charset "utf-8";
+/* ===== Header Navbar Style ===== */
+.cla-pagetitle {
+    margin-bottom: 15px;
+    text-transform: none;
+}
+
+.header {
+    min-height: 58px;
+}
+
+.header-navOption {
+    min-height: 35px;
+}
+
+.header .navbar-default {
+	background-color: #eaebeb;
+	border-color: #e7e7e7;
+    padding-top: 5px;
+}
+
+.header .navbar-default .navbar-nav > li {
+        padding: 0 5px;
+}
+
+.header .navbar-default .navbar-nav > li > a {
+            font-size: 18px;
+            color: #4e4e4e;
+            text-transform: uppercase;
+}
+
+.header .navbar-default .navbar-nav > .active > a, .header .navbar-default .navbar-nav > .active > a:hover, .header .navbar-default .navbar-nav > .active > a:focus {
+	color: #e51d25;
+	background: none;
+	background: transparent;
+}
+/* ===== navbar-right CSS =====*/
+.vertical-nav-devider {
+    background: url(../images/vertical-nav-devider.png) no-repeat left center;
+}
+
+.header .navbar-nav.navbar-right > li {
+    padding: 0;
+}
+
+.header .navbar-nav.navbar-right .userIcon {
+    margin: 0;
+    padding: 0;
+}
+
+.header .navbar-nav.navbar-right .userIcon a {
+        padding: 0;
+        margin: 5px 15px 0 0;
+}
+
+.header .navbar-nav.navbar-right li > a {
+	font-size: 12px;
+	text-transform: capitalize;
+}
+/* ===== Login Page Style =====*/
+.login-panel {
+    max-width: 390px;
+    margin: 0 auto;
+    padding-top: 5%;
+}
+
+.login-panel .form-horizontal .control-label {
+        text-align: left;
+        font-size: 12px;
+        width: 100px;
+        font-weight: normal;
+}
+
+.login-boxbody {
+	background-color: #f4f4f4;
+    padding: 20px 20px 0;
+}
+
+.addpicFilesform {
+    width: auto;
+}
+/* ===== table inside Tabs - add-items grey header table inside tabs ===== */
+.add-items thead {
+	border: 0 none;
+	color: #333333;
+	padding: 12px 20px;
+    background: #e1e1e1;
+}
+
+.add-items thead tr td {
+	padding: 12px 20px;
+        font-weight: 600;
+}
+/* ===== Form Style ===== */
+.cla-form {
+}
+
+.multiple-select-box {
+    width: 422px !important;
+    height: 150px !important;
+    padding: 0;
+    overflow: scroll;
+}
+
+.multiple-select-box option {
+        padding: 7px 16px;
+        font-size: 14px;
+}
+
+.multiple-select-box option:nth-child(odd) {
+ /*background-color: #ffffff;*/
+}
+
+.multiple-select-box option:nth-child(even) {
+ /*background-color: #f4f4f4;*/
+}
+
+.emailgen-textarea {
+    width: 100%;
+}
+
+.emailgen-emailbox {
+    width: 500px;
+	padding: 2px 12px 5px;
+}
+
+.cla-form .align-left {
+	text-align: left;
+}
+
+.form-inline.cla-form .form-control.large-input {
+    width: 600px;
+}
+
+.cla-form label {
+    font-weight: normal;
+}
+
+.cla-form .form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.form-inline.cla-form .form-group {
+    float: left;
+}
+
+.cla-form .form-control {
+    font-size: 12px;
+}
+
+.cla-form input.form-control {
+	border-radius: 0;
+    border: 1px solid #bfbfbf;
+}
+
+.form-inline.cla-form .form-group input[type="checkbox"], .form-inline.cla-form .form-group input[type="radio"] {
+    margin-top: 18px;
+}
+
+.btn {
+	border: medium none;
+	cursor: pointer;
+	border-radius: 0;
+    padding: 8px 22px;
+    outline: none;
+    font-weight: 600;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+        color: #fff;
+}
+
+.btn1 {
+	color: #fff;
+	background-color: #d46f33;
+}
+
+.btn2 {
+	background-color: #154f6e;
+	color: #fff;
+}
+
+.btn1:hover, .btn2:hover {
+        color: #fff;
+}
+
+.ncl-slect {
+    width: 200px;
+}
+
+.show-record {
+    width: 50px;
+}
+
+.pop-select {
+    width: 150px;
+}
+
+input[type="file"] {
+    padding: 0;
+}
+
+.cla-form .form-control.cla-textarea {
+    width: 250px;
+    border-radius: 0;
+}
+
+.cla-form .fetch-details input {
+    float: left;
+}
+
+.cla-form .btn-fetch-details {
+    float: left;
+    margin-left: 20px;
+}
+
+.cla-form .btn-space {
+    margin-left: 20px;
+}
+
+.cla-form .selectbox-space {
+    margin-right: 20px;
+}
+
+.cla-form.form-horizontal .control-label {
+    text-align: left;
+    font-size: 12px;
+    width: 135px;
+}
+
+.cla-form.form-inline .control-label {
+    font-size: 12px;
+}
+
+.cla-form .selectbox-dropdown {
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+}
+
+.cla-form .btn-group.bootstrap-select.form-control.ncl-slect {
+    width: 150px;
+}
+
+.cla-form .btn-group.bootstrap-select.form-control.hfcl-slect {
+    width: 200px;
+}
+
+.cla-form .bootstrap-select.btn-group .dropdown-menu li a span.text {
+    font-size: 12px;
+    color: #646464;
+}
+
+.cla-form .btn-default.active.focus, .cla-form .btn-default.active:focus, .cla-form .btn-default.active:hover, .cla-form .btn-default.focus:active, .cla-form .btn-default:active:focus, .cla-form .btn-default:active:hover, .cla-form .open > .dropdown-toggle.btn-default.focus, .cla-form .open > .dropdown-toggle.btn-default:focus, .cla-form.open > .dropdown-toggle.btn-default:hover {
+    background: #fbfbfb;
+}
+
+.cla-form .bootstrap-select > .dropdown-toggle {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: none;
+    background: #fbfbfb;
+    border: 1px solid #bfbfbf;
+    font-size: 12px;
+    font-weight: normal;
+    color: #707070;
+    padding-left: 12px;
+}
+
+.bootstrap-dropdown-container .dropdown-toggle {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: none;
+    background: #fbfbfb;
+    border: 1px solid #bfbfbf;
+    font-size: 12px;
+    font-weight: normal;
+    color: #707070;
+    padding-left: 12px;
+}
+
+.claim-info-form-editable label {
+        font-weight: normal;
+}
+
+.cla-form .btn-group.open .dropdown-toggle {
+	box-shadow: none;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+	background: transparent;
+    color: #333;
+}
+
+.table label.control-label {
+    font-weight: 600;
+}
+
+.mandetory-star {
+    color: #fe4040;
+}
+
+.cla-form .borderedAll-table .borderedAll-table-checkbox, .cla-form .no-border .checkbox-rtspace,.cla-form .borderedDocument-table .borderedAll-table-checkbox {
+	float: left;
+	margin-right: 20px;
+}
+
+.orange-button, .btn-new-claim {
+    background-color: rgb(213,110,51);
+    color: white;
+}
+
+.btn-delete-claim {
+    background-color: rgb(22,79,109);
+    color: white;
+}
+
+.search-container .form-group {
+    margin-bottom: 0px;
+}
+
+.btn-large-width {
+    min-width: 110px;
+}
+
+ input[type="file" ]::-webkit-file-upload-button {
+}
+
+.search-form-group {
+    background-color: rgb(191,215,227);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.advanced-search-container select {
+    width: 100%;
+}
+
+.addfilter {
+    text-decoration: underline;
+	color: rgb(20,79,109);
+    font-weight: 400;
+}
+
+.reset-button {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+	margin-top: 15px;
+	color: rgb(20,79,109);
+    position: relative;
+}
+
+.reset-button2 {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+	margin-top: 25px;
+	color: rgb(20,79,109);
+    position: relative;
+}
+
+.reset-button .reset-image {
+	padding-right: 0;
+	padding-left: 0;
+}
+/* ===== Sandbox Calendar ===== */
+.form-inline .form-group .sandbox-container {
+    display: inline;
+    margin-left:-4px;
+}
+
+.sandbox-container input.sand-datepicker {
+	background: url(../images/calendar-icon.png) no-repeat right center #fff;
+	font-size: 14px;
+	/*font-weight: bold;*/
+	padding-left: 12px;
+	width: 145px;
+    border-radius: 0;
+    cursor: pointer;
+}
+/* ===== well CSS ===== */
+.cla-well {
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #cccccc;
+    background: #eaf8ff;
+	padding: 15px;
+}
+
+.cla-well a, .cla-well a:focus, .cla-well a:hover {
+	color: #606060;
+        text-decoration: underline;
+        outline: none;
+}
+/* ===== breadcrumb CSS =====*/
+.cla-breadCrumb .breadcrumb {
+	background: rgba(255, 255, 255, 0.07);
+	border: 0px solid rgba(255, 255, 255, 0);
+	border-radius: 0px;
+	display: block;
+    margin: 10px;
+    padding: 0 5px;
+}
+
+.cla-breadCrumb .breadcrumb li {
+	font-size: 14px;
+}
+
+    .cla-breadCrumb .breadcrumb a, .cla-breadCrumb .breadcrumb a:hover, .cla-breadCrumb .breadcrumb > .active {
+	color: rgba(153, 153, 153, 1);
+        outline: none;
+}
+
+    .cla-breadCrumb .breadcrumb > li + li:before {
+	color: rgba(153, 153, 153, 1);
+	content: "\203A\00a0";
+}
+/* ===== Tabs CSS ===== */
+.tab-wrapper {
+}
+
+.contractnoTitle {
+    margin-bottom: 20px;
+}
+
+.tab-wrapper .tab-content {
+	border-bottom: 1px solid #bdbdbd;
+	border-left: 1px solid #bdbdbd;
+	border-right: 1px solid #bdbdbd;
+	padding: 20px 25px;
+}
+
+.tab-wrapper .nav-tabs > li > a {
+	border-top: 1px solid #bdbdbd;
+	border-right: 1px solid #bdbdbd;
+	border-bottom: 1px solid #bdbdbd;
+	border-left: 1px solid #bdbdbd;
+	border-radius: 0;
+	color: #606060;
+	font-weight: 600;
+	margin-right: 6px;
+	/*text-transform: uppercase;*/
+    outline: none;
+    padding: 10px 12px;
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 50%, #eaebeb 50%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #ffffff), color-stop(50%, #eaebeb));
+	background: -webkit-linear-gradient(top, #ffffff 50%, #eaebeb 50%);
+	background: -o-linear-gradient(top, #ffffff 50%, #eaebeb 50%);
+	background: -ms-linear-gradient(top, #ffffff 50%, #eaebeb 50%);
+	background: linear-gradient(to bottom, #ffffff 50%, #eaebeb 50%);
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaebeb', GradientType=0 );
+}
+
+.tab-wrapper .nav-tabs > li.active > a {
+    background: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.grey-tfoot {
+    background: #e1e1e1;
+    padding: 0;
+}
+/* ===== Icon Menus ===== */
+.add-update-icon {
+	float: right;
+	list-style: outside none none;
+}
+
+.add-update-icon > li {
+        padding: 0 14px;
+        display: inline-block;
+        /*float: left;*/
+}
+
+.comm-prop {
+	float: left;
+	height: 24px;
+    cursor: pointer;
+}
+
+span.claim-text {
+	font-size: 21px;
+    color: #656565;
+	padding-left: 16px;
+}
+
+.add-edit-container .add-edit-col {
+	margin: 18px 0 14px;
+}
+
+.add-update-icon li span.add {
+	background: url(../images/CRMS_Icons_Sprite.png) no-repeat -394px -12px;
+    width: 29px;
+}
+
+.add-update-icon li span.update {
+	background: url(../images/CRMS_Icons_Sprite.png) no-repeat -443px -15px;
+    width: 30px;
+}
+
+.add-update-icon li span.report {
+	background: url(../images/CRMS_Icons_Sprite.png) no-repeat -20px -56px;
+    width: 18px;
+}
+
+.add-update-icon li span.time {
+	background: url(../images/CRMS_Icons_Sprite.png) no-repeat -57px -55px;
+    width: 18px;
+}
+
+.add-update-icon .dropdown .dropdown-menu.tooltip-up-arrow:after {
+    left: auto;
+    right: 10px;
+	border-bottom-color: #eee;
+    top: -15px;
+}
+
+.popup-width {
+    width: 350px !important;
+}
+
+.add-update-icon .dropdown .dropdown-menu li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#addDamage .tooltip-up-arrow:after, .addpicFiles .tooltip-up-arrow:after, #addcharge .tooltip-up-arrow:after, .addPayment .tooltip-up-arrow:after,.addwriteoff .tooltip-up-arrow:after,.addNotes .tooltip-up-arrow:after, .collapseFetchDetails .tooltip-up-arrow:after {
+	left: 5%;
+    top: -15px;
+}
+
+.recent-notes.tooltip-up-arrow:after {
+    top: -15px;
+}
+/* ==== Document Generator popup ===== */
+/*--Model popup css start here */
+.cla-modpopup h4.modal-title {
+    color: #606060;
+    font-size: 12px;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.cla-modpopup .modal-header {
+	background: #e5e5e5 none repeat scroll 0 0;
+    padding: 10px 15px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.cla-modpopup .modal-content {
+	-webkit-border-bottom-left-radius: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-moz-border-radius-bottomright: 4px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.cla-modpopup .modal-dialog {
+	margin: 50px auto;
+	width: 960px;
+}
+
+.cla-modpopup .modal-body {
+	padding: 20px;
+	position: relative;
+}
+
+.cla-modpopup .doctypegen-leftcol {
+    border: 1px solid #cccccc;
+	height: auto;
+    padding: 20px;
+}
+
+.cla-modpopup .doctypegen-heading {
+	background: #2987ba none repeat scroll 0 0;
+	color: #fff;
+	float: left;
+	font-size: 14px;
+	height: 44px;
+	line-height: 44px;
+	width: 100%;
+    font-weight: bold;
+}
+
+.cla-modpopup .doctype-search-wrapper {
+	margin: 12px 0;
+    position: relative;
+    float: left;
+}
+
+.cla-modpopup .search-text-box {
+	border: 1px solid #cccccc;
+	/*line-height: 34px;*/
+    padding: 6px 15px 8px 15px;
+}
+
+.cla-modpopup .doctypegen-searchbox-warapper {
+	border: 1px solid #cccccc;
+	height: auto;
+	float: left;
+	margin: 0;
+	padding: 0;
+	text-indent: 12px;
+}
+
+.cla-modpopup .doctypegen-searchbox {
+	float: left;
+	font-size: 12px;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.cla-modpopup .doctypegen-searchbox label {
+	text-indent: 0;
+}
+
+.cla-modpopup .doctypegen-searchbox > li {
+	border: 0 none;
+	float: left;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+        font-size: 14px;
+}
+
+ .cla-modpopup .doctypegen-searchbox > li:nth-child(odd) {
+	background: #f4f4f4 none repeat scroll 0 0;
+            text-indent: 16px;
+}
+
+  /*.cla-modpopup .doctypegen-searchbox > li:nth-child(odd) {
+	background: none none repeat scroll 0 0;
+     border-right: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+            text-indent: 16px;
+}*/
+
+.cla-modpopup .doctypegen-searchbox > li:nth-child(even) {
+	background: #ffffff none repeat scroll 0 0;
+            text-indent: 16px;
+}
+
+/*.cla-modpopup .doctypegen-searchbox > li:nth-child(even) {
+	background:none none repeat scroll 0 0;
+    border-right: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+    text-indent: 16px;
+}*/
+
+.cla-modpopup .doctypegen-searchbox .search-hdr {
+	font-weight: bold;
+}
+
+.cla-modpopup .doctypegen-searchbox li:not(.search-hdr) {
+        padding-left: 12px;
+}
+
+.cla-modpopup .doctypegen-rightcol h5 {
+	font-weight: bold;
+    color: #606060;
+}
+
+.cla-modpopup .doctypegen-rightcol h6 {
+    color: #6e6e6e;
+}
+
+.cla-modpopup .search-box .doctypegen-searchbox .search-hdr {
+    font-weight: bold;
+}
+
+.cla-modpopup input[type="checkbox"], .cla-modpopup input[type="radio"] {
+	float: left;
+	line-height: 35px;
+	margin: 3px 5px 1px 0;
+}
+
+.cla-modpopup button.close {
+    margin-top: 0;
+    background: url(../images/CRMS_Icons_Sprite.png) no-repeat -314px -9px;
+    width: 25px;
+    height: 25px;
+}
+/*--Model popup css end here */
+
+
+/*Claim info stlye starts here*/
+/*Driver and Insurance form claim table style starts here*/
+.driver-insurance-claim-form .dropdown-toggle {
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding-left: 11px;
+}
+
+ .driver-insurance-info table tr > td:nth-child(1) {
+ /*font-weight: 600;*/
+    width: 20%;
+}
+
+ .driver-insurance-info table tr > td:nth-child(3) {
+ /*font-weight: 600;*/
+    width: 20%;
+}
+
+.add-driver {
+    background-color: rgb(212,111,51);
+    float: right;
+    font-weight: normal;
+}
+
+.driver-insurance-claim-form input[type=text].datepicker {
+    padding-left: 10px;
+}
+/*Driver and Insurance form claim table style ends here*/
+/*Recent Notes Style Starts Here*/
+.recent-notes-legend {
+    font-size: 16px;
+    font-weight: bold;
+	color: #606060;
+}
+
+.recent-notes-table td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.notes-creation-date {
+    color: #bbb;
+    font-weight: lighter;
+}
+
+.recent-notes-table {
+    font-weight: bold;
+    color: grey;
+}
+/*Recent Notes Style Ends Here*/
+/*Claim info stlye ends here*/
+    
+
+
+/*Claim table stlye starts here*/
+/*Followup and Pending claim table style starts here*/
+.claim-table th, .claim-table td, .pending-claim-table th, .pending-claim-table td {
+    text-align: center;
+    padding: 5px 10px;
+}
+
+.claim-table td, .pending-claim-table td {
+    padding: 5px;
+}
+
+
+.claim-table {
+    border-bottom: 1px solid #ccc;
+}
+
+.claim-table-container, .pending-claim-table {
+	/*font-size:12px;*/
+}
+
+.claim-table .check-coloumn {
+	width: 40px;
+	padding-left: 5px;
+}
+
+.claim-table .claim-id-coloumn {
+	text-align: center;
+}
+
+.claim-table td.claim-id-coloumn a, .pending-claim-table td.claim-id-coloumn a {
+    text-decoration: underline;
+    color: grey;
+}
+
+.claim-table .claim-assigned-coloumn {
+    width: 150px;
+}
+
+.claim-assigned-coloumn select {
+    max-width: 55%;
+}
+
+.claim-table .claim-assigned-coloumn label {
+    font-weight: 100;
+}
+
+.claim-table .claim-followup-date, .claim-table .claim-vehicle-coloumn {
+    text-align: center;
+}
+
+.claim-table .claim-vehicle-coloumn {
+    text-align: center;
+}
+
+.claim-table .claim-followup-date {
+	padding-left: 4px;
+	padding-right: 4px;
+	width: 100px;
+}
+
+    .claim-table .claim-followup-date.db-clicked {
+	width: 210px;
+}
+
+.claim-table th.claim-assigned-coloumn {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/*.claim-table .incorrect-icon,.partial-ryt .incorrect-icon-small, .claim-table .correct-icon,.partial-ryt .correct-icon-small {
+	width:22px;
+	height:20px;
+	display:inline-block;
+	margin-bottom: -4px;
+}*/
+.claim-table .incorrect-icon, .claim-table .correct-icon {
+    width: 22px;
+    height: 20px;
+    display: inline-block;
+	margin-bottom: -4px;
+}
+
+/*.notes-coloumn .dropdown-menu {
+    width:350px;
+}*/
+
+.notes-coloumn .dropdown-menu td {
+    text-align: left;
+} 
+
+.notes-coloumn .tooltip-up-arrow:after {
+	right: 0%;
+    left: auto;
+    top: -15px;
+}
+
+
+.pending-claim-table th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pending-claim-table .notes-coloumn {
+    width: 100px;
+}
+
+.pending-claim-table .claim-vehicle-coloumn {
+    text-align: left;
+    padding-left: 25px;
+}
+
+.pending-claim-table .incorrect-icon, .pending-claim-table .correct-icon {
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	margin-bottom: -4px;
+	margin-left: 5px;
+}
+
+.claim-group-button .btn:first-child {
+    border-right: none;
+}
+
+.claim-group-button .btn:last-child {
+    border-left: none;
+    color: #6b6b6b;
+}
+
+.ajax-loader {
+            width: 30px; 
+            margin: 0px auto 0 6%;
+        }
+
+/*Followup and Pending claim table ends here*/
+    /* Advanced search box css starts here*/
+.advandced-search-button {
+    margin-left: 10px;
+    text-decoration: underline;
+    color: #6b6b6b;
+    font-size: 14px;
+}
+
+.advanced-search-container {
+	border-radius: 0;
+	box-shadow: none;
+	background: #eaf8ff;
+}
+
+.advanced-search-collapsable {
+    position: relative;
+}
+
+.advanced-search-collapsable .input-unit-number {
+        height: 36px;
+        border: none;
+        border-radius: 0;
+}
+
+.advanced-search-collapsable .dropdown-toggle {
+        font-weight: lighter;
+}
+
+.advanced-search-collapsable .filter-close-button {
+	width: 22px;
+	height: 34px;
+	background: url(../images/CRMS_Icons_Sprite.png) -352px -8px no-repeat;
+	position: absolute;
+	top: 13px;
+        right: 7px; /*cursor:pointer;*/
+}
+
+.search-form-submit {
+	width: 57px;
+	height: 34px;
+	background-color: rgb(20,79,109);
+	margin-top: 10px;
+    border-radius: 4px;
+}
+
+.advanced-search-container:after {
+	top: -14px;
+	left: 24%;
+	margin-left: -8px;
+}
+/* Advanced search box ends starts here*/
+/*Claim table stlye ends here*/
+
+/* ===== REPORT CSS Start here ===== */
+.report-leftcol {
+    background: #2988b9;
+    width: 25%;
+    height: 100%;
+    min-height: 500px;
+    float: left;
+    padding-bottom: 20px;
+}
+
+.report-leftcol-heading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+    background: #216d94;
+    position: relative;
+}
+
+.report-leftcol .report-search-wrapper {
+	margin: 12px 0;
+    position: relative;
+    float: left;
+}
+
+.report-leftcol .search-text-box {
+	border: 1px solid #22719a;
+	line-height: 34px;
+    background: #d4e7f1;
+}
+
+.report-leftcol .doctypegen-searchbox-warapper {
+	border: 1px solid #cccccc;
+	height: auto;
+	float: left;
+	margin: 0;
+	padding: 0;
+	text-indent: 12px;
+}
+
+.report-leftcol .doctypegen-searchbox {
+	float: left;
+	font-size: 12px;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.report-leftcol .doctypegen-searchbox label {
+	text-indent: 0;
+}
+
+.report-leftcol .doctypegen-searchbox > li {
+	border: 0 none;
+	float: left;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+        font-size: 14px;
+}
+/*-------------------------------*/
+#menu ul li.selected {
+    background: bisque;
+}
+#menu li {
+    display: block;
+    float: left;
+}
+#menu a:active {
+    background: bisque;
+}
+/*------------------------------*/
+.report-leftcol .doctypegen-searchbox > li:nth-child(odd) {
+ background: #ffffff none repeat scroll 0 0;
+            text-indent: 16px;
+}
+
+.report-leftcol .doctypegen-searchbox > li:nth-child(even) {
+ background: #ffffff none repeat scroll 0 0;
+            text-indent: 16px;
+}
+
+.report-leftcol .doctypegen-searchbox .search-hdr {
+	font-weight: bold;
+}
+
+.report-leftcol .doctypegen-searchbox li:not(.search-hdr) {
+        padding-left: 5px;
+}
+
+.report-leftcol .search-box .doctypegen-searchbox .search-hdr {
+    font-weight: bold;
+}
+/*---*/
+.report-rightcol {
+    width: 75%;
+    float: left;
+}
+
+.search-toggle-btn {
+    width: 50px;
+    height: 45px;
+    background: url(../images/Search-toggle.jpg) no-repeat;
+    position: absolute;
+    right: 0;
+}
+
+.report-form {
+    border: 1px solid #cccccc;
+    float: left;
+    width: 100%;
+    padding: 20px;
+}
+
+.report-label {
+    width: 50px;
+}
+
+.report-submit-btn {
+    margin-left: 106px;
+}
+
+.report-box {
+    background: #f2f2f2;
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+.export-btn {
+}
+
+.export-btn span.exporticon {
+        background: url(../images/CRMS_Icons_Sprite.png) -148px -12px no-repeat;
+	float: left;
+	margin-top: 3px;
+	width: 20px;
+}
+/* ===== Admin CSS ===== */
+
+.admin-search {
+    width: 235px;
+	}
+
+.delete-file-icon {
+    cursor: pointer;
+    background: url(../images/CRMS_Icons_Sprite.png) no-repeat -95px -61px;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+	}	
+
+.tooltip-up-arrow-icon {
+    position: absolute;
+    background: url(../images/tooltip-up-arrow.png) no-repeat;
+    width: 23px;
+    height: 15px;
+    right: 13px;
+    top: -15px;
+	}	
+
+
+/* styles for validation helpers */
+.field-validation-error { 
+    color: #e51d25;
+    display: block;
+    font-family: "SegoeUI";
+    font-size: 12px;
+    margin: 4px 0 0;
+}
+
+.fetch-contract-error {
+    clear: both;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.grey-white-table .claim-followup-date label {
+    font-weight: 100;
+}
+
+.grey-white-table tr th a {
+    color: white;
+}
+
+
+
+.claim-info-form-editable .panel-heading {
+	font-family: 'SegoeUI';
+	color: #fff;
+	background-color: #2988b9;
+	border-color: #abb5ba;
+    padding: 15px 20px;
+}
+
+.errorMsg {
+    color: red;
+}
+
+.display-none {
+    display: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.pd15 {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+.left-offset100 {
+    margin-left: 100px;
+}
+
+.editable-row {
+    border-bottom: 1px dotted rgb(41,135,186);
+    color: rgb(41,135,186);
+}
+
+.saveSuccess {
+    color: rgb(41,135,186);
+}
+
+.claim-status-table tr {
+    cursor: pointer;
+}
+
+#child-header {
+    font-size: 0.89em;
+    margin: 0 -15px;
+    margin-top: -20px;
+    color: black;
+    font-size: 14px;
+    background: #f5f5f5;
+    height: 2em;
+    line-height: 2em;
+    text-align: left;
+}
+
+#child-header a {
+    text-decoration: none;
+    color: #6d6d6d;
+}
+
+#child-header a {
+    margin-right: 2.5em;
+}
+
+.navOptionSelected {
+    color: #e51d25 !important;
+}
+
+.grey_bg {
+    background: bisque !important;
+}
+
+.disable-button {
+    background: #9fa6aa !important;
+    cursor: default !important;
+}
+
+.btnDisabled {
+    cursor: default !important;
+    background: #FFCC99 !important;
+}
+
+.detailsBorderTop {
+    border-top: 1px solid #bdbdbd;
+}
+
+.rowSelected {
+    background-color: bisque !important;
+}
+
+.tabletoul {
+    display: inline-block;
+    width: 40%;
+    padding: 8px 0;
+}
+.anothertabletoul {
+    display: inline-block;
+    width: 18%;
+    padding: 8px 0;
+}
+
+#emailGen .tab-pane {
+    min-height: 100px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+#emailGen .select-all {
+    list-style: none;
+    padding: 8px 0;
+}
+
+.panel-body .addon {
+    margin-left: 0px;
+}
+
+
+#LabourHour {
+    display: inline-block;
+    margin: 0px 5px;
+    width:100px;
+}
+
+.panel-body .addon .label-labour-hours {
+    margin-left: 500px;
+    font-weight: 600;
+}
+
+.total-labor-form {
+    display: inline-block;
+}
+
+.removePreEffect {
+    background-color: #eaebeb;
+    border: none;
+}
+
+#UserRoleUpdate .checkbox-holder {
+    margin: 0px 20px;
+}
+
+    #UserRoleUpdate .checkbox-holder div {
+        width: 215px !important;
+    }
+
+    #UserRoleUpdate .checkbox-holder label {
+        vertical-align: middle;
+        font-weight: normal;
+        display: inline-block;
+}
+
+.w99 {
+    width: 99% !important;
+}
+
+#divClaimEvents .dataTables_scroll {
+    max-height: 450px;
+    overflow: auto;
+    padding-right: 0;
+    overflow-x: hidden;
+}
+
+
+.align-text-left {
+    text-align: left !important;
+}
+
+.notesPre {
+    background-color: transparent;
+    border: none;
+    font-family: SegoeUI;
+    color: #606060;
+    font-size: 14px;
+}
+
+.margin-left-admin {
+    margin-left: -8px;
+}
+
+.PermissionCategory {
+    margin: 15px 45px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    padding: 15px;
+    background: #f5f5f5;
+}
+
+    .PermissionCategory h4 {
+        background: #ddd;
+        padding: 5px;
+    }
+
+#alertbox {
+    position: absolute;
+    top: 30%;
+    left: 38%;
+    background: #fff;
+    border: 1px solid #000;
+    width: 450px;
+    z-index: 1000;
+    display: none;
+}
+
+    #alertbox .popup-top {
+        background: #e5e5e5;
+        font-size: 1.2em;
+        padding: 5px 10px;
+    }
+.cursor-pointer {
+    cursor:pointer;
+}
+.document-selected {
+    /*color:white;
+    background-color: #2987ba !important;*/
+     background-color: bisque !important;
+}
+
+/* Animation operation in Reports section */
+/*#left-col {
+    float: left;
+    width: 316px;
+}*/
+/*.side-section-top {
+    height: 45px;
+    background: #226d94;
+}
+#right-col {
+    float: left;
+    width: calc(100% - 316px);
+}
+#left-col .side-section-top h2.fully-closed {
+    background: url(../images/fully-collapsed-arrow.png) right 7px no-repeat;
+    width: 30px;
+    height: 30px;
+}
+
+#left-col .side-section-top h2.open,
+#left-col .side-section-top h2.closed {
+    width: 60%;
+}
+
+.side-section-body,
+.app-man-side-section-body {
+    padding: 5px;
+}
+
+    .side-section-body select.two-cols-select,
+    .app-man-side-section-body select.two-cols-select {
+        width: 99%;
+        float: left;
+        margin: 0 10px 10px 0;
+        padding: 5px;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radious: 5px;
+        background: #cde3f0;
+        border: 0;
+    }
+
+    .side-section-body input.date-picker,
+    .app-man-side-section-body input.date-picker {
+        width: 90%;
+        padding-left: 5px !important;
+    }
+
+    #left-col .side-section-body {
+    background: #2987ba;
+    padding: 0 3% 1% 3%;
+}*/
+.toggle {
+    float: right;
+}
+.calculatedWidth {
+    width: calc(100% - 60px) !important;
+}
+
+/* End animation opeation in reports section */
+
+.ReportSummaryTotal {
+    font-size: 16px;
+    font-weight: bold;
+    background: beige !important;
+}
+
+#reportlocation span
+{
+  font-size:17px;
+}
+
+#reportlocation {
+border:none;
+}
+
+.popup_bg_master {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+}
+#ReportSearchCriteria label{
+    width:80px;
+    text-align:right;
+}
+
+.charges{
+    margin-top:7px;
+}
+
+.location{
+    margin-right: 10px !important;
+}
+
+.ask{
+    display:inline;
+}
+
+}
+
+.fixed-width-450 {
+    width:450px;
+}
+
+.borderedDocument-table {
+	border-bottom:1px solid #a4a4a4;
+}
+.borderedDocument-table th, .borderedDocument-table td {
+	border: 1px solid #a4a4a4;
+	padding: 6px;
+	text-align:left;
+}
+.float-right {
+    float:right !important;
+}
+.border-none {
+    border:none !important;
+    background:none !important;
+}
+
+.vertical-nav-divider-viewClaim {
+    background :url(../images/vertical-nav-devider.png) no-repeat left 14px;
+}
+
+
+/* ===== Tracking CSS Start here ===== */
+.tracking-leftcol	{
+	background: #2988b9;
+    width: 20%;
+    height: 100%;
+    float: left;
+    padding-bottom: 20px;
+}	
+.tracking-rightcol.tab-content {
+	width: 80%;
+    float: left;
+    border: none;
+    padding: 0px;
+}
+.tracking-leftcol .tracking-selector {
+    border: 1px solid #cccccc;
+    height: auto;
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-indent: 12px;
+    width: 100%;
+}
+.tracking-leftcol .tracking-selector-list {
+    float: left;
+    font-size: 12px;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.tracking-leftcol .tracking-selector-list > li>a {
+	border: 0 none;
+	float: left;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size:14px;
+	color:#2988b9;
+	border-radius:0px;
+	padding:0px;
+}
+.tracking-leftcol .tracking-selector-list > li:nth-child(odd)>a {
+	 background: #f4f4f4 none repeat scroll 0 0;
+	 text-indent:16px;
+}
+.tracking-leftcol .tracking-selector-list > li:nth-child(even)>a {
+	 background: #ffffff none repeat scroll 0 0;
+	 text-indent:16px;
+}
+.tracking-leftcol>.panel-heading{
+	border:none;	
+}
+.tracking-leftcol .tracking-selector-list > li.active>a,.tracking-leftcol .tracking-selector-list > li.active>a:hover{
+	background-color:#fff4cc;
+	color:#2988b9;
+}
+.panel table.tracking-table > tbody > tr > td{
+	padding: 7px 20px;
+	line-height: 23px;
+}
+.tracking-table thead {
+    border: 0 none;
+    color: #333333;
+    padding: 12px 20px;
+    background: #e1e1e1;
+}
+.panel .tracking-table > tbody > tr.active,
+.panel .tracking-table > tbody > tr:nth-of-type(2n).active,
+.panel .tracking-table > tbody > tr:nth-of-type(2n+1).active
+ {   border: 1px solid #d46f33;
+    background-color: #FFF4CC;
+}
+.panel .tracking-table > tbody > tr.active>td,
+.panel .tracking-table > tbody > tr:nth-of-type(2n).active>td,
+.panel .tracking-table > tbody > tr:nth-of-type(2n+1).active>td{
+	background-color: #FFF4CC;
+}
+.tracking-table .undo-image{
+	float: right;
+    padding-right: 32px;
+}
+/* ===== Tracking CSS Ens here ===== */
+.btn.small{
+	padding: 3px 16px;
+}
+.undo-image {
+	width: 32px;
+	height: 23px;
+	background: url(../images/CRMS_Icons_undo.png)  no-repeat;
+	cursor:pointer;
+}
+
+.completed {
+    opacity : 0.6;
+}
+
+.completed-font-color {
+    color:green;
+}

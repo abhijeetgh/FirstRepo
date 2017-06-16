@@ -1,0 +1,68 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.SalvageViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<div class="row" id="updateDiv">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Salvage</h3>
+            </header>
+            <div class="panel-body">
+                <div class="top-space clearfix"></div>
+                @using (@Ajax.BeginForm("SaveSalvageInfo", "Salvage", new AjaxOptions { HttpMethod = "Post", OnSuccess = "salvageSaveSuccessful(data)", OnFailure = "onErrorHandler(xhr)" }, new { @class = "cla-form", @role = "form", @id = "salvageForm" }))
+                {
+                     @Html.AntiForgeryToken()
+                    <table class="table table-striped add-items">
+                        <thead>
+                            <tr>
+                                <th width="300">Salvage Amount</th>
+                                <th>Date of Receipt</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditSalvage))
+                                     { 
+                                        @Html.TextBoxFor(x => x.SalvageAmount, new { @class = "form-control ncl-slect pop-select", @placeholder = "Amount", id = "salvageAmount", @min = "0" })
+                                        @Html.ValidationMessageFor(x => x.SalvageAmount)
+                                    }
+                                    else { 
+                                        @Html.TextBoxFor(x => x.SalvageAmount, new { @class = "form-control ncl-slect pop-select", @placeholder = "Amount", id = "salvageAmount", @min = "0", @readonly = "readonly" })
+                                    }
+                                </td>
+                                <td>
+                                    <div class="sandbox-container">
+                                    @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditSalvage))
+                                    { 
+                                        @Html.TextBoxFor(x => x.SalvageReceiptDate, Model.SalvageReceiptDate.HasValue ? Model.SalvageReceiptDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : string.Empty, new { @class = "form-control sand-datepicker datepicker", @id = "salvageReceiptDate" ,@readonly="readonly"})
+                                        @Html.ValidationMessageFor(x => x.SalvageReceiptDate)
+                                    }
+                                    else { 
+                                        @Html.TextBoxFor(x => x.SalvageReceiptDate, Model.SalvageReceiptDate.HasValue ? Model.SalvageReceiptDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : string.Empty, new { @class = "form-control sand-datepicker datepicker", @id = "salvageReceiptDate" ,@readonly="readonly", @disabled="disabled"})
+                                        @Html.ValidationMessageFor(x => x.SalvageReceiptDate)
+                                    }
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="salvageSaveStatus" class="saveSuccess"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                     if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditSalvage)) { 
+                        <button type="submit" class="btn btn1">SAVE</button>
+                        <button type="reset" class="btn btn2 left15">RESET</button>
+                     }
+                   @Html.HiddenFor(x => x.ClaimId)
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/appScripts/salvage-info.js")"></script>

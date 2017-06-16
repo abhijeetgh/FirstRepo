@@ -1,0 +1,94 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+</head>
+    <body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+                <td width="33%" align="left" valign="top">
+                    <div>
+                        *<br />Risk Management Services<br />
+                         @Model.Company.Address<br />
+                @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                    </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.RiskUserEmail<br />
+                Phone:  @Model.Company.Phone<br />
+                    Fax:    @Model.Company.Fax
+                
+            </td>
+        </tr>
+    </table>
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="50%" align="left" valign="top">
+                    <div style="font-weight:bold">
+                        *<br />@Model.DriverViewModel.Name<br />
+                        @Model.DriverViewModel.Address<br />
+                    @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                    </div>
+                </td>
+                <td width="50%" align="right" valign="top">
+                    <div style="font-weight:bold">
+                        *<br />@DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY) 
+                    </div>
+            </td>
+        </tr>
+        <tr>
+                <td align="left" valign="top">
+                    <div style="font-weight:bold">
+                        *<br />Claim #: @String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)<br /><br />
+                    </div>
+            </td>
+                <td align="right" valign="top">
+                    <div style="font-weight:bold">
+                        *<br />Date of Loss: @Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)<br /><br />
+                    </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                    *<br />Dear Renter:<br />
+                We have read and reviewed your claim. Because you purchased the Collision Damage Waiver (CDW) 
+                or Loss Protection Coverage (LPC or LPC-2) and you have not violated the contract,
+                we are pleased to inform you that this claim has been closed.
+                If you require any other information please contact me at @Model.Company.Phone.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                    <div>
+                        *<br /> Kind Regards,<br />
+                        @Model.RiskUserFullName<br />
+                    Risk Management Representative
+                    </div>
+                    <div style="font-weight:bold">TICKET</div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

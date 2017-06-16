@@ -1,0 +1,149 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.SalvageBidViewModel
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.HeaderViewModel.Company.Address<br />
+                    @Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.HeaderViewModel.RiskUserEmail<br />
+                Phone:  @Model.HeaderViewModel.Company.Phone<br />
+                Fax:    @Model.HeaderViewModel.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+    <table border="0" width="100%" align="center">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left" style="text-decoration:underline; font-size:large">SALVAGE VEHICLES</td>
+        </tr>
+        <tr>
+            <td align="left" style="text-decoration:underline; font-size:large">BID ACCEPTED</td>
+        </tr>
+                    <tr>
+            <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+            <td align="left">Congratulations,  your savlage bid has been accepted for the following vehicle!</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="1" align="center">
+                    <tr><td colspan="3"></td></tr>
+                    <tr>
+                        <td style="font-weight:bold" align="left" width="25%">Claim#</td>
+                        <td style="font-weight:bold" align="left" width="35%">Unit#</td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                                   
+                                               <p>@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</p>
+                                    
+                                     
+                                     
+                                      
+                               
+
+                        </td>
+                        <td align="left" height="10">@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold" align="left">VIN #</td>
+                        <td colspan="2" style="font-weight:bold" align="left">Vehicle Info</td>
+                    </tr>
+                    <tr>
+                        <td align="left">@Model.HeaderViewModel.VehicleViewModel.VIN</td>
+                        <td colspan="2" align="left">@Model.HeaderViewModel.VehicleViewModel.Year @Model.HeaderViewModel.VehicleViewModel.Color @Model.HeaderViewModel.VehicleViewModel.Make @Model.HeaderViewModel.VehicleViewModel.Model</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td style="text-decoration:underline" align="left">Location of Vehicle</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="1" align="center">
+                    <tr><td colspan="3"></td></tr>
+                    <tr>
+                        <td align="left" width="80%">Salvage Bid Amount</td>
+                        <td align="left" width="20%">$@Model.SalvageAmount</td>
+                    </tr>
+                    <tr>
+                        <td align="left" width="80%">Title Fee</td>
+                        <td align="left" width="20%">$36.75</td>
+                    </tr>
+                    <tr>
+                        <td align="left" width="80%">Total Due</td>
+                        <td align="left" width="20%">$@(@Model.SalvageAmount + 36.75)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left">
+                *<br />• Send a company check for the amount of your bid.<br />
+                        • Send Separate company check for the Florida Title Fee of $36.75.<br />
+                        • Include claim number and unit number on all checks.<br />
+                        • When the payment is received the vehicle will be released for pick-up.
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                *<br />Please send a company checks within three business days to:<br />
+                E-Z Rent-A-Car
+                2003 McCoy Road Suite C Orlando, FL 32809
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                *<br /> If you have questions, please contact Chris Colarusso at (407) 888-0518 or email at risk@ezrac.com.
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

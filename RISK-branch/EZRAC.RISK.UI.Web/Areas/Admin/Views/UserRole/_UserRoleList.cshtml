@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.UserRoleModel>
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="UserRoleListTable" style="max-height:500px;overflow:scroll">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height"> Claim Status </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <input type="hidden" id="RoleID" class="roleID" value="@item.RoleId" />
+                    <td class="claim-status-coloumn claim-status field" style="cursor: pointer;">@item.RoleName</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $.extend(true, $.fn.dataTable.defaults, {
+            "searching": true,
+            "ordering": false,
+            "paging": false,
+            "info": false,
+            //"destroy": true
+        });
+
+        $('#UserRoleList table').DataTable({
+            columnDefs: [
+            {
+            //    "orderable": false, "targets": [-1, 4],
+            }
+            ],
+            "order": [[0, "asc"]],
+            "language": {
+                "emptyTable": "Users are not available"
+            }
+        });
+        $(".dataTables_filter").css("display", "none");
+        $("#userRoleSearch").keyup(function () {
+            $('#UserRoleList table').DataTable().search($('#userRoleSearch').val()).draw();
+        });
+    });
+</script>

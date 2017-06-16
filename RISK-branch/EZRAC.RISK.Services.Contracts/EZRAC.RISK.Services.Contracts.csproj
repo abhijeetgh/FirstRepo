@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{969A7D24-05D5-4FDF-80E0-AFB7A7767B9E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EZRAC.RISK.Services.Contracts</RootNamespace>
+    <AssemblyName>EZRAC.RISK.Services.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Dtos\BillingsDto.cs" />
+    <Compile Include="Dtos\BillingTypeDto.cs" />
+    <Compile Include="Dtos\ClaimBasicInfoDto.cs" />
+    <Compile Include="Dtos\ClaimCreationStatusDto.cs" />
+    <Compile Include="Dtos\ClaimDto.cs" />
+    <Compile Include="Dtos\ClaimStatusDto.cs" />
+    <Compile Include="Dtos\CompanyDto.cs" />
+    <Compile Include="Dtos\ContractDto.cs" />
+    <Compile Include="Dtos\ContractInfoFromTsd.cs" />
+    <Compile Include="Dtos\DamageDto.cs" />
+    <Compile Include="Dtos\DamageTypesDto.cs" />
+    <Compile Include="Dtos\DocumentCategoryDto.cs" />
+    <Compile Include="Dtos\DocumentgeneratorDto.cs" />
+    <Compile Include="Dtos\DocumentHeaderDto.cs" />
+    <Compile Include="Dtos\DocumentsReceivedDto.cs" />
+    <Compile Include="Dtos\DocumentTypeDto.cs" />
+    <Compile Include="Dtos\DriverAndIncInfoDto.cs" />
+    <Compile Include="Dtos\DriverDto.cs" />
+    <Compile Include="Dtos\EmailGeneratorDto.cs" />
+    <Compile Include="Dtos\EmailGeneratorReceipient.cs" />
+    <Compile Include="Dtos\FetchedDetailsDto.cs" />
+    <Compile Include="Dtos\IncidentDto.cs" />
+    <Compile Include="Dtos\InformationToSendDto.cs" />
+    <Compile Include="Dtos\InformationToShowDto.cs" />
+    <Compile Include="Dtos\InsuranceDto.cs" />
+    <Compile Include="Dtos\LocationDto.cs" />
+    <Compile Include="Dtos\LossTypesDto.cs" />
+    <Compile Include="Dtos\NonContractDto.cs" />
+    <Compile Include="Dtos\NotesDto.cs" />
+    <Compile Include="Dtos\NotesSearchCriteria.cs" />
+    <Compile Include="Dtos\NotesTypeDto.cs" />
+    <Compile Include="Dtos\PaymentInfoDto.cs" />
+    <Compile Include="Dtos\PaymentsDto.cs" />
+    <Compile Include="Dtos\PaymentTypesDto.cs" />
+    <Compile Include="Dtos\PermissionDto.cs" />
+    <Compile Include="Dtos\PicturesAndFilesDto.cs" />
+    <Compile Include="Dtos\PoliceAgencyDto.cs" />
+    <Compile Include="Dtos\ReportCriteriaDto.cs" />
+    <Compile Include="Dtos\ReportAdminDto.cs" />
+    <Compile Include="Dtos\ReportClaimDto.cs" />
+    <Compile Include="Dtos\ReportClaimPaymentDto.cs" />
+    <Compile Include="Dtos\ReportClaimVehiclePaymentDto.cs" />
+    <Compile Include="Dtos\ReportCommonDto.cs" />
+    <Compile Include="Dtos\ReportCommonClaimDto.cs" />
+    <Compile Include="Dtos\ReportCommonPaymentDto.cs" />
+    <Compile Include="Dtos\ReportCommonPaymentVehicleDto.cs" />
+    <Compile Include="Dtos\ReportPaymentDto.cs" />
+    <Compile Include="Dtos\ReportVehicleDto.cs" />
+    <Compile Include="Dtos\RiskBillingDto.cs" />
+    <Compile Include="Dtos\RiskPaymentReasonDto.cs" />
+    <Compile Include="Dtos\RiskReportDto.cs" />
+    <Compile Include="Dtos\SalvageDto.cs" />
+    <Compile Include="Dtos\SearchClaimsCriteria.cs" />
+    <Compile Include="Dtos\SearchTagPlateDto.cs" />
+    <Compile Include="Dtos\TrackerCategoryDto.cs" />
+    <Compile Include="Dtos\TrackingDto.cs" />
+    <Compile Include="Dtos\UserActionLogDto.cs" />
+    <Compile Include="Dtos\UserDto.cs" />
+    <Compile Include="Dtos\UserRoleDto.cs" />
+    <Compile Include="Dtos\VehicleDto.cs" />
+    <Compile Include="Dtos\WriteOffDto.cs" />
+    <Compile Include="Dtos\WriteOffTypeDTO.cs" />
+    <Compile Include="ICompanyService.cs" />
+    <Compile Include="IDocumentGeneratorService.cs" />
+    <Compile Include="IDocumentsReceivedService.cs" />
+    <Compile Include="IEmailGeneratorService.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IAdminService.cs" />
+    <Compile Include="IBillingService.cs" />
+    <Compile Include="IClaimService.cs" />
+    <Compile Include="IDriverAndIncService.cs" />
+    <Compile Include="IInsuranceCompanyService.cs" />
+    <Compile Include="ILocationService.cs" />
+    <Compile Include="ILookUpService.cs" />
+    <Compile Include="INotesService.cs" />
+    <Compile Include="IPaymentService.cs" />
+    <Compile Include="IPoliceAgencyService.cs" />
+    <Compile Include="IRiskFileService.cs" />
+    <Compile Include="IRiskReport.cs" />
+    <Compile Include="IRiskReportDefaultSelectionService.cs" />
+    <Compile Include="IRiskWriteOffService.cs" />
+    <Compile Include="ITrackingService.cs" />
+    <Compile Include="ITSDService.cs" />
+    <Compile Include="IUserRoleService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="IVehicleSectionService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDtos\AccountReceivableReportDto.cs" />
+    <Compile Include="ReportDtos\AdminFeeCommissionReportDto.cs" />
+    <Compile Include="ReportDtos\ARAgingReportDto .cs" />
+    <Compile Include="ReportDtos\BasicReportDtos.cs" />
+    <Compile Include="ReportDtos\ChargeBackLossReportDto.cs" />
+    <Compile Include="ReportDtos\CollectionReportDto.cs" />
+    <Compile Include="ReportDtos\RiskReportDefaultSelectionDto.cs" />
+    <Compile Include="ReportDtos\VehicleDamageSectionReportDto.cs" />
+    <Compile Include="ReportDtos\VehicleToBeReleasedReportDto.cs" />
+    <Compile Include="ReportDtos\WriteOffReportDto.cs" />
+    <Compile Include="ReportDtos\ChargeTypeReportDto.cs" />
+    <Compile Include="ReportDtos\DepositDateReportDto.cs" />
+    <Compile Include="ReportDtos\StolenRecovered ReportDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EZRAC.Api.Model\EZRAC.Api.Model.csproj">
+      <Project>{f656fad1-494e-4de3-965d-fdb31e360ec6}</Project>
+      <Name>EZRAC.Api.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EZRAC.RISK.Util\EZRAC.RISK.Util.csproj">
+      <Project>{edd1af64-7769-4853-8761-a9b832c7d40e}</Project>
+      <Name>EZRAC.RISK.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

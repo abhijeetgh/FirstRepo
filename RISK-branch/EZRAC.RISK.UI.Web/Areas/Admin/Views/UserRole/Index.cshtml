@@ -1,0 +1,30 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Admin.UserRoleViewModel
+@{
+    ViewBag.Title = "User Role Management";
+}
+@Html.Partial("~/Areas/Admin/Views/Admin/_ChildHeader.cshtml")
+<div class="row top20" id="UserRoleHeader">
+    @Html.Partial("_UserRoleOperation",null)
+</div>
+<div class="row">
+    @*<div class="col-xs-5" id="UserRoleList">
+        @Html.Partial("_UserRoleList", Model.userRoleModel)
+    </div>*@
+    <div class="col-xs-12">
+        <div class="row tab-wrapper">
+            <div class="col-sm-12">
+                <div class="tab-content container-fluid no-padding" style="border-top: 1px solid #bdbdbd">
+                    <div id="UserRoleUpdate" class="tab-pane fade in active" role="tabpanel">
+                        @Html.Partial("_UserRoleUpdate", Model.PermissionCategoryModel)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Claims/_ClaimsUrl.cshtml")
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/UserRole.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/Common.js")"></script>
+<script src="~/Scripts/jquery-dataTable.js"></script>
+<link href="~/Content/dataTable.css" rel="stylesheet" />

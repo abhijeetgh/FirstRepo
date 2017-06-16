@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.ClaimStatusViewModel>
+
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table claim-status-table" id="claimStatusTable" style="max-height:500px;overflow:scroll">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Claim Status </div>
+            </th>
+            <th class="">
+                <div class="th-min-height"> Delete </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="claim-status-coloumn claim-status align-text-left" data-id="@item.Id" data-url="@Url.Action("GetClaimStatus", "ClaimStatus")">@item.ClaimStatus</td>
+                <td class="claim-status-coloumn"><a class="delete-action" href="javascript:void(0);" title="Delete" data-url-validation="@Url.Action("IsClaimStatusUsed","ClaimStatus")" data-url="@Url.Action("DeleteClaimStatus", "ClaimStatus")" data-id="@item.Id"><span class="ico-delete">&nbsp;</span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/ClaimStatus/claim-status-table.js")" type="text/javascript"></script>

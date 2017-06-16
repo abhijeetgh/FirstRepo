@@ -1,0 +1,76 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.BillingViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+    <thead>
+        <tr>
+            <th>
+                <div class="display-inline">@Html.DisplayNameFor(model => model.SelectedBillingTypeId)</div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">@Html.DisplayNameFor(model => model.Amount) $</div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">@Html.DisplayNameFor(model => model.Discount) %</div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">@Html.DisplayNameFor(model => model.Billings.FirstOrDefault().SubTotal) $</div>
+            </th>
+            <th class="align-right"><div class="display-inline">Action </div> </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var billing in Model.Billings)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(b => billing.BillingTypeDesc)</td>
+                <td class="align-right">@Html.DisplayFor(b => billing.Amount)</td>
+                <td class="align-right">@Html.DisplayFor(b => billing.Discount)</td>
+                <td class="align-right">@Html.DisplayFor(b => billing.SubTotal)</td>
+
+
+                <td>
+                    <div class="align-right right10">
+
+
+                        @*    @Ajax.MyActionLink("<span class='ico-delete'>&nbsp;</span>", "DeleteBilling", "delete-action left20", new { Id = billing.Id },
+            new AjaxOptions { UpdateTargetId = "view-billing" })*@
+                        @if ( SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteBilling) && billing.BillingTypeId != (int)Constants.BillingTypes.LossOfUse) 
+                        {
+
+                            <a class="delete-action left20" data-url="@Url.Action("DeleteBilling")" onclick="DeleteBilling(this,@billing.Id,@Model.ClaimId)" href="javascript:void(0);" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+                        }
+                        else
+                        {
+
+                            <a class="delete-action left20 opacity-light cursor-default" href="javascript:void(0);" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+                        }
+                    </div>
+
+
+                </td>
+
+
+            </tr>
+
+        }
+
+        
+        @Html.HiddenFor(model => model.TotalBilling)
+        @Html.HiddenFor(model => model.TotalDue)
+        @Html.HiddenFor(mode => Model.AdminFee)
+    </tbody>
+
+<tfoot>
+
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="align-right"><strong>@Html.DisplayNameFor(model => model.TotalBilling) : $</strong><strong id="footer-total-billing">@Html.DisplayFor(model => model.TotalBilling)</strong></td>
+        <td>&nbsp;</td>
+    </tr>
+</tfoot>
+@*</table>*@
+<script src="~/Scripts/appScripts/view-billing.js"></script>

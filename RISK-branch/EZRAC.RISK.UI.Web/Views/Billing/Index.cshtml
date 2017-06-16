@@ -1,0 +1,63 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.BillingViewModel
+
+<link href="@Url.Content("~/Content/dataTable.css")" rel="stylesheet" />
+@using EZRAC.Risk.UI.Web.Helper
+<script src="@Url.Content("~/Scripts/jquery-dataTable.js")" type="text/javascript"></script>
+
+<script src= "@Url.Content("~/Scripts/appScripts/add-billing.js")" type="text/javascript"></script>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">
+                    <span>@Html.DisplayNameFor(model => model.TotalBilling) : $</span><span id="total-billing"> $@Html.DisplayFor(model => model.TotalBilling) </span>
+                    <span class="left-offset">@Html.DisplayNameFor(model => model.TotalDue) : $</span><span id="total-due"> $@Html.DisplayFor(model => model.TotalDue)</span> 
+                 </h3>
+            </header>
+            <div class="panel-body">
+
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.AddBilling))
+                {
+                    <div class="form-group inline-form-space addon">
+                        <button type="button" class="btn btn1" data-toggle="collapse" data-target="#addcharge" aria-expanded="false" aria-controls="addcharge" title="Add Charge"><span class="glyphicon glyphicon-plus"></span> ADD CHARGE</button>
+
+                        @using (@Ajax.BeginForm("UpdateLabourHour", "Billing", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "view-billing",OnFailure = "onErrorHandler(xhr)" }, new { @class = "cla-form total-labor-form pull-right", role = "form", id = "email-generator-send" }))
+                        {
+                            @Html.LabelFor(model => model.LabourHour, new {@class="" })<span class="mandetory-star">*</span>
+
+
+                              @Html.TextBoxFor(model => model.LabourHour, new { @class = "form-control ncl-slect top5 labour-hours-value" })
+
+                            @Html.HiddenFor(model => model.ClaimId)
+                            @*<div class="display-none" id="LabourHoursSuccessMessage">Labour hours saved successfully.</div>*@
+                            <button id="save-labour-hours" type="submit" class="btn btn1" title="Save">SAVE</button>
+
+
+                            <label id="labour-hours-required" class="field-validation-error fetch-contract-error" style="display: none;margin-left:40%">Please enter labor hours</label>
+
+
+                        }
+                    </div>
+
+                }
+
+
+                <div class="well cla-well collapse container-fluid top15 relative " id="addcharge">
+                    <div class="close-container" data-target="#addcharge" data-toggle="collapse" title="Close"></div>
+                    <div class="tooltip-up-arrow">
+
+                        @{Html.RenderPartial("AddBilling", Model);}
+
+                    </div>
+                </div>
+                <div class="top-space clearfix"></div>
+                <form class="cla-form" role="form">
+                    <table class="table table-striped add-items" id="view-billing">
+                        @{Html.RenderPartial("ViewBilling", Model);}
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

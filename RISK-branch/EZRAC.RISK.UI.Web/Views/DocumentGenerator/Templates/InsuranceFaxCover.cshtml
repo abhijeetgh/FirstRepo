@@ -1,0 +1,156 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+
+</head>
+<body style="font-family:'Times New Roman'">
+    <table width="100%">
+        <tr>
+            <td align="center" valign="top">
+                <table align="center" width="100%">
+                    <tr>
+                        <td align="center">
+                            <img src="@Model.Company.Logopath" width="80" height="50" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            RISK MANAGEMENT SERVICES<br />
+                            @Model.Company.Address<br />
+                            @Model.Company.City, @Model.Company.State @Model.Company.Zip<br />
+                            Phone: @Model.Company.Phone<br />
+                            Fax: @Model.Company.Fax<br /><br />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="middle" style="border-bottom:solid; border-top:solid">*<br />FACSIMILE TRANSMITTAL SHEET<br /><br /></td>
+        </tr>
+        <tr>
+            <td align="center" style="border-bottom:solid">
+                <table align="center">
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                        <td  align="left" width="50%"><br />TO:<div style="font-weight:bold">To Whom It May Concern</div></td>
+                        <td  align="left" width="50%"><br />FROM:<div style="font-weight:bold">@Model.RiskUserFullName</div></td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+        <tr>
+            <td align="center" style="border-bottom:solid">
+                <table align="center">
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                        <td align="left" width="50%"><br />COMPANY:<div style="font-weight:bold">@Model.DriverViewModel.InsuranceViewModel.InsuranceCompanyName</div></td>
+                        <td align="left" width="50%"><br />DATE:<div style="font-weight:bold">@DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" style="border-bottom:solid">
+                <table align="center">
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                        <td align="left" width="50%"><br />FAX NUMBER:<div style="font-weight:bold">@Model.DriverViewModel.InsuranceViewModel.Fax</div></td>
+                        <td align="left" width="50%"><br /># OF PAGES INCLUDING COVER:</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" style="border-bottom:solid">
+                <table align="center">
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                        <td align="left" width="50%"><br />PHONE NUMBER:<div style="font-weight:bold">@Model.DriverViewModel.InsuranceViewModel.Phone</div></td>
+                        <td align="left" width="50%"><br />SENDER'S REFERENCE NUMBER:<div style="font-weight:bold">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" style="border-bottom:solid">
+                <table align="center">
+                    <tr><td colspan="2"></td></tr>
+                    <tr>
+                        <td align="left" width="50%"><br />CC:</td>
+                        <td align="left" width="50%"><br />YOUR REFERENCE NUMBER:<div style="font-weight:bold">@Model.DriverViewModel.InsuranceViewModel.InsuranceClaimNumber</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" style="border-bottom:solid">
+                *<br />URGENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR REVIEW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PLEASE COMMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PLEASE REPLY
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PLEASE RECYCLE<br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+               *<br /><br />Notes/Comments:<br />
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold">
+                *<br />Attention:  Claims Adjuster<br />
+                Please see attached subrogration documents.  Also, I have included the definitions for the claim fees.  If you require any other information, please email me
+                at risk@ezrac.com.  Otherwise, please forward your payment to:<br /><br />
+                @Model.Company.Name<br />
+                @Model.Company.Address<br />
+                @Model.Company.City, @Model.Company.State @Model.Company.Zip<br /><br />
+                Thank you for your cooperation.
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td width="90%">
+                <font size="2">
+                    <b>Loss of Use</b> is the compensation for one not having access to or the use of ones property.
+                    It is the use value and not the rental value, which is compensable. <u>Loss of use is based upon the deprivation and not the financial cost or loss involved.</u>
+                    A rental company agency has the  many uses and values associated with their vehicles which do not necessarily directly related to rental revenue or consumers
+                    use of the vehicle, such as; rental car companies have the right to display their vehicles, many rental car companies have trade out agreements with hotels and
+                    other business which relate to revenue that cannot necessarily be tried to a specific type or class of vehicle, rental car companies my provide vehicles to their
+                    sales and management personnel.  All of these uses have a direct financial benefit to the rental car company that is deprived when a loss occurs.
+                    <br /><br />
+                    Pursuant to Restatement (Second)of Torts, S931: <i>
+                        The owner of the subject matter is entitled to recover as damages for the loss of the value of the use,
+                        at least the rental value of the chattel or land during the period of deprivation. this is true even though the owner in fact had suffered no harm through the
+                        deprivation, as when he was not using the subject matter at the time or had a substitute that he used without additional expense to him
+                    </i>.
+                    <u>The appropriate measure of damages for loss of use does not vary based upon the intended use of the vehicle or the economic status of the owner.</u>
+                    <br /><br />
+                    <div style="font-weight:bold">Fleet Utilization Log</div>
+                    <u>Please do not request</u> a fleet utilization log because we will not be sending one to you due to the legal system recognizes that <u>
+                        controlling the use of
+                        property is in and of itself, a valuable right.
+                    </u>  When one is deprived of this right, the amount of the loss is generally measured by the propertys rental
+                    value for the period it was detained. The fact that the owner of the vehicle happens to be a rental operator should have no bearing on the basic measure of
+                    damages applied to the loss. Accordingly, the fleet utilization argument would not appear to be keeping with the legal systems view of the loss of use.
+                    <br /><br />
+                    <div style="font-weight:bold">Administrative Fee</div><br />
+                    Car rental companies are entitled to an administrative fee because the processing and negotiation of the insurance claims are not within the normal scope
+                    of doing business when one is in the business of renting vehicles.  It had been determined that only approximately 4% of the vehicles rented annually are returned
+                    with damage and the subsequent need for and insurance claim.  Accordingly, it could be deemed and unfair and deceptive trade practice for the car rental companies
+                    to include claims handling costs in the rate structure.  As a result, the Administrative Fee had been an element of every major rental car companys rental contract
+                    for the last 25 years.
+                    <br /><br />
+                    <div style="font-weight:bold">Diminishment of Value</div>
+                    You may think that once a damaged vehicle is repaired properly, it will not go down in its value.  However, it is a proven fact that any vehicle that has had
+                    any type of damage on it does decrease in value. A rental company must, by law, disclose any damage to the manufacturer or buyer.  If such disclosure is not given, our
+                    company has exposed ourselves to potential future liability.
+                    <br /><br />Once a buyer knows that a vehicle has been damaged, their perception and attitude towards the vehicle has changed. Most will not purchase such
+                    a vehicle without a reduction in price to compensate for its prior damage.
+                    <br /><br />We have experienced a loss from the sale of previously damaged vehicles. This is why we have an independent company determine the diminishment
+                    in value. We feel this is fair and amicable way to determine the loss we have to compensate for when the vehicle is sold or returned to the leasing company.
+                </font>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,149 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.VehicleInfoViewModel
+
+<section class="panel panel-default complete-height bottom0">
+    <header class="panel-heading">
+        
+
+        <h3 class="panel-title">
+            Vehicle Information 
+            
+            @*@Ajax.MyActionLink("<span>EDIT</span>", "EditVehicleInfo", "pull-right", 
+                        new { vehicleId = Model.Id, contractNumber = Model.ContractNumber, claimId = Model.ClaimId },
+                                                 new AjaxOptions { UpdateTargetId = "vehicle-info" })*@
+
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DownloadVehicleInfo))
+            {
+                 @Ajax.MyActionLink("<span>DOWNLOAD</span>", "DownloadVehicleInfo", "pull-right",
+                     new { claimId = Model.ClaimId, vehicleId = Model.Id,contractNumber=Model.ContractNumber, unitNumber = Model.UnitNumber },
+                                                                       new AjaxOptions { UpdateTargetId = "vehicle-info", OnFailure = "onErrorHandler(xhr)" })
+            }
+
+          
+        </h3>
+
+    </header>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+
+                <td>@Html.DisplayNameFor(model => model.UnitNumber)</td>
+                <td>@Html.DisplayFor(model => model.UnitNumber)</td>
+
+
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.TagNumberAndExp)</td>
+
+                <td>@Html.DisplayFor(model => model.TagNumberAndExp)</td>
+
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.VIN)</td>
+                <td>@Html.DisplayFor(model => model.VIN)</td>
+
+
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.VehicleShortDesc)</td>
+
+                <td>@Html.DisplayFor(model => model.VehicleShortDesc)</td>
+            </tr>
+            <tr>
+
+                <td>@Html.DisplayNameFor(model => model.Mileage)</td>
+
+
+                <td>@Html.DisplayFor(model => model.Mileage)</td>
+
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.LocationNameAndStatus)</td>
+                <td>@Html.DisplayFor(model => model.LocationNameAndStatus)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.PurchaseType)</td>
+                <td>@Html.DisplayFor(model => model.PurchaseType)</td>
+            </tr>
+            <tr>
+
+                <td>@Html.DisplayNameFor(model => model.SwappedVehicles)</td>
+                <td>
+                    @if (Model.SwappedVehicles != null)
+                    {
+                        foreach (var unitNumber in Model.SwappedVehicles)
+                        {
+                            if ( ! unitNumber.Equals(Model.UnitNumber))
+                            {
+                                 if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DownloadVehicleInfo))
+                                 { 
+                                    <a href="javascript:void(0);" onclick="DownloadContract('@unitNumber',@Model.ClaimId,'@Model.ContractNumber',@Model.Id)">@unitNumber</a>
+                                 }
+                                 else { 
+                                   <span>@unitNumber&nbsp;</span>
+                                 
+                                 }
+                                
+                            }
+
+                            
+                        }
+                    }
+                </td>
+
+
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<script type="text/javascript">
+
+    function DownloadContract(unitNumber, claimId, contractNumber, vehicleId) {
+        
+        ShowConfirmBox("Do you want to download selected vehicle information ?", true, function () {
+            
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            var downloadVehicleInfo = { ClaimID: claimId, ContractNumber: contractNumber, UnitNumber: unitNumber, VehicleId: vehicleId, __RequestVerificationToken: token };
+
+            $.ajax({
+                url: "@Url.Action("DownloadVehicleInfo", "ClaimBasicInfo")",
+                data: downloadVehicleInfo,
+            // headers: headers,
+            dataType: "html",
+            type: "POST",
+            cache: false,
+            success: function (returnData) {
+                $('#vehicle-info').html(returnData);
+            },
+            error: onErrorHandler,
+            });
+        });
+        @*if (confirm("Are you sure you want to download this vehicle")) {
+
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            var downloadVehicleInfo = { ClaimID: claimId, ContractNumber: contractNumber, UnitNumber: unitNumber, VehicleId: vehicleId, __RequestVerificationToken: token };
+
+            $.ajax({
+                url: "@Url.Action("DownloadVehicleInfo", "ClaimBasicInfo")",
+                data: downloadVehicleInfo,
+                // headers: headers,
+                dataType: "html",
+                type: "POST",
+                cache: false,
+                success: function (returnData) {
+
+                    $('#vehicle-info').html(returnData);
+                },
+                error: onErrorHandler,
+            });
+        }*@
+    
+    }
+
+
+
+</script>
+

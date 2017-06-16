@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{787FEDF3-FEF8-455A-A9EB-59570A1F47FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EZRAC.RISK.EntityFramework</RootNamespace>
+    <AssemblyName>EZRAC.RISK.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Mapping\ClaimTrackingsMap.cs" />
+    <Compile Include="Mapping\NonContractMapping.cs" />
+    <Compile Include="Mapping\PermissionLevelMapping.cs" />
+    <Compile Include="Mapping\RiskAdminChargeMapping.cs" />
+    <Compile Include="Mapping\RiskBillingMapping.cs" />
+    <Compile Include="Mapping\ClaimMapping.cs" />
+    <Compile Include="Mapping\ContractMapping.cs" />
+    <Compile Include="Mapping\DriverMapping.cs" />
+    <Compile Include="Mapping\IncidentMapping.cs" />
+    <Compile Include="Mapping\InsuranceMaping.cs" />
+    <Compile Include="Mapping\LocationMapping.cs" />
+    <Compile Include="Mapping\PermissionMapping.cs" />
+    <Compile Include="Mapping\RiskCategoryMapping.cs" />
+    <Compile Include="Mapping\RiskClaimApprovalMapping.cs" />
+    <Compile Include="Mapping\RiskClaimStatusMapping.cs" />
+    <Compile Include="Mapping\RiskDamageMapping.cs" />
+    <Compile Include="Mapping\RiskDamageTypeMap.cs" />
+    <Compile Include="Mapping\RiskDocumentCategoryMap.cs" />
+    <Compile Include="Mapping\RiskDocumentsReceivedMapping.cs" />
+    <Compile Include="Mapping\RiskDocumentTypeMap.cs" />
+    <Compile Include="Mapping\RiskDriverInsuranceMap.cs" />
+    <Compile Include="Mapping\RiskFileMapping.cs" />
+    <Compile Include="Mapping\RiskFileTypesMapping.cs" />
+    <Compile Include="Mapping\RiskLossTypeMapping.cs" />
+    <Compile Include="Mapping\RiskNoteTypesMap.cs" />
+    <Compile Include="Mapping\RiskPaymentMapping.cs" />
+    <Compile Include="Mapping\RiskPaymentReasonMapping.cs" />
+    <Compile Include="Mapping\RiskPaymentTypeMapping.cs" />
+    <Compile Include="Mapping\RiskPoliceAgencyMap.cs" />
+    <Compile Include="Mapping\RiskNoteMapping.cs" />
+    <Compile Include="Mapping\RiskReportCategoryMapping.cs" />
+    <Compile Include="Mapping\RiskReportDefaultselectionMapping.cs" />
+    <Compile Include="Mapping\RiskReportMapping.cs" />
+    <Compile Include="Mapping\RiskTrackingMap.cs" />
+    <Compile Include="Mapping\RiskTrackingTypesMap.cs" />
+    <Compile Include="Mapping\RiskWriteOffMapping.cs" />
+    <Compile Include="Mapping\RiskWriteOffTypeMapping.cs" />
+    <Compile Include="Mapping\RoleMap.cs" />
+    <Compile Include="Mapping\SliMapping.cs" />
+    <Compile Include="Mapping\UserActionLogMapping.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Mapping\UserRoleMap.cs" />
+    <Compile Include="Mapping\VehicleMapping.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CRMSContext.cs" />
+    <Compile Include="SearchClassMapping.cs" />
+    <Compile Include="TSDContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EZRAC.RISK.Domain\EZRAC.RISK.Domain.csproj">
+      <Project>{862f9a10-9ec6-48b8-ac8d-15f390b3932a}</Project>
+      <Name>EZRAC.RISK.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EZRAC.RISK.Util\EZRAC.RISK.Util.csproj">
+      <Project>{edd1af64-7769-4853-8761-a9b832c7d40e}</Project>
+      <Name>EZRAC.RISK.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

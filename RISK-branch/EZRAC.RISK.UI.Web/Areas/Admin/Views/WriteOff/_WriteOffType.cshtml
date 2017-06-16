@@ -1,0 +1,36 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Admin.WriteOffTypeMasterViewModel
+
+<div>
+    <div class="row top20">
+        <div class="col-xs-12">
+            <div class="form-group pull-left">
+                <div class="relative admin-search">
+                    <div class="center-align input-type-search-icon input-icon">
+                        <input type="text" placeholder="Search" id="searchWriteOffType" class="form-control input-type-search">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group inline-form-space pull-left">
+                <button class="btn btn1" type="button" id="addwriteOffType" data-url="@Url.Action("NewWriteOffType","WriteOff")"><span class="glyphicon"></span>NEW WRITE OFF TYPE</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5" id="writeOffTypeTable" style="max-height:680px;overflow-y:scroll">
+            @Html.Partial("_WriteOffTypeTable", Model.WriteOffTypes)
+        </div>
+        <div class="col-xs-7">
+            <div class="row tab-wrapper">
+                <div class="col-sm-12">
+                    <div class="tab-content container-fluid no-padding" style="border-top: 1px solid #bdbdbd">
+                        <div id="writeOffTypeDetails" class="tab-pane fade in active" role="tabpanel">
+                            @Html.Partial("_AddUpdateWriteOffType", Model.WriteOffTypeViewModel)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/WriteOffTypes/writeoff-types.js")"></script>

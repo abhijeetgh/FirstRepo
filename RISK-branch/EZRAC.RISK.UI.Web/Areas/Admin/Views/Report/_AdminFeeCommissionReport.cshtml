@@ -1,0 +1,103 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Reports.AdminFeeCommissionReportViewModel
+
+<div class="col-xs-12">
+    <div class="grey-border-1 top15">
+
+        <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+            <thead>
+                <tr class="white-color">
+                    <th>
+                        <div class="display-inline">Claim </div>
+                    </th>
+                    <th>
+                        <div class="display-inline">Contract /Claim Number</div>
+                    </th>                
+                    <th>
+                        <div class="display-inline">Location</div>
+                    </th>
+                    <th>
+                        <div class="display-inline">Payments</div>                    
+                    </th>                    
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model.ClaimWiseAdminFeeCommissionReportViewModel)
+                    {
+                        <tr>
+                            <td> @String.Format("{0}-{1}", item.CompanyAbbr, item.Claim) <input type="hidden" id="claimid" value="@item.Claim" /> </td>
+                            <td> @Html.ActionLink(String.Format("{0} / {1}-{2}", item.Contract, item.CompanyAbbr, item.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = item.Claim }) </td>
+
+                            @*<td>@item.Claim <input type="hidden" id="claimid" value="@item.Claim" /> </td>
+                            <td> @item.Contract </td>*@
+                            <td > @item.Location</td>                            
+                            <td > @item.Payment</td>                            
+                        </tr>
+                    }
+
+                }
+                
+                <tr class="ReportSummaryTotal">
+                    <td colspan="3"> Total Contracts : @Model.TotalContracts</td>    
+                    <td style="display: none;"></td>
+                    <td style="display: none;"></td>                                    
+                    <td > $ @Model.TotalPayments</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    <div class="grey-border-1 top15">
+
+        <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+            <thead>
+                <tr class="white-color">
+                    <th>
+                        <div class="display-inline">Employee </div>
+                    </th>
+                    <th>
+                        <div class="display-inline">Amount Each</div>
+                    </th>
+                    <th>
+                        <div class="display-inline">Quantity</div>
+                    </th>
+                    <th>
+                        <div class="display-inline">Comisssions</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model.UserWiseAdminFeeCommissionReportViewModel)
+                    {
+                        <tr>
+                            <td>@item.Employee </td>
+                            <td> @item.AmountEach </td>
+                            <td> @item.Quantity</td>
+                            <td> @item.Commission</td>
+                        </tr>
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".export-btn").click(function () {
+            window.location = 'Report/GenerateExportFile';
+        });
+    });
+</script>

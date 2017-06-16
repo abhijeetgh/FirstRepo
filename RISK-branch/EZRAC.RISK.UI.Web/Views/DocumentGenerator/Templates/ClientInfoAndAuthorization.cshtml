@@ -1,0 +1,139 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+   
+</head>
+<body style="font-family:'Times New Roman'">
+
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top">
+                *<br /><img src="@Model.Company.Logopath" width="80" height="50" />
+            </td>
+            <td align="right" valign="top">
+                <div>
+                    *<br />Email:  @Model.RiskUserEmail<br />
+                    Phone:  @Model.Company.Phone<br />
+                Fax:    @Model.Company.Fax
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+    <table border="0" width="100%">
+
+
+        <tr>
+            <td colspan="2" align="center">
+              
+                <table width="85%">
+                    <tr><td>*</td><td>*</td><td>*</td></tr>
+                        <tr>
+                        <td style="border:1px solid black">Renter Name</td>
+                        <td style="border:1px solid black">Our Claim Number</td>
+                        <td style="border:1px solid black">Amount Due</td>
+                        </tr>
+                        <tr style="font-weight:bold">
+                        <td style="border:1px solid black">@Model.DriverViewModel.Name</td>
+                        <td style="border:1px solid black">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+                        <td style="border:1px solid black">@Model.TotalDue.ToString("C2")</td>
+                        </tr>
+                    </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center" width="80%" style="font-weight:bold">All damages to the rental vehicle must be reported to your insurance company immediately.</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" width="80%">
+                <div>
+                    *<br />
+                    Customer Name:_________________________________________<br /><br />
+             
+                    Insurance Co:_________________________________
+                    Phone: ________________________________________<br /><br />
+                   
+                    Policy Number:________________________________
+                    Deductible: __________________________________<br /><br />
+                   
+                    Adjuster Name:________________________________
+                    Phone: _______________________________________<br /><br />
+                   
+                    Fax:   _______________________________________
+                    Claim Number:_________________________________
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" width="80%">
+                <div>Renter/driver/cardholder has been involved in an incident, accident, or has damaged the rental vehicle.  I fully understand that I am totaly responsible
+                    for payment of the entire bill.  If, for any reason, my insurance company does not fully pay the amount billed to them, I will pay the balance due within
+                    30 days of notification.  I understand that if I do not have the full payment, I can make scheduled payments that are agreed upon with the risk department
+                and myself.</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" width="80%">
+                <div style="font-weight:bold">
+                    *<br />_________I,______________________(Card Holder Name) give E-Z Rent-A-Car permission to charge my credit card for the amount of $____________________<br /><br />
+                    _________I,______________________(Driver/Renter Name) have provided full payment by check or money order in the amount of $____________________<br /><br>
+                    _________I,______________________(Driver/Renter Name) do not have the total amount owed and would like to setup a payment plan.  Please contact me at the following phone number:____________________<br />
+                </div>
+               
+                   
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" width="80%">
+             
+                *<br /><div style="font-weight:bold; text-decoration:underline">Card Holder/Driver Consent Form</div>
+    <div>
+        *<br />Credit Card #:_______________________________
+        Expiration Date: ________________________________________<br /><br />
+               
+        Card Holder's Signature: _______________________________
+        Date: __________________________<br />
+    </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="50%">&nbsp;</td>
+            <td width="50%" align="center">(Imprint Credit Card)</td>
+        </tr>
+
+        <tr>
+            <td width="50%">&nbsp;</td>
+            <td style="border:solid 1px" valign="bottom" height="80%">
+                <div>*<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                        Place credit card under this page and lightly color over the credit card with a pencil.  Be sure all numbers are visible.
+                        Or, make a copy of the front and back of your credit card and attach it to this form.
+                </div>
+               
+            </td>
+        </tr>
+
+    </table>
+
+
+</body>
+</html>

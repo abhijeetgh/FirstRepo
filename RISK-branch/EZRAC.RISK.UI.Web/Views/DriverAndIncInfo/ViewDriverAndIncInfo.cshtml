@@ -1,0 +1,216 @@
+﻿@model  EZRAC.Risk.UI.Web.ViewModels.Claims.DriverAndInsuranceViewModel
+@using EZRAC.Risk.UI.Web.Helper
+@using EZRAC.RISK.Util.Common
+
+<section class="panel panel-default">
+    <header class="panel-heading">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-8 col-md-8 col-lg-8 padding-left-0">
+                    <h3 class="panel-title">
+                        <span data-target="#additional-driver-info-collapsable-@Model.GetHashCode()" data-toggle="collapse" class="glyphicon glyphicon-minus-sign cursor-pointer"></span>
+
+                        @if (Model.DriverType == 1)
+                        {
+                            <span class="left10">Primary Driver</span>
+                        }
+                        else if (Model.DriverType == 2)
+                        { 
+                        <span class="left10">Additional Driver</span>
+                        }
+                        else { 
+                        <span class="left10">Third Party Driver @ViewBag.DriverCount</span>
+                        }
+                    </h3>
+                </div>
+
+                @{ string updateTargetId = String.Format("driver-inc-for-{0}-{1}", Model.DriverId, Model.DriverType); }
+             
+
+                <h3 class="panel-title">
+
+                   @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditDriverInfo))
+                   {
+                        @Ajax.MyActionLink("<span>EDIT</span>", "EditDriverAndIncInfo", "pull-right",
+                        new { driverId = Model.DriverId, driverType = Model.DriverType, claimId = Model.ClaimId },
+                                                              new AjaxOptions { UpdateTargetId = updateTargetId, OnFailure = "onErrorHandler(xhr)" })
+                   }
+
+                   
+                </h3>
+
+            </div>
+        </div>
+    </header>
+    <div class="collapse in" id="additional-driver-info-collapsable-@Model.GetHashCode()">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>@Html.DisplayFor(model=>model.FirstName) @Html.DisplayFor(model=>model.LastName) </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model=>model.Address1)</td>
+                    <td>@Html.DisplayFor(model => model.Address1)</td>
+                    <td>@Html.DisplayNameFor(model => model.Address2)</td>
+                    <td>@Html.DisplayFor(model => model.Address2)</td>
+
+
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.State)</td>
+                    <td>@Html.DisplayFor(model => model.State)</td>
+                    <td>@Html.DisplayNameFor(model => model.City)</td>
+                    <td>@Html.DisplayFor(model => model.City)</td>
+                </tr>
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model => model.Zip)</td>
+                    <td>@Html.DisplayFor(model => model.Zip)</td>
+                    <td>@Html.DisplayNameFor(model => model.Phone1)</td>
+                    <td>@Html.DisplayFor(model => model.Phone1)</td>
+
+
+                </tr>
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model => model.Fax)</td>
+                    <td>@Html.DisplayFor(model => model.Fax)</td>
+                    <td>@Html.DisplayNameFor(model => model.Phone2)</td>
+                    <td>@Html.DisplayFor(model => model.Phone2)</td>
+
+                </tr>
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model => model.OtherContact)</td>
+                    <td>@Html.DisplayFor(model => model.OtherContact)</td>
+                    <td>@Html.DisplayNameFor(model => model.Email)</td>
+                    <td>@Html.DisplayFor(model => model.Email)</td>
+
+                </tr>
+                <tr>
+
+
+                    <td>@Html.DisplayNameFor(model => model.LicenceNumber)</td>
+                    <td>@Html.DisplayFor(model => model.LicenceNumber)</td>
+                    <td>@Html.DisplayNameFor(model => model.DOB)</td>
+                    <td>@Html.DisplayFor(model => model.DOB)</td>
+
+                </tr>
+
+                <tr>
+
+
+                    <td>@Html.DisplayNameFor(model => model.LicenceExpiry)</td>
+                    <td>@Html.DisplayFor(model => model.LicenceExpiry)</td>
+
+                    <td>@Html.DisplayNameFor(model => model.LicenceState)</td>
+                    <td>@Html.DisplayFor(model => model.LicenceState)</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model => model.IsAuthorizedDriver)</td>
+
+                    @if (Model.IsAuthorizedDriver)
+                   {
+                        <td>Yes</td>
+                   }
+                   else {
+
+                        <td>No</td>
+                   }
+
+
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr style="background:#e1e1e1">
+                    <td><div class="bolder">Insurance Details</div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+
+                    <td>@Html.DisplayNameFor(model => model.InsuranceCompanyName)</td>
+                    <td>@Html.DisplayFor(model => model.InsuranceCompanyName)</td>
+                    <td>@Html.DisplayNameFor(model => model.PolicyNumber)</td>
+                    <td>@Html.DisplayFor(model => model.PolicyNumber)</td>
+
+                </tr>
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model => model.Deductible)</td>
+                    <td>@Html.DisplayFor(model => model.Deductible)</td>
+                    <td>@Html.DisplayNameFor(model => model.InsuranceClaimNumber)</td>
+                    <td>@Html.DisplayFor(model => model.InsuranceClaimNumber)</td>
+
+                </tr>
+                <tr>
+
+                    <td>@Html.DisplayNameFor(model => model.InsuranceExpiry)</td>
+                    <td>@Html.DisplayFor(model => model.InsuranceExpiry)</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                @if (Model.DriverType != (int)ClaimsConstant.DriverTypes.ThirdParty)
+                {
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.CreditCardCompany)</td>
+                        <td>@Html.DisplayFor(model => model.CreditCardCompany)</td>
+                        <td>@Html.DisplayNameFor(model => model.CreditCardPolicyNumber)</td>
+                        <td>@Html.DisplayFor(model => model.CreditCardPolicyNumber)</td>
+
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.CreditCardCoverageAmt)</td>
+                        <td>@Html.DisplayFor(model => model.CreditCardCoverageAmt)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        @if (TempData["RequestedForAddThirdPartyDriver"] != null && (bool)TempData["RequestedForAddThirdPartyDriver"])
+        {
+        @Html.HiddenFor(m => TempData["RequestedForAddThirdPartyDriver"])    
+        }
+
+        
+      
+    </div>
+</section>
+
+<script type="text/javascript"> $('#driver-inc-for-0-@Model.DriverType').attr("id", "@updateTargetId")</script>
+<script type="text/javascript"> $('#driver-insurance-section-0-@Model.DriverType').attr("id", "#driver-insurance-section-@Model.DriverId-@Model.DriverType")</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.collapse').on('shown.bs.collapse', function () {
+            $(this).parent().find(".glyphicon-plus-sign").removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+        }).on('hidden.bs.collapse', function () {
+            $(this).parent().find(".glyphicon-minus-sign").removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
+        });
+
+//alert($('#TempData_RequestedForAddThirdPartyDriver_').val());
+
+        if ($('#TempData_RequestedForAddThirdPartyDriver_').length != 0 && $('#TempData_RequestedForAddThirdPartyDriver_').val() != undefined &&
+        $('#TempData_RequestedForAddThirdPartyDriver_').val().toLowerCase()=='true') {
+
+            $('#add-driver').removeAttr('disabled');
+        }
+    });
+
+
+</script>

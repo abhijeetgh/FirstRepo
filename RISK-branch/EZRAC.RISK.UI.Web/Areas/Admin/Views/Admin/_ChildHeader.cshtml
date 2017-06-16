@@ -1,0 +1,17 @@
+﻿<header class="header-navOption">
+    <div id="child-header" class="clear container-fluid">
+        <span class="header-links-inner wl">
+            @Html.ActionLink("Claim Status", "Index", "ClaimStatus", new { area = "Admin" }, new { @id = "claimStatusLink", @class = " navOptions  claimstatus", @currentpage = "claimstatus" })
+            @Html.ActionLink("Loss Type", "Index", "LossType", new { area = "Admin" }, new { @class = "navOptions losstype", @currentpage = "losstype" })
+            @Html.ActionLink("Vehicle Section", "Index", "VehicleSection", new { }, new { @class = "navOptions vahicle", @currentpage = "vahicle" })
+            @Html.ActionLink("User Management", "Index", "User", new { }, new { @class = "navOptions user", @currentpage = "user" })
+            @Html.ActionLink("Role Permission", "Index", "UserRole", new { }, new { @class = "navOptions userrole", @currentpage = "userrole" })
+            @Html.ActionLink("Insurance Company", "Index", "InsuranceCompany", new { }, new { @class = "navOptions insurancecompany", @currentpage = "insurancecompany" })
+            @Html.ActionLink("Police Agency", "Index", "PoliceAgency", new { area = "Admin" }, new { @class = "navOptions policeagency", @currentpage = "policeagency" })
+            @Html.ActionLink("Location", "Index", "Locations", new { area = "Admin" }, new { @class = "navOptions locations", @currentpage = "locations" })
+            @Html.ActionLink("Company", "Index", "Company", new { area = "Admin" }, new { @class = "navOptions companies", @currentpage = "companies" })
+            @Html.ActionLink("Write Off Type", "Index", "WriteOff", new { area = "Admin" }, new { @class = "navOptions writeoff", @currentpage = "writeofftypes" })
+        </span>
+    </div>
+</header>
+

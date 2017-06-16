@@ -1,0 +1,47 @@
+﻿@model IList<EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimInfoViewModel>
+<div class="grey-border-1 top15">
+    <table class="grey-white-table  dark-blue-header complete complete-width claim-table bordered-table ">
+        <tr class="white-color table-header">            
+            <th class='claim-id-coloumn'>
+                <div class="display-inline">Claim Id
+            </th>
+            <th class='claim-status-coloumn'>
+                <div class="display-inline">Status
+            </th>
+            <th class='claim-assigned-coloumn'>
+                <div>
+                    <div class="display-inline">
+                      Assigned To
+                </div>
+            </div>
+        </th>
+        <th class='contract-coloumn'>
+            <div class="display-inline">Contract
+        </th>
+        <th class='claim-   -coloumn'>
+            <div class="display-inline">Driver
+        </th>
+        <th class='claim-driver-coloumn'>
+            <div class="display-inline">Unit No. 
+        </th>
+        <th class='claim-vehicle-coloumn'>
+            <div class="display-inline">Vehicle 
+        </th>       
+</tr>
+
+        @foreach (var item in Model)
+         {
+        <tr>            
+            <td class='claim-id-coloumn '> @Html.ActionLink(String.Format("{0}-{1}", item.CompanyAbbr, item.ClaimID), "ViewClaim", new { id = item.ClaimID }) </td>
+            <td class='claim-status-coloumn'> @item.SelectedStatusName</td>
+            <td class='claim-assigned-coloumn'>
+                <label id="assignedUser">@item.SelectedAssignedUserName</label>                
+            </td>
+            <td class='contract-coloumn'> @item.ContractNumber</td>
+            <td class='claim-driver-coloumn'>@item.DriverName</td>
+            <td class='claim-unitnumber-coloumn'>@item.UnitNumber</td>
+            <td class='claim-vehicle-coloumn'>@item.VehicleName</td>            
+        </tr>
+        }
+</table>
+</div>

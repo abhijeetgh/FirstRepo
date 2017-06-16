@@ -1,0 +1,79 @@
+﻿@model EZRAC.Risk.UI.Web.Helper.QuickNotesPageHelper<EZRAC.Risk.UI.Web.ViewModels.Claims.NotesViewModel>
+<script src="~/Scripts/appScripts/quick-notes.js"></script>
+@*<ul class="dropdown-menu pull-right  tooltip-up-arrow top10 recent-notes">*@
+    <li class="padding-horizontal-15 top10 recent-notes-legend">Recent Notes</li>
+    <li>
+        <table class="white-grey-table  complete-width recent-notes-table">
+            @if (Model.NotesPresent) {            
+                foreach (var item in Model.Data)
+                {
+                    <tr>
+                        <td class="padding-horizontal-15">
+                            <div class="complete-width">@item.Description </div>
+                            <div class="complete-width">
+                                <div class="pull-right notes-creation-date">@item.UpdatedBy @item.Date.Date.ToString("d")</div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            @if (!Model.NotesPresent)
+            {
+                <tr>
+                        <td class="padding-horizontal-15">
+                            <div class="complete-width">@Model.Result</div>
+                        </td>
+                </tr>
+                
+            }
+        </table>
+    </li>
+
+    <li class="padding-horizontal-15">
+
+        <div class="row padding-horizontal-15">
+            <div class="recent-notes-legend">
+                Add Note
+            </div>
+            <form class="form padding-horizontal-15">
+
+                <div class="row top10">
+                    <fieldset class="form-inline">
+                        <label class="control-label">Type</label>
+                        <select class="form-control  curved-border-sm grey-border-1  left10 noteTypes" id="noteTypes">
+                            <option value="-1" selected>--Select note type--</option>
+                            @foreach (var item in Model.NoteTypes)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+
+                    </fieldset>
+                </div>
+
+                <div id="errorMsgNoteType" class="errorMsg"></div>
+
+                <div class="row top10">
+                    <fieldset class="form-inline">
+                        <textarea rows="5" class="complete-width description-area"></textarea>
+                    </fieldset>
+                </div>
+
+                <div id="errorMsgDescription" class="errorMsg"></div>
+
+                <div class="row top10">
+
+                    <input type="checkbox" class="top3" id="isNotify"/><label class="left5">Send Email Notification</label>
+                </div>
+
+                <div class="row top10">
+                    <button type="button" class="btn orange-button btn-large-width addNotes">Add Note</button>
+                </div>
+
+
+            </form>
+        </div>
+
+    </li>
+@*</ul>*@
+<input type="hidden" id="hdnClaimId" value=""/>

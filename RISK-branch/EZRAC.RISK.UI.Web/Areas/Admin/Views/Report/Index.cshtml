@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div id="main">
+    <div class="left-col-toggle cursor-pointer left">
+        <img src="~/Images/search-toggle-e.png" alt="toggle" style="margin-left:16px" />
+    </div>
+    <div id="left-col" class="report-leftcol">
+        @Html.Partial("~/Areas/Admin/Views/Report/_ReportMenu.cshtml")
+    </div>
+
+    <div id="right-col">
+        @Html.Partial("~/Areas/Admin/Views/Report/_ReportResult.cshtml")
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/appScripts/ReportPages/CommonReport.js")"></script>
+<script src="~/Scripts/jquery-dataTable.js"></script>
+<link href="~/Content/dataTable.css" rel="stylesheet" />

@@ -1,0 +1,157 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.PaymentDueViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.HeaderViewModel.Company.Abbr - @Model.HeaderViewModel.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.HeaderViewModel.Company.Address<br />
+                    @Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+
+                *<br />
+                Email:  @Model.HeaderViewModel.RiskUserEmail<br />
+                Phone:  @Model.HeaderViewModel.Company.Phone<br />
+                Fax:    @Model.HeaderViewModel.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="50%" align="left" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.HeaderViewModel.DriverViewModel.Name<br />
+                    @Model.HeaderViewModel.DriverViewModel.Address<br />
+                    @Model.HeaderViewModel.DriverViewModel.City,  @Model.HeaderViewModel.DriverViewModel.State  @Model.HeaderViewModel.DriverViewModel.Zip
+
+                </div>
+            </td>
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />@DateTime.Now.ToString(EZRAC.Risk.UI.Web.Helper.Constants.CrmsDateFormates.MMDDYYYY)
+                    </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Dear @Model.HeaderViewModel.DriverViewModel.Name:</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">*<br />Re: Payment Receipt - CLOSED CLAIM</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center>
+                    <table border="1" width="85%">
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Our Claim Number</td>
+                            <td style="font-weight:bold">Unit Number</td>
+                            <td style="font-weight:bold">Date of Loss</td>
+                            <td style="font-weight:bold">Original Balance</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</td>
+                            <td style="font-weight:bold">@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                            <td style="font-weight:bold">@Model.HeaderViewModel.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                            <td style="font-weight:bold">$@Model.OriginalDue</td>
+                        </tr>
+                    </table>
+                </center>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <center>
+                    <table border="1" width="85%">
+                        <tr><td colspan="3"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Date Received</td>
+                            <td style="font-weight:bold">Amount of Payment</td>
+                            <td style="font-weight:bold">Received From</td>
+                        </tr>
+
+                        @if (Model.Payments != null && Model.Payments.Any())
+                        {
+                            foreach (var item in @Model.Payments)
+                            {
+                                <tr>
+                                    <td>@item.ReceivedDate.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                                    <td>$@Math.Round(item.Amount.HasValue ? item.Amount.Value : default(double), 2)</td>
+                                    <td>@item.SelectedPaymentFrom</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>NA</td>
+                                <td>$0</td>
+                                <td>NA</td>
+                            </tr>
+                        }
+
+                    </table>
+                </center>
+            </td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <td colspan="2">
+                *<br />We would like to thank you for settling your claim with Central Florida Paint and Body.
+                We appreciate your business and hope that you choose us for your future Rental Car needs.
+            </td>
+        </tr>
+        <tr><td>*<br />Please visit our website at <u>www.cfpaint.com</u>www.cfpaint.com </td></tr>
+        <tr><td></td></tr>
+        <tr>
+            <td colspan="2">
+                *<br />Kind Regards,
+            </td>
+        </tr>
+        <tr><td>@Model.HeaderViewModel.RiskUserFullName</td></tr>
+        <tr><td> Risk Management Services</td></tr>
+        <tr>
+            <td colspan="2" style="font-weight:bold">
+                PYMT - CLOSED
+            </td>
+        </tr>
+    </table>
+
+
+
+
+</body>
+</html>

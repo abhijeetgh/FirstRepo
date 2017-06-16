@@ -1,0 +1,54 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimBasicInfoViewModel
+
+<div class="row">
+
+    <div class="row-height">
+        <div class="col-xs-6 col-height padding-bottom-20" id="claim-info">
+
+            @{Html.RenderPartial("ViewClaimInfo", Model.ClaimInfo);}
+
+        </div>
+
+        @if (Model.ClaimInfo != null && Model.ClaimInfo.HasContract)
+        {
+            <div class="col-xs-6 col-height padding-bottom-20" id="contract-info">
+
+                @{Html.RenderPartial("ViewContractInfo", Model.ContractInfo);}
+
+            </div>
+        }
+        else
+        {
+            <div class="col-xs-6 col-height padding-bottom-20" id="non-contract-info">
+
+                @{Html.RenderPartial("ViewNonContractInfo", Model.NonContractInfo);}
+
+            </div>
+        }
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="row-height">
+
+        <div class="col-xs-6 col-height padding-bottom-20" id="vehicle-info">
+
+            @{Html.RenderPartial("ViewVehicleInfo", Model.VehicleInfo);}
+
+        </div>
+
+        <div class="col-xs-6 col-height padding-bottom-20" id="incident-info">
+
+            @{Html.RenderPartial("ViewIncidentInfo", Model.IncidentInfo);}
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.InsuranceCompanyViewModel>
+
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="insuranceCompanyTable" style="cursor:pointer;">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Company Name </div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Email </div>
+            </th>
+            <th class="">
+                <div class="th-min-height"> Delete </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="claim-status-coloumn insurance-column align-text-left" data-id="@item.Id" data-url="@Url.Action("InsuranceCompany","InsuranceCompany")">@item.CompanyName</td>
+                <td class="claim-status-coloumn insurance-column align-text-left" data-id="@item.Id" data-url="@Url.Action("InsuranceCompany","InsuranceCompany")">@item.Email</td>
+                <td class="claim-status-coloumn"><a class="delete-action" href="javascript:void(0);" title="Delete" data-id="@item.Id" data-url-delete="@Url.Action("DeleteInsuranceCompany", "InsuranceCompany")" data-url-valid="@Url.Action("InsuranceCompanyAlreadyUsed","InsuranceCompany")"><span class="ico-delete">&nbsp;</span></a></td>
+            </tr> 
+        }
+    </tbody>
+</table>
+@Html.AntiForgeryToken()
+<script src="~/Scripts/appScripts/AdminPages/InsuranceCompany/insurance-company.js"></script>

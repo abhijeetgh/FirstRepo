@@ -1,0 +1,58 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@*@model EZRAC.Risk.UI.Web.Helper.DamageInfoHelper<EZRAC.Risk.UI.Web.ViewModels.Claims.DamageViewModel>*@
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.DamageInfoViewModel
+        
+<link href="@Url.Content("~/Content/dataTable.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-dataTable.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/appScripts/damage-tab.js")" type="text/javascript"></script>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Damage Details</h3>
+            </header>
+            <div class="panel-body">
+
+                @if (SecurityHelper.IsCreatorOrAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.AddDamages,Model.ClaimId))
+                {
+                    <button type="button" class="btn btn1" data-toggle="collapse" data-target=".addDamage" aria-expanded="false" aria-controls="addDamage"><span class="glyphicon glyphicon-plus"></span> ADD DAMAGE</button>
+                    <div class="well cla-well collapse container-fluid top15 relative addDamage">
+                        <div class="close-container" data-toggle="collapse" data-target=".addDamage" title="Close"></div>
+                        <div class="tooltip-up-arrow">
+                            @using (Ajax.BeginForm("AddDamage", new { }, new AjaxOptions { OnSuccess = "clearValues", UpdateTargetId = "damageTable", InsertionMode = InsertionMode.Replace, OnFailure = "onErrorHandler(xhr)" }, new { @id = "addDamageForm", @class = "form-inline cla-form", @role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <label class="control-label">Section</label>
+                                    <br />
+                                    @Html.DropDownListFor(model => model.SelectedSectionId, Model.Section, "--Select section--", new { @id = "damageSection", @class = "form-control ncl-slect top5 selectpicker", @data_live_search = "true" })
+                                    @Html.ValidationMessageFor(x => x.SelectedSectionId)
+                                </div>
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label">Details</label>
+                                    <br>
+                                    @Html.TextBoxFor(model => model.Details, Model.Details, new { @id = "damageDetails", @class = "form-control ncl-slect top5 large-input" })
+                                    @Html.ValidationMessageFor(x => x.Details)
+                                </div>
+                                <div class="form-group inline-form-space">
+                                    <button id="addDamageInfo" type="submit" class="btn btn1 top25 padding-horizontal-30">SAVE</button>
+                                </div>
+                                @Html.HiddenFor(model => model.ClaimId)
+                            }
+                        </div>
+                    </div>
+                }
+
+                <div class="top-space clearfix"></div>
+                <form class="cla-form" role="form">
+
+                    <table id="damageTable" class="table table-striped add-items damageInfoTable">
+                        @{Html.RenderAction("GetDamageList", new { claimNumber = Model.ClaimId });}
+                        @*@Html.Partial("_DamageTableInfo", Model.Damages)*@
+                    </table>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.WriteOffTypeViewModel>
+
+@using EZRAC.Risk.UI.Web.Helper
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="writeOffTypeDataTable" style="max-height:500px;overflow:scroll">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Write Off Type</div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Description</div>
+            </th>
+            <th class="">
+                <div class="th-min-height">Delete</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="cursor:pointer">
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("WriteOffTypeDetail","WriteOff")">@item.WriteOffType</td>
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("WriteOffTypeDetail", "WriteOff")">@item.Description </td>
+                <td class="claim-status-coloumn"><a class="delete-action" title="Delete" href="javascript:void(0);" data-url="@Url.Action("DeleteWriteOffType", "WriteOff")" data-id="@item.Id" data-url-validation="@Url.Action("IsWriteOffTypeUsed","WriteOff")"><span class='ico-delete'>&nbsp;</span></a></td>               
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/WriteOffTypes/writeoff-types-table.js")"></script>

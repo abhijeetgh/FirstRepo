@@ -1,0 +1,70 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+    
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.RiskUserEmail<br />
+                Phone:  @Model.Company.Phone<br />
+                Fax:    @Model.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+    <br /><br /><br /><br /><br />
+    <div style="text-decoration:underline; font-size:medium">VEHICLE RELEASE</div><br />
+    Date: @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)<br /><br />
+    To Whom It May Concern:<br /><br />
+    The vehicle listed below has been purchased and is now released for pickup to the buyer listed. The buyer will call your office to make pick-up arrangements.
+    <br /><br />
+    Please remove the vehicle license plate and mail it back to:<br /><br />
+    E-Z Rent-A-Car<br />
+    Attn: Mary<br />
+    2003 McCoy Road Suite A<br />
+    Orlando, FL 32809<br /><br />
+    Buyer Name:<br /><br />
+    <table border="1" align="center">
+        <tr><td colspan="2"></td></tr>
+        <tr>
+            <td style="font-weight:bold" width="25%" align="left">Claim #</td>
+            <td style="font-weight:bold" width="25%" align="left">Unit #</td>
+        </tr>
+        <tr>
+            <td align="left">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+            <td align="left">@Model.VehicleViewModel.UnitNumber</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="font-weight:bold" width="25%" align="left">VIN #</td>
+            <td style="font-weight:bold" width="25%" align="left">Vehicle Info</td>
+        </tr>
+        <tr>
+            <td align="left">@Model.VehicleViewModel.VIN</td>
+            <td align="left">@String.Format("{0} {1} {2} {3}", Model.VehicleViewModel.Year, Model.VehicleViewModel.Color, Model.VehicleViewModel.Make, Model.VehicleViewModel.Model)</td>
+        </tr>
+    </table>
+    <br /><br />
+    <div style="text-decoration:underline; font-size:medium">Location of Vehicle</div><br /><br /><br /><br /><br /><br />
+    If you have Questions please contact Chris Colarusso at (407)888-0518 or email her at: risk@ezrac.com<br /><br />
+    Thank you for your assistance
+</body>
+</html>

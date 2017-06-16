@@ -1,0 +1,198 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+
+</head>
+<body style="font-family:'Times New Roman'">
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.RiskUserEmail<br />
+                Phone:  @Model.Company.Phone<br />
+                Fax:    @Model.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.DriverViewModel.Name<br />
+                    @Model.DriverViewModel.Address<br />
+                    @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                </div>
+            </td>
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />@DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">*<br />Dear @Model.DriverViewModel.Name:</td>
+        </tr>
+
+
+        <tr>
+
+            <td colspan="2" style="font-size:medium">
+                <br />
+                    You were the renter or authorized driver of a rental vehicle which sustained damage or loss.  Pursuant to the rental contract, you are responsible for all damages or loss to the rented property while it was in your care, custody or control, regardless of fault.
+                    Set forth below is the amount that is being sought from you.  This billing represents an estimate of the loss you are responsible for:
+
+                    <div style="font-weight:bold">
+                        <br /><br />
+
+                        Claim #: @String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)
+                        &nbsp;&nbsp;&nbsp;Unit #:  @Model.VehicleViewModel.UnitNumber
+                        &nbsp;&nbsp;&nbsp;Date of Loss:  @Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)
+                    </div>
+
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td colspan="2" style="border-bottom:solid"><br /></td>
+        </tr>
+
+        @if (Model.Billings != null)
+        {
+            foreach (var billing in Model.Billings)
+            {
+                <tr>
+                    <td width="50%" align="left">@billing.BillingTypeDesc</td>
+                    <td width="50%" align="right">@billing.SubTotal.ToString("C2")</td>
+
+                </tr>
+            }
+        }
+       
+        @if (Model.Contract != null)
+        {
+            if (Model.Contract.CDW && !Model.Contract.CDWVoided)
+            {
+                <tr>
+                    <td width="50%" align="left" style="color:red">CDW Accepted - Total Due</td>
+                    <td width="50%" align="right" style="color:red">@Model.TotalDue.ToString("C2")</td>
+                </tr>
+
+            }
+            else if (Model.Contract.LDW && !Model.Contract.LDWVoided)
+            {
+                <tr>
+                    <td width="50%" align="left" style="color:red">LDW Accepted - Total Due</td>
+                    <td width="50%" align="right" style="color:red">@Model.TotalDue.ToString("C2")</td>
+                </tr>
+            }
+        }
+
+        @if (Model.Payments != null)
+        {
+            foreach (var item in Model.Payments)
+            {
+                <tr>
+                    <td width="50%" align="left">Payment From @item.PaymentFrom on @item.ReceivedDate.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                    <td width="50%" align="right">@item.Amount.Value.ToString("C2")</td>
+
+                </tr>
+            }
+        }
+
+        <tr>
+            <td width="50%" align="left" style="border-bottom:solid; font-weight:bold">TOTAL DUE</td>
+            <td width="50%" align="right" style="border-bottom: solid; font-weight: bold">@Model.TotalDue.ToString("C2")</td>
+        </tr>
+
+
+
+        <tr>
+            <td colspan="2" style="font-size:small">
+                    We have enclosed all supporting documents so that you may make a claim through your Credit Card Company or your Insurance Company should the damages be higher than your deductible.
+                    Pictures will be sent by email upon request.
+                    <br /><br />If you have insurance coverage that existed at the time of damage, please provide all the information on the attached <u>Client Information & Authorization Form</u> and mail, or fax it to the Risk Department.
+                    If you do not have insurance or wish to set up a payment plan, please contact us at @Model.Company.Phone.
+                    <br />
+                    <div style="font-weight:bold">*<br />Please send payment immediately, or have your insurance company contact this office.</div>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td colspan="2" align="center">
+                <table>
+                    <tr>
+                        <td style="font-style: italic; font-weight: bold">*<br />Please make check payable to:</td>
+                        <td style="font-weight: bold; font-size:large">*<br />@Model.Company.Name</td>
+                    </tr>
+                </table>
+                <br />
+                Mail Payment to:<br />
+                Risk Management Services<br />
+                @Model.Company.Address<br />
+                @Model.Company.City, @Model.Company.State @Model.Company.Zip
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2" align="center">
+                <div style="font-size:small">*<br />You may contact our office at @Model.Company.Phone, M-F 8am - 3pm (EST) or Fax @Model.Company.Fax.</div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <div style="font-size:small">
+                    *<br />
+                    Kind Regards,<br />
+                    @Model.RiskUserFullName <br />
+                    Risk Management Services<br />
+                </div>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td colspan="2" style="font-size:small;">
+                <div style=" font-size:small; font-weight:bold">
+                *<br />DL1- RTR</div>
+                    If any such legal action is taken and results in judgment against you, a Writ of Execution may be issued against your attachable assests.  Any legal action taken may result in additional expenses, including service of process and other court cost; thereby increasing your debt and overall financial obligation.  In addition, the agreement between you and E-Z Rent-A-Car contains an attorney's fees clause which specifies that the prevailing party to any action concerning this debt will be entitled to a reasonable attorney's fees in addition to any other award granted.  If the car rental company needs to resort to legal action to collect this debt, a request will be made that you be held liable for all such attorney's fees incurred.
+                    DL1-RTR
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

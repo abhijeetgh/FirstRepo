@@ -1,0 +1,97 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimTrackingViewModel
+@using EZRAC.Risk.UI.Web.Helper;
+@using EZRAC.RISK.Util.Common;
+
+<table id="trackingTable" class="table table-striped tracking-table">
+    @Html.AntiForgeryToken()
+    <thead>
+        <tr>
+            <th class="align-left">
+                <div class="display-inline">No.</div>
+            </th>
+            <th class="align-left">
+                <div class="display-inline">Events</div>
+            </th>
+            <th class="align-left">
+                <div class="display-inline">User</div>
+            </th>
+            <th class="align-left">
+                <div class="display-inline">Date / Time</div>
+            </th>
+            <th class="align-left">
+                <div class="display-inline">Time Taken</div>
+            </th>
+            <th class="center-align">
+                <div class="display-inline">Action</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var count = 1;}
+        @foreach (var item in Model.TrackingModel)
+        {
+            if (item.IsCurrent)
+            {
+                <tr class="active">
+                    <td class="align-left">@count</td>
+                    <td class="align-left display-none">@item.Id</td>
+                    <td class="align-left">@item.TrackingDescription</td>
+                    <td class="align-left"></td>
+                    <td class="align-left"></td>
+                    <td class="align-left"></td>
+                    <td class="align-right"><button type="button" class="btn btn1 small doneEvent" title="Done" data-id="@item.Id" data-url="@Url.Action("UpdateEvent", "ClaimTracking")" data-claimid="@item.ClaimId" data-type="@item.TrackingTypeId">Done</button></td>
+                </tr>
+            }
+            else if (item.IsCompleted)
+            {
+                <tr>
+                    <td class="align-left">@count</td>
+                    <td class="align-left display-none">@item.Id</td>
+                    <td class="align-left">@item.TrackingDescription</td>
+                    <td class="align-left">@item.CreatedBy</td>
+                    <td class="align-left">@item.CreatedDateTime</td>
+                    <td class="align-left">@item.TimeTaken</td>
+                    @if (SecurityHelper.IsAuthorized(ClaimsConstant.TrackerUndo) && item.CanUndo)
+                    {
+                        <td class="align-right">
+                            @using (@Ajax.BeginForm("UndoEvent", "ClaimTracking", new { claimTrackingId = @item.ClaimTrackingId, claimId = item.ClaimId, type = item.TrackingTypeId }, new AjaxOptions { UpdateTargetId = "trackerDiv", HttpMethod = "POST", InsertionMode = InsertionMode.Replace }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn2 small">Undo</button>
+                            }
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="center-align" style="color:green;font-size:20px;"><span class="glyphicon glyphicon-ok"></span></td>
+                    }
+                </tr>
+
+            }
+            else
+            {
+                <tr class="completed">
+                    <td class="align-left">@count</td>
+                    <td class="align-left display-none">@item.Id</td>
+                    <td class="align-left">@item.TrackingDescription</td>
+                    <td class="align-left"></td>
+                    <td class="align-left"></td>
+                    <td class="align-left"></td>
+                    <td class="align-right"></td>
+                </tr>
+            }
+            ++count;
+        }
+        <tr>
+            <td class="align-left"></td>
+            <td class="align-left display-none"></td>
+            <td class="align-left"></td>
+            <td class="align-left"></td>
+            <td class="align-right bold">Total Time</td>
+            <td class="align-left" id="time">@Model.TotalTimeTaken</td>
+            <td class="align-right"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="@Url.Content("~/Scripts/appScripts/tracker.js")"></script>

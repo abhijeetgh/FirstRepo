@@ -1,0 +1,38 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.PaymentsViewModel
+@using EZRAC.Risk.UI.Web.Helper;
+@using (@Ajax.BeginForm("AddPayment", "Payments", new { }, new AjaxOptions { HttpMethod = "Post", OnSuccess = "addPaymentSuccess(data)", OnFailure = "onErrorHandler(xhr)" }, new { @class = "form-inline cla-form", @role = "form", @id = "addPaymentsForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="control-label">Payment From</label>
+        <br>
+        @Html.DropDownListFor(x => x.SelectedPaymentTyepId, Model.PaymentTypes, "--Select Type--", new { @class = "form-control ncl-slect selectpicker top5", @data_live_search = "true", @title = "Please select", @id = "paymentType" })
+        @Html.ValidationMessageFor(x => x.SelectedPaymentTyepId)
+    </div>
+    <div class="form-group inline-form-space">
+        <label class="control-label">Reason</label>
+        <br>
+        @Html.DropDownListFor(x => x.SelectedPaymentReasonId, Model.Reasons, "--Select Reason--", new { @class = "form-control ncl-slect selectpicker top5", @data_live_search = "true", @title = "Please select", @id = "reasonType" })
+        @Html.ValidationMessageFor(x => x.SelectedPaymentReasonId)
+    </div>
+    <div class="form-group inline-form-space">
+        <label class="control-label">Amount $</label>
+        <br>
+        @*<input type="text" class="form-control ncl-slect top5" placeholder="Amount">*@
+        @Html.TextBoxFor(x => x.Amount, new { @class = "form-control ncl-slect top5", @placeholder = "Amount", @min = "0", @id = "paymentAmount" })
+        @Html.ValidationMessageFor(x => x.Amount)
+    </div>
+    <div class="form-group inline-form-space">
+        <label class="control-label bottom5">Received Date</label>
+        <br>
+        <div class="sandbox-container top5 pull-left">
+            @*<input type="text" value="03/09/2015" class="form-control sand-datepicker datepicker">*@
+            @Html.TextBoxFor(x => x.ReceivedDate, Model.ReceivedDate != null ? Model.ReceivedDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : string.Empty, new { @class = "form-control sand-datepicker datepicker", @readonly = "readonly", @id = "paymentDate" })
+            @Html.ValidationMessageFor(x => x.ReceivedDate)
+        </div>
+    </div>
+    <div class="form-group inline-form-space">
+        <button type="submit" class="btn btn1 top25">SAVE</button>
+    </div>
+    @Html.HiddenFor(x => x.ClaimId);
+}

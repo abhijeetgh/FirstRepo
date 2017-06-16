@@ -1,0 +1,68 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+    
+</head>
+<body style="font-family:'Times New Roman'">
+
+
+  
+    <table width="100%">
+        <tr>
+            <td align="center" valign="top">
+                <table align="center" width="100%">
+                    <tr>
+                        <td align="center">
+                            <img src="@Model.Company.Logopath" width="80" height="50" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                                RISK MANAGEMENT SERVICES<br />
+                                @Model.Company.Address<br />
+                                @Model.Company.City, @Model.Company.State @Model.Company.Zip<br />
+                                Phone: @Model.Company.Phone<br />
+                                Fax: @Model.Company.Fax<br /><hr /><br />
+                                FACSIMILE TRANSMITTAL SHEET<br /><hr /><br />                        
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+                </table>
+    <table width="100%">
+        <tr>
+            <td style="border-bottom:solid">*<br />TO: <div style="font-weight:bold">@Model.DriverViewModel.Name</div> </td>
+            <td style="border-bottom:solid">*<br />FROM:<div style="font-weight:bold">@Model.RiskUserFullName</div></td>
+        </tr>
+
+        <tr>
+            <td style="border-bottom:solid"></td>
+            <td style="border-bottom:solid">*<br />DATE:<div style="font-weight:bold">@DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)</div></td>
+        </tr>
+
+        <tr>
+            <td style="border-bottom:solid">*<br />FAX NUMBER:<div style="font-weight:bold">@Model.Company.Fax </div></td>
+            <td style="border-bottom:solid">*<br /># OF PAGES INCLUDING COVER:<br /></td>
+        </tr>
+
+
+        <tr>
+            <td style="border-bottom:solid">*<br />PHONE NUMBER:<div style="font-weight:bold">@Model.Company.Phone </div></td>
+            <td style="border-bottom:solid">*<br />SENDER'S REFERENCE NUMBER:<div style="font-weight:bold">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty) </div></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2" align="center" style="border-bottom:solid"> <br /><br />URGENT  REVIEW PLEASE COMMENT PLEASE REPLY PLEASE RECYCLE<br /><br /></td>                               
+        </tr>
+
+    </table>
+    <br /><br />
+    Notes/Comments :
+
+</body>
+</html>
+

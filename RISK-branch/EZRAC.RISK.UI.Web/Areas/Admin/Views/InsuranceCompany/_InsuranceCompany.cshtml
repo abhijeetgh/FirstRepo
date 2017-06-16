@@ -1,0 +1,33 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Admin.InsuranceCompanyMasteViewModel
+
+<div class="row top20">
+    <div class="col-xs-12">
+        <div class="form-group pull-left">
+            <div class="relative admin-search">
+                <div class="center-align input-type-search-icon input-icon">
+                    <input type="text" placeholder="Search" class="form-control input-type-search" id="searchCompanyName">
+                </div>
+            </div>
+        </div>
+        <div class="form-group inline-form-space pull-left">
+            <button class="btn btn1" type="button" id="addInsuranceCompany" data-url="@Url.Action("AddInsuranceCompany","InsuranceCompany")"><span class="glyphicon"></span> NEW INSURANCE COMPANY</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-5" id="insuranceCompanyList" style="max-height:680px;overflow-y:scroll;">
+        @Html.Partial("_InsuranceCompanyTable", Model.InsuranceCompanyList)
+    </div>
+    <div class="col-xs-7">
+        <div class="row tab-wrapper">
+            <div class="col-sm-12">
+                <div class="tab-content container-fluid no-padding">
+                    <div id="divInsuranceCompany" class="tab-pane fade in active" role="tabpanel" style="border-top: 1px solid #bdbdbd;">
+                     @Html.Partial("_AddUpdateInsuranceCompany",Model.InsuranceComapnyViewModel)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

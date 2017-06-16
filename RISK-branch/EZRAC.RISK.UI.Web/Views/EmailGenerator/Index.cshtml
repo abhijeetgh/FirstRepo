@@ -1,0 +1,177 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.EmailGenerator.EmailGeneratorViewModel
+
+<!-- email-generator-modpopup --->
+<div class="modal fade cla-modpopup" id="emailGen" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title">Email Generator</h4>
+            </div>
+            <div class="modal-body">
+                @*<script src="~/Scripts/appScripts/email-generator.js"></script>*@
+                @using (@Ajax.BeginForm("SendEmail", "EmailGenerator", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccessEmail", OnBegin = "OnBeginEmail", OnFailure = "onErrorHandler(xhr)" }, new { @class = "cla-form", role = "form", id = "email-generator-send" }))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.HiddenFor(model => model.ClaimId)
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>To generate E-mail, first choose recipient. Then you will be able to choose the information you wish to include.</p>
+                            <div class="form-group">
+                                <label class="control-label"><strong>Recipient</strong></label>
+                                <span class="mandetory-star">*</span>
+                                @Html.DropDownListFor(model => model.SelectedRecipient, Model.Recipients, "-- Select --", new { @class = "form-control hfcl-slect selectpicker bs-select-hidden", id = "receipients" })
+                                <label id="recipient-required" class="field-validation-error fetch-contract-error display-none" style="padding-left: 78px;">Please select recipient</label>
+                                
+                            </div>
+                            <div id="custom-email" class="form-group display-none">
+                                <label class="control-label"><strong>Custom Email Address</strong> ( Add Multiple Email Address separated by semicolon(;) )</label><br />
+                                <span class="mandetory-star">*</span>
+                                @Html.TextBoxFor(model => model.CustomEmailAddress, new { @class = "emailgen-emailbox", id = "custom-email-address" })
+                                <label id="email-required" class="field-validation-error fetch-contract-error display-none">Please enter valid email</label>
+                               
+
+                                @*<input type="email" class="emailgen-emailbox" />*@
+                            </div>
+
+                            <div id="risk-users" class="form-group display-none">
+                                <label class="control-label"><strong>Select Receptions</strong> (Select Multiple with CTRL+Click)</label><br />
+
+                                @Html.ListBoxFor(model => model.SelectedUserEmails, Model.RiskUserEmails, new { @class = "form-control multiple-select-box", id = "risk-user-emails" })
+                                <label id="risk-user-required" class="field-validation-error fetch-contract-error display-none">Please select at least one user email</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row tab-wrapper">
+                                <div class="col-sm-12">
+                                    <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-tabs-horizontal">
+                                        <li class="active"><a href="#emailgen-tab1" data-toggle="tab">Claim Information</a></li>
+                                        <li><a href="#emailgen-tab2" data-toggle="tab">Notes</a></li>
+                                        <li><a href="#emailgen-tab3" data-toggle="tab">Files</a></li>
+                                    </ul>
+                                    <div class="tab-content container-fluid no-padding">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="emailgen-tab1">
+                                            <ul class="table table-striped no-border">
+                                                <li class="select-all">
+                                                    <input type="checkbox" id="select-all-info" class="checkbox-rtspace" />
+                                                    Select All
+                                                </li>
+                                                @foreach (var infoToSend in Model.InformationToSendList)
+                                                {
+                                                    <li class="tabletoul">
+                                                        @if (infoToSend.IsAvailable)
+                                                        {
+                                                            <input type="checkbox" value="@infoToSend.Id" name="SelectedInfoToSend" class="checkbox-rtspace info-to-send for-credit-card" />
+                                                            <span>@infoToSend.Text</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="checkbox" disabled="disabled" value="@infoToSend.Id" name="SelectedInfoToSend" class="checkbox-rtspace" />
+                                                            <span>@infoToSend.Text</span>
+                                                        }
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="emailgen-tab2">
+                                            <table class="table table-striped no-border">
+                                                <tbody>
+
+                                                    @if (Model.Notes.Any())
+                                                    {
+                                                        <tr>
+                                                            <td width="40"><input type="checkbox" id="select-all-notes" class="checkbox-rtspace" /></td>
+                                                            <td colspan="2">Select All</td>
+                                                        </tr>
+                                                        foreach (var note in Model.Notes)
+                                                        {
+                                                            <tr>
+                                                                <td width="40"><input value="@note.NoteId" type="checkbox" name="SelectedNotesToSend" class="notes-to-send" /></td>
+                                                                <td >
+                                                                    <strong>@note.SelectedNoteType</strong><br />
+                                                                    <span class="notesDescription">@note.Description</span>
+                                                                </td>
+                                                                <td>@note.UpdatedBy @note.Date</td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+
+                                                            <td colspan="2">No Notes Available</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="emailgen-tab3">
+                                            <ul class="table table-striped no-border">
+
+                                                @if (Model.Files != null && Model.Files.Any())
+                                                {
+                                                    <li class="select-all">
+                                                        <input type="checkbox" id="select-all-files" class="checkbox-rtspace file-to-send" />
+                                                        Select All
+                                                    </li>
+
+                                                    foreach (var files in Model.Files)
+                                                    {
+                                                        <li style="list-style:none;font-weight:bold">
+                                                            @files.CategoryName
+                                                        </li>
+                                                        foreach (var file in files.FileList)
+                                                        {
+                                                            <li class="tabletoul">
+                                                                <input type="checkbox" value="@file.Id" name="SelectedFilesToSend" class="checkbox-rtspace file-to-send" />
+
+                                                                @Html.ActionLink(@file.FileName, "Download", "RiskFiles", new { id = @file.Id }, new { })
+
+                                                               
+                                                            </li>
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <li class="select-all">
+                                                        No files Available
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label id="items-required" style="padding-left: 15px;" class=" field-validation-error fetch-contract-error display-none">Please select at least one item to send</label>
+                    </div>
+                    
+                    <div class="row top10">
+                        <div class="col-xs-12"><strong>Remarks</strong></div>
+                        <div class="col-xs-12">
+
+                            @Html.TextAreaFor(model => model.Remarks, new { @class = "emailgen-textarea top5", rows = "5", id="remarks" })
+
+                            @*<textarea class="emailgen-textarea top5" rows="5"></textarea>*@
+                            <div class="display-none saveSuccess" id="SuccessMessage">Email successfully sent.</div>
+                        </div>
+                        
+                        <div class="col-xs-12">
+                            <button id="send-email" type="submit" class="btn btn1 pull-left top20" title="Send Email">SEND EMAIL</button>
+                            <a  id="reset-email-generator" class="pull-left top30 reset-button2" href="javascript:void(0);"> <span class="col-xs-1 reset-image"></span>RESET ALL </a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/emailGenerator")
+

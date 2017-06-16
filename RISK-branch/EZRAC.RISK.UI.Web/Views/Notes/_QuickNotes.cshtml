@@ -1,0 +1,91 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.NotesViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<script src="~/Scripts/appScripts/quick-notes.js"></script>
+@*<ul class="dropdown-menu pull-right  tooltip-up-arrow top10 recent-notes">*@
+<li class="padding-horizontal-15 top10 recent-notes-legend">Recent Notes</li>
+<li>
+    <table class="white-grey-table  complete-width recent-notes-table">
+        @if (Model.Notes.Any())
+        {
+            foreach (var item in Model.Notes)
+            {
+                <tr>
+                    <td class="padding-horizontal-15 pd15">
+                        <div class="complete-width quicknotes-overflow-text">@item.Description </div>
+                        <div class="complete-width">
+                            <div class="pull-right notes-creation-date">@item.UpdatedBy @item.Date</div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        @if (!Model.Notes.Any())
+        {
+            <tr>
+                <td class="padding-horizontal-15 pd15">
+                    <div class="complete-width">@Constants.StringConstants.NoNotesFound </div>
+                </td>
+            </tr>
+
+        }
+    </table>
+</li>
+<br />
+<li class="padding-horizontal-15">
+
+    <div class="row padding-horizontal-15">
+        <div class="recent-notes-legend">
+            Add Note
+        </div>
+        <form class="form padding-horizontal-15 cla-form ">
+
+            <div class="row top10">
+                <fieldset class="form-inline">
+                    <label class="control-label">Type</label>
+                    <select class="form-control ncl-slect curved-border-sm grey-border-1 left10 selectpicker noteTypes" title="Please select type" data-live-search="true">
+                        <option value="-1" selected>--Select note type--</option>
+                        @foreach (var item in Model.NotesType)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    @* @Html.DropDownListFor(model => model.SelectedNoteTypeId, Model.NotesType, "--Select section--", new { @id = "damageSection", @class = "form-control ncl-slect selectpicker", @data_live_search = "true" })*@
+                </fieldset>
+            </div>
+
+            <div class="errorMsg errorMsgNoteType"></div>
+
+            <div class="row top10">
+                <fieldset class="form-inline">
+                    <textarea rows="5" class="complete-width description-area"></textarea>
+                </fieldset>
+            </div>
+
+            <div class="errorMsg errorMsgDescription"></div>
+
+            <div class="row top10">
+                @if (Model.NoteAssignedToLoggedInUser)
+                {
+                    <input type="checkbox" class="top3" id="isNotify" disabled="disabled" /><label class="left5">Send Email Notification</label>
+                }
+                else
+                {
+                    <input type="checkbox" class="top3" id="isNotify" /><label class="left5">Send Email Notification</label>
+                }
+            </div>
+            <div class="row">
+                <input type="checkbox" class="top3" id="IsPrivilege" /><label class="left5">Privileged</label>
+            </div>
+            <div class="clear"></div>
+            <div class="row top10">
+                <button type="button" class="btn orange-button btn-large-width addNotes">SAVE</button>
+            </div>
+
+
+        </form>
+    </div>
+
+</li>
+@*</ul>*@
+<input type="hidden" id="hdnClaimId" value="" />

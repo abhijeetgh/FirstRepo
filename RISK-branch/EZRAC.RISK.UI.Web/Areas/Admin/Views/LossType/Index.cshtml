@@ -1,0 +1,23 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Admin.LossTypeMasterViewModel
+
+
+<link href="@Url.Content("~/Content/dataTable.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-dataTable.js")" type="text/javascript"></script>
+
+@{
+    ViewBag.Title = "Loss Type Management";
+}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+@Html.Partial("~/Areas/Admin/Views/Admin/_ChildHeader.cshtml")
+    <!-- main container -->
+    <div>
+        <div class="tab-pane  fade in  active " id="result-panel">
+            @Html.Partial("_LossType", Model)
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/Common.js")"></script>

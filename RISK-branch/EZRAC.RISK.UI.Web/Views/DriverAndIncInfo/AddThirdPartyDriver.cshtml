@@ -1,0 +1,11 @@
+﻿@model  EZRAC.Risk.UI.Web.ViewModels.Claims.DriverAndInsuranceViewModel
+
+<section id="driver-insurance-section-@Model.DriverId-@Model.DriverType">
+    <div class="row">
+        <div class="col-xs-12" id="driver-inc-for-@Model.DriverId-@Model.DriverType">
+
+            @{Html.RenderPartial("EditDriverAndIncInfo", Model); }
+
+        </div>
+    </div>
+</section>

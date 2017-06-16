@@ -1,0 +1,46 @@
+﻿
+<div class="col-xs-12">
+    <div class="form-group">
+        <div class="relative ">
+            <div class="">
+                @*<input type="text" id="userRoleSearch" placeholder="Search" class="form-control input-type-search">*@
+                @*<select id="UserRoleList" class="bootstrap-select" data-live-search="true">
+                        @{
+                            <option value="0">---select---</option>
+                            foreach (var item in ViewBag.UserRoleList)
+                            {
+                                <option value="@item.RoleId" permissionid="@item.PermissionIds">@item.RoleName</option>
+                            }
+                        }
+                    </select>*@
+                <form>
+                    <div class="row bottom10">
+                        <div class="col-xs-2  padding-right-0 bootstrap-dropdown-container">
+                            <select id="UserRoleList" class="form-control ncl-slect selectpicker bs-select-hidden" data-live-search="true">
+                                @{
+                                    <option value="0">--Select--</option>
+                                    foreach (var item in ViewBag.UserRoleList)
+                                    {
+                                        <option value="@item.RoleId" permissionid="@item.PermissionIds">@item.RoleName</option>
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            @*<input type="button" id="AddRole" value="Add Role" class="btn btn2" />*@
+
+        </div>
+
+
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $(document).find('.main-nav li').removeClass('active');
+        $(document).find('.main-nav li').eq(1).addClass('active');
+    });
+</script>

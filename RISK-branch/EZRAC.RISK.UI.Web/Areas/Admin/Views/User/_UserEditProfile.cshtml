@@ -1,0 +1,272 @@
+﻿@model  EZRAC.Risk.UI.Web.ViewModels.Admin.UserViewModel
+<div class="row tab-wrapper">
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs nav-tabs-horizontal" id="nav-tabs-wrapper">
+            @*<li class="active"><a data-toggle="tab" href="#adminProfile">PROFILE</a></li>*@
+
+        </ul>
+        <div class="tab-content container-fluid no-padding">
+            <h4 class="padding-left-15 padding-vertical-15" id="heddinglable"></h4>
+            @using (Ajax.BeginForm("AddUpdateUser", new { Controller = "User" }, new AjaxOptions { OnSuccess = "resetUserData()", UpdateTargetId = "UserList", HttpMethod = "Post", OnFailure = "onErrorHandler(xhr)" }, new { @class = "form-horizontal cla-form top20 bottom20", @id = "user-info-form" }))
+            {
+
+                @Html.AntiForgeryToken()
+                
+                <input type="hidden" id="CurrentLoggedUserId" value="@EZRAC.Risk.UI.Web.Helper.SecurityHelper.GetUserIdFromContext()" />
+                
+                @Html.HiddenFor(model => model.Id, new { @UserID = Model.Id, @class = "hiddenUserID" })
+                <div id="adminProfile" class="tab-pane fade in active" role="tabpanel">
+                    @*<form class="">*@
+                    <div class="row bottom10">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                                @Html.LabelFor(m => m.FirstName)<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                                @Html.LabelFor(model => model.LastName)<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom10">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                                @Html.LabelFor(model => model.UserName)<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.UserName)
+                                <span class="field-validation-error" style="display:none" id="checkusername">Username already exists.</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                                @Html.LabelFor(model => model.Email)<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0 ">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.Email)
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom10">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                                @Html.LabelFor(model => model.Password)<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                               @Html.PasswordFor(m => m.Password, new { @class = "form-control ", @PlaceHolder = "****" })
+                               @Html.ValidationMessageFor(model => model.Password)
+                               <span class="field-validation-error" style="display:none" id="errorpassword">Please enter password</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                               @Html.LabelFor(model => model.ConfirmPassword)<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0 ">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control ", @PlaceHolder = "****" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom10">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">                              
+                                User Role<label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                                @Html.DropDownListFor(m => m.UserRoleId, (IEnumerable<SelectListItem>)ViewBag.UserRoleList, "Please select", new { @class = "form-control selectpicker", @data_live_search = "true" })
+                                @Html.ValidationMessageFor(m => m.UserRoleId)
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                                <label for="">Status</label><label style="color:red">*</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0 top5">
+
+
+                                <div class="display-inline">
+                                    @Html.RadioButton("IsActiveUser", "Active", (Model.IsActive) ? new { @checked = true } : null) Active
+
+                                </div>
+                                <div class="display-inline left15">
+                                    @Html.RadioButton("IsActiveUser", "IsActive", (Model.IsActive) ? null : new { @checked = true }) InActive
+                                </div>
+                                @Html.HiddenFor(m => m.IsActive, new { @value = Model.IsActive })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 bottom20 top15">
+                        <div role="tabpanel" class="tab-pane fade in active" id="emailgen-tab1">
+                                @if (Model.AssignedLocations != null)
+                                {
+                                    <span style="margin-bottom:5px;">Locations</span>
+                                    <ul class="table table-striped no-border">
+                                        @foreach (var item in Model.AssignedLocations)
+                                        {
+                                            if (item.IsLocationAssigned)
+                                            {
+                                                <li class="anothertabletoul">
+                                                    <input type="checkbox" value="@item.LocationId" name="AssignedLocationsId" checked="checked" class="checkbox-rtspace info-to-send" style="margin-right:5px;" />
+                                                    <span>@item.LocationCode - @item.CompanyAbbreviation</span>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="anothertabletoul">
+                                                    <input type="checkbox" value="@item.LocationId" name="AssignedLocationsId" class="checkbox-rtspace info-to-send" style="margin-right:5px;" />
+                                                    <span>@item.LocationCode - @item.CompanyAbbreviation</span>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                        <br/>
+                            <button class="btn btn2 " disabled="disabled" id="cancel" type="button">CANCEL</button>
+                            <input class="btn btn1 " disabled="disabled" id="Submitform" type="submit" value="SAVE" />
+                        </div>
+                    @*</form>*@
+                </div>
+                @*<div id="adminLocation" class="tab-pane fade in" role="tabpanel">
+                        <form class="form-horizontal cla-form top20 bottom20">
+                            <table class="table table-striped no-border">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Select All
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                        <td width="30">
+                                            <input type="checkbox" class="checkbox-rtspace" />
+                                            Location
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>*@
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".selectpicker").selectpicker({});
+        $.validator.setDefaults({
+            ignore: []
+        });
+        $.validator.unobtrusive.parse("#user-info-form");
+        $("input[name=IsActiveUser]").on("change", function () {
+            if ($(this).val() == "Active") {
+                $("#IsActive").val("true");
+            }
+            else {
+                $("#IsActive").val("false");
+            }
+        });
+        $("#cancel").on("click", function () {
+            resetUserData();
+            //ShowConfirmBox("Do you want to discard changes?", true, resetUserData);
+            //var flag = confirm("Do you want to discard changes?");
+            //if (flag) {
+            //    resetUserData();
+            //}
+            $("#UserList table tbody").find(".grey_bg td").eq(0).click();
+        });
+        $("#UserEditProfile input:text,input:password").on("input", function () {
+            RemoveDisableButton();
+        });
+        $("#UserRoleId , input[name=IsActiveUser]").on("change", function () {
+            RemoveDisableButton();
+        });
+
+        $("#Submitform").on("click", function () {
+            if ($("#UserEditProfile .hiddenUserID").val() == 0) {
+                if ($("#Password").val() != "") {
+                    $("#errorpassword").hide();
+                    return true;
+                }
+                $("#errorpassword").show();
+                return false;
+            }
+            return true;
+        });
+        $("#UserName").focusout(function () {
+            if ($(this).val() != undefined && $(this).val() != "" && $(".hiddenUserID").val() == 0) {
+                CheckUserName($(this).val(), $(".hiddenUserID").val());
+            }
+            else {
+                $("#checkusername").hide();
+            }
+        });
+
+        $(".anothertabletoul input").on("change", function () {
+            RemoveDisableButton();
+        });
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.CompanyViewModel>
+    @{
+    ViewBag.Title = "Company Management";
+    }
+
+    @Html.Partial("~/Areas/Admin/Views/Admin/_ChildHeader.cshtml")
+    <div class="row top20">
+        <div class="col-xs-12">
+            <div class="form-group pull-left">
+                <div class="relative admin-search">
+                    <div class="center-align input-type-search-icon input-icon">
+                        <input type="text" id="companySearch" placeholder="Search" class="form-control input-type-search">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group inline-form-space pull-left">
+                <button class="btn btn1" id="addCompany" type="button"> NEW COMPANY</button>
+                <span id="errormsg" class="errorMsg" style="display:none">Can not delete company already in use.</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4" id="CompanyList" style="max-height: 700px; overflow-y: auto; padding-right: 0; overflow-x: hidden;">
+            @Html.Partial("_CompanyList",Model)
+        </div>
+        <div class="col-xs-8" id="CompanyEditProfile">
+            @Html.Partial("_CompanyEditProfile",new EZRAC.Risk.UI.Web.ViewModels.Admin.CompanyViewModel())
+        </div>
+    </div>
+@Html.Partial("~/Views/Claims/_ClaimsUrl.cshtml")
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/Companies.js")"></script>
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/Common.js")"></script>
+<script src="~/Scripts/jquery-dataTable.js"></script>
+<link href="~/Content/dataTable.css" rel="stylesheet" />

@@ -1,0 +1,857 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{47E5FFB7-F377-41E8-9FC2-0A2749ECDE47}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EZRAC.Risk.UI.Web</RootNamespace>
+    <AssemblyName>EZRAC.Risk.UI.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EZRAC.Core">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core\bin\Debug\EZRAC.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EZRAC.Core.Caching.ContextCache">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.Caching.ContextCache\bin\Debug\EZRAC.Core.Caching.ContextCache.dll</HintPath>
+    </Reference>
+    <Reference Include="EZRAC.Core.Data.EntityFramework">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.Data.EntityFramework\bin\Debug\EZRAC.Core.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EZRAC.Core.Email">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.Email\bin\Debug\EZRAC.Core.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="EZRAC.Core.FileGenerator">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.PDFGenerator\bin\Debug\EZRAC.Core.FileGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="EZRAC.Core.Util">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.Util\bin\Debug\EZRAC.Core.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.PDFGenerator\bin\Debug\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlRenderer.PdfSharp">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.PDFGenerator\bin\Debug\HtmlRenderer.PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Mvc">
+      <HintPath>..\packages\Unity.Mvc.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.PDFGenerator\bin\Debug\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.PDFGenerator\bin\Debug\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\..\EZRAC.Core\EZRAC.Core.Util\bin\Debug\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiException.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InsuranceCompanyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PoliceAgencyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LocationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserRoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VehicleSectionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WriteOffController.cs" />
+    <Compile Include="Attributes\ContractNumberValidatorAttribute.cs" />
+    <Compile Include="Attributes\CRMSAdminAccess.cs" />
+    <Compile Include="Attributes\CRMSAuthroizeAttribute.cs" />
+    <Compile Include="Attributes\UnitNumberValidatorAttribute.cs" />
+    <Compile Include="Attributes\UserActionLogAttribute.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClaimStatusController.cs" />
+    <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\ClaimBasicInfoController.cs" />
+    <Compile Include="Controllers\ClaimEventsController.cs" />
+    <Compile Include="Controllers\ClaimsController.cs" />
+    <Compile Include="Controllers\ClaimTrackingController.cs" />
+    <Compile Include="Controllers\DamageController.cs" />
+    <Compile Include="Controllers\DocumentGeneratorController.cs" />
+    <Compile Include="Controllers\DocumentsReceivedController.cs" />
+    <Compile Include="Controllers\DriverAndIncInfoController.cs" />
+    <Compile Include="Controllers\EmailGeneratorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LossTypeController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
+    <Compile Include="Controllers\RiskFilesController.cs" />
+    <Compile Include="Controllers\SalvageController.cs" />
+    <Compile Include="Controllers\RiskWriteOffController.cs" />
+    <Compile Include="DocumentGenerator\DocumentFactory.cs" />
+    <Compile Include="DocumentGenerator\DocumentTemplateDto.cs" />
+    <Compile Include="DocumentGenerator\IDocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ARDL1.cs" />
+    <Compile Include="DocumentGenerator\Implementation\BodyShopRepair.cs" />
+    <Compile Include="DocumentGenerator\Implementation\CdwNotVoided.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ClientInfoAndAuthorization.cs" />
+    <Compile Include="DocumentGenerator\Implementation\CustomerFaxCoverSheet .cs" />
+    <Compile Include="DocumentGenerator\Implementation\CustomerServiceInformation .cs" />
+    <Compile Include="DocumentGenerator\Implementation\GflRenter.cs" />
+    <Compile Include="DocumentGenerator\Implementation\InsuranceFaxCover.cs" />
+    <Compile Include="DocumentGenerator\Implementation\IntroductionLetter.cs" />
+    <Compile Include="DocumentGenerator\Implementation\JNRDebtorPlacementForm.cs" />
+    <Compile Include="DocumentGenerator\Implementation\AttorneyAcknowledgementLetter .cs" />
+    <Compile Include="DocumentGenerator\Implementation\NationalCasualtyInsuranceCover.cs" />
+    <Compile Include="DocumentGenerator\Implementation\PaymentPlan.cs" />
+    <Compile Include="DocumentGenerator\Implementation\PayoffForm.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ReportedStolen.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ReposessionAuthorization.cs" />
+    <Compile Include="DocumentGenerator\Implementation\RepossesionAutherizationNationwideRepo.cs" />
+    <Compile Include="DocumentGenerator\Implementation\RenterDemandLetterThreeAndFour.cs" />
+    <Compile Include="DocumentGenerator\Implementation\SalvageBid.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ThirdPartyDemandLetter.cs" />
+    <Compile Include="DocumentGenerator\Implementation\PaymentBalanceDue.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ThirdPartyInsuranceDemandLetter.cs" />
+    <Compile Include="DocumentGenerator\Implementation\RenterDemandLetterOneAndTwo.cs" />
+    <Compile Include="DocumentGenerator\Implementation\TicketAdminFee.cs" />
+    <Compile Include="DocumentGenerator\Implementation\TicketAffaidavit.cs" />
+    <Compile Include="DocumentGenerator\Implementation\VehicleRelease.cs" />
+    <Compile Include="DocumentGenerator\Implementation\ViolationAdminFee.cs" />
+    <Compile Include="DocumentGenerator\Implementation\WholeSaleBillOfSale .cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helper\AdminHelpers.cs" />
+    <Compile Include="Helper\AdminHelper.cs" />
+    <Compile Include="Helper\AjaxExtensions.cs" />
+    <Compile Include="Helper\ClaimHelper.cs" />
+    <Compile Include="Helper\ClaimStatusHelper.cs" />
+    <Compile Include="Helper\ConfigSettingsReader.cs" />
+    <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\CustomHtmlHelper.cs" />
+    <Compile Include="Helper\DamageInfoHelper.cs" />
+    <Compile Include="Helper\DocumentGeneratorHelper.cs" />
+    <Compile Include="Helper\DocumentsReceivedHelper.cs" />
+    <Compile Include="Helper\EmailGeneratorHelper.cs" />
+    <Compile Include="Helper\EmailGeneratorManager.cs" />
+    <Compile Include="Helper\EmailTemplatesHelper.cs" />
+    <Compile Include="Helper\LookUpHelpers.cs" />
+    <Compile Include="Helper\LossTypeHelper.cs" />
+    <Compile Include="Helper\NotesPageHelper.cs" />
+    <Compile Include="Helper\PageHelper.cs" />
+    <Compile Include="Helper\PaymentHelper.cs" />
+    <Compile Include="Helper\PendingClaimPageHelper.cs" />
+    <Compile Include="Helper\QuickNotesPageHelper.cs" />
+    <Compile Include="Helper\ReportExportHelper.cs" />
+    <Compile Include="Helper\ReportHelper.cs" />
+    <Compile Include="Helper\SecurityHelper.cs" />
+    <Compile Include="Helper\TrackingHelper.cs" />
+    <Compile Include="Helper\UserActionLogHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Email\NotesEmailRequest.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="UnityResolver.cs" />
+    <Compile Include="ViewModels\Admin\AssignedLocationViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ClaimStatusMasterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ClaimStatusViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\Admin\InsuranceCompanyMasteViewModel.cs" />
+    <Compile Include="ViewModels\Admin\InsuranceCompanyViewModel.cs" />
+    <Compile Include="ViewModels\Admin\LocationMasterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\LocationViewModel.cs" />
+    <Compile Include="ViewModels\Admin\LossTypeMasterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\LossTypeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\PoliceAgencyMasterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\PoliceAgencyViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserRoleViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserViewModel.cs" />
+    <Compile Include="ViewModels\Admin\VehicleSectionMasterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\VehicleSectionViewModel.cs" />
+    <Compile Include="ViewModels\Admin\WriteOffTypeMasterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\WriteOffTypeViewModel.cs" />
+    <Compile Include="ViewModels\ClaimBasicInfo\ClaimInfoForViewEditViewModel.cs" />
+    <Compile Include="ViewModels\Claims\BillingViewModel.cs" />
+    <Compile Include="ViewModels\Claims\ClaimBasicInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\ClaimInfoHeaderViewModel.cs" />
+    <Compile Include="ViewModels\Claims\ClaimInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\ClaimTrackingViewModel.cs" />
+    <Compile Include="ViewModels\Claims\ContractViewModel.cs" />
+    <Compile Include="ViewModels\Claims\CreateClaimViewModel.cs" />
+    <Compile Include="ViewModels\Claims\DamageInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\DamageViewModel.cs" />
+    <Compile Include="ViewModels\Claims\DownloadContractInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\DownloadVehicleInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\DriverAndInsuranceViewModel.cs" />
+    <Compile Include="ViewModels\Claims\FetchDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Claims\IncidentViewModel.cs" />
+    <Compile Include="ViewModels\Claims\NonContractInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\NotesViewModel.cs" />
+    <Compile Include="ViewModels\Claims\PaymentInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\PaymentReasonViewModel.cs" />
+    <Compile Include="ViewModels\Claims\RequestPagesInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\PaymentsViewModel.cs" />
+    <Compile Include="ViewModels\Claims\PicturesAndFilesViewModel.cs" />
+    <Compile Include="ViewModels\Claims\RiskBillingsViewModel.cs" />
+    <Compile Include="ViewModels\Claims\RiskFileModel.cs" />
+    <Compile Include="ViewModels\Claims\RiskFileUploadModel.cs" />
+    <Compile Include="ViewModels\Claims\SalvageViewModel.cs" />
+    <Compile Include="ViewModels\Claims\TrackerCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Claims\TrackingViewModel.cs" />
+    <Compile Include="ViewModels\Claims\UserActionLogViewModel.cs" />
+    <Compile Include="ViewModels\Claims\VehicleViewModel.cs" />
+    <Compile Include="ViewModels\Claims\ViewClaimsModel.cs" />
+    <Compile Include="ViewModels\Claims\WriteOffInfoViewModel.cs" />
+    <Compile Include="ViewModels\Claims\WriteOffViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\ContractViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\DocumentTemplateViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\DocumentCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\DocumentGeneratorViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\DocumentTypeViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\DriverViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\LocationViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\NationalCasualtyInsuranceCoverViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\PaymentDueViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\PaymentPlanViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\PayoffFormViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\RepoAuthorziationViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\SalvageBidViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\TicketAffidavitViewModel.cs" />
+    <Compile Include="ViewModels\DocumentGenerator\VehicleViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsReceived\DocumentsReceivedViewModel.cs" />
+    <Compile Include="ViewModels\EmailGenerator\EmailGeneratorViewModel.cs" />
+    <Compile Include="ViewModels\EmailGenerator\InformationToShowViewModel.cs" />
+    <Compile Include="ViewModels\Reports\AccountReceivableViewModel.cs" />
+    <Compile Include="ViewModels\Reports\AdminFeeCommissionReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\AdminReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ARAgingReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ChargeBackLossReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ChargeTypeReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ClaimViewModel.cs" />
+    <Compile Include="ViewModels\Reports\Claim_PaymentViewmodel.cs" />
+    <Compile Include="ViewModels\Reports\ClaimVehiclePaymentViewModel.cs" />
+    <Compile Include="ViewModels\Reports\CollectionReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\CommonViewModel.cs" />
+    <Compile Include="ViewModels\Reports\CommonClaimViewModel.cs" />
+    <Compile Include="ViewModels\Reports\CommonPaymentViewModel.cs" />
+    <Compile Include="ViewModels\Reports\BasicReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\DepositDateReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\PaymentViewModel.cs" />
+    <Compile Include="ViewModels\Reports\ReportCriteria.cs" />
+    <Compile Include="ViewModels\Reports\SearchTagPlateViewModel.cs" />
+    <Compile Include="ViewModels\Reports\VehicleDamageSectionReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\VehicleToBeReleasedViewModel.cs" />
+    <Compile Include="ViewModels\Reports\StolenRecoveredReportViewModel.cs" />
+    <Compile Include="ViewModels\Reports\VehicleViewModel.cs" />
+    <Compile Include="ViewModels\Reports\WriteOffReportViewModel.cs" />
+    <Compile Include="WebApiService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+    <Content Include="App_Data\BillingContent.htm" />
+    <Content Include="App_Data\BillingFooter.htm" />
+    <Content Include="App_Data\BillingHeader.htm" />
+    <Content Include="App_Data\ClaimSentForApproval.htm" />
+    <Content Include="App_Data\ContractInformation.htm" />
+    <Content Include="App_Data\ContractInformationWithoutCreditCardDetails.htm" />
+    <Content Include="App_Data\DriverInformation.htm" />
+    <Content Include="App_Data\DriversInsuranceInformation.htm" />
+    <Content Include="App_Data\EmailGeneratorHeader.htm" />
+    <Content Include="App_Data\IncidentInformation.htm" />
+    <Content Include="App_Data\NewClaimAssignedEmail.htm" />
+    <Content Include="App_Data\NewNoteAddedForClaim.htm" />
+    <Content Include="App_Data\NotesContent.htm" />
+    <Content Include="App_Data\NotesHeader.htm" />
+    <Content Include="App_Data\PaymentContent.htm" />
+    <Content Include="App_Data\PaymentFooter.htm" />
+    <Content Include="App_Data\PaymentHeader.htm" />
+    <Content Include="App_Data\VehicleDamageContent.htm" />
+    <Content Include="App_Data\VehicleDamageFooter.htm" />
+    <Content Include="App_Data\VehicleDamageHeader.htm" />
+    <Content Include="App_Data\VehicleInformation.htm" />
+    <Content Include="Content\bootstrap-datepicker\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-select\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\common.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\dataTable.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\SegoeUI\SegoeUI.svg" />
+    <Content Include="Content\fonts\SegoeUI\userIcon.png" />
+    <Content Include="Content\jquery-ui\jquery-ui.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\adlogo.png" />
+    <Content Include="Images\ajax_loader_blue_large.gif" />
+    <Content Include="Images\bslogo.png" />
+    <Content Include="Images\calendar-icon.png" />
+    <Content Include="Images\Close.png" />
+    <Content Include="Images\CRMS_Icons_Sprite.png" />
+    <Content Include="Images\ezlogo.png" />
+    <Content Include="Images\fslogo.png" />
+    <Content Include="Images\jnrlogo.png" />
+    <Content Include="Images\jquery-ui\ui-icons_222222_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_454545_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_888888_256x240.png" />
+    <Content Include="Images\jquery-ui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\repologo.gif" />
+    <Content Include="Images\Search-toggle-e.png" />
+    <Content Include="Images\Search-toggle.jpg" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\upgrade_ad_logo.png" />
+    <Content Include="Images\upgrade_ez_logo.png" />
+    <Content Include="Images\userIcon.png" />
+    <Content Include="Images\vertical-nav-devider.png" />
+    <Content Include="Scripts\appScripts\add-billing.js" />
+    <Content Include="Scripts\appScripts\add-notes.js" />
+    <Content Include="Scripts\appScripts\AdminPages\Common.js" />
+    <Content Include="Scripts\appScripts\AdminPages\Companies.js" />
+    <Content Include="Scripts\appScripts\AdminPages\InsuranceCompany\insurance-company.js" />
+    <Content Include="Scripts\appScripts\AdminPages\LossTypes\add-update-losstype.js" />
+    <Content Include="Scripts\appScripts\AdminPages\LossTypes\loss-types-table.js" />
+    <Content Include="Scripts\appScripts\AdminPages\LossTypes\loss-types.js" />
+    <Content Include="Scripts\appScripts\AdminPages\police-agency.js" />
+    <Content Include="Scripts\appScripts\AdminPages\UserRole.js" />
+    <Content Include="Scripts\appScripts\AdminPages\WriteOffTypes\add-update-writeoff.js" />
+    <Content Include="Scripts\appScripts\AdminPages\WriteOffTypes\writeoff-types-table.js" />
+    <Content Include="Scripts\appScripts\AdminPages\WriteOffTypes\writeoff-types.js" />
+    <Content Include="Scripts\appScripts\AdminUser.js" />
+    <Content Include="Scripts\appScripts\AdminPages\VehicleSection\add-update-vehicle-section.js" />
+    <Content Include="Scripts\appScripts\AdminPages\VehicleSection\vehicle-section-table.js" />
+    <Content Include="Scripts\appScripts\AdminPages\VehicleSection\vehicle-section.js" />
+    <Content Include="Scripts\appScripts\advance-search.js" />
+    <Content Include="Scripts\appScripts\AdminPages\ClaimStatus\add-update-claim-status.js" />
+    <Content Include="Scripts\appScripts\AdminPages\ClaimStatus\claim-status-tab.js" />
+    <Content Include="Scripts\appScripts\AdminPages\ClaimStatus\claim-status-table.js" />
+    <Content Include="Scripts\appScripts\app-level-script.js" />
+    <Content Include="Scripts\appScripts\claim-header-info.js" />
+    <Content Include="Scripts\appScripts\ClaimEvents.js" />
+    <Content Include="Scripts\appScripts\claims-list.js" />
+    <Content Include="Scripts\appScripts\create-claim.js" />
+    <Content Include="Scripts\appScripts\damage-tab.js" />
+    <Content Include="Scripts\appScripts\damage-table-info.js" />
+    <Content Include="Scripts\appScripts\edit-claim-info.js" />
+    <Content Include="Scripts\appScripts\email-generator.js" />
+    <Content Include="Scripts\appScripts\fetched-details.js" />
+    <Content Include="Scripts\appScripts\get-claim-list.js" />
+    <Content Include="Scripts\appScripts\incident.js" />
+    <Content Include="Scripts\appScripts\AdminPages\locations.js" />
+    <Content Include="Scripts\appScripts\notes-tab.js" />
+    <Content Include="Scripts\appScripts\notes-table.js" />
+    <Content Include="Scripts\appScripts\payment-tab.js" />
+    <Content Include="Scripts\appScripts\payment-table-info.js" />
+    <Content Include="Scripts\appScripts\pending-approved-claims.js" />
+    <Content Include="Scripts\appScripts\quick-notes.js" />
+    <Content Include="Scripts\appScripts\ReportPages\basic-report.js" />
+    <Content Include="Scripts\appScripts\ReportPages\CommonReport.js" />
+    <Content Include="Scripts\appScripts\Risk-files.js" />
+    <Content Include="Scripts\appScripts\salvage-info.js" />
+    <Content Include="Scripts\appScripts\tracker.js" />
+    <Content Include="Scripts\appScripts\view-billing.js" />
+    <Content Include="Scripts\appScripts\view-claim-info.js" />
+    <Content Include="Scripts\appScripts\view-claim.js" />
+    <Content Include="Scripts\appScripts\WriteOff-tab.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-select\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\SegoeUI\SegoeUI.eot" />
+    <Content Include="Content\fonts\SegoeUI\SegoeUI.ttf" />
+    <Content Include="Content\fonts\SegoeUI\SegoeUI.woff" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\VehicleSection\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ClaimStatus\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LossType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VehicleSection\_VehicleSection.cshtml" />
+    <Content Include="Areas\Admin\Views\VehicleSection\_VehicleSectionTable.cshtml" />
+    <Content Include="Areas\Admin\Views\VehicleSection\_AddUpdateVehicleSection.cshtml" />
+    <Content Include="Areas\Admin\Views\User\_UserGridList.cshtml" />
+    <Content Include="Areas\Admin\Views\User\_UserEditProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\UserRole\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserRole\_UserRoleList.cshtml" />
+    <Content Include="Areas\Admin\Views\UserRole\_UserRoleUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\_ChildHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\InsuranceCompany\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InsuranceCompany\_InsuranceCompany.cshtml" />
+    <Content Include="Areas\Admin\Views\InsuranceCompany\_AddUpdateInsuranceCompany.cshtml" />
+    <Content Include="Areas\Admin\Views\InsuranceCompany\_InsuranceCompanyTable.cshtml" />
+    <Content Include="Areas\Admin\Views\UserRole\_UserRoleOperation.cshtml" />
+    <Content Include="Areas\Admin\Views\PoliceAgency\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PoliceAgency\_AddUpdatePoliceAgency.cshtml" />
+    <Content Include="Areas\Admin\Views\PoliceAgency\_PoliceAgencyTable.cshtml" />
+    <Content Include="Areas\Admin\Views\Locations\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Locations\View.cshtml" />
+    <Content Include="Areas\Admin\Views\Locations\AddOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\_CompanyList.cshtml" />
+    <Content Include="Areas\Admin\Views\Company\_CompanyEditProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ReportMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ReportSearchTagPlate.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ReportResult.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ReportCriteria.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\IntroductionLetter.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_AdminReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ReportVahicleToBeReleased.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_WriteOffReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_AccountReceivableReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ARAgingReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ChargeBackLossReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_VehicleDamageSection.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_BasicReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_DepositDateReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_ChargeTypeReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_StolenRecoveredReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ViewBilling.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ViewPayments.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_AdminFeeCommissionReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_CollectionReport.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\WriteOff\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\WriteOff\_AddUpdateWriteOffType.cshtml" />
+    <Content Include="Areas\Admin\Views\WriteOff\_WriteOffType.cshtml" />
+    <Content Include="Areas\Admin\Views\WriteOff\_WriteOffTypeTable.cshtml" />
+    <None Include="Properties\PublishProfiles\CRMS.pubxml" />
+    <None Include="Properties\PublishProfiles\My profile.pubxml" />
+    <None Include="Properties\PublishProfiles\NGClaimPackage.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap\affix.js" />
+    <Content Include="Scripts\bootstrap\alert.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\button.js" />
+    <Content Include="Scripts\bootstrap\carousel.js" />
+    <Content Include="Scripts\bootstrap\collapse.js" />
+    <Content Include="Scripts\bootstrap\dropdown.js" />
+    <Content Include="Scripts\bootstrap\modal.js" />
+    <Content Include="Scripts\bootstrap\npm.js" />
+    <Content Include="Scripts\bootstrap\popover.js" />
+    <Content Include="Scripts\bootstrap\scrollspy.js" />
+    <Content Include="Scripts\bootstrap\tab.js" />
+    <Content Include="Scripts\bootstrap\tooltip.js" />
+    <Content Include="Scripts\bootstrap\transition.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-dataTable.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui\jquery-ui-timepicker-addon.js" />
+    <Content Include="Scripts\jquery.shorten.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\DocumentGenerator\Templates\CustomerServiceInformation.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ThirdPartyDemandLetter.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LayoutBackup.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Claims\CreateClaim.cshtml" />
+    <Content Include="Views\Claims\_FetchedDetails.cshtml" />
+    <Content Include="Views\Claims\ClaimList.cshtml" />
+    <Content Include="Views\Claims\ViewClaim.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Claims\_ClaimHeaderInfo.cshtml" />
+    <Content Include="Views\Claims\_PendingClaimsList.cshtml" />
+    <Content Include="Views\Claims\_ClaimsUrl.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\DownloadContractInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\DownloadVehicleInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\EditClaimInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\EditContractInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\EditIncidentInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\EditVehicleInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\ViewBasicInfoClaim.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\ViewClaimInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\ViewContractInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\ViewIncidentInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\ViewVehicleInfo.cshtml" />
+    <Content Include="Views\Claims\_QuickNotes.cshtml" />
+    <Content Include="Views\Claims\SearchClaims.cshtml" />
+    <Content Include="Views\Damage\_DamageInfo.cshtml" />
+    <Content Include="Views\DriverAndIncInfo\Index.cshtml" />
+    <Content Include="Views\DriverAndIncInfo\ViewDriverAndIncInfo.cshtml" />
+    <Content Include="Views\Damage\_DamageTableInfo.cshtml" />
+    <Content Include="Views\Damage\_DamageUrls.cshtml" />
+    <Content Include="Views\Salvage\_SalvageInfo.cshtml" />
+    <Content Include="Views\DriverAndIncInfo\AddThirdPartyDriver.cshtml" />
+    <Content Include="Views\Notes\_NotesTab.cshtml" />
+    <Content Include="Views\Notes\_NotesTable.cshtml" />
+    <Content Include="Views\Notes\_QuickNotes.cshtml" />
+    <Content Include="Views\Notes\_AddNotes.cshtml" />
+    <Content Include="Views\Notes\_NotesUrl.cshtml" />
+    <Content Include="Views\RiskFiles\Index.cshtml" />
+    <Content Include="Views\RiskFiles\ListFiles.cshtml" />
+    <Content Include="Views\DriverAndIncInfo\EditDriverAndIncInfo.cshtml" />
+    <Content Include="Views\Billing\Index.cshtml" />
+    <Content Include="Views\Billing\AddBilling.cshtml" />
+    <Content Include="Views\Billing\ViewBilling.cshtml" />
+    <Content Include="Views\Claims\ClaimNotFound.cshtml" />
+    <Content Include="Views\Payments\_PaymentTab.cshtml" />
+    <Content Include="Views\Payments\_PaymentTableInfo.cshtml" />
+    <Content Include="Views\Payments\_AddPayments.cshtml" />
+    <Content Include="Views\Claims\_AdvancedSearchClaimList.cshtml" />
+    <Content Include="Areas\Admin\Views\ClaimStatus\_AdminClaimStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ClaimStatus\_AddUpdateClaimStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\ClaimStatus\_ClaimStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\LossType\_LossType.cshtml" />
+    <Content Include="Areas\Admin\Views\LossType\_LossTypeTable.cshtml" />
+    <Content Include="Areas\Admin\Views\LossType\_AddUpdateLossType.cshtml" />
+    <Content Include="Views\EmailGenerator\Index.cshtml" />
+    <Content Include="Views\Notes\_RejectNotes.cshtml" />
+    <Content Include="Views\ClaimEvents\Index.cshtml" />
+    <Content Include="Views\ClaimEvents\_GetClaims.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\DocumentGenerator\_Index.cshtml" />
+    <Content Include="Views\DocumentGenerator\_DocumentTypes.cshtml" />
+    <Content Include="Views\DocumentGenerator\_DocumentGeneratorForm.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ARDL2RTR.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ARDL1RTR.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ARDL3RTR.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\AttorneyAcknowledgementLetter.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\JNRDebtorPlacementForm.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\NationalCasualtyInsuranceCover.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\CdwNotVoided.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ClientInfoAndAuthorization.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\CustomerFaxCoverSheet.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ZurichEmpireLetter.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\PaymentBalanceDue.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\PaymentClaimClosed.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\PaymentPlan.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ThirdPartyInsuranceDemandLetter.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\Payoff_Form.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ReposessionAuthorizationNationwideRepo.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\RenterInsuranceDemandLetter.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\RenterDemandLetterOne.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\RenterDemandLetterTwo.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\RenterDemandLetterThree.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\RenterDemandLetterFour.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ReposessionAuthorization.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\SalvageBidAccepted.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\SalvageBid.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\GflRenter.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\InsuranceFaxCover.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\TicketAdminFee.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\VehicleRelease.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\TicketAffidavit.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ViolationAdminFee.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ViolationAdminFeeDeclined.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\SLIFaxCoverSheet.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\WholeSaleBillOfSale.cshtml" />
+    <Content Include="Views\Notes\_RejectNotesForViewClaim.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\ViewNonContractInfo.cshtml" />
+    <Content Include="Views\ClaimBasicInfo\EditNonContractInfo.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\BodyShopRepair.cshtml" />
+    <Content Include="Views\DocumentGenerator\Templates\ReportedStolen.cshtml" />
+    <Content Include="Views\DocumentsReceived\Index.cshtml" />
+    <Content Include="Views\ClaimTracking\_TrackingTab.cshtml" />
+    <Content Include="Views\ClaimTracking\_TrackerGrid.cshtml" />
+    <Content Include="Views\Claims\_ClaimListGrid.cshtml" />
+    <Content Include="Views\Notes\_AddFollowupNotesClaimList.cshtml" />
+    <Content Include="Views\Notes\_AddFollowupNotesViewClaim.cshtml" />
+    <Content Include="Views\Notes\_ApproveNote.cshtml" />
+    <Content Include="Views\Notes\_ApprovalNotesForViewClaim.cshtml" />
+    <Content Include="Views\RiskWriteOff\_WriteOffIndex.cshtml" />
+    <Content Include="Views\RiskWriteOff\_AddWriteOff.cshtml" />
+    <Content Include="Views\RiskWriteOff\_ViewWriteOff.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\TempEmails\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Views\Shared\EditorTemplates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EZRAC.RISK.EntityFramework\EZRAC.RISK.EntityFramework.csproj">
+      <Project>{787fedf3-fef8-455a-a9eb-59570a1f47fd}</Project>
+      <Name>EZRAC.RISK.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EZRAC.RISK.Services.Contracts\EZRAC.RISK.Services.Contracts.csproj">
+      <Project>{969a7d24-05d5-4fdf-80e0-afb7a7767b9e}</Project>
+      <Name>EZRAC.RISK.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EZRAC.RISK.Services.Implementation\EZRAC.RISK.Services.Implementation.csproj">
+      <Project>{aad054f2-25b4-495a-9dce-cab0617ec5b9}</Project>
+      <Name>EZRAC.RISK.Services.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EZRAC.RISK.Util\EZRAC.RISK.Util.csproj">
+      <Project>{edd1af64-7769-4853-8761-a9b832c7d40e}</Project>
+      <Name>EZRAC.RISK.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56870</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56870/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

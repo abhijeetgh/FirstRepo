@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{862F9A10-9EC6-48B8-AC8D-15F390B3932A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EZRAC.RISK.Domain</RootNamespace>
+    <AssemblyName>EZRAC.RISK.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuditableEntity.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="BasicReport.cs" />
+    <Compile Include="Claim.cs" />
+    <Compile Include="ClaimTrackings.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="EventTrackingCategory.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="PermissionLevel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RiskAdminCharge.cs" />
+    <Compile Include="RiskBilling.cs" />
+    <Compile Include="RiskBillingType.cs" />
+    <Compile Include="RiskCategory.cs" />
+    <Compile Include="RiskClaimApproval.cs" />
+    <Compile Include="RiskClaimStatus.cs" />
+    <Compile Include="RiskContract.cs" />
+    <Compile Include="RiskDamage.cs" />
+    <Compile Include="RiskDamageType.cs" />
+    <Compile Include="RiskDocumentAction.cs" />
+    <Compile Include="RiskDocumentCategories.cs" />
+    <Compile Include="RiskDocumentHistory.cs" />
+    <Compile Include="RiskDocumentsReceived.cs" />
+    <Compile Include="RiskDocumentType.cs" />
+    <Compile Include="RiskDriver.cs" />
+    <Compile Include="RiskDriverInsurance.cs" />
+    <Compile Include="RiskDriverTypes.cs" />
+    <Compile Include="RiskFileMapping.cs" />
+    <Compile Include="RiskIncident.cs" />
+    <Compile Include="RiskInsurance.cs" />
+    <Compile Include="RiskLossType.cs" />
+    <Compile Include="RiskNonContract.cs" />
+    <Compile Include="RiskNote.cs" />
+    <Compile Include="RiskNoteTypes.cs" />
+    <Compile Include="RiskPayment.cs" />
+    <Compile Include="RiskPaymentReason.cs" />
+    <Compile Include="RiskPaymentTypes.cs" />
+    <Compile Include="RiskPoliceAgency.cs" />
+    <Compile Include="RiskReport.cs" />
+    <Compile Include="RiskReportCategory.cs" />
+    <Compile Include="RiskReportDefaultselection.cs" />
+    <Compile Include="RiskSalvage.cs" />
+    <Compile Include="RiskTrackings.cs" />
+    <Compile Include="RiskTrackingTypes.cs" />
+    <Compile Include="RiskVehicle.cs" />
+    <Compile Include="RiskFileTypes.cs" />
+    <Compile Include="RiskWriteOff.cs" />
+    <Compile Include="RiskWriteOffType.cs" />
+    <Compile Include="Sli.cs" />
+    <Compile Include="SliLocation.cs" />
+    <Compile Include="UserActionLog.cs" />
+    <Compile Include="UserLocations.cs" />
+    <Compile Include="UserManagement\Permission.cs" />
+    <Compile Include="UserManagement\UserRoles.cs" />
+    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\RolePermission.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EZRAC.RISK.Util\EZRAC.RISK.Util.csproj">
+      <Project>{edd1af64-7769-4853-8761-a9b832c7d40e}</Project>
+      <Name>EZRAC.RISK.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

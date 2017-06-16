@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+    @{
+
+        AjaxOptions ajaxOptions = new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result-panel", OnFailure = "onErrorHandler(xhr)" };
+    }
+    <header class="header-navOption">
+        @*<nav id="myNavbar" class="navbar navbar-default" role="navigation">
+                <ul class="nav navbar-nav nav-options">
+                    <li class="active">@Ajax.ActionLink("Claim Status", "GetClaimStatusList", "ClaimStatus", new { area="Admin" }, ajaxOptions, new { @id = "claimStatusLink" })</li>
+                    <li>@Ajax.ActionLink("Loss Type", "LossType", "LossType", new { area="Admin" }, ajaxOptions,null)</li>
+                    <li><a href="javascript:void(0);">Roles</a></li>
+                </ul>
+            </nav>*@
+        <div id="child-header">
+            <span class="header-links-inner wl">
+                @Ajax.ActionLink("Claim Status", "GetClaimStatusList", "ClaimStatus", new { area = "Admin" }, ajaxOptions, new { @id = "claimStatusLink", @class = "navOptionSelected navOptions" })
+                @Ajax.ActionLink("Loss Type", "LossType", "LossType", new { area = "Admin" }, ajaxOptions, new { @class = "navOptions" })
+                <a href="javascript:void(0);">Roles</a>
+
+            </span>
+        </div>
+    </header>
+    <!-- main container -->
+    <div class=" container-fluid">
+        <div class="tab-pane  fade in  active " id="result-panel"></div>
+    </div>
+</body>
+</html>
+
+<link href="@Url.Content("~/Content/dataTable.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-dataTable.js")" type="text/javascript"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#claimStatusLink").trigger('click');
+
+        $(".navOptions").click(function () {
+            $(".navOptions").removeClass("navOptionSelected");
+            $(this).addClass("navOptionSelected");
+        });
+
+    });
+</script>

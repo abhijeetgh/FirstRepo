@@ -1,0 +1,196 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.PayoffFormViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.HeaderViewModel.Company.Abbr - @Model.HeaderViewModel.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td style="font-weight:bold; font-size:large">Risk Information:</td>
+            <td style="font-weight:bold; font-size:large">Corporate Information:</td>
+        </tr>
+    </table>
+    <table border="0" width="100%">
+        <tr>
+            <td align="left" valign="top" width="50%">
+                <table border="0" width="100%">
+                    <tr>
+                        <td>*</td>
+                        <td>*</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Date Claim Received:</td>
+                        <td style="text-decoration:underline">@Model.OpenDate</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Date of Loss:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Renter:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.DriverViewModel.Name</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Claim:</td>
+                        <td style="text-decoration:underline">@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Unit:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Make:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.Make</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Model:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.Model</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Year:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.Year</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">VIN:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.VIN</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Mileage of Unit:</td>
+                        <td>
+                            <table>
+                                <tr><td colspan="2" style="font-size:smaller">*</td></tr>
+                                <tr>
+                                    <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.Mileage</td>
+                                    <td>&nbsp;&nbsp;Have Key? ____</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Drivable / Not Drivable</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Location of Unit:</td>
+                        <td style="text-decoration:underline">@Model.HeaderViewModel.VehicleViewModel.Location</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">•&nbsp;Estimate Amount:</td>
+                        <td style="text-decoration:underline">$@Model.EstimatedAmount</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight:bold">•&nbsp;Collectable&nbsp;&nbsp;•&nbsp;Non&nbsp;-&nbsp; Collectable&nbsp;&nbsp;•&nbsp;Unknown</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight:bold">
+                                @if (Model.Contract != null && Model.Contract.CDW)
+                                {
+                                    <div>X</div>
+                                }
+                                else
+                                {
+                                    <div>•</div>
+                                }
+                                X CDW ($1,500 Ded.)&nbsp;&nbsp;•&nbsp;LDW
+                                @if (Model.Contract != null &&  Model.Contract.CDWVoided)
+                                {
+                                    <div>X&nbsp;</div>
+                                }
+                                &nbsp;&nbsp;•&nbsp;VOIDED
+                                @*else
+                                {
+                                    <div>•</div>
+                                }*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight:bold">
+                            @if (Model.ActualCashValue.HasValue && Model.ActualCashValue != 0.0)
+                            {<div>X</div>}
+                            else
+                            {<div>•</div>}•&nbsp;Ordered ACV
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight:bold">
+                            @if (Model.ActualCashValue.HasValue && Model.ActualCashValue != 0.0)
+                            {
+                                <div>
+                                    Amount:&nbsp; @Math.Round(Model.ActualCashValue.Value, 2) * 80 % &nbsp;= &nbsp; @(Math.Round((Model.ActualCashValue.Value * 0.8), 2))
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    Amount: &nbsp; N/A
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="font-weight:bold">•&nbsp;Window Sticker</td></tr>
+                    <tr><td colspan="2" style="font-weight:bold">•&nbsp;Vehicle Totaled</td></tr>
+                    <tr><td colspan="2" style="font-weight:bold">•&nbsp;Ordered Diminished Value Report</td></tr>
+                    <tr><td colspan="2" style="font-weight:bold">•&nbsp;Title Rebuildable</td></tr>
+                    <tr><td colspan="2" style="font-weight:bold">•&nbsp;Title Certificate of Destruction</td></tr>
+                    <tr><td colspan="2" style="font-weight:bold">•&nbsp;Clean Title</td></tr>
+                </table>
+            </td>
+            <td align="left" valign="top">
+                <table border="0" width="100%">
+                    <tr><td style="font-weight:bold">Payoff Amount:<hr align="left" width="90%" size="1" noshade></td></tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td style="font-weight:bold">Amount Paid:</td></tr>
+                    <tr><td style="font-weight:bold">Name of Salvage Company:</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Sell Salvage to Highest Bidder</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Do Not Sell w/out Approval</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Sell at Auction<hr align="left" width="90%" size="1" noshade></td></tr>
+                    <tr><td >&nbsp;</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Sell to IAA</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Order Title</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Truck to CFP&B</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Fix at CFP&B</td></tr>
+                    <tr><td style="font-weight:bold">•&nbsp;Fix at Local Body Shop</td></tr>
+                    <tr>
+                        <td style="font-weight:bold">
+                            Comments from MM:
+                            <hr align="left" width="90%" size="1" noshade>
+                            <hr align="left" width="90%" size="1" noshade>
+                            <hr align="left" width="90%" size="1" noshade>
+                        </td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td style="font-weight:bold">Corporate: Mehrdad Memarpouri</td></tr>
+                    <tr><td style="font-weight: bold; border-bottom: solid">Initials:</td></tr>
+                    <tr><td style="font-weight:bold; border-bottom:solid">*<br />Date:</td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">
+                <table border="0" width="100%">
+                    <tr>
+                        <td style="font-weight:bold">
+                            Risk Comments:
+                            <br /><hr align="left" width="90%" size="1" noshade>
+                            <hr align="left" width="90%" size="1" noshade>
+                            <hr align="left" width="90%" size="1" noshade>
+                        </td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td style="font-weight:bold">Risk Examiner: <hr align="left" width="90%" size="1" noshade></td></tr>
+                    <tr><td style="font-weight:bold">Initials:<hr align="left" width="90%" size="1" noshade></td></tr>
+                    <tr><td style="font-weight:bold">Date:<hr align="left" width="90%" size="1" noshade></td></tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr><td style="font-weight:bold">Risk Manager: Chris Colarusso</td></tr>
+                    <tr><td style="font-weight:bold">Initials:<hr align="left" width="90%" size="1" noshade></td></tr>
+                    <tr><td style="font-weight: bold; border-bottom: solid">*<br />Date:</td></tr>
+                </table>
+            </td>
+            <td align="left" valign="top">&nbsp;</td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

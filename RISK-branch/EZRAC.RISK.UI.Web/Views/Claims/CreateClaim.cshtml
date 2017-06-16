@@ -1,0 +1,103 @@
+﻿@using EZRAC.Risk.UI.Web.Helper;
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.CreateClaimViewModel
+@{
+    ViewBag.Title = "Create Claim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row cla-breadCrumb">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("GetClaimList", "Claims")"><span class="glyphicon glyphicon-home"></span></a> </li>
+            <li><a href="javascript:void(0);">@Html.ActionLink("Claims", "GetClaimList", "Claims")</a> </li>
+            <li class="active">New Claim</li>
+        </ol>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="col-xs-12">New Claim</h1>
+        <p class="col-xs-12">Enter the information about the claim below</p>
+
+            @using (Html.BeginForm("CreateClaim", "Claims", FormMethod.Post, new { @id = "frm-createClaim", @class = "col-xs-12 form-horizontal cla-form top10" }))
+            {
+
+                    <div class="form-group fetch-details">
+                        <label class="control-label col-xs-1">@Html.LabelFor(model => model.ContractNo)</label>
+                        <div class="col-xs-8">
+
+                            @Html.TextBoxFor(model => model.ContractNo, new { @id = "contractNo", @class = "form-control ncl-slect", @placeholder = "Contract No." })
+
+                            <button type="button" id="FetchDetails" class="btn btn2 btn-fetch-details">FETCH DETAILS </button>
+                            <span id="wait" style="display:none;"><img class="ajax-loader" src="~/Images/ajax_loader_blue_large.gif" /></span>
+                            @Html.ValidationMessageFor(model => model.ContractNo, "", new { @class = "fetch-contract-error" })
+                            <label id="contractNoRequired" class="field-validation-error fetch-contract-error" style="display:none">Please provide valid contract number</label>
+
+                            <label id="fetchRequired" class="field-validation-error fetch-contract-error" style="display:none">Please fetch contract details</label>
+
+                            <input type="hidden" value="false" id="IsContractFetched" />
+
+                            <div id="FetchDetailsUrl" data-url="@Url.Action("FetchContractInfo", "Claims")"></div>
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="collapse" id="FetchedContractInfo">
+
+                    </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-1">@Html.LabelFor(model => model.Locations)<span class="mandetory-star">*</span></label>
+                <div class="col-xs-4">
+
+                    @Html.DropDownListFor(model => model.SelectedLocation, Model.Locations, "-- Select --", new { @class = "form-control hfcl-slect selectpicker", @data_live_search = "true", id="location" })
+                    @Html.ValidationMessageFor(model => model.SelectedLocation)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-1">@Html.LabelFor(model => model.LossTypes)<span class="mandetory-star">*</span></label>
+                <div class="col-xs-4">
+
+                    @Html.DropDownListFor(model => model.SelectedLossType, Model.LossTypes, "-- Select --", new { @class = "form-control hfcl-slect selectpicker", @data_live_search = "true", id="loss-type" })
+                    @Html.ValidationMessageFor(model => model.SelectedLossType)
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-1">@Html.LabelFor(model => model.DateOfLoss)<span class="mandetory-star">*</span></label>
+                <div class="col-xs-5 sandbox-container">
+                    @Html.TextBoxFor(model => model.DateOfLoss, Model.DateOfLoss.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepickerDateOfLoss" })
+                    @Html.ValidationMessageFor(model => model.DateOfLoss)
+                  
+                </div>
+            </div>
+          
+
+            <div class="form-group">
+                <label class="control-label col-xs-1"><strong>@Html.LabelFor(model => model.Users)</strong><span class="mandetory-star">*</span></label>
+                <div class="col-xs-4">
+
+
+                    @Html.DropDownListFor(model => model.SelectedAssignedUser, Model.Users, "-- Select --", new { @class = "form-control hfcl-slect selectpicker",@data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.SelectedAssignedUser)
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 left-offset">
+                   
+                        <button id="createClaimsbmt" type="submit" class="btn btn1">SUBMIT</button>
+        
+                    <input onclick="window.location.href='@Url.Action("CreateClaim")'" type="button" class="btn btn2 btn-space" value="CANCEL">
+                </div>
+            </div>
+                
+                @Html.HiddenFor(model => model.SelectedUnitNumber);
+            }
+    </div>
+</div>
+
+
+<script src="~/Scripts/appScripts/create-claim.js"></script>

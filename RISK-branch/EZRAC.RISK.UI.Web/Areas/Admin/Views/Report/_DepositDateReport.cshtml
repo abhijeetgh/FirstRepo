@@ -1,0 +1,114 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Reports.DepositDateReportViewModel>
+<div id="ReportResult">
+    <div class="col-xs-12">
+        @*<div class="report-box">
+            <h4>Summary</h4>
+            <p><span><strong>Date Range</strong></span> &nbsp;<span id="SummaryDateRange"></span></p>
+            <p><span><strong>Paid From</strong></span> &nbsp;<span id="SummaryPaidFrom"></span></p>
+            <p><span><strong>Report Date</strong></span>&nbsp;<span id="ReportDate"></span></p>
+        </div>*@
+        <a href="@Url.Action("GenerateExportFile", "Report")" class="export-btn pull-right top20"><span class="exporticon">&nbsp;</span><strong>Export</strong></a>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="grey-border-1 top15">
+
+            <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                <thead>
+                    <tr class="white-color">
+                        <th>
+                            <div class="display-inline">Contract / Claim Number </div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Unit</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Unit Description </div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Loss Type</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Claim Status</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Loss Date</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Paid From</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Paid Date</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Check Amount</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Billed</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Balance</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                               <tr>
+                                @*<td> @item.Claim <input type="hidden" id="claimid" value="@item.Claim" /></td>*@
+                                   <td> @Html.ActionLink(String.Format("{0} / {1}-{2}", item.Claim, item.CompanyAbbr, item.ClaimId), "ViewClaim", new { @area = "", @Controller = "claims", id = item.ClaimId }) </td>
+                                @*<td> @Html.ActionLink(@item.Claim, "ViewClaim", new { @area = "", @Controller = "claims", id = @item.ClaimId }) <input type="hidden" id="claimid" value="@item.Claim" /></td>*@
+                                <td> @item.Unit</td>
+                                <td> @item.UnitDescription </td>
+                                <td> @item.LossType</td>
+                                <td> @item.ClaimStatus </td>
+                                <td> @item.LossDate</td>
+                                <td> @item.PaidFrom</td>
+                                <td> @item.PaidDate</td>
+                                <td> @item.CheckAmount </td>                                
+                                <td> @item.Billed</td>
+                                <td> @item.Balance</td>
+                            </tr>
+                        }
+
+                    }
+
+                </tbody>
+            </table>           
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.extend(true, $.fn.dataTable.defaults, {
+            "searching": true,
+            "ordering": true,
+            "paging": true,
+            "info": false,
+            "destroy": true
+            //"scrollY": "200px",
+
+        });
+        $("#ReportResult table").DataTable({
+            columnDefs: [
+            {
+                "orderable": false,
+            }
+            ],
+            "order": [[0, "asc"]],
+            "dom": '<"top"i>rt<"bottom"flp><"clear">',
+            "language": {
+                "lengthMenu": "Display _MENU_ records",
+                "emptyTable": "Records are not available"
+            }
+        });
+        $(".dataTables_filter").css("display", "none");
+
+        //$(".export-btn").click(function () {            
+        //    window.location = 'Report/GenerateExportFile';
+        //});
+    });
+</script>

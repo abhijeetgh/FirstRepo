@@ -1,0 +1,145 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.ContractInfoViewModel
+
+<section class="panel panel-default complete-height bottom0">
+    <header class="panel-heading">
+
+      
+
+        <h3 class="panel-title">
+            Contract Information
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditDownloadContractInfo))
+            {
+                if (Model.Id != 0)
+                {
+                    @Ajax.MyActionLink("<span>EDIT</span>", "EditContractInfo", "pull-right", new { contractId = Model.Id, claimId = Model.ClaimId },
+                                                                       new AjaxOptions { UpdateTargetId = "contract-info", OnFailure = "onErrorHandler(xhr)" })
+                }
+
+
+
+                @Ajax.MyActionLink("<span>DOWNLOAD</span>", "DownloadContractInfo", "pull-right right10",
+                             new { claimId = Model.ClaimId, contractId = Model.Id, contractNumber = Model.ContractNumber },
+                                                                       new AjaxOptions { UpdateTargetId = "contract-info", OnFailure = "onErrorHandler(xhr)" })
+            }
+        </h3>
+
+        @*<h3 class="panel-title">Contract Information <a class="pull-right" href="javascript:void(0);"> <span class="glyphicon glyphicon-pencil"></span> </a> </h3>*@
+    </header>
+    <table class="table table-striped">
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ContractNumber)</td>
+            <td>@Html.DisplayFor(model => model.ContractNumber)</td>
+        </tr>
+        <tr>
+
+            <td>@Html.DisplayNameFor(model => model.PickupDate)</td>
+
+            <td>@Html.DisplayFor(model => model.PickupDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ReturnDate)</td>
+            <td>@Html.DisplayFor(model => model.ReturnDate)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.DaysOut)</td>
+
+            <td>@Html.DisplayFor(model => model.DaysOut)</td>
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Miles)</td>
+
+            <td>@Html.DisplayFor(model => model.Miles)</td>
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Rates)</td>
+            <td>@Html.DisplayFor(model => model.Rates)</td>
+        </tr>
+        <tr>
+            
+
+            <td>@Html.DisplayNameFor(model => model.CDW)</td>
+
+            @if (Model.CDW)
+            {
+                <td> Yes | @(Model.CDWVoided ? "VOIDED" : "NOT VOIDED")</td>
+            }
+            else
+            {
+            
+                <td> @(Model.CDW ? "Yes" : "No")</td>
+            }
+
+            
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LDW)</td>
+
+         
+
+            @if (Model.LDW)
+            {
+                <td> Yes | @(Model.LDWVoided ? "VOIDED" : "NOT VOIDED")</td>
+            }
+            else
+            {
+
+                <td> @(Model.LDW ? "Yes" : "No")</td>
+            }
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.SLI)</td>
+
+            <td> @(Model.SLI ? "Yes" : "No")</td>
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LPC)</td>
+
+            <td> @(Model.LPC ? "Yes" : "No")</td>
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LPC2)</td>
+
+            <td> @(Model.LPC2 ? "Yes" : "No")</td>
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.GARS)</td>
+
+            <td> @(Model.GARS ? "Yes" : "No")</td>
+
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CardNumber)</td>
+            <td>@Html.DisplayFor(model => model.CardNumber)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CardType)</td>
+            <td>@Html.DisplayFor(model => model.CardType)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CardExpDate)</td>
+            <td>@Html.DisplayFor(model => model.CardExpDate)</td>
+        </tr>
+    </table>
+</section>
+<script>
+    $(".totalDue").html(@Model.TotalDue);
+</script>
+
+

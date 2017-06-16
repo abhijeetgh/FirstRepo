@@ -1,0 +1,95 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@model EZRAC.Risk.UI.Web.ViewModels.ClaimBasicInfo.ClaimInfoForViewEditViewModel
+
+<section class="panel panel-default complete-height bottom0">
+    <header class="panel-heading">
+
+
+        <h3 class="panel-title">
+            Claim Information
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditClaimInfo))
+            {
+
+                @Ajax.MyActionLink("<span>EDIT</span>", "EditClaimInfo", "pull-right", new { claimId = Model.ClaimID },
+                                                                 new AjaxOptions { UpdateTargetId = "claim-info", OnFailure = "onErrorHandler(xhr)" })
+            }
+        </h3>
+
+
+    </header>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.OpenDate)</td>
+
+                <td>@Html.DisplayFor(model => model.OpenDate)</td>
+
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.CloseDate)</td>
+
+                <td>@Html.DisplayFor(model => model.CloseDate)</td>
+
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.LocationName)</td>
+                <td>@Html.DisplayFor(model => model.LocationName)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.LossTypeDesc)</td>
+                <td id="lossType">@Html.DisplayFor(model => model.LossTypeDesc)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.EstReturnDate)</td>
+
+                <td>@Html.DisplayFor(model => model.EstReturnDate)</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @Html.HiddenFor(model => model.IsCollectable)
+
+</section>
+
+<script src="@Url.Content("~/Scripts/appScripts/view-claim-info.js")"></script>
+

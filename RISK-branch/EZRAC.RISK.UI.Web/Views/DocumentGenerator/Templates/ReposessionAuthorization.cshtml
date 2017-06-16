@@ -1,0 +1,86 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.RepoAuthorziationViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.HeaderViewModel.Company.Abbr - @Model.HeaderViewModel.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="90%" align="center">
+        <tr>
+            <td align="center" style="font-weight:bold; font-size:large">
+                PRIVATE-PARTY REPOSSESSION AUTHORIZATION
+            </td>
+            </tr>
+        <tr>
+            <td align="left" style="font-size:small">
+                *<br />This REPOSESSION AUTHORIZATION (Authorization) grants the REPO-ZONE to repossess and impound the here in below described collateral which is the underpinning collateral of and for a defaulted private-party purchase/lend/lease agreement.  Moreover, the undersigned names THE REPO-ZONE as his/her executive agent there for such repossession.  Said directive means that henceforth any previously retained repossession company(ies) and/or agent(s) are prohibited from reposessing aforesaid collateral unless they have been authorized to do so, in written form, by the REPO-ZONE.<br /><br />
+                The undersigned agrees to legallay defend, indemnify, and save harmless THE REPO-ZONE from and against any and all losses, claims, and/or legal actions which are expressly caused thereby or associated therewith the assignment of this Authorization for the repossession thereof the herein below described collateral.  All legal actions instituted against THE REPO-ZONE due to the assignment of this Authorization and repossession of the herein below described collateral shall be governed and bound by the applicable laws of the State of Oklahoma.  Nothing contained herein shall be constituted to incite, suggest, or authorize violation of Oklahoma state law.<br /><br />
+                In the event the herein below described collateral is located and found to be have repair and/or storage charges assessed against it which will exceed the estimated salvage/wholesale/trade-in value of said collateral, THE REPO-ZONE's respossession fee will be capped at such valued amount and the undersigned will tender a clear and negotiable title for said collateral to THE REPO-ZONE in lieu of any and all resossession service fees.  Futhermore,  the undersigned acknowledges, understands, and agrees to be charged, in conjunction with a towing/transport fee, a recovery fee based on a range of ten to twenty-five percent of the value of the recovered collateral.  It is understood by the undersigned that this Authorization is contingent-fee based; that is , the undersigned is not obligated to pay THE REPO-ZONE repossession service fee unless the herein below described collateral is duly repossessed.  Notwithstanding, in teh even the undersigned cancels this Authorization within ninety (90) days from its execution date, the undesigned agrees to immediately pay a closeout fee of <u>$200.00</u> to THE REPO-ZONE.<br /><br />
+                In the event the herein named debtor, his/her relatives, and/or agents surrenders the herein described collateral to anyone during the term and course of this Authorization such act will be construed and deemed to have effectuated the repossession of said collateral by THE REPO-ZONE.  The term "anyone" means, but is not limited to, law enforcement personnel, police impound facilities, body shops, towing companies, salvage companies, storage facilities, other repossessors and/or repossession companies, or to any person, business, or facility under the direct or indirect control of THE REPO-ZONE.
+            </td>
+        </tr>
+        </table>
+    <table border="0" width="90%" align="center">
+        <tr><td colspan="2" style="border-bottom:solid"></td></tr>
+        <tr>
+            <td align="left" valign="top">
+                *<br />
+                Debtor/Lessee Name:  @Model.HeaderViewModel.DriverViewModel.Name<br />
+                Debtor/Lessee Social Security Number:<br />
+                
+                Debtor/Lessee Date of Birth: @String.Format("{0}", Model.HeaderViewModel.DriverViewModel.DOB.HasValue ? Model.HeaderViewModel.DriverViewModel.DOB.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : String.Empty)<br />
+                Debtor/Lessee Address: @Model.HeaderViewModel.DriverViewModel.Address &nbsp; @Model.HeaderViewModel.DriverViewModel.City @Model.HeaderViewModel.DriverViewModel.State @Model.HeaderViewModel.DriverViewModel.Zip<br />
+                Debtor Home Phone: @Model.HeaderViewModel.DriverViewModel.Phone1<br />
+                Debtor Cell Phone:  @Model.HeaderViewModel.DriverViewModel.Phone2<br />
+            </td>
+            <td align="left" valign="top">
+                *<br />
+                @if (Model.PolicyAgency != null && Model.PolicyAgency != "")
+                {
+                    <div>Police Agency:&nbsp; @Model.PolicyAgency</div>
+                }
+                else
+                {
+                    <div>
+                        Police Agency: Not Specified
+                    </div>
+                }
+                <br />Case Number: @Model.CaseNumber
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border-bottom:solid"></td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" colspan="2">
+                *<br />Vehicle Description<br /><br />
+                Year:  @Model.HeaderViewModel.VehicleViewModel.Year&nbsp;&nbsp;Make:  @Model.HeaderViewModel.VehicleViewModel.Make&nbsp;&nbsp;Model:  @Model.HeaderViewModel.VehicleViewModel.Model&nbsp;&nbsp;Color:  @Model.HeaderViewModel.VehicleViewModel.Color<br />
+                VIN:  @Model.HeaderViewModel.VehicleViewModel.VIN<br />
+                Key Code:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border-bottom:solid"></td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" colspan="2">
+
+                Signature: <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u><br />
+                Printed:  Vania Regalado<br />
+                Company:  E-Z Rent-A-Car / L&M Car Rental<br /><br /><br />
+                Contact Information<br />
+                Contact Name:  Vania Regalado<br />
+                Address:  2003 Mcoy Road Suite A<br />
+                City:  Orlando&nbsp;&nbsp;&nbsp;State:  FL&nbsp;&nbsp;&nbsp;Zip Code:  32809<br />
+                Telephone:  407-888-0528&nbsp;&nbsp;Facsimile:  866-237-3581<br />
+                Cell:<br />
+                Email:  vregalado@ezrac.com
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>
+

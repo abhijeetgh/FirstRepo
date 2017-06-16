@@ -1,0 +1,78 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.Company.Abbr - @Model.ClaimId</title>
+</head>
+    <body style="font-family:'Times New Roman'">
+        <table border="0" width="100%">
+            <tr><td align="left" style="font-size:25px;"><img src="@Model.Company.Logopath" align="left" />&nbsp;JNR Adjustment Company, Inc.</td></tr>
+            <tr><td align="center"><div>*<br/>12661 Challenger Parkway, Suite 200B Orlando, FL 32826 <br />(866) 812-2345 Toll Free (407) 207-5633 Fax</div></td></tr>
+        </table>
+    <table border="0" width="100%">
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td width="60%">*<br />Your Company Name: __________________________<br /></td>
+            <td width="40%">*<br />Date: @DateTime.Now.Date.ToShortDateString()<br /></td>
+        </tr>
+        <tr>
+            <td width="60%">Address: _____________________________________</td>
+            <td width="40%">Authorized By: _______________</td>
+        </tr>
+        <tr>
+            <td width="60%">City: ________________________________________</td>
+            <td width="40%">Phone: 407-888-0528</td>
+        </tr>
+        <tr>
+            <td width="60%">State: ________________________________________</td>
+            <td width="40%">Zip: ________________________</td>
+        </tr>
+        <tr>
+            <td width="60%">E-Mail: ______________________________________</td>
+            <td width="40%">Fax: 888-400-2291</td>
+        </tr>
+        <tr><td colspan="2">*<br />Please accept the following list of accounts for collection:<br /><br /></td></tr>
+    </table>
+
+    <table border="1" width="90%">
+        <tr>
+                <td><table><tr><td>*<br />Name:&nbsp;&nbsp;</td><td style="color:red">*<br />@Model.DriverViewModel.Name </td></tr></table></td>
+                <td><table><tr><td>*<br />Balance Due:&nbsp;&nbsp;</td><td style="color:red">*<br />$@Math.Round(Model.TotalDue, 2) </td></tr></table></td>
+        </tr>
+        <tr>
+                            <td><table><tr><td>*<br />Address:&nbsp;&nbsp;</td><td style="color:red">*<br />@Model.DriverViewModel.Address </td></tr></table></td>
+                            <td><table><tr><td>*<br />Balance Due:&nbsp;&nbsp;</td><td style="color:red">*<br />Primary Driver </td></tr></table></td>
+        </tr>
+        <tr>
+                            <td><table><tr><td>*<br />City, State/Zip:&nbsp;&nbsp;</td><td style="color:red">*<br />@Model.DriverViewModel.City, @Model.DriverViewModel.State/@Model.DriverViewModel.Zip </td></tr></table></td>
+            <td>&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+                            <td><table><tr><td>*<br />Phone:&nbsp;&nbsp;</td><td style="color:red">*<br />@Model.DriverViewModel.Phone1  @(string.Format("/ {0}",Model.DriverViewModel.Phone2)) </td></tr></table></td>
+                            <td><table><tr><td>*<br />Account Number:&nbsp;</td><td style="color:red">*<br />@Model.ClaimId</td></tr></table></td>
+        </tr>
+        <tr>
+            @if (Model.DateOfLastPayment.HasValue)
+            {
+                <td><table><tr><td>*<br />Date of Last Payment:&nbsp;&nbsp;</td><td style="color:red">*<br />@Model.DateOfLastPayment.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td></tr></table></td>
+            }
+            else{
+            <td><table><tr><td>*<br />Date of Last Payment:&nbsp;&nbsp;</td><td style="color:red">*<br />NA</td></tr></table></td>
+            
+            }
+            @if (Model.DateOfLoss.HasValue)
+            {
+                 <td><table><tr><td>*<br />Date of Loss:&nbsp;&nbsp;</td><td style="color:red">*<br />@Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td></tr></table></td>
+            }
+            else { 
+            
+             <td><table><tr><td>*<br />Date of Loss:&nbsp;&nbsp;</td><td style="color:red">*<br />NA</td></tr></table></td>
+            }
+                            
+                           
+        </tr>
+                        <tr><td colspan="2">*<br />Additional Information:<br /></td></tr>
+    </table>
+
+</body>
+</html>

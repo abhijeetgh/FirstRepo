@@ -1,0 +1,202 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.ClaimBasicInfo.ClaimInfoForViewEditViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<section class="panel panel-default complete-height bottom0">
+
+
+
+    @using (Ajax.BeginForm("EditClaimInfo", new { }, new AjaxOptions { OnSuccess = "EditClaimInfoSuccess", HttpMethod = "Post", OnFailure = "onErrorHandler(xhr)" }, new { @class = " bottom5  claim-info-form-editable", @id = "claim-info-form" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <header class="panel-heading">
+            <h3 class="panel-title">
+                Claim Information
+                <span class="pull-right">
+
+                    <a href="javascript:void(0);" onclick="$('#claim-info-form').submit();" class="inline-group save-icon-btn right10">
+                        <span class="pull-right top3">SAVE</span>
+                    </a>
+
+                    @Ajax.MyActionLink("<span class='form-label'>CANCEL</span>", "ViewClaimInfo", "display-inline  cancel-icon-btn top3", new { claimId = Model.ClaimID },
+                                                              new AjaxOptions { UpdateTargetId = "claim-info", OnFailure = "onErrorHandler(xhr)" })
+
+                </span>
+
+            </h3>
+        </header>
+
+        <div class="top10 padding-horizontal-15">
+
+            @*<div class="row bottom10">
+
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.OpenDate)</label>
+                </div>
+                <div class="col-xs-3 padding-left-0 ">
+                    <div class="sandbox-container">
+
+                        @Html.TextBoxFor(model => model.OpenDate, Model.OpenDate.ToString(EZRAC.Risk.UI.Web.Helper.Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepickerOpenDate" })
+                        @Html.ValidationMessageFor(model => model.OpenDate)
+
+                    </div>
+                </div>
+
+
+
+            </div>*@
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.CloseDate)</label>
+                </div>
+                <div class="col-xs-3 padding-left-0 ">
+                    <div class="sandbox-container">
+
+                        @if (Model.CloseDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.CloseDate, Model.CloseDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepickerCloseDate" })
+                            @Html.ValidationMessageFor(model => model.CloseDate)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.CloseDate, new { @class = "form-control sand-datepicker datepickerCloseDate" })
+                            @Html.ValidationMessageFor(model => model.CloseDate)
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.SelectedOpenLocationId)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 bootstrap-dropdown-container">
+
+                    @Html.DropDownListFor(model => model.SelectedOpenLocationId, Model.OpenLocations, "-- Select --", new { @class = "form-control ncl-slect selectpicker bs-select-hidden", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.SelectedOpenLocationId)
+
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.SelectedCloseLocationId)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 bootstrap-dropdown-container">
+
+                    @Html.DropDownListFor(model => model.SelectedCloseLocationId, Model.CloseLocations, "-- Select --", new { @class = "form-control ncl-slect selectpicker bs-select-hidden", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.SelectedCloseLocationId)
+
+                </div>
+
+            </div>
+
+
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.LossTypeDesc)</label><span class="mandetory-star">*</span>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown bootstrap-dropdown-container">
+
+                    @Html.DropDownListFor(model => model.SelectedLossTypeId, Model.LossTypes, "-- Select --", new { @class = "form-control ncl-slect selectpicker bs-select-hidden", @data_live_search = "true" })
+                    @Html.ValidationMessageFor(model => model.SelectedLossTypeId)
+
+
+                </div>
+
+
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label>@Html.DisplayNameFor(model => model.EstReturnDate)</label>
+                </div>
+                <div class="col-xs-3 padding-left-0 ">
+                    <div class="sandbox-container">
+
+                        @if (Model.EstReturnDate.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.EstReturnDate, Model.EstReturnDate.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepickerOpenDate" })
+                            @Html.ValidationMessageFor(model => model.EstReturnDate)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.EstReturnDate, new { @class = "form-control sand-datepicker datepickerOpenDate" })
+                            @Html.ValidationMessageFor(model => model.EstReturnDate)
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label for="firstname">@Html.DisplayNameFor(model => model.IsCollectable)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown">
+
+                    @Html.CheckBoxFor(model => model.IsCollectable, new { @class = "middle" })
+
+                </div>
+            </div>
+
+            @*<div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label for="firstname">@Html.DisplayNameFor(model => model.HasContract)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown">
+
+                    @Html.CheckBoxFor(model => model.HasContract, new { @class = "middle" })
+
+                </div>
+            </div>*@
+
+            <div class="row bottom10">
+                <div class="col-xs-4  top5 padding-right-0 ">
+                    <label for="firstname">@Html.DisplayNameFor(model => model.HasContract)</label>
+                </div>
+                <div class="col-xs-8  padding-left-0 location-dropdown">
+
+                    @if (@Model.DisableHasContract)
+                    {
+                        if (Model.HasContract)
+                        {
+                            <input checked="checked" class="middle" disabled="disabled" id="HasContract" name="HasContract" type="checkbox">
+                        }
+                        else { 
+                            <input class="middle" disabled="disabled" id="HasContract" name="HasContract" type="checkbox">
+                        
+                        }
+                        
+                       
+                         <input type="hidden" name="HasContract" value="@Model.HasContract.ToString()" />
+                    }
+                    else
+                    { 
+                        @Html.CheckBoxFor(model => model.HasContract, new { @class = "middle" })
+                        
+                        
+
+                    }
+
+                   
+
+                 
+
+                </div>
+            </div>
+
+          
+
+        </div>
+
+
+
+
+        @Html.HiddenFor(model => model.ClaimID)
+        @Html.HiddenFor(model => model.OpenDate)
+    }
+
+</section>
+<script src="@Url.Content("~/Scripts/appScripts/edit-claim-info.js")"></script>

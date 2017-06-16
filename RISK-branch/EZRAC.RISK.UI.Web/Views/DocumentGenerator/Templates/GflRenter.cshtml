@@ -1,0 +1,129 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+  
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.RiskUserEmail<br />
+                Phone:  @Model.Company.Phone<br />
+                Fax:    @Model.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.DriverViewModel.Name<br />
+                    @Model.DriverViewModel.Address<br />
+                    @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                </div>
+            </td>
+
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                    @DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                Dear @Model.DriverViewModel.Name:
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td align="center" valign="top" colspan="2">
+                <table border="0">
+                    <tr><td colspan="6">*</td></tr>
+                    <tr>
+                        <td style="font-weight:bold">Claim #:</td>
+                        <td width="21%">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+                        <td style="font-weight:bold">Unit #: </td>
+                        <td width="18%" align="left">@Model.VehicleViewModel.UnitNumber</td>
+                        <td style="font-weight:bold" align="right" width="25%">Date of Loss: </td>
+                        <td align="right">@String.Format("{0}", Model.DateOfLoss.HasValue ? Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY) : String.Empty)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                We have read your complaint and investigated this claim.  We understand your concern and would like to keep you as a valued
+                customer.  We have closed this claim and apologize for any inconvenience this may have caused you.<br /><br />
+                If you require any other information, contact me at @Model.Company.Phone.
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+
+            <td colspan="2">
+                <div style="font-size:small">
+                    *<br />Kind Regards,<br />
+                    @Model.RiskUserFullName<br />
+                    Risk Management Services<br />
+                </div>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td colspan="2" style="font-weight:bold; font-size:small">
+               GFL-RTR
+            </td>
+        </tr>
+    </table>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,20 @@
+﻿
+
+<link href="@Url.Content("~/Content/dataTable.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-dataTable.js")" type="text/javascript"></script>
+
+@model EZRAC.Risk.UI.Web.ViewModels.Admin.InsuranceCompanyMasteViewModel
+@{
+    ViewBag.Title = "Insurance Company Management";
+}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    @Html.Partial("~/Areas/Admin/Views/Admin/_ChildHeader.cshtml")
+    <script src="~/Scripts/appScripts/AdminPages/Common.js"></script>
+    <!-- main container -->
+        <div>
+           @Html.Partial("_InsuranceCompany",Model)
+        </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+   
+</head>
+<body style="font-family:'Times New Roman'">
+    <center>
+        <img src="@Model.Company.AdLogoPath" width="80" height="50" /><img src="@Model.Company.EzLogoPath" width="80" height="50" />
+        <h1>Body Shop Repair Information</h1>
+        Date:  ______/_____/20_____
+    </center>
+    <br />
+    <div style="font-weight:bold; font-size:small">Attention:  Location Manager & Fleet Department</div><br />
+    <div style="font-size:small">&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;This form needs to be printed and placed on the dashboard of all vehicles that will be sent to Body Shops for repair.</div><br />
+    <div style="font-weight:bold; font-size:small">Attention:  Body Shop</div><br />
+    <div style="font-size:small">
+        &nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;Below is the information that is needed to process this repair. No other repairs should be made without authorization from our Fleet &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maintenance Director Jim Fair he can be reached at (769) 610-6907 or email him at jim.fair@advantage.com.<br /> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&#8226;&nbsp;&nbsp;&nbsp;&nbsp; All vehicles have already been inspected by our Independent Appraiser.
+    </div>
+    <hr />
+        <table width="85%" border="0">
+            <tr style="font-size:small">
+                <td width="50%" align="left">Claim Number: @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</td>
+                <td width="50%" align="left">Contract Number: @String.Format("{0}", Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+            </tr>
+            <tr><td colspan="2">&nbsp;<br /></td></tr>
+            <tr style="font-size:small">
+                <td width="50%" align="left">Unit Number: @Model.VehicleViewModel.UnitNumber</td>
+                <td width="50%" align="left">Color/Make/Model: @Model.VehicleViewModel.Color @Model.VehicleViewModel.Make @Model.VehicleViewModel.Model</td>
+            </tr>
+            <tr><td colspan="2">&nbsp;<br /></td></tr>
+            <tr style="font-size:small">
+                <td width="50%" align="left">Tag Number: @Model.VehicleViewModel.TagNumber</td>
+                <td width="50%" align="left">VIN: @Model.VehicleViewModel.VIN</td>
+            </tr>
+            <tr style="font-size:small">
+                <td colspan="2">
+                    Damage to Vehicle:&nbsp;&nbsp;Outlined is all the damage approved on this claim.  No other damage will be authorized on this claim.<br />
+
+                    @if (Model.Damages != null && Model.Damages.Any())
+                    {
+                        foreach (var item in Model.Damages)
+                        {
+                            @String.Format("{0} - {1},", item.SelectedSection, item.Details)
+                        }
+                    }
+                    <br /><br /><br />
+                </td>
+            </tr>
+        </table>
+    <hr />
+    <div style="font-size:small; font-weight:bold">(To be filled out by Location Employee after repair. When completed upload this form to the Claim in the Risk Program)</div><br />
+    <div style="font-size:small; font-weight:bold">____/____/20_____ Date Vehicle Received back from Repair Location</div><br />
+    <div style ="font-size:small; font-weight:bold">
+         ____ Vehicle Inspected (after Repair)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inspected By: _______________________________________________________________________<br /><br /><br />
+        List any issues with repair ________________________________________________________________________________________________<br /><br />
+        __________________________________________________________________________________________________________________________________________<br /><br />
+        ***If any issues were found please contact your manager.
+    </div>
+        <table border="0" width="100%">
+            <tr><td align="center"><hr width="95%" /></td></tr>
+            <tr><td><strong></strong></td></tr>
+            <tr><td><strong><font size="4"></font></strong></td></tr>
+            <tr><td>&nbsp;<br /></td></tr>
+            <tr>
+                <td>
+                    <strong>
+                        <font size="4">
+                           
+                           
+                        </font>
+                    </strong>
+                </td>
+            </tr>
+        </table>
+
+        <!--table border = "1" width = "85%">
+        <tr><td width="50%" align="center"><b><u>Team #</u></b></td><td width="50%" align="center"><b><u>TOTAL HOURS</u></b></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #1</u></b><br />Efrain Goez</td><td width="50%"></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #5</u></b><br />Carlos Ramirez</td><td width="50%"></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #7</u></b><br />Roberto Reynoso</td><td width="50%"></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #4</u></b><br />Habib Namani</td><td width="50%"></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #3</u></b><br />Scott Pierson</td><td width="50%"></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #2</u></b><br />Jose Ortiz</td><td width="50%"></td></tr>
+        <tr><td valign="top" align="center" width="50%"><b><u>Team #6</u></b><br />Shallom Peets, Edison Medina</td><td width="50%"></td></tr>
+        </table-->
+
+
+</body>
+</html>
+

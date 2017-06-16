@@ -1,0 +1,188 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.PaymentDueViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.HeaderViewModel.Company.Abbr - @Model.HeaderViewModel.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.HeaderViewModel.Company.Address<br />
+                    @Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+
+                Email:  @Model.HeaderViewModel.RiskUserEmail<br />
+                Phone:  @Model.HeaderViewModel.Company.Phone<br />
+                Fax:    @Model.HeaderViewModel.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="50%" align="left" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                    @Model.HeaderViewModel.DriverViewModel.Name<br />
+                    @Model.HeaderViewModel.DriverViewModel.Address<br />
+                    @Model.HeaderViewModel.DriverViewModel.City,  @Model.HeaderViewModel.DriverViewModel.State  @Model.HeaderViewModel.DriverViewModel.Zip
+
+                </div>
+            </td>
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />@DateTime.Now.ToString(EZRAC.Risk.UI.Web.Helper.Constants.CrmsDateFormates.MMDDYYYY)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Dear @Model.HeaderViewModel.DriverViewModel.Name:</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">*<br />Re: Payment Receipt - CLOSED CLAIM</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center>
+                    <table border="1" width="85%">
+                        <tr><td colspan="5"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Our Claim Number</td>
+                            <td style="font-weight:bold">Unit Number</td>
+                            <td style="font-weight:bold">Date of Loss</td>
+                            <td style="font-weight:bold">Original Balance</td>
+                            <td style="font-weight:bold">Balance Due</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</td>
+                            <td style="font-weight:bold">@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                            <td style="font-weight:bold">@Model.HeaderViewModel.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                            <td style="font-weight:bold">$@Model.OriginalDue</td>
+                            <td style="font-weight:bold">$@Model.HeaderViewModel.TotalDue</td>
+                        </tr>
+                    </table>
+                </center>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <center>
+                    <table border="1" width="85%">
+                        <tr><td colspan="3"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Date Received</td>
+                            <td style="font-weight:bold">Amount of Payment</td>
+                            <td style="font-weight:bold">Received From</td>
+                        </tr>
+
+                        @if (Model.Payments != null && Model.Payments.Any()) { 
+                            foreach (var item in @Model.Payments)
+                            {
+                                <tr>
+                                    <td>@item.ReceivedDate.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                                    <td>$@Math.Round(item.Amount.HasValue ? item.Amount.Value : default(double), 2)</td>
+                                    <td>@item.SelectedPaymentFrom</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>NA</td>
+                                <td>$0</td>
+                                <td>NA</td>
+                            </tr>
+                        }
+
+                    </table>
+                </center>
+            </td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <td colspan="2">
+                *<br />We have received the above payment(s).  The claim has not yet been satisfied, and there is
+                a balance due on the account.  Please remit the balance within ten (10) days of this letter.
+            </td>
+        </tr>
+        <tr><td>*<br />Please send payment immediately.</td></tr>
+        <tr>
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td style="font-style: italic; font-weight: bold">*<br />Please make check payable to:</td>
+                        <td style="font-weight: bold; font-size:large">*<br />@Model.HeaderViewModel.Company.Name</td>
+                    </tr>
+                </table>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>  Mail Payment to:</td>
+        </tr>
+        <tr>
+            <td> Risk Management Services</td>
+        </tr>
+        <tr>
+            <td>@Model.HeaderViewModel.Company.Address</td>
+        </tr>
+        <tr>
+            <td>@Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Fax</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                You may contact our office at @Model.HeaderViewModel.Company.Phone, M-F 8am - 3pm (EST) or Fax @Model.HeaderViewModel.Company.Fax.
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                *<br />
+                Kind Regards,<br />
+                @Model.HeaderViewModel.RiskUserFullName<br />
+                Risk Management Services
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="font-size:10px;">
+                *<br />If any such legal action is taken and results in judgment against you, a Writ of Execution may be issued against your attachable assests.  Any legal action taken may result in additional expenses, including service of process and other court cost; thereby increasing your debt and overall financial obligation.  In addition, the agreement between you and E-Z Rent-A-Car contains an attorney's fees clause which specifies that the prevailing party to any action concerning this debt will be entitled to a reasonable attorney's fees in addition to any other award granted.  If the car rental company needs to resort to legal action to collect this debt, a request will be made that you be held liable for all such attorney's fees incurred.
+                PYMT - BAL DUE
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

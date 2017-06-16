@@ -1,0 +1,62 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.PaymentsViewModel
+@using EZRAC.Risk.UI.Web.Helper;
+
+<script src="@Url.Content("~/Scripts/appScripts/payment-table-info.js")" type="text/javascript"></script>
+
+<table class="table table-striped add-items " id="paymentsTable">
+    <thead>
+        <tr>
+            <th>
+                <div class="display-inline">Payments From</div>
+            </th>
+            <th>
+                <div class="display-inline">Reason</div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">Amount $ </div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">Received Date </div>
+            </th>
+            <th class="align-right">
+                <div class="display-inline">Action </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Payments)
+        {
+            <tr>
+                <td>@item.SelectedPaymentFrom</td>
+                <td>@item.SelectedReason</td>
+                <td class="align-right">@item.Amount</td>
+                <td class="align-right">@item.ReceivedDate.ToString(@Constants.CrmsDateFormates.MMDDYYYY)</td>
+                <td>
+                    <div class="align-right right10">
+
+                        @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeletePayments) && item.SelectedPaymentTypeId != (int)Constants.PaymentTypes.Cdw && 
+                            item.SelectedPaymentTypeId != (int)Constants.PaymentTypes.Ldw && 
+                            item.SelectedPaymentTypeId != (int)Constants.PaymentTypes.Lpc2)
+                        {
+                            <a class="delete-action delete" href="javascript:void(0);" data-url="@Url.Action("DeletePayment","Payments")" id="deletePayment" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+                        }
+                        else
+                        {
+
+                            <a class="delete-action opacity-light cursor-default" href="javascript:void(0);" title="Delete"><span class="ico-delete">&nbsp;</span></a>
+                        }
+
+
+
+                    </div>
+                </td>
+                @Html.Hidden("PaymentId", @item.PaymentId, new { @id = "paymentId" })
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@Html.HiddenFor(x => x.TotalPayment, new { @id = "payments" })
+@Html.HiddenFor(x => x.TotalBilling, new { @id = "billings" })
+@Html.HiddenFor(x => x.TotalDue, new { @id = "due" })

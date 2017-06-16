@@ -1,0 +1,65 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@model EZRAC.Risk.UI.Web.ViewModels.Claims.IncidentInfoViewModel
+<section class="panel panel-default complete-height bottom0">
+    <header class="panel-heading">
+       
+       
+        <h3 class="panel-title">
+            Incident Information
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.EditIncidentInfo))
+            {
+                @Ajax.MyActionLink("<span>EDIT</span>", "EditIncidentInfo", "pull-right", new { incidentId = Model.Id },
+                                                    new AjaxOptions { UpdateTargetId = "incident-info", OnFailure = "onErrorHandler(xhr)" })
+            }
+        </h3>
+        
+
+
+
+    </header>
+    <table class="table table-striped">
+        <tr>
+
+            <td>@Html.DisplayNameFor(model => model.LossDate)</td>
+
+            <td>@Html.DisplayFor(model => model.LossDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.SelectedLocationId)</td>
+
+            <td>@Html.DisplayFor(model => model.SelectedLocationName)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.SelectedPoliceAgencyId)</td>
+
+            <td>@Html.DisplayFor(model => model.SelectedPoliceAgencyName)</td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.CaseNumber)</td>
+
+            <td>@Html.DisplayFor(model => model.CaseNumber)</td>
+
+        </tr>
+        <tr>
+
+            <td>@Html.DisplayNameFor(model => model.RenterFault)/@Html.DisplayNameFor(model => model.ThirdPartyFault)</td>
+            <td>
+                @(Model.RenterFault ? "Yes" : "No")/
+                @(Model.ThirdPartyFault ? "Yes" : "No")
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ReportedDate)</td>
+
+            <td>@Html.DisplayFor(model => model.ReportedDate)</td>
+
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</section>
+

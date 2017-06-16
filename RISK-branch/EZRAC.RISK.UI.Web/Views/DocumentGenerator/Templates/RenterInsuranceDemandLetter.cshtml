@@ -1,0 +1,229 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+<head>
+    <title>Document Generator, Claim ID 106497</title>
+
+</head>
+<body style="font-family:'Times New Roman'">
+
+    <!--table border="0" width="100%">
+    <tr>
+       <td align="center" valign="top"><img src="images/bslogo.png" border="0" /></td>
+    </tr>
+    </table-->
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.Company.Address<br />
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.RiskUserEmail<br />
+                Phone:  @Model.Company.Phone<br />
+                Fax:    @Model.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="50%" align="left" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+
+                    @Model.DriverViewModel.InsuranceViewModel.InsuranceCompanyName <br />
+                    @Model.DriverViewModel.InsuranceViewModel.Address<br />
+                    @Model.DriverViewModel.InsuranceViewModel.City, @Model.DriverViewModel.InsuranceViewModel.State @Model.DriverViewModel.InsuranceViewModel.Zip
+
+                </div>
+            </td>
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />@DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+                <div style="font-weight:bold">
+                    *<br />
+                    Renter/Insured: @Model.DriverViewModel.Name <br />
+                    Policy Number: @Model.DriverViewModel.InsuranceViewModel.PolicyNumber <br />
+                    Your Claim #: @Model.DriverViewModel.InsuranceViewModel.InsuranceClaimNumber
+                </div>
+            </td>
+            <td width="50%" align="right" valign="top">
+                <div style="font-weight:bold">
+                    *<br />Our Claim #: @String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Dear Claims Professional:</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <div style="font-size:medium">
+                    Your insured was the driver or authorized driver of a rental vehicle which sustained damage or loss.  Pursuant to the rental contract, your insured is responsible for all damages or loss to the rented property while it was in his/her care, custody, or control, regardless of fault.<br /><br />
+                    Set forth below is the amount that is being sought from your insured's policy.  This billing represents an estimate of the loss you are responsible for:
+                    <br /><br />
+                </div>
+
+                <center>
+                    <table border="1" width="85%">
+                        <tr><td colspan="3"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Our Claim Number</td>
+                            <td style="font-weight:bold">Unit Number</td>
+                            <td style="font-weight:bold">Date of Loss</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+                            <td style="font-weight:bold">@Model.VehicleViewModel.UnitNumber</td>
+                            <td style="font-weight:bold">@Model.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                        </tr>
+                    </table>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border-bottom:solid"></td>
+        </tr>
+
+        @if (Model.Billings != null)
+        {
+            foreach (var billing in Model.Billings)
+            {
+                <tr>
+                    <td width="50%" align="left">@billing.BillingTypeDesc</td>
+                    <td width="50%" align="right">@billing.SubTotal.ToString("C2")</td>
+
+                </tr>
+            }
+        }
+
+        @if (Model.Contract != null)
+        {
+            if (Model.Contract.CDW && !Model.Contract.CDWVoided)
+            {
+                <tr>
+                    <td width="50%" align="left" style="color:red">CDW Accepted - Total Due</td>
+                    <td width="50%" align="right">@Model.TotalDue.ToString("C2")</td>
+                </tr>
+
+            }
+            else if (Model.Contract.LDW && !Model.Contract.LDWVoided)
+            {
+                <tr>
+                    <td width="50%" align="left" style="color:red">LDW Accepted - Total Due</td>
+                    <td width="50%" align="right">@Model.TotalDue.ToString("C2")</td>
+                </tr>
+            }
+        }
+
+        @if (Model.Payments != null)
+        {
+            foreach (var item in Model.Payments)
+            {
+                <tr>
+                    <td width="50%" align="left">Payment From @item.PaymentFrom on @item.ReceivedDate.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                    <td width="50%" align="right">@item.Amount.Value.ToString("C2")</td>
+
+                </tr>
+            }
+        }
+
+        <tr>
+            <td width="50%" align="left" style="font-weight:bold">
+                TOTAL DUE
+            </td>
+            <td width="50%" align="right" style="font-weight:bold">
+                @Model.TotalDue.ToString("C2")
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border-bottom:solid"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <font size="2">We have provided documents in support of our claim.  Pictures will be sent by email upon request.  Please remit the balance within the next fifteen (15) days so that we may govern ourselves accordingly.</font>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <table>
+                    <tr>
+                        <td style="font-style: italic; font-weight: bold">*<br />Please make check payable to:</td>
+                        <td style="font-weight: bold; font-size:large">*<br />@Model.Company.Name</td>
+                    </tr>
+                </table>
+                <br />
+                Mail Payment to:<br />
+                Risk Management Services<br />
+                @Model.Company.Address<br />
+                @Model.Company.City, @Model.Company.State @Model.Company.Zip<br />
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center" style="font-size:small">
+                *<br />You may contact our office at @Model.Company.Phone, M-F 8am - 3pm (EST) or Fax @Model.Company.Fax.
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2" style="font-size:small">
+                *<br />
+                    Kind Regards,<br />
+                    @Model.RiskUserFullName <br />
+                    Risk Management Services
+                <div style="font-size: small; font-weight: bold">DL1- 3RD/IN</div>
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

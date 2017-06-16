@@ -1,0 +1,44 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Admin.LossTypeViewModel
+
+@if (Model.IsNew) { 
+<h4 class="padding-left-15 padding-bottom-10 padding-top-10 details-header">New Loss Type</h4>
+}
+else
+{
+    <h4 class="padding-left-15 padding-bottom-10 padding-top-10 details-header">Update Loss Type</h4>
+}
+@using (Ajax.BeginForm("AddOrUpdateLossType", "LossType", new { area = "Admin" }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "success", OnFailure = "onErrorHandler(xhr)" }, new { @class = "form-horizontal cla-form top20 bottom20", @id = "lossTypeForm" }))
+    {
+    @Html.AntiForgeryToken()
+    <div class="row bottom10">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                <label for="">Loss Type<label class="mandetory-star">*</label></label>
+            </div>
+            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                @Html.TextBoxFor(x => x.LossType, new { @class="form-control form-input-value" ,id="inputLossType"})
+                @Html.ValidationMessageFor(x => x.LossType)
+                <div id="errorMessage" class="errorMsg"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row bottom10">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-4 col-sm-5 col-md-5 col-lg-4 top5 padding-right-0">
+                <label for="">Description<label class="mandetory-star">*</label></label>
+            </div>
+            <div class="col-xs-8 col-sm-7 col-md-7 col-lg-8 padding-left-0">
+                @Html.TextBoxFor(x => x.Description, new {  @class = "form-control form-input-value",id="inputDescription" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 bottom20 top15">
+        <button class="btn btn2 form-buttons" type="button" disabled="disabled" id="cancelLossType">CANCEL</button>
+        <button class="btn btn1 form-buttons" type="submit" disabled="disabled">SAVE</button>
+    </div>
+    
+    @Html.HiddenFor(x => x.Id)
+}
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/LossTypes/add-update-losstype.js")"></script>

@@ -1,0 +1,114 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @String.Format("{0}-{1}", Model.Company.Abbr, Model.ClaimId)</title>
+
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%" cellspacing="0" cellpadding="5">
+        <tr>
+            <td colspan="2" align="right">
+                <br />
+                @if (Model.Location.CompanyAbbr == "EZ")
+                {
+                    <img src="@Model.Company.Logopath" width="120" height="60" />
+                }
+                else
+                {
+                    <img src="@Model.Company.Logopath" width="150" height="50" />
+                }
+            </td>
+
+        </tr>
+        <tr>
+            @if (Model.Location.CompanyAbbr == "EZ")
+            {
+                <td align="left" style="background-color: yellowgreen; color: white; height: 30px; font-weight: bold">
+                    @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </td>
+                <td align="right" style="background-color: yellowgreen; color: white; height: 30px; font-weight: bold;">
+                    www.e-zrentacar.com
+                </td>
+            }
+            else
+            {
+                <td align="left" style="background-color: STEELBLUE; color: white; height: 30px; font-weight: bold;">
+                    @Model.Company.Address @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                </td>
+                <td align="right" style="background-color: STEELBLUE; color: white; height: 30px; font-weight: bold; ">www.advantage.com</td>
+            }
+
+        </tr>
+        <tr>
+            <td colspan="2" align="right"> @DateTime.Now.ToString(Constants.CrmsDateFormates.MMMM + " d, yyyy")</td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+
+
+        <tr>
+            <td width="50%" align="left" valign="top">
+                <div>
+                    *<br />
+                    @Model.DriverViewModel.Name<br />
+                    @Model.DriverViewModel.Address<br />
+                    @Model.DriverViewModel.City, @Model.DriverViewModel.State @Model.DriverViewModel.Zip
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <div style="font-weight: bold">
+                    *<br />Renter Agreement  @Model.Contract.ContractNumber<br />
+                    Location:    @String.Format("{0},{1} ({2})", Model.Location.Name, Model.Location.State, Model.Location.Code)<br />
+                    Vehicle:    @String.Format("{0} {1} {2}", Model.VehicleViewModel.Year, Model.VehicleViewModel.Make, Model.VehicleViewModel.Model) <br />
+                    Tag Number:  @Model.VehicleViewModel.TagNumber<br />
+                    Vehicle Information: @Model.VehicleViewModel.VIN<br /><br />
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                *<br />
+                Dear @Model.DriverViewModel.Name,<br /><br />
+                On @Model.Contract.PickupDate.Value.ToString(Constants.CrmsDateFormates.MMMM + " d, yyyy") @Model.Company.Name rented you a @String.Format("{0} {1} {2}", Model.VehicleViewModel.Year, Model.VehicleViewModel.Make, Model.VehicleViewModel.Model), which was to be returned on @Model.Contract.ReturnDate.Value.ToString(Constants.CrmsDateFormates.MMMM + " d, yyyy").
+                The vehicle has not been recorded as returned and we are requesting further information and action. We have attempted to reach communication with you via telephone and email in regards to the whereabouts of this vehicle@{if ((Convert.ToString(Model.DriverViewModel.Phone1).Trim() != string.Empty || Convert.ToString(Model.DriverViewModel.Phone2).Trim() != string.Empty) || (Model.DriverViewModel.Email != null && Convert.ToString(Model.DriverViewModel.Email).Trim() != string.Empty))
+                {<span>. At the time of signing you provided us</span>
+                    if (Convert.ToString(Model.DriverViewModel.Phone1).Trim() != string.Empty || Convert.ToString(Model.DriverViewModel.Phone2).Trim() != string.Empty)
+                    {
+                        <span>the phone number @(Model.DriverViewModel.Phone1 != string.Empty ? Model.DriverViewModel.Phone1 : Model.DriverViewModel.Phone2)</span>}
+                    if (Model.DriverViewModel.Email != null && Convert.ToString(Model.DriverViewModel.Email).Trim() != string.Empty)
+                    {
+                        if (Convert.ToString(Model.DriverViewModel.Phone1).Trim() != string.Empty || Convert.ToString(Model.DriverViewModel.Phone2).Trim() != string.Empty)
+                        {
+                            <span>and</span>
+                        }
+                        <span>email address <font color="blue">@Model.DriverViewModel.Email</font></span>}
+                }<span>, which have not been successful forms of communication.</span>
+                }
+
+                We are requesting you to contact us directly in order to further discuss this matter. You can directly reach me at (321) 319-5334 or via email <font color="blue">@Model.RiskUserEmail</font>.<br /><br />
+
+                Please advise us of any information pertaining to the vehicle so we may take immediate action of its retrieval. We are requesting your communication by @DateTime.Now.AddDays(7).ToString(Constants.CrmsDateFormates.MMMM + " d, yyyy"). If we do not receive your correspondence, in regards to the @String.Format("{0} {1} {2}", Model.VehicleViewModel.Year, Model.VehicleViewModel.Make, Model.VehicleViewModel.Model), we may have to pursue legal action.<br /><br />
+                Please contact me at your earliest convenience. We look forward to hearing from you.<br /><br /><br /><br />
+
+                Kind Regards,<br /><br />
+
+                @Model.RiskUserFullName<br />
+                AEZ Rent A Car<br />
+                Ph: 321-319-5334<br />
+            </td>
+        </tr>
+    </table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.Claims.BillingViewModel
+@using (Ajax.BeginForm("AddBilling", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "view-billing", OnSuccess = "clearBillingValues", OnFailure = "onErrorHandler(xhr)" }, new { @class = "form-inline cla-form", role = "form", id = "add-billing-form" }))
+{
+   @Html.AntiForgeryToken()
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.SelectedBillingTypeId)
+        <br>
+
+        @Html.DropDownListFor(model => model.SelectedBillingTypeId, Model.BillingTypes, "Please select", new { @class = "form-control ncl-slect selectpicker top5",id="billing-types", data_live_search = "true" })
+        @Html.ValidationMessageFor(model=>model.SelectedBillingTypeId)
+
+    </div>
+    <div class="form-group inline-form-space">
+
+        @Html.LabelFor(model => model.Amount) $
+        <br>
+        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control ncl-slect top5" })
+        @Html.ValidationMessageFor(model => model.Amount)
+    </div>
+    <div class="form-group inline-form-space">
+
+        @Html.LabelFor(model => model.Discount) %
+        <br>
+
+        @Html.TextBoxFor(model => model.Discount, new { @class = "form-control ncl-slect top5" })
+        @Html.ValidationMessageFor(model => model.Discount)
+    </div>
+    
+    <div class="form-group inline-form-space">
+        <button type="submit" class="btn btn1 top28" title="Save">SAVE</button>
+    </div>
+
+    <div class="form-group inline-form-space clear">
+
+        @Html.EditorFor(model => model.AutoAdminFeeCalculate, new { @class = "form-control ncl-slect top5" })
+        @Html.LabelFor(model => model.AutoAdminFeeCalculate)
+
+        <span id="admin-fee">
+            @if (Model.AdminFee.HasValue)
+            {
+                <span> The current admin fee is $@Html.DisplayFor(mode => mode.AdminFee).</span>
+
+            }
+        </span>
+       
+    </div>
+
+
+    
+    
+    @Html.HiddenFor(model => model.ClaimId)
+}
+

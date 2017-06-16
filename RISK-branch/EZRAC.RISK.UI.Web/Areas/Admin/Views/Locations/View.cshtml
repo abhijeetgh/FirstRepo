@@ -1,0 +1,43 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.LocationViewModel>
+@using EZRAC.Risk.UI.Web.Helper
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="locationDataTable">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Code</div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Description</div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left">Company</div>
+            </th>
+            <th class="">
+                <div class="th-min-height">Delete</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="cursor:pointer">
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("AddOrUpdate", "Locations")">@item.Code</td>
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("AddOrUpdate", "Locations")">@item.Description </td>
+                <td class="claim-status-coloumn details align-text-left" data-id="@item.Id" data-url="@Url.Action("AddOrUpdate", "Locations")">@item.CompanyAbbr </td>
+
+                <td class="claim-status-coloumn">
+                    <a class="delete-action delete-location" title="Delete" data-islocationused="@Url.Action("IsLocationUsed", "Locations", new { id = item.Id })" data-url="@Url.Action("Delete", "Locations", new { id = @item.Id })" data-id="@item.Id"><span class="ico-delete" title="Delete">&nbsp;</span></a>
+                </td>
+            </tr>
+            
+            
+        }
+
+        
+
+        @Html.AntiForgeryToken()
+    </tbody>
+</table>
+
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/locations.js")"></script>

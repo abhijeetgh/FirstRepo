@@ -1,0 +1,220 @@
+﻿@using EZRAC.Risk.UI.Web.Helper;
+@model EZRAC.Risk.UI.Web.Helper.PendingClaimPageHelper<EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimInfoViewModel>
+
+<script>
+    var AdSearchSortOrder = '@Model.SortOrder.ToString()';
+    var AdSearchSortBy = '@Model.SortBy';
+</script>
+<table id="AdvancedSearchGrid" class="grey-white-table  dark-blue-header complete complete-width claim-table top15 bordered-table grey-border-1">
+    <tr class="white-color table-header">
+
+        @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteClaim))
+        {
+
+            <th class='check-coloumn check-header'>
+                <input type="checkbox" name="select-checkbox" />
+            </th>
+        }
+        <th class='claim-id-coloumn'>
+            <div class="display-inline">
+                <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="Id" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Claim Id</a>
+                @*@Ajax.ActionLink("Claim Id", "GetCurrentGridData", new { page = 1, sortBy = "Id", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                @CustomHtmlHelper.SortOrderMark(Model.SortBy, "Id", Model.SortOrder)
+            </div>
+        </th>
+        <th class='claim-status-coloumn'>
+            <div class="display-inline">
+                <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="Status" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Status</a>
+                @*@Ajax.ActionLink("Status", "GetCurrentGridData", new { page = 1, sortBy = "Status", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                @CustomHtmlHelper.SortOrderMark(Model.SortBy, "Status", Model.SortOrder)
+            </div>
+        </th>
+        <th class='claim-assigned-coloumn'>
+            <div>
+                <div class="display-inline">
+                    <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="AssignedToName" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Assigned To</a>
+
+                    @*@Ajax.ActionLink("Assigned To", "GetadvancedSearchRecords", new { page = 1, sortBy = "AssignedToName", sortOrder = Model.SortOrder, recordCountToDisplay = "xx", claimSearchDto ="({'SearchTypeId':'1','SearchType':'contract','SearchItem':'ATL-101920'})" }, new AjaxOptions { HttpMethod = "post", UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                    @CustomHtmlHelper.SortOrderMark(Model.SortBy, "AssignedToName", Model.SortOrder)
+                </div>
+            </div>
+        </th>
+        <th class='contract-coloumn'>
+            <div class="display-inline">
+                <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="ContractNumber" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Contract</a>
+                @*@Ajax.ActionLink("Contract", "GetCurrentGridData", new { page = 1, sortBy = "ContractNumber", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                @CustomHtmlHelper.SortOrderMark(Model.SortBy, "ContractNumber", Model.SortOrder)
+            </div>
+        </th>
+        <th class='claim-   -coloumn'>
+            <div class="display-inline">
+                <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="DriverName" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Driver</a>
+                @*@Ajax.ActionLink("Driver", "GetCurrentGridData", new { page = 1, sortBy = "DriverName", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                @CustomHtmlHelper.SortOrderMark(Model.SortBy, "DriverName", Model.SortOrder)
+            </div>
+        </th>
+        <th class='claim-driver-coloumn'>
+            <div class="display-inline">
+                <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="UnitNumber" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Unit No.</a>
+                @*@Ajax.ActionLink("Unit No.", "GetCurrentGridData", new { page = 1, sortBy = "UnitNumber", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                @CustomHtmlHelper.SortOrderMark(Model.SortBy, "UnitNumber", Model.SortOrder)
+            </div>
+        </th>
+        <th class='claim-vehicle-coloumn'>
+            <div class="display-inline">
+                <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="Model" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Vehicle</a>
+                @*@Ajax.ActionLink("Vehicle", "GetCurrentGridData", new { page = 1, sortBy = "Model", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                @CustomHtmlHelper.SortOrderMark(Model.SortBy, "Model", Model.SortOrder)
+            </div>
+        </th>
+        <th class='claim-followup-date'>
+            <div class="padding-left-10">
+                <div class="display-inline">
+                    <a href="#" onclick="AdvancedSearchOperation(this)" page="@Model.CurrentPage" sortby="FollowUpDate" sortorder='@Model.SortOrder.ToString()' recordcounttodisply="@Model.RecordsToShow">Follow Up Date</a>
+                    @*@Ajax.ActionLink("Follow Up Date", "GetCurrentGridData", new { page = 1, sortBy = "FollowUpDate", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults" }, new { @class = "pageNo" })*@
+                    @CustomHtmlHelper.SortOrderMark(Model.SortBy, "FollowUpDate", Model.SortOrder)
+                </div>
+
+            </div>
+        </th>
+        <th class='notes-coloumn'> Notes </th>
+    </tr>
+    @foreach (var item in Model.Data)
+    {
+        <tr class="dataRow">
+
+            @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteClaim))
+            {
+
+                <td class='check-coloumn child-checkbox'><input type="checkbox" name="delete-claim-checkbox" id="@item.ClaimID" /></td>
+
+            }
+            <td class='claim-id-coloumn '>@Html.ActionLink(String.Format("{0}-{1}", item.CompanyAbbr, item.ClaimID), "ViewClaim", new { id = item.ClaimID }) </td>
+            <td class='claim-status-coloumn'> @item.SelectedStatusName</td>
+            <td class='claim-assigned-coloumn'>
+                <label id="assignedUserId" class="display-none"> @item.SelectedAssignedUserId</label>
+                <label id="assignedUser" class="editable-row">@item.SelectedAssignedUserName</label>
+                <div class="center-align display-none">
+                    <select>
+                        @foreach (var user in item.Users)
+                        {
+                            if (user.Value.Equals(item.SelectedAssignedUserId.ToString()))
+                            {
+                                <option selected="selected" value="@user.Value">@user.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@user.Value">@user.Text</option>}
+                        }
+                    </select>
+                    <a class="correct-icon correct-icon-small" href="javascript:void(0);"></a>
+                    <a class="incorrect-icon incorrect-icon-small" href="javascript:void(0);"></a>
+                </div>
+            </td>
+            <td class='contract-coloumn'> @item.ContractNumber</td>
+            <td class='claim-driver-coloumn'>@item.DriverName</td>
+            <td class='claim-unitnumber-coloumn'>@item.UnitNumber</td>
+            <td class='claim-vehicle-coloumn'>@item.VehicleName</td>
+            <td class='claim-followup-date'>
+                <label id="followUpDate" class="editable-row">@Html.DisplayFor(d => item.FollowupDate)</label>
+                <div class="sandbox-container display-none">
+
+                    <input type="text" readonly="readonly" value='@Html.DisplayFor(d => item.FollowupDate)' class="form-control sand-datepicker display-inline-block datepicker" />
+                    <a class="correct-icon correct-icon-small " href="javascript:void(0);"></a>
+                    <a class="incorrect-icon incorrect-icon-small" href="javascript:void(0);"></a>
+
+                </div>
+            </td>
+            <td class='notes-coloumn'>
+                <div class=" display-inline relative notes" title="Notes">
+                    <a class="dropdown-toggle" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown">
+                        <span class="notes-icon float-left">&nbsp;</span>
+                    </a>
+
+                    <ul class="dropdown-menu pull-right  tooltip-up-arrow notes-area top15 popup-width" id="notes-id"></ul>
+                </div>
+
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row padding-horizontal-30 paging-footer">
+    <div class="row grey-background">
+        @if (Model.TotalRecordCount > 5)
+        {
+            <div class="float-left">
+                <ul class="pagination-list bottom0 top5 ">
+                    <li class="pagination-list-item ">
+                        @*<a href="javascript:void(0);" aria-label="Next">
+                                <div class=arrow-left></div>
+                            </a>*@
+                        @*@Ajax.MyActionLink("<div class=arrow-left></div>", "GetAdvancedSearchRecords", "pageNo", new { page = Model.CurrentPage - 1, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "divSearchResults", OnFailure = "onErrorHandler(xhr)" })*@
+                        @Html.ActionLink(HttpUtility.HtmlDecode("&#9668;"), "", null, new { href = "#", page = Model.CurrentPage - 1, sortby = Model.SortBy, sortorder = !Model.SortOrder, recordcounttodisply = Model.RecordsToShow, @class = "pageNo", onclick = "AdvancedSearchOperation(this);" })
+                    </li>
+                    @for (int i = 1; i <= Model.NumberOfPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <li class="pagination-list-item active"><a>@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="pagination-list-item">
+                                @*<a href="#" onclick="AdvancedSearchOperation(this)" page="@i" sortby="@Model.SortBy" sortorder='@Convert.ToBoolean(Model.SortOrder)' recordcounttodisply="@Model.RecordsToShow" class="pageNo">@i</a>*@
+                                @Html.ActionLink(i.ToString(), "", null, new { href = "#", page = i.ToString(), sortby = Model.SortBy, sortorder = !Model.SortOrder, recordcounttodisply = Model.RecordsToShow, @class = "pageNo", onclick = "AdvancedSearchOperation(this);" })
+                            </li>
+                        }
+                    }
+                    <li class="pagination-list-item">
+                        @*<a href="javascript:void(0);" aria-label="Next">
+                                <div class=arrow-right></div>
+                            </a>*@
+                        @Html.ActionLink(HttpUtility.HtmlDecode("&#9658;"), "", null, new { href = "#", page = Model.CurrentPage + 1, sortby = Model.SortBy, sortorder = !Model.SortOrder, recordcounttodisply = Model.RecordsToShow, @class = "pageNo", onclick = "AdvancedSearchOperation(this);" })
+
+                    </li>
+                </ul>
+            </div>
+        }
+        <div class="row padding-right-20">
+            <div class="bottom10 top10">
+                @if (Model.TotalRecordCount > 5)
+                {
+                    <div class="float-left ">&nbsp;
+                        <span>Items per Page </span> <span>
+                            <select class="show-record ">
+                                <option value="0">All</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </span>
+                    </div>
+                }
+                @if (Model.TotalRecordCount > 0)
+                {
+                    <span class="pull-right info"> @Model.PageInfo</span>
+                }
+                else
+                {
+                    <div style="text-align:center">
+                        <span class="info"> @Model.PageInfo</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="AdSearchClaimsPageNo" value="@Model.CurrentPage" />
+<input type="hidden" id="AdSearchClaimsSortBy" value="@Model.SortBy" />
+<input type="hidden" id="AdSearchClaimsRecordsToShow" value="@Model.RecordsToShow" />
+<input type="hidden" id="AdSearchClaimsSortOrder" value="@Model.SortOrder.ToString()" />
+<input type="hidden" id="AdSearchClaimsType" value="@Model.Type" />
+<input type="hidden" id="AdSearchTotalRecords" value="@Model.TotalRecordCount" />
+<input type="hidden" id="AdSearchclaimIdForNotes" />
+
+@*<script src="@Url.Content("~/Scripts/appScripts/get-claim-list.js")"></script>*@
+<script src="@Url.Content("~/Scripts/appScripts/advance-search.js")"></script>

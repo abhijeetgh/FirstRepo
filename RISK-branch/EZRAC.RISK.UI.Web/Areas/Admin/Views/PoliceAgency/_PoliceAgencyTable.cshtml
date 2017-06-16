@@ -1,0 +1,28 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.PoliceAgencyViewModel>
+
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="policeAgencyTable" style="cursor:pointer;">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Agency Name </div>
+            </th>
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin"> Email </div>
+            </th>
+            <th class="">
+                <div class="th-min-height"> Delete </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="claim-status-coloumn police-agency-column align-text-left" data-id="@item.Id" data-url="@Url.Action("PoliceAgency", "PoliceAgency")">@item.AgencyName</td>
+                <td class="claim-status-coloumn police-agency-column align-text-left" data-id="@item.Id" data-url="@Url.Action("PoliceAgency", "PoliceAgency")">@item.Email</td>
+                <td class="claim-status-coloumn"><a class="delete-action" title="Delete" href="javascript:void(0);" data-id="@item.Id" data-url-delete="@Url.Action("DeletePoliceAgency", "PoliceAgency")" data-url-valid="@Url.Action("PoliceAgencyAlreadyUsed", "PoliceAgency")"><span class="ico-delete">&nbsp;</span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/Scripts/appScripts/AdminPages/police-agency.js"></script>

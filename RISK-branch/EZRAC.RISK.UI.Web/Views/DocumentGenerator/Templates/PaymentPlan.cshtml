@@ -1,0 +1,169 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.PaymentPlanViewModel
+@using EZRAC.Risk.UI.Web.Helper
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.HeaderViewModel.Company.Abbr - @Model.HeaderViewModel.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="33%" align="left" valign="top">
+                <div>
+                    *<br />Risk Management Services<br />
+                    @Model.HeaderViewModel.Company.Address<br />
+                    @Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+                </div>
+            </td>
+            <td width="33%" align="center" valign="top"><img src="@Model.HeaderViewModel.Company.Logopath" width="80" height="50" /></td>
+            <td align="right">
+                *<br />
+                Email:  @Model.HeaderViewModel.RiskUserEmail<br />
+                Phone:  @Model.HeaderViewModel.Company.Phone<br />
+                Fax:    @Model.HeaderViewModel.Company.Fax
+
+            </td>
+        </tr>
+    </table>
+
+    <table border="0" width="100%">
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" style="font-weight:bold">
+                *<br />
+                    @Model.HeaderViewModel.DriverViewModel.Name<br />
+                    @Model.HeaderViewModel.DriverViewModel.Address<br />
+                    @Model.HeaderViewModel.DriverViewModel.City,  @Model.HeaderViewModel.DriverViewModel.State  @Model.HeaderViewModel.DriverViewModel.Zip
+            </td>
+            <td align="right" valign="top" style="font-weight:bold">
+                <div>*<br />@DateTime.Now.ToString(Constants.CrmsDateFormates.MMDDYYYY)</div>
+                    
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Dear @Model.HeaderViewModel.DriverViewModel.Name:</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">*<br />Re: Payment Plan</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                You are the responsible party for the incident that occurred with the rental vehicle listed.  You have selected to set up a payment plan with
+                our company.  All payments are due on the 15th of each month.  If a payment is missed, we will have no other option then to send your claim
+                to our collections company.  Listed below are the dates and amounts due per month.  Please sign and return this form.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center>
+                    <table border="1" width="80%">
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Our Claim Number</td>
+                            <td style="font-weight:bold">Unit Number</td>
+                            <td style="font-weight:bold">Date of Loss</td>
+                            <td style="font-weight:bold">Balance Due</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">@String.Format("{0}-{1}, {2}", Model.HeaderViewModel.Company.Abbr, Model.HeaderViewModel.ClaimId, Model.HeaderViewModel.Contract != null ? Model.HeaderViewModel.Contract.ContractNumber.ToString() : string.Empty)</td>
+                            <td style="font-weight:bold">@Model.HeaderViewModel.VehicleViewModel.UnitNumber</td>
+                            <td style="font-weight:bold">@Model.HeaderViewModel.DateOfLoss.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY)</td>
+                            <td style="font-weight:bold">$@Model.HeaderViewModel.TotalDue</td>
+                        </tr>
+                    </table>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center>
+                    <table border="1" width="80%">
+                        <tr><td colspan="2"></td></tr>
+                        <tr>
+                            <td style="font-weight:bold">Due Date of Payment</td>
+                            <td style="font-weight:bold">Amount Due</td>
+                        </tr>
+                        @if (Model.Payments != null && Model.Payments.Any()) { 
+                            foreach (var item in Model.Payments)
+                            {
+                                <tr>
+                                    <td>@item.DateOfPayment</td>
+                                    <td>$@item.Amount</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>NA</td>
+                                <td>$@Model.HeaderViewModel.TotalDue</td>
+                            </tr>
+                        }
+                    </table>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    *<br />I,_______________understand and agree to the above payment plan.  I fully understand that if I miss a payment I must call the Risk Department and advise them.
+                    If I do not make arrangements for the missed payment I understand that within five (5) days of the late payment my account will be turned over to our collection company.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                *<br />Print Name _______________Signature_________________Date_______________
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                *<br /><div style="background-color:yellow; width:220px">All payments must be sent to the address below.</div>
+                <table>
+                    <tr>
+                        <td style="font-style:italic; font-weight:bold">*<br />Please make check payable to:</td>
+                        <td style="font-weight:bold; font-size:large">*<br />@Model.HeaderViewModel.Company.Name</td>
+                    </tr>
+                </table>
+                Mail Payment to:<br />
+                Risk Management Services<br />
+                @Model.HeaderViewModel.Company.Address<br />
+                @Model.HeaderViewModel.Company.City, @Model.HeaderViewModel.Company.State @Model.HeaderViewModel.Company.Zip
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                You may contact our office at @Model.HeaderViewModel.Company.Phone, M-F 8am - 3pm (EST) or Fax @Model.HeaderViewModel.Company.Fax.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                *<br />Kind Regards,<br />
+                @Model.HeaderViewModel.RiskUserFullName<br />
+                Risk Management Services<br /><br />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="font-size:small">
+                    <br /><br />If any such legal action is taken and results in judgment against you, a Writ of Execution may be issued against your attachable assests.  Any legal action taken may result in additional expenses, including service of process and other court cost; thereby increasing your debt and overall financial obligation.  In addition, the agreement between you and E-Z Rent-A-Car contains an attorney's fees clause which specifies that the prevailing party to any action concerning this debt will be entitled to a reasonable attorney's fees in addition to any other award granted.  If the car rental company needs to resort to legal action to collect this debt, a request will be made that you be held liable for all such attorney's fees incurred.
+                    PYMT PLAN
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

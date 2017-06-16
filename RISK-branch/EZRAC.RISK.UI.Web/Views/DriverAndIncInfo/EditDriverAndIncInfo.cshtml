@@ -1,0 +1,453 @@
+﻿@model  EZRAC.Risk.UI.Web.ViewModels.Claims.DriverAndInsuranceViewModel
+@using EZRAC.Risk.UI.Web.Helper
+@using EZRAC.RISK.Util.Common
+
+
+    @{ string updateTargetId = String.Format("driver-inc-for-{0}-{1}", Model.DriverId,Model.DriverType); }
+@using (Ajax.BeginForm("EditDriverAndIncInfo", new { }, new AjaxOptions { UpdateTargetId = updateTargetId, HttpMethod = "Post", OnSuccess = "onSuccess", OnFailure = "onErrorHandler(xhr)" }, new { @class = " form-horizontal cla-form", @id = "form-" + updateTargetId }))
+{ 
+        @Html.AntiForgeryToken();
+
+    <section class="panel panel-default driver-insurance-claim-form">
+        <header class="panel-heading">
+            <div class="row padding-horizontal-15">
+                <div class="col-xs-8  padding-left-0">
+                    <h3 class="panel-title">
+                        <span data-target="#additional-driver-info-collapsable-@Model.GetHashCode()" data-toggle="collapse" class="glyphicon glyphicon-minus-sign cursor-pointer"></span>
+
+                        @if (Model.DriverType == 1)
+                        {
+                            <span class="left10">Primary Driver</span>
+                        }
+                        else if (Model.DriverType == 2)
+                        {
+                            <span class="left10">Additional Driver</span>
+                        }
+                        else
+                        {
+                            <span class="left10">Third Party Driver @ViewBag.DriverCount</span>
+                        }
+                    </h3>
+                </div>
+                <div class='col-xs-4 '>
+
+                    <div class="pull-right">
+
+
+                        <a href="javascript:void(0);" onclick="$('#form-@updateTargetId').submit();" class="inline-group save-icon-btn">
+                            <span class="transparent no-border"></span><span class="pull-right form-label" style="font-weight: bold; margin-right: 10px;">SAVE</span>
+                        </a>
+
+
+                        <a class="inline-group cancel-icon-btn" href="javascript:void(0);" onclick="CancelDriverEdit(@Model.DriverId,@Model.DriverType,@Model.ClaimId,'@updateTargetId','driver-insurance-section-@Model.DriverId-@Model.DriverType')">
+                            
+                            <span class="form-label" style="font-weight:bold">CANCEL</span>
+                        </a>
+
+
+
+                        @*@Ajax.MyActionLink("<span class='form-label'>CANCEL</span>", "ViewDriverAndIncInfo", "display-inline  cancel-icon-btn top3", new { driverId = Model.DriverId, driverType = Model.DriverType, claimId = Model.ClaimId },
+            new AjaxOptions { OnSuccess = "( function() { onSuccess(data,hashCode,test'); } )" })*@
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <div class="collapse in  top10 bottom5 padding-horizontal-15" id="additional-driver-info-collapsable-@Model.GetHashCode()">
+            <!-- First Name And Last Name -->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.FirstName)<span class="mandetory-star">*</span>
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.FirstName, Model.FirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model=>model.FirstName)
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.LastName)<span class="mandetory-star">*</span>
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.LastName, Model.LastName, new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+            </div>
+            <!-- Address -->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Address1)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Address1, Model.Address1, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Address2)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Address2, Model.Address2, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- Sate  And City-->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.State)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.State, Model.State, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.City)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.City, Model.City, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- Zip And Phone -->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Zip)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Zip, Model.Zip, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Phone1)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Phone1, Model.Phone1, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- Fax And Phone-->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Fax)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Fax, Model.Fax, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Phone2)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Phone2, Model.Phone2, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- Other Contact And Email Id-->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.OtherContact)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.OtherContact, Model.OtherContact, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Email)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Email, Model.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- License No And DOB -->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.LicenceNumber)<span class="mandetory-star">*</span>
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.LicenceNumber, Model.LicenceNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LicenceNumber)
+                    </div>
+                </div>
+                <div class="col-xs-6 ">
+                    <div class="col-xs-4  top5 padding-right-0">
+                        @Html.LabelFor(model => model.DOB)
+                    </div>
+                    <div class="col-xs-3 padding-left-0 ">
+                        <div class="sandbox-container">
+
+
+                            @if (Model.DOB.HasValue)
+                            {
+                                @Html.TextBoxFor(model => model.DOB, Model.DOB.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepickerDOB" })
+                                @Html.ValidationMessageFor(model => model.DOB)
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control sand-datepicker datepickerDOB" })
+                                @Html.ValidationMessageFor(model => model.DOB)
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- License Expiry And License State-->
+            <div class="row bottom20">
+                <div class="col-xs-6 ">
+                    <div class="col-xs-4  top5 padding-right-0">
+                        @Html.LabelFor(model => model.LicenceExpiry)<span class="mandetory-star">*</span>
+                    </div>
+                    <div class="col-xs-3 padding-left-0 ">
+                        <div class="sandbox-container">
+
+
+                            @if (Model.LicenceExpiry.HasValue)
+                            {
+                                @Html.TextBoxFor(model => model.LicenceExpiry, Model.LicenceExpiry.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepicker" })
+                                @Html.ValidationMessageFor(model => model.LicenceExpiry)
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => model.LicenceExpiry, new { @class = "form-control sand-datepicker datepicker" })
+                                @Html.ValidationMessageFor(model => model.LicenceExpiry)
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.LicenceState)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.LicenceState, Model.LicenceState, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- Authorized Driver Check Box -->
+            <div class="row bottom20">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.IsAuthorizedDriver)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.CheckBoxFor(model => model.IsAuthorizedDriver, new { @class = "middle"})
+                    </div>
+                </div>
+            </div>
+            <!-- Insurance Detail label -->
+            <div class="row top10 bottom20" style="background:#e1e1e1">
+                <div class="col-xs-6">
+                    <div class="col-xs-4 top5 padding-right-0 ">
+                        <label for="firstname"><strong>Insurance Details</strong></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Ins. Company And Policy No. -->
+            <div class="row top10 bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4 top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.InsuranceCompanyId)
+                    </div>
+                    <div class="col-xs-3  padding-left-0 padding-right-0">
+
+                        @Html.DropDownListFor(model => model.InsuranceCompanyId, Model.InsuranceCompanies, "-- Select --", new { @class = "form-control selectpicker", @data_live_search = "true" })
+                        @Html.ValidationMessageFor(model => model.InsuranceCompanyId)
+
+                    </div>
+                    @*@if (SecurityHelper.IsAdminAccess()) {
+                        <div class="float-left left7 top3 right5">
+                            <button type="button" data-url="@Url.Action("Index", "InsuranceCompany", new {area="admin" })" id="addInsuranceCompany" class="plus-background add-insurance-company"></button>
+                        </div>
+                        <div class=" padding-left-0 padding-right-0 top7"> Add Insurance Company </div>
+                    }*@
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.PolicyNumber)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.PolicyNumber, Model.PolicyNumber, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <!-- Deducatable And Expiry Date -->
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.Deductible)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.Deductible, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Deductible)
+                    </div>
+                </div>
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.InsuranceClaimNumber)
+                    </div>
+                    <div class="col-xs-8  padding-left-0">
+
+                        @Html.TextBoxFor(model => model.InsuranceClaimNumber, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom10">
+                <div class="col-xs-6  ">
+                    <div class="col-xs-4  top5 padding-right-0 ">
+                        @Html.LabelFor(model => model.InsuranceExpiry)
+                    </div>
+                    <div class="sandbox-container">
+
+                        @if (Model.InsuranceExpiry.HasValue)
+                        {
+                            @Html.TextBoxFor(model => model.InsuranceExpiry, Model.InsuranceExpiry.Value.ToString(Constants.CrmsDateFormates.MMDDYYYY), new { @class = "form-control sand-datepicker datepicker" })
+                            @Html.ValidationMessageFor(model => model.InsuranceExpiry)
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.InsuranceExpiry, new { @class = "form-control sand-datepicker datepicker" })
+                            @Html.ValidationMessageFor(model => model.InsuranceExpiry)
+                        }
+
+                    </div>
+
+
+                </div>
+                <div class="col-xs-6"></div>
+            </div>
+
+            @if (Model.DriverType != (int)ClaimsConstant.DriverTypes.ThirdParty)
+            {
+            <!-- Credit Card No And Credit Card Policy No.-->
+                <div class="row bottom10">
+                    <div class="col-xs-6  ">
+                        <div class="col-xs-4  top5 padding-right-0 ">
+                            @Html.LabelFor(model => model.CreditCardCompany)
+                        </div>
+                        <div class="col-xs-8  padding-left-0">
+
+                            @Html.TextBoxFor(model => model.CreditCardCompany, Model.CreditCardCompany, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-xs-6  ">
+                        <div class="col-xs-4  top5 padding-right-0 ">
+                            @Html.LabelFor(model => model.CreditCardPolicyNumber)
+                        </div>
+                        <div class="col-xs-8  padding-left-0">
+
+                            @Html.TextBoxFor(model => model.CreditCardPolicyNumber, Model.CreditCardPolicyNumber, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            <!-- Credit Card Coverage Amount -->
+                <div class="row bottom15">
+                    <div class="col-xs-6  ">
+                        <div class="col-xs-4  top5 padding-right-0 ">
+                            @Html.LabelFor(model => model.CreditCardCoverageAmt)
+                        </div>
+                        <div class="col-xs-8  padding-left-0">
+
+                            @Html.TextBoxFor(model => model.CreditCardCoverageAmt, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(model=>model.CreditCardCoverageAmt)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    @Html.HiddenFor(model => model.ClaimId)
+    @Html.HiddenFor(model => model.DriverId)
+    @Html.HiddenFor(model => model.DriverType)
+}
+
+@*TODO:Remove the script from partial View*@
+<script type="text/javascript">
+
+    $(document).ready(function (e) {
+
+        $(".selectpicker").selectpicker({});
+
+        //var dateToday = new Date();
+        //$(".datepickerDOB").datepicker({
+        //    maxDate: dateToday,
+        //    //beforeShowDay: $.datepicker.noWeekends
+        //});
+
+        ////var dateToday = new Date();
+        //$(".datepicker").datepicker({
+        //    //minDate: dateToday,
+        //    //beforeShowDay: $.datepicker.noWeekends
+        //});
+
+        $(".datepicker").datepicker("destroy");
+        $(".datepickerDOB").datepicker("destroy");
+
+        var count=0;
+        $('.datepicker').each(function () {
+            
+            var inputId = $(this).attr('id');
+
+            $(this).attr("id",inputId+count);
+            $(this).datepicker();
+
+            count++;
+        });
+
+        var count=0;
+        $('.datepickerDOB').each(function () {
+            
+            var inputId = $(this).attr('id');
+
+            $(this).attr("id",inputId+count);
+            $(this).datepicker();
+
+            count++;
+        });
+
+        $("#addInsuranceCompany").click(function(){
+            window.location = $(this).attr("data-url");
+        });
+
+    });
+    $.validator.unobtrusive.parse("#driver-info-form");
+
+
+
+    
+</script>

@@ -1,0 +1,160 @@
+﻿@model  IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Claims.DriverAndInsuranceViewModel>
+@using EZRAC.RISK.Util.Common
+
+@{ string lastdriverId = default(string); }
+<div id="driver-content">
+
+    @{ViewBag.DriverCount = 0;}
+
+    @foreach (var driverAndIncInfo in Model)
+    {
+        if (driverAndIncInfo.DriverType == (int)ClaimsConstant.DriverTypes.ThirdParty)
+        {
+            ViewBag.DriverCount++;
+        }
+
+        <section id="driver-insurance-section-@driverAndIncInfo.DriverId-@driverAndIncInfo.DriverType">
+            <div class="row">
+                <div class="col-xs-12" id="driver-inc-for-@driverAndIncInfo.DriverId-@driverAndIncInfo.DriverType">
+
+                    
+
+                    @{Html.RenderPartial("ViewDriverAndIncInfo", driverAndIncInfo); }
+
+                </div>
+            </div>
+        </section>
+
+
+                    lastdriverId = String.Format("driver-inc-for-{0}-{1}", driverAndIncInfo.DriverId, driverAndIncInfo.DriverType);
+    }
+</div>
+
+
+
+
+<div class="row padding-horizontal-15 white-color">
+
+    @*@using (Ajax.BeginForm("AddThirdPartyDriver", new { driverType = 3, claimId = Model.FirstOrDefault().ClaimId }, new AjaxOptions { HttpMethod = "Get", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = lastdriverId }))
+        {*@
+
+    <button id="add-driver" title="Add Driver" class="btn btn2 add-driver padding-horizontal-30" type="submit">
+        <span class="glyphicon glyphicon-plus right5"></span>ADD THIRD PARTY DRIVER
+    </button>
+
+  
+
+    
+    @*}*@
+
+
+</div>
+
+<script type="text/javascript">
+
+    $('#add-driver').click(function () {
+
+        $(this).attr('disabled', 'disabled');
+
+        $.ajax({
+            url: '@Url.Action("AddThirdPartyDriver")',
+            data: { driverType: 3, claimId: '@Model.FirstOrDefault().ClaimId' },
+            type: "GET",
+            cache: false,
+            success: function (returnData) {
+
+                $('#driver-content').append(returnData);
+                
+                $(".selectpicker").selectpicker({});
+
+                $(".datepicker").datepicker("destroy");
+                $(".datepickerDOB").datepicker("destroy");
+
+
+                var count = 0;
+                $('.datepicker').each(function () {
+
+                    var inputId = $(this).attr('id');
+
+                    $(this).attr("id", inputId + count);
+                    $(this).datepicker();
+
+                    count++;
+                });
+
+                var count = 0;
+                $('.datepickerDOB').each(function () {
+
+                    var inputId = $(this).attr('id');
+
+                    $(this).attr("id", inputId + count);
+                    $(this).datepicker();
+
+                    count++;
+                });
+
+                //var dateToday = new Date();
+                //$(".datepickerDOB").datepicker({
+                //    maxDate: dateToday,
+                //    //beforeShowDay: $.datepicker.noWeekends
+                //});
+
+                ////var dateToday = new Date();
+                //$(".datepicker").datepicker({
+                //    //minDate: dateToday,
+                //    //beforeShowDay: $.datepicker.noWeekends
+                //});
+
+                $(document).ready(function () {
+                    $('.collapse').on('shown.bs.collapse', function () {
+                        $(this).parent().find(".glyphicon-plus-sign").removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+                    }).on('hidden.bs.collapse', function () {
+                        $(this).parent().find(".glyphicon-minus-sign").removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
+                    });
+
+                });
+
+            },
+            error: onErrorHandler,
+        });
+
+    });
+
+    function CancelDriverEdit(driverId, driverType, claimId, updateTargetId,removeTargetId) {
+        // updateTargetId
+        $.ajax({
+            url: '@Url.Action("ViewDriverAndIncInfo")',
+            data: { driverId: driverId, driverType: driverType, claimId: claimId },
+            type: "GET",
+            cache: false,
+            success: function (data) {
+
+                if (data != null && data != '') {
+
+                    $('#' + updateTargetId + '').html(data);
+
+                } else {
+
+                    $('#' + removeTargetId + '').remove();
+                    $('#add-driver').removeAttr('disabled');
+                }
+
+            },
+            error: onErrorHandler,
+        });
+
+        
+    }
+
+    function onSuccess(data) {
+       // alert('hi');
+        //if (data.indexOf("Third Party")>-1) {
+          //  $('#add-driver').removeAttr('disabled');
+        //}
+
+       
+    }
+
+
+
+</script>

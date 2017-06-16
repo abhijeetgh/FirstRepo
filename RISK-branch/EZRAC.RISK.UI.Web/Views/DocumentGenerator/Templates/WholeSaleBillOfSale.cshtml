@@ -1,0 +1,220 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+@using EZRAC.Risk.UI.Web.Helper
+
+<html>
+    <head>
+        <title>Document Generator, Claim ID 106379</title>    
+    </head>
+    <body style="font-family:'Times New Roman'">
+        <table>
+            <tr>
+                <td width="30%">
+                    <table>
+                        <tr><td colspan="2" align="center"><img src="@Model.Company.Logopath" width="60" height="30" /></td></tr>
+                        <tr>
+                            <td align="center" style="font-size:small">
+                                *<br />@Model.Company.Address<br />
+                                @Model.Company.City, @Model.Company.State @Model.Company.Zip
+                            </td>
+                            <td align="center" style="font-size:small">
+                                *<br />Phone:  @Model.Company.Phone<br />
+                                Fax:    @Model.Company.Fax
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="35%" align="center">
+                    WHOLESALE BILL OF SALE AND<br />ODOMETER DISCLOSURE STATEMENT
+                </td>
+                <td style="font-size:small" width="35%">
+                    BUYER (Transferee) :_______________________
+                    <br />ADDRESS :____________________________
+                    <br />CITY :_______________________________
+                    <br />ZIP :_____________ PHONE :___________
+                </td>
+            </tr>
+        </table>
+        <br /><br />
+        <table border="1">
+        <tr>
+            <td style="font-size:small">CLAIM NO.</td>
+            <td style="font-size:small" width="15%">UNIT NO.</td>
+            <td style="font-size:small">YEAR</td>
+            <td style="font-size:small">MAKE</td>
+            <td style="font-size:small" width="10%">MODE</td>
+            <td style="font-size:small">TYPE</td>
+            <td style="font-size:small">MILEAGE</td>
+            <td style="font-size:small" width="20%">VIN NO.</td>
+            <td style="font-size:small">PAYOFF</td>
+            <td style="font-size:small">SALVAGE</td>
+        </tr>
+        <tr>
+            <td style="font-size:small">@String.Format("{0}-{1}, {2}", Model.Company.Abbr, Model.ClaimId, Model.Contract != null ? Model.Contract.ContractNumber : String.Empty)</td>
+            <td style="font-size:small">@Model.VehicleViewModel.UnitNumber</td>
+            <td style="font-size:small">@Model.VehicleViewModel.Year</td>
+            <td style="font-size:small">@Model.VehicleViewModel.Make</td>
+            <td style="font-size:small">@Model.VehicleViewModel.Model</td>
+            <td style="font-size:small">4-DOOR</td>
+            <td style="font-size:small">@Model.VehicleViewModel.Mileage</td>
+            <td style="font-size:small">@Model.VehicleViewModel.VIN</td>
+            <td style="font-size:small">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="font-size:small">(@Model.SalvageBill.ToString("C2"))</td>
+        </tr>
+        <tr>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+        </tr>
+        <tr>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+        </tr>
+        <tr>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+        </tr>
+        <tr>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+            <td><font size="2">&nbsp;</font></td>
+        </tr>
+        <tr>
+            <td colspan="6" align="center" bgcolor="#DDDDDD"><font size="3"><strong>Vehicle Sales Invoice</strong></font></td>
+            <td colspan="2">&nbsp;</td>
+            <td bgcolor="black"  align="center" style="font-size:small; color:white"><strong>Total Amt. Due</strong></td>
+            <td><font size="3">$</font></td>
+        </tr>
+        <tr>
+            <td colspan="4" style="font-size:small" valign="top">
+                <br /><br />
+                    As described vehicles are sold " as is" condition and seller makes no written or oral express warranties or implied warranties whatsoever.
+                <br /><br />
+                Purchaser has read the terms and conditions of this contract and agrees and accepts them.
+                <br /><br /><br /><br />
+                ____________________________
+                <br />
+                Purchaser's Signature
+            </td>
+            <td colspan="6" align="center" style="font-size:small; font-weight:bold; border-top:none; border-bottom:none" width="48%">
+                <table border="1">
+                    <tr>
+                        <td valign="top" width="70%" align="left">Title Holder</td>
+                        <td valign="top">Amount:</td>
+                        <td valign="top" align="left">*<br />Sales Approval:<br />&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td valign="top" align="left">*<br />Title Approval:<br />&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td valign="top" align="left">*<br />Routed To:<br />&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right">Total Pay Off This Invoice:</td>
+                        <td>$</td>
+                        <td valign="top" align="left">*<br />Date Sent:<br />&nbsp;</td>
+                    </tr>
+                </table>
+            </td>          
+        </tr>
+         <tr>
+              <td colspan="10" bgcolor="black" align="left" style="color:white;font-weight:bold">Odometer Disclosure Statement</td>
+         </tr>
+        <tr>
+            <td colspan ="5" style="font-size:small" valign="top">
+                Federal law (and State lasw if applicable) requires that you state the mileage upon transfer of ownership of a vehicle.  Failure to complete an
+                odometer disclosure statement or providing a false statment may result in fines and/or imprisonment.
+                <br /><br />
+                I,_______________________state that the odometer reading(s) (of the vehicle described above) reflects the acutal mileage of the vehicle(s) described above, unless one of the
+                following statements is checked.
+                <br /><br />
+                ___________ (1) I hereby certify that to the best of my knowledge the odometer reading(s) reflects the amount of the mileage in excess
+                of its mechanical limits.
+                <br /><br />
+                ___________ (2) I hereby certify that to the best of my knowledge the odometer reading(s) is NOT the actual mileage.  WARNING ODOMETER
+                DISCREPANCY.
+            </td>
+            <td colspan="5" valign="top" style="border-top:none; border-bottom:none">
+                <table border="1">
+                    <tr><td colspan="3"></td></tr>
+                    <tr>
+                        <td colspan="3" align="center" bgcolor="gray">TRANSFEROR'S (SELLER) INFORMATION</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="font-size:small">
+                            *<br />TRANSFEROR'S PRINTED NAME (SELLER) TRANSFEROR'S STREET<br />
+                            ADDRESS CITY STATE ZIP
+                            <div style="font-size:medium">
+                                *<br />E­Z Rent­A­Car <br />2003 McCoy Road Orlando, FL<br />
+                                32809
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" valign="top" style="font-size: small">
+                            <br />SELLER'S SIGNATURE<br /><br /><br />
+                        </td>
+                        <td width="33%" valign="top" style="font-size: small">
+                            *<br />PRINT NAME<br /><br /><br />
+                        </td>
+                        <td width="33%" valign="top" style="font-size: small">
+                            *<br />DATE<br /><br /><br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center" bgcolor="gray">
+                            RECEIPT OF COPY ACKNOWLEDGED BY
+                            TRANSFEREE (BUYER)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="33%" valign="top" style="font-size: small">
+                            *<br />BUYER'S SIGNATURE<br /><br /><br />
+                        </td>
+                        <td width="33%" valign="top" style="font-size: small">
+                            *<br />PRINT NAME<br /><br /><br />
+                        </td>
+                        <td width="33%" valign="top" style="font-size: small">
+                            *<br />DATE<br /><br /><br />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+     </table>      
+</body>
+</html>

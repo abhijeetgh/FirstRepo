@@ -1,0 +1,128 @@
+﻿@model EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentTemplateViewModel
+<html>
+<head>
+    <title>Document Generator, Claim ID @Model.Company.Abbr - @Model.ClaimId</title>
+</head>
+<body style="font-family:'Times New Roman'">
+    <table border="0" width="90%">
+        <tr><td colspan="3" align="center"></td></tr>
+        <tr><td colspan="3">&nbsp;</td></tr>
+        <tr><td colspan="3" align="center"><h1>REPOSSESION & HOLD HARMLESS AUTHORIZATION</h1></td></tr>
+        <tr>
+            <td align="center" valign="middle" width="20%">Phone:  1-800-425-5075</td>
+            <td align="center" valign="middle" width="50%"><img src=@Model.Company.Logopath width="180" height="50"/></td>
+            <td align="center" valign="middle" width="20%">Fax:  1-800-793-3508</td>
+        </tr>
+        <tr>
+            <td> *<br />&nbsp;Description of Collateral:</td>
+            <td colspan="2">
+                <table>
+                    <tr><td style="font-size:1px">*</td></tr>
+                    <tr>
+                        <td>&nbsp;Yr:</td>
+                        <td style="text-decoration:underline">@Model.VehicleViewModel.Year</td>
+                        <td>&nbsp;Make :</td>
+                        <td style="text-decoration:underline">@Model.VehicleViewModel.Make</td>
+                        <td>&nbsp;Model :</td>
+                        <td style="text-decoration:underline">@Model.VehicleViewModel.Model</td>
+                        <td>&nbsp;Color :</td>
+                        <td style="text-decoration:underline">@Model.VehicleViewModel.Color</td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        <tr>
+            <td colspan="3">
+                <table>
+                    <tr><td style="font-size:1px">*</td></tr>
+                    <tr>
+                        <td>VIN# &nbsp;</td>
+                        <td style="text-decoration:underline">@Model.VehicleViewModel.VIN</td>
+                        <td>&nbsp;Key Codes: &nbsp;</td>
+                        <td>____________</td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        <tr>
+            <td colspan="3">
+                <table>
+                    <tr><td style="font-size:1px">*</td></tr>
+                    <tr>
+                        <td>Debtor/Lessees Name:</td>
+                        <td style="text-decoration:underline">@Model.DriverViewModel.Name</td>
+                        <td>&nbsp;Debtor's SSN:&nbsp;</td>
+                        <td>___________-__________-__________</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                &nbsp;Monthly Payment:__________________________ Oustanding Bal.:____________________________<br /><br />
+                <hr width="100%" />
+            </td>
+        </tr>
+        <tr><td colspan="3">&nbsp;</td></tr>
+        <tr>
+            <td colspan="3" width="80%">
+                <p>
+                    This is your authorization to reposs and impound the above-described collateral which is covered by a defaulted installment contract or lease agreement.
+                    We name Nationwide-Repo as our exclusive agents for respossesing the above described collateral.  This means that any agent we have previously engaged is no longer
+                    authorized to repossess this collateral unless they are subsequently authorized to do so by Nationwide-Repo.
+                </p>
+                <p>
+                    We agree to idemnify, defend, and save you harmless from and against any and all claims, losses and actions, except for your unauthorized efforts and/or actions
+                    may be acts of our company, its officers, employees or agent.  We understand Nationwide-Repo under its corporate charter, is bound by the laws of the State of
+                    Delaware, and it's services are rendered subject to the jurisdiction of the laws of the state.
+                </p>
+                <p>
+                    Should the collateral be found with repair charges and or storage charges incurred in such an amount that they exceed our estimate value of the collateral,
+                    Nationwide-Repo's fee will never exceed the salvage value of the collateral or we will tender a negotiable title to the collateral in lieu of your fees.
+                    I understand that I will be charged a percentage of the collateral value for skip tracing.  I also understand that this is a contingent repossesion and I will not
+                    be charged unless the collateral is repossesed, as described at www.NationWide-Repo.com/NationWide-Repo-repossesion.htm.  We will pay $200.00 closeout fee
+                    if we cancel the repo assignment prior to the 90 days.
+                </p>
+                <p>
+                    We also agree that if the debtor or his agent(s) should surrender the collateral to anyone else during the term of this agreement it will be deemed to have been
+                    repossesed by Nationwide-Repo, anyone else is understood to mean but is not limited to, body shops, police impound lots, other repossesors or to any facility under
+                    our direct or indirect control.  Your special immediate efforts will be appreciated.
+                </p>
+            </td>
+        </tr>
+        <tr><td colspan="3" align="center" style="border-bottom:solid"></td></tr>
+        <tr>
+            <td colspan="3" width="80%">
+                Signature:_____________
+                </td>
+            </tr>
+        <tr>
+            <td colspan="3" width="80%">
+                <table>
+                    <tr><td colspan="4" style="font-size:1px">*</td></tr>
+                    <tr>
+                        <td colspan="2">Company Name:</td><td colspan="2" style="text-decoration:underline"> E-Z Rent-A-Car</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Contact Name:</td>
+                        <td colspan="2" style="text-decoration:underline"> Vania Regalado</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Address:</td>
+                        <td colspan="2" style="text-decoration:underline">  2003 McCoy Road Suite A Orlando, FL 32809</td>
+                    </tr>
+                    <tr>
+                        <td> Telephone Number:</td><td style="text-decoration:underline">407-888-0528</td><td> Fax Number:</td><td style="text-decoration:underline">888-400-2285</td>
+                    </tr>
+                </table>
+                  <br />
+                 <br />
+                    
+            </td>
+        </tr>
+        <tr><td colspan="3" style="border-bottom:solid"></td></tr>
+    </table>
+
+
+</body>
+</html>

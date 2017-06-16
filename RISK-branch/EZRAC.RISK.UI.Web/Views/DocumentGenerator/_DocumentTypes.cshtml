@@ -1,0 +1,81 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.DocumentGenerator.DocumentCategoriesViewModel>
+
+<div style="max-height: 500px; overflow: auto;" class="col-xs-12 doctypegen-searchbox-warapper">
+    <ul class="doctypegen-searchbox">
+        @*<li class="search-hdr">AR</li>
+            <li>DL 2 RTR</li>
+            <li>DL 3 RTR</li>
+            <li>DL 2 RTR</li>
+            <li>DL 3 RTR</li>
+            <li class="search-hdr">Demand Letter</li>
+            <li>3rd Party</li>
+            <li>3rd Party</li>
+            <li>3rd Party</li>
+            <li>3rd Party</li>
+            <li class="search-hdr">Payment</li>
+            <li>Balance Due</li>
+            <li>Claim Closed</li>
+            <li>Claim Closed</li>
+            <li class="search-hdr">Salvage</li>
+            <li>Bid</li>
+            <li>Bid</li>
+            <li>Bid Accepted</li>
+            <li class="search-hdr">Salvage</li>
+            <li>Bid</li>
+            <li>Bid</li>
+            <li>Bid Accepted</li>
+            <li>Bid</li>
+            <li>Bid</li>
+            <li>Bid Accepted</li>*@
+        
+        @foreach (var item in Model)
+        {
+           <li class="search-hdr">@item.Category</li>
+            foreach (var type in item.DocumentTypes)
+            {
+                <li class="cursor-pointer" data-doc-type=@type.Id data-url="@Url.Action("GetDocumentType","DocumentGenerator")">@type.Description</li>
+            }
+        }
+    </ul>
+</div>
+
+
+<script>
+    $('#searchDocumentType').keyup(function () {
+        var valThis = this.value.toLowerCase(),
+            lenght = this.value.length;
+        //'<b>' + text.substr(0, lenght) + '</b>' +
+        $('.doctypegen-searchbox > li').each(function () {
+            var text = $(this).text(),
+                textL = text.toLowerCase(),
+                htmlR = text.substr(0, lenght) + text.substr(lenght);
+            (textL.indexOf(valThis) >= 0) ? $(this).html(htmlR).show() : $(this).hide();
+        });
+
+    });
+
+    $('.cursor-pointer').click(function () {
+        var claimId = $("#claimIdForNotes").val();
+        var url = $(this).attr("data-url");
+        var title = $(this).text();
+        var docType = $(this).attr("data-doc-type");
+        getDocumentGenerator(url, title, docType, claimId);
+        $('.cursor-pointer').removeClass("document-selected");
+        $(this).addClass("document-selected");
+
+    });
+
+    function getDocumentGenerator(url, title, docType, claimId) {
+        $.ajax({
+            url: url,
+            data: { claimId: claimId, documentType: docType, title: title },
+            type: "GET",
+            cache: false,
+            success: function (returnData) {
+                $("#updateContainer").html(returnData);
+            },
+            error: onErrorHandler,
+        });
+    }
+</script>
+

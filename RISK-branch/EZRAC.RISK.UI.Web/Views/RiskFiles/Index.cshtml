@@ -1,0 +1,55 @@
+﻿@using EZRAC.Risk.UI.Web.Helper
+@{
+    Layout = null;
+}  
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <h3 class="panel-title">Pictures/Files</h3>
+            </header>
+            <div class="panel-body">
+
+                @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.AddFiles))
+                {
+                    <button type="button" class="btn btn1" data-toggle="collapse" data-target=".addpicFiles" aria-expanded="false"><span class="glyphicon glyphicon-plus"></span> ADD PICTURES / FILES</button>
+                    <div class="well cla-well collapse container-fluid top15 relative addpicFiles">
+                        <a data-toggle="collapse" data-target=".addpicFiles" class="close-container" title="Close"></a>
+                        <div class="tooltip-up-arrow">
+                            <form class="form-inline cla-form" role="form">
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <label class="control-label">Category</label>
+                                    <br>
+                                    @Html.DropDownList("SelectedItem", ViewBag.FileList as IEnumerable<SelectListItem>, new { @id = "fileTypes", @class = "form-control ncl-slect top5 selectpicker", @data_live_search = "true", @title = "--Please Select--" })
+                                    <div id="validationMessage" style="color:red"></div>
+                                    <div id="fileUploadResult" class="saveSuccess top10"></div>
+                                </div>
+                                <div class="form-group inline-form-space">
+                                    <label class="control-label">Upload Files</label>
+                                    <br>
+                                    <input type="file" id="txtUploadfile" name="FileUpload" multiple class="form-control ncl-slect top5">
+                                    <div id="fileValidation" style="color:red"></div>
+                                    <div id="fileinfo" class="clearfix">
+                                    </div>
+                                </div>
+                                <div class="form-group inline-form-space">
+                                    <button type="button" id="btnFileSave" class="btn btn1 top25 btn-large-width">SAVE</button>
+                                    <button type="button" id="btnFileCancel" class="btn btn2 top25 left10 btn-large-width">RESET</button>
+
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                }
+
+                <div class="top-space clearfix"></div>
+                <div id="fileList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/appScripts/Risk-files.js")"></script>

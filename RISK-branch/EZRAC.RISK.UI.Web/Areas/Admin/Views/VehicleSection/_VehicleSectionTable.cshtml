@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Admin.VehicleSectionViewModel>
+@using EZRAC.Risk.UI.Web.Helper
+<table class="grey-white-table  dark-blue-header complete complete-width pending-claim-table grey-border-1 bordered-table" id="vehicleSectionTable" style="cursor:pointer">
+    <thead>
+        <tr class="white-color th--min-height">
+            <th class="">
+                <div class="th-min-height align-text-left margin-left-admin">Vehicle Section</div>
+            </th>
+            <th class="">
+                <div class="th-min-height"> Delete </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="claim-status-coloumn vehicle-section align-text-left" data-id="@item.Id" data-url="@Url.Action("VehicleSectionDetail", "VehicleSection")">@item.Section</td>
+                @*<td class="claim-status-coloumn"><a class="delete-action" href="javascript:void(0);" data-id="@item.Id"></a></td>*@
+                <td class="claim-status-coloumn"><a class="delete-action" title="Delete" href="javascript:void(0);" data-url="@Url.Action("DeleteVehicleSection", "VehicleSection")" data-id="@item.Id" data-url-validation="@Url.Action("IsVehicleSectionUsed", "VehicleSection")"><span class='ico-delete'>&nbsp;</span></a></td>
+                    @*@Ajax.MyActionLink("<span class='ico-delete'>&nbsp;</span>", "DeleteVehicleSection", "VehicleSection", "delete-action",
+                    new {area="Admin",id=@item.Id}, 
+                    new AjaxOptions{ HttpMethod="Delete", 
+                        Confirm="Do you want to delete vehicle section?", 
+                        InsertionMode=InsertionMode.Replace,
+                        OnSuccess = "successDelete(data)"
+                    })*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="@Url.Content("~/Scripts/appScripts/AdminPages/VehicleSection/vehicle-section-table.js")" type="text/javascript"></script>

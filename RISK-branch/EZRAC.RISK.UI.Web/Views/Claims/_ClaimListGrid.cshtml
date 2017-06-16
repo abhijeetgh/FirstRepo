@@ -1,0 +1,199 @@
+﻿@using EZRAC.Risk.UI.Web.Helper;
+@model EZRAC.Risk.UI.Web.Helper.PageHelper<EZRAC.Risk.UI.Web.ViewModels.Claims.ClaimInfoViewModel>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".show-record option").each(function () {
+            if (this.value.toString() == '@Model.RecordsToShow') {
+                $(this).attr("selected", "selected");
+            }
+        });
+    });
+
+</script>
+<script src="@Url.Content("~/Scripts/appScripts/get-claim-list.js")"></script>
+<link href="~/Content/dataTable.css" rel="stylesheet" />
+
+    <div id="divFollowup" class="row padding-horizontal-15">
+        <div class="grey-border-1 top15">
+            <table class="grey-white-table  dark-blue-header complete complete-width claim-table bordered-table ">
+                <tr class="white-color table-header">
+                    @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteClaim))
+                    {
+                        <th class='check-coloumn check-header'>
+                            <input type="checkbox" name="select-checkbox" />
+                        </th>
+                    }
+                    <th class='claim-id-coloumn'>
+                        <div class="display-inline">@Ajax.ActionLink("Claim Id", "GetCurrentGridData", new { page = 1, sortBy = "Id", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</div>
+
+                        @CustomHtmlHelper.SortOrderMark(Model.SortBy, "Id", Model.SortOrder)
+                        
+                    </th>
+                    <th class='claim-status-coloumn'>
+                        <div class="display-inline">@Ajax.ActionLink("Status", "GetCurrentGridData", new { page = 1, sortBy = "Status", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</div>
+                        @CustomHtmlHelper.SortOrderMark(Model.SortBy, "Status", Model.SortOrder)
+                    </th>
+                    <th class='claim-assigned-coloumn'>
+                        <div>
+                            <div class="display-inline">@Ajax.ActionLink("Assigned To", "GetCurrentGridData", new { page = 1, sortBy = "AssignedToName", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })
+                            @CustomHtmlHelper.SortOrderMark(Model.SortBy, "AssignedToName", Model.SortOrder)
+                        </div>
+
+
+                    </div>
+                </th>
+                <th class='contract-coloumn'>
+                    <div class="display-inline">@Ajax.ActionLink("Contract", "GetCurrentGridData", new { page = 1, sortBy = "ContractNumber", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</div>
+                    @CustomHtmlHelper.SortOrderMark(Model.SortBy, "ContractNumber", Model.SortOrder)
+                </th>
+                <th class='claim-   -coloumn'>
+                    <div class="display-inline">@Ajax.ActionLink("Driver", "GetCurrentGridData", new { page = 1, sortBy = "DriverName", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</div>
+                    @CustomHtmlHelper.SortOrderMark(Model.SortBy, "DriverName", Model.SortOrder)
+                </th>
+                <th class='claim-driver-coloumn'>
+                    <div class="display-inline">@Ajax.ActionLink("Unit No.", "GetCurrentGridData", new { page = 1, sortBy = "UnitNumber", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</div>
+                    @CustomHtmlHelper.SortOrderMark(Model.SortBy, "UnitNumber", Model.SortOrder)
+                </th>
+                <th class='claim-vehicle-coloumn'>
+                    <div class="display-inline">@Ajax.ActionLink("Vehicle", "GetCurrentGridData", new { page = 1, sortBy = "Model", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</div>
+                    @CustomHtmlHelper.SortOrderMark(Model.SortBy, "Model", Model.SortOrder)
+                </th>
+                <th class='claim-followup-date'>
+                    <div class="padding-left-10">
+                        <div class="display-inline">@Ajax.ActionLink("Follow Up Date", "GetCurrentGridData", new { page = 1, sortBy = "FollowUpDate", sortOrder = Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })
+                        @CustomHtmlHelper.SortOrderMark(Model.SortBy, "FollowUpDate", Model.SortOrder)
+                    </div>
+
+                </div>
+            </th>
+            <th class='notes-coloumn'> Notes </th>
+        </tr>
+        @foreach (var item in Model.Data)
+{
+    <tr class="dataRow">
+        @if (SecurityHelper.IsAuthorized(EZRAC.RISK.Util.Common.ClaimsConstant.DeleteClaim))
+        {
+            <td class='check-coloumn child-checkbox'><input type="checkbox" name="delete-claim-checkbox" id="@item.ClaimID" /></td>
+        }
+        <td class='claim-id-coloumn '>@Html.ActionLink(String.Format("{0}-{1}", item.CompanyAbbr, item.ClaimID), "ViewClaim", new { id = item.ClaimID }) </td>
+        <td class='claim-status-coloumn'> @item.SelectedStatusName</td>
+        <td class='claim-assigned-coloumn'>
+            <label id="assignedUserId" class="display-none"> @item.SelectedAssignedUserId</label>
+            <label id="assignedUser" class="editable-row">@item.SelectedAssignedUserName</label>
+            <div class="center-align display-none">
+                <select>
+                    @foreach (var user in item.Users)
+                    {
+                        if (user.Value.Equals(item.SelectedAssignedUserId.ToString()))
+                        {
+                            <option selected="selected" value="@user.Value">@user.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@user.Value">@user.Text</option>}
+                    }
+                </select>
+                <a class="correct-icon correct-icon-small" href="javascript:void(0);"></a>
+                <a class="incorrect-icon incorrect-icon-small" href="javascript:void(0);"></a>
+            </div>
+        </td>
+        <td class='contract-coloumn'> @item.ContractNumber</td>
+        <td class='claim-driver-coloumn'>@item.DriverName</td>
+        <td class='claim-unitnumber-coloumn'>@item.UnitNumber</td>
+        <td class='claim-vehicle-coloumn'>@item.VehicleName</td>
+        <td class='claim-followup-date'>
+            <label id="followUpDate" class="editable-row">@Html.DisplayFor(d => item.FollowupDate)</label>
+            <div class="sandbox-container display-none" data-id="@item.ClaimID" data-url="@Url.Action("AddFollowupNotesClaimList", "Notes")">
+
+                <input type="text" readonly="readonly" value='@Html.DisplayFor(d => item.FollowupDate)' class="form-control sand-datepicker display-inline-block datepicker" />
+                <a class="correct-icon correct-icon-small " href="javascript:void(0);"></a>
+                <a class="incorrect-icon incorrect-icon-small" href="javascript:void(0);"></a>
+
+            </div>
+        </td>
+        <td class='notes-coloumn'>
+            <div class=" display-inline relative notes" title="Notes">
+                <a class="dropdown-toggle" role="button" aria-expanded="true" aria-haspopup="true" data-toggle="dropdown">
+                    <span class="notes-icon float-left">&nbsp;</span>
+                </a>
+
+                <ul class="dropdown-menu pull-right  tooltip-up-arrow notes-area top15 popup-width" id="notes-id"></ul>
+            </div>
+
+        </td>
+    </tr>
+}
+    </table>
+
+    <div class="row padding-horizontal-30 paging-footer">
+        <div class="row grey-background grey-border-1">
+            @if (Model.TotalRecordCount > 5)
+            {
+                <div class="float-left">
+                    <ul class="pagination-list bottom0 top5 ">
+                        <li class="pagination-list-item ">
+                            @*<a href="javascript:void(0);" aria-label="Next">
+                                <div class=arrow-left></div>
+                            </a>*@
+                            @Ajax.MyActionLink("<div class=arrow-left></div>", "GetCurrentGridData", "pageNo border-none", new { page = (Model.CurrentPage == 1) ? Model.CurrentPage : Model.CurrentPage - 1, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" })
+                        </li>
+                        @for (int i = 1; i <= Model.NumberOfPages; i++)
+                        {
+                            if (i == Model.CurrentPage)
+                            {
+                                <li class="pagination-list-item active"><a>@i</a></li>
+                            }
+                            else //else if(i == (Model.CurrentPage -1) || i == (Model.CurrentPage +1))
+                            {
+                                <li class="pagination-list-item"> @Ajax.ActionLink(@i.ToString(), "GetCurrentGridData", new { page = @i, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" }, new { @class = "pageNo" })</li>
+                            }
+                        }
+                        <li class="pagination-list-item">
+                            @*<a href="javascript:void(0);" aria-label="Next">
+                                <div class=arrow-right></div>
+                            </a>*@
+                            @Ajax.MyActionLink("<div class=arrow-right></div>", "GetCurrentGridData", "pageNo border-none", new { page = (Model.CurrentPage == Model.NumberOfPages) ? Model.CurrentPage : Model.CurrentPage + 1, sortBy = Model.SortBy, sortOrder = !Model.SortOrder, recordCountToDisplay = "xx" }, new AjaxOptions { UpdateTargetId = "gridcontainer", OnFailure = "onErrorHandler(xhr)" })
+                        </li>
+                    </ul>
+                </div>
+            }
+            <div class="row padding-right-20">
+                <div class=" bottom10 top10">
+                    @if (Model.TotalRecordCount > 5)
+                    {
+                        <span>Items per Page </span> <span>
+                            <select class="show-record">
+                                <option value="0">All</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </span>
+                    }
+                    @if (Model.TotalRecordCount > 0)
+                    {
+                        <span class="pull-right info"> @Model.PageInfo</span>
+                    }
+                    else
+                    {
+                        <span class="info"> @Model.PageInfo</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="popup"></div>
+
+<input type="hidden" id="pageNo" value="@Model.CurrentPage" />
+<input type="hidden" id="sortBy" value="@Model.SortBy" />
+<input type="hidden" id="recordsToShow" value="@Model.RecordsToShow" />
+<input type="hidden" id="sortOrder" value="@Model.SortOrder" />
+<input type="hidden" id="totalRecords" value="@Model.TotalRecordCount" />
+<input type="hidden" id="claimIdForNotes" />
+

@@ -1,0 +1,126 @@
+﻿@model IEnumerable<EZRAC.Risk.UI.Web.ViewModels.Reports.BasicReportViewModel>
+<div id="ReportResult">
+    <div class="col-xs-12">
+        @*<div class="report-box">
+            <h4>Summary</h4>
+            <p><span><strong>Date Type</strong></span>&nbsp;<span id="DateType"></span></p>
+            <p><span><strong>Date Range</strong></span> &nbsp;<span id="SummaryDateRange"></span></p>
+            <p><span><strong>Locations</strong></span>&nbsp;<span id="LocationNames"> vaniya, john01</span></p>
+            <p><span><strong>Report Date</strong></span>&nbsp;<span id="ReportDate"></span></p>
+        </div>*@
+        <a href="@Url.Action("GenerateExportFile", "Report")" class="export-btn pull-right top20"><span class="exporticon">&nbsp;</span><strong>Export</strong></a>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="grey-border-1 top15">
+
+            <table class="grey-white-table dark-blue-header complete complete-width bordered-table paginated-table">
+                <thead>
+                    <tr class="white-color">
+                        <th>
+                            <div class="display-inline">Claim </div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Contract/Claim Number</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Customer </div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Unit</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Make/Model</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Tag</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Location</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Charges</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Payments</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Balance</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">Status</div>
+                        </th>
+                        <th>
+                            <div class="display-inline">FollowUp Date</div>
+                        </th>
+                    </tr>
+                </thead>
+
+
+
+                <tbody>
+
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> @String.Format("{0}-{1}", item.CompanyAbbr, item.Claim) <input type="hidden" id="claimid" value="@item.Claim" /> </td>
+                                <td> @Html.ActionLink(String.Format("{0} / {1}-{2}", item.Contract, item.CompanyAbbr, item.Claim), "ViewClaim", new { @area = "", @Controller = "claims", id = item.Claim }) </td>
+                                @*<td> @item.Contract</td>*@
+                                <td> @item.Customer </td>
+                                <td> @item.Unit</td>
+                                <td> @item.MakeModel </td>
+                                <td> @item.Tag</td>
+                                <td> @item.Location</td>
+                                <td><a data-url="@Url.Action("ViewBilling", new { id = @item.Claim })" class="view-billings cursor-pointer">@item.Charges</a></td>
+                                <td><a data-url="@Url.Action("ViewPayments", new { id = @item.Claim })" class="view-payments cursor-pointer" data-claimid="@item.Claim">@item.Payment </a></td>
+                                <td> @item.Balance</td>
+                                <td> @item.Status</td>
+                                <td> @item.NextCallDate</td>
+                            </tr>
+                        }
+
+                    }
+
+                </tbody>
+            </table>           
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/appScripts/ReportPages/basic-report.js")" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+            $.extend(true, $.fn.dataTable.defaults, {
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "info": false,
+                "destroy": true
+                //"scrollY": "200px",
+
+            });
+            $("#ReportResult table").DataTable({
+                columnDefs: [
+                {
+                    "orderable": false,
+                }
+                ],
+                "order": [[0, "asc"]],
+                "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                "language": {
+                    "lengthMenu": "Display _MENU_ records",
+                    "emptyTable": "Records are not available"
+                }
+            });
+            $(".dataTables_filter").css("display", "none");
+        //$(".export-btn").click(function () {            
+        //    window.location = 'Report/GenerateExportFile';
+        //});
+
+    })
+
+</script>
+
+
