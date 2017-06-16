@@ -1,0 +1,1169 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*=========================
+Tab panel css here
+======================*/
+.container {
+    width: 98.4%;
+    margin: 0 auto;
+}
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+
+.auto-console-div {
+    padding: 14px 0 14px 17px;
+    background-color: #e5e5e5;
+    margin-bottom: 11px;
+    color: #000;
+    font-weight: bold;
+}
+
+.container #content .tab-panel .tab-content {
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+
+.container #content .tab-panel .nav li a {
+    padding: 12px 19px 12px 19px;
+    text-transform: uppercase;
+}
+
+.container #content .tab-panel .tab-content .edit-del-box {
+    padding: 18px 0 18px 11px;
+    width: 99.4%;
+}
+
+.container .panel-container #view2 .edit-del-box .Sch-loc-status-user-box span.sch-new-job {
+    float: left;
+    padding: 9px 10px;
+    background-color: #154f6e;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.container #content .tab-panel .tab-content .edit-del-box .Sch-loc-status-user-box .loc-status-user-ul {
+    display: inline;
+    float: left;
+    list-style-type: none;
+    padding: 8px 0 0 13px;
+    color: #3c3c3c;
+    min-width: 22%;
+}
+
+.container .panel-container #view2 .edit-del-box .Sch-loc-status-user-box .dropdonw-container {
+    float: left;
+    width: 60%;
+}
+
+.dropdown-sub-menu li a {
+    display: inline;
+}
+
+.dropdown-sub-menu {
+    margin-top: 12px;
+}
+
+.container #content .tab-panel .tab-content .edit-del-box .review-delete-box {
+    float: right;
+}
+
+.container #content .tab-panel .tab-content .edit-del-box .Sch-loc-status-user-box .loc-status-user-ul li {
+    display: inline;
+    font-weight: bold;
+}
+
+.container #content .tab-panel .tab-content .data-panel {
+    margin: 0 auto;
+    width: 99.3%;
+    padding: 13px 5px 13px 5px;
+}
+
+.container #content .tab-panel .tab-content .tab-pane .edit-del-box .loc-status-user-ul .dropdown a#drop4 {
+    border: 1px solid #bfbfbf;
+    border-radius: 5px;
+    padding: 10px;
+    color: #707070;
+}
+
+.container #content .tab-panel .nav li.active {
+    font-weight: bold;
+}
+
+.tab-panel .tab-content .tab-pane .edit-del-box .Sch-loc-status-user-box .loc-status-user-ul .dropdown .dropdown-toggle {
+    margin: 0 13px 0 0;
+}
+/*=========================
+right side  edit del icon css here
+======================*/
+.container .panel-container #view2 .edit-del-box .review-delete-box ul li {
+    display: block;
+    float: left;
+    height: 43px;
+    list-style-type: none;
+}
+
+.container .panel-container #view2 .edit-del-box .review-delete-box ul li {
+    cursor: pointer;
+}
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.start-icon {
+        background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll 9px 20px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.stop-icon {
+        background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -29px 20px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.edit-icon {
+        background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -64px 20px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.pending-icon {
+        background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -96px 20px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.review-icon {
+        background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -154px 20px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.delete-icon {
+        background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -210px 19px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.initiateSum-icon {
+        background: rgba(0, 0, 0, 0) url("../images/start_summary.png") no-repeat scroll 47% 20px;
+        cursor: default;
+    }
+
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.show-icon {
+        background: rgba(0, 0, 0, 0) url("../images/showSummary.png") no-repeat scroll 50% 20px;
+        cursor: default;
+    }
+    .container .panel-container #view2 .edit-del-box .review-delete-box ul li.read-only-shop-icon {
+        background: rgba(0, 0, 0, 0) url("../images/R.png") no-repeat scroll 47% 20px;
+        cursor: default;
+    }
+
+.start {
+    /*background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll 10px 0px;*/
+    cursor: default;
+    background: rgba(0, 0, 0, 0) url("../images/sprite.png") no-repeat scroll 2px 0;
+}
+
+.stop {
+    /*background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -26px 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite.png") no-repeat scroll -33px 0;
+    cursor: default;
+}
+
+.edit {
+    /*background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -61px 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite.png") no-repeat scroll -68px 0;
+    cursor: default;
+}
+
+.pending {
+    /*background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -96px 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -112px 0px;
+    cursor: default;
+}
+
+.review {
+    /*background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -154px 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -170px 0px;
+    cursor: default;
+}
+
+.del {
+    /*background: rgba(0, 0, 0, 0) url("../images/sprite-for-right-edit-vew-del.png") no-repeat scroll -210px 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite.png") no-repeat scroll -224px 0;
+    cursor: default;
+}
+
+
+
+
+#view2 .start, #view2 .stop, #view2 .edit, #view2 .del, #view2 .pending, #view2 .review, #view2 .initiateSum, #view2 .show {
+    cursor: pointer !important;
+}
+
+.container .panel-container #view2 .edit-del-box .review-delete-box ul li span {
+    padding: 6px;
+}
+
+.panel-container #view1 .jobschedule, .panel-container #view1 .rateparameter {
+    float: left;
+    width: 40%;
+}
+
+    .panel-container #view1 .jobschedule > span, .panel-container #view1 .rateparameter > span, .panel-container #view1 .ratesuggestion > span {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+.ratesuggestion .pricegap-box {
+    float: left;
+    width: 20%;
+    padding-top: 9px;
+}
+
+    .ratesuggestion .pricegap-box ul {
+        display: inline;
+        list-style-type: none;
+    }
+
+    .ratesuggestion .pricegap-box li {
+        font-size: 14px;
+        color: #6c6c6c;
+    }
+
+.ratesuggestion li input {
+    margin-right: 9px;
+}
+
+.ratesuggestion .pricegap-box li.spacing-top-bottom {
+    padding: 5px 1px;
+    font-size: 12px;
+}
+
+    .ratesuggestion .pricegap-box li.spacing-top-bottom:last-child {
+        margin-bottom: 20px;
+    }
+
+#view1 .jobschedule .frequency, #view1 .jobschedule .daystorun, #view1 .jobschedule .days, .rateparameter .rate-fetch-parameter {
+    float: left;
+    width: 100%;
+    padding: 8px 0;
+}
+
+    #view1 .jobschedule .frequency .freq-ul {
+        padding-top: 15px;
+    }
+
+        #view1 .jobschedule .frequency .freq-ul li {
+            color: #6c6c6c;
+            float: left;
+            font-size: 14px;
+            list-style-type: none;
+            padding: 8px 0;
+            width: 34%;
+        }
+
+}
+
+#view1 .jobschedule .frequency .freq-ul li input[type="checkbox"], .days .days-inner-box .all-text input[type="checkbox"] {
+    margin-right: 9px;
+}
+
+#view1 .jobschedule .frequency .freq-text, #view1 .jobschedule .daystorun .daystorun-inner-box .daystorun-text, #view1 .jobschedule .daystorun .days-inner-box .days-text {
+    color: #6c6c6c;
+    display: block;
+    float: left;
+    padding: 9px 0;
+    width: 100%;
+}
+
+.stand-horizon-box {
+    float: left;
+    width: 100%;
+}
+
+.ratesuggestion .pricegap-text, .ratesuggestion .setminratebtn {
+    color: #6c6c6c;
+    display: block;
+    padding: 9px 9px 0 0;
+}
+
+.rateparameter .rate-fetch-parameter .ratefetch-text {
+    color: #6c6c6c;
+    display: block;
+    float: left;
+    padding: 9px 9px 0 0;
+}
+
+.rateparameter .rate-fetch-parameter .horizon-text {
+    color: #6c6c6c;
+    display: block;
+    float: left;
+    padding: 9px 0;
+}
+
+.panel-container .jobschedule .daystorun .daystorun-inner-box .daystorun-ul {
+    list-style-type: none;
+}
+
+.select_tym, .daystorun .daystorun-inner-box .start-date span, .end-date span, .days .days-inner-box span, .source-loc-length-car-box .source .source-inner-box span, .location .location-inner-box span, .provider-box span {
+    color: #3b3b3b;
+    float: left;
+    //font-size: 11px;
+    font-weight: bold;
+    padding: 6px 0;
+    width: 100%;
+}
+
+.rateparameter .rate-fetch-parameter .rate-fetch-parameter-inner-box {
+    float: left;
+    width: 100%;
+}
+
+.provider-box {
+    float: left;
+    width: 31%;
+}
+
+.rate-fetch-parameter .rate-fetch-parameter-inner-box .start-date span, .end-date span {
+    color: #3b3b3b;
+    float: left;
+    //font-size: 11px;
+    font-weight: bold;
+    padding: 6px 0;
+    width: 100%;
+}
+
+.daystorun .daystorun-inner-box .start-date, .end-date, .rate-fetch-parameter .rate-fetch-parameter-inner-box .start-date, .end-date {
+    float: left;
+    width: 157px;
+}
+
+.hasDatepicker, .ib {
+    border: 1px solid #bfbfbf;
+    padding: 5px;
+    width: 137px;
+}
+
+.days .days-inner-box .weekdaysbox {
+    border: 1px solid #bebebe;
+    width: 145px;
+    overflow: hidden;
+    float: left;
+}
+
+
+.days .days-inner-box .weekdays-ul li {
+    color: #6c6c6c;
+    float: left;
+    font-size: 12px;
+    list-style-type: none;
+    padding: 8px 0 0 15px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.days .days-inner-box .weekdays-ul input, .ratefetch-text input, .rateparameter .rate-fetch-parameter .horizon-text input, .jobschedule .frequency .freq-ul input {
+    margin-bottom: 2px;
+    vertical-align: bottom;
+}
+
+.rateparameter .rate-fetch-parameter .source-loc-length-car-box .sourc-loc-inner-box {
+    float: left;
+    margin-right: 13px;
+    margin-top: 15px;
+    width: 166px;
+}
+
+.rateparameter .rate-fetch-parameter .source-loc-length-car-box {
+    float: left;
+    width: 100%;
+}
+
+.source .source-inner-box .sourcebox, .location .location-inner-box .locationbox {
+    border: 1px solid #bebebe;
+    width: 145px;
+    overflow: hidden;
+    float: left;
+}
+
+.source-ul li, .location-ul li {
+    color: #6c6c6c;
+    float: left;
+    font-size: 12px;
+    list-style-type: none;
+    padding: 8px 0 0 15px;
+    width: 100%;
+}
+
+.location .location-inner-box .locationbox p {
+    padding: 3px;
+}
+
+    .location .location-inner-box .locationbox p input {
+        height: 29px;
+        line-height: 29px;
+    }
+
+.location .location-inner-box .locationbox .search-box {
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    float: left;
+    margin: 3px;
+}
+
+.search-box .search-input {
+    border: 0 none;
+}
+
+img.search {
+    bottom: 8px;
+    float: right;
+    padding-right: 7px;
+    position: relative;
+    cursor: pointer;
+}
+
+.length li {
+    float: left;
+    list-style-type: none;
+    padding-right: 13.9px;
+}
+
+.all-text.length li:nth-child(1) {
+    padding-left: 0;
+}
+
+.setminratebtn input[type="button"] {
+    background: #164f6d none repeat scroll 0 0;
+    border: 0 none;
+    box-sizing: border-box;
+    color: #fff;
+    line-height: 34px;
+    padding: 0 15px;
+}
+
+.save input[type="button"] {
+    background: #d36f33 none repeat scroll 0 0;
+    border: 0 none;
+    box-sizing: border-box;
+    color: #fff;
+    line-height: 34px;
+    padding: 0 15px;
+}
+
+.save-box {
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+.save {
+    float: left;
+}
+
+.righseltext {
+    color: #707070;
+    float: right;
+    font-size: 12px;
+    cursor: pointer;
+}
+/*=========================
+table-responsive css for Schedulre new job
+======================*/
+.container .panel-container #view2 .data-panel {
+    margin-top: 19px;
+}
+
+.data-panel .table-responsive table.table {
+    width: 100%;
+}
+
+.data-panel .table-responsive .table tr.table-tr-sch-new-job th {
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+.data-panel .table-responsive .table tr.table-tr-sch-new-job {
+    background: #2988b9 none repeat scroll 0 0;
+    color: #fff;
+}
+
+.data-panel .table-responsive .table tr.table-tr-sch-new-job-content td {
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.data-panel .table-responsive .table tr.table-tr-sch-new-job th:last-child {
+    width: 14%;
+}
+
+.data-panel:not(.ftbjobtable) .table-responsive .table.table-bordered ul li {
+    float: left;
+    list-style-type: none;
+}
+
+.data-panel .table-responsive .table tbody td ul li span {
+    margin-right: 18px;
+}
+
+
+.table-ul-right {
+    display: inline;
+}
+
+.Sch-loc-status-user-box {
+    width: 75%;
+}
+
+.table {
+    border-spacing: 0;
+    border: 1px solid #b6b6b6;
+    border-right: 0;
+    text-align: center;
+}
+
+    .table th {
+        border-bottom: 1px solid #b6b6b6;
+        font-weight: bold;
+    }
+
+    .table th {
+        background: #2988b9;
+        color: #fff;
+        padding: 10px 20px;
+    }
+
+td {
+    padding: 10px 20px;
+}
+
+table td, .table th {
+    border-right: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+}
+
+.popup-top {
+    background: #e5e5e5;
+    font-size: 1.2em;
+    padding: 13px 10px;
+}
+
+#srpopup {
+    width: 1250px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    z-index: 99;
+    background: #fff;
+    border: 1px solid #ccc;
+    background: #cde3f0;
+}
+
+#mr_popup {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    z-index: 99;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0;
+}
+
+    #mr_popup input[type="text"] {
+        padding: 5px;
+        width: 80%;
+    }
+
+/* Automation console tether setting */
+#mr_Tether_popup {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    z-index: 99;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0;
+}
+
+    #mr_Tether_popup input[type="text"] {
+        padding: 4px;
+        width: 24%;
+    }
+/* End automation console tether setting */
+
+/**/
+#mr_AutoConsoleRuleSet_popup {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    z-index: 99;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0;
+}
+
+
+.left-panel {
+    width: 12%;
+}
+
+.right-panel {
+    box-sizing: border-box;
+    width: 88%;
+    min-height: 410px;
+    overflow: auto;
+    background: #fff;
+}
+
+.left-panel ul li {
+    list-style: none;
+    padding: 12px 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.popup_bg {
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    opacity: 0.2;
+}
+
+.rsselected {
+    background: #ccc;
+}
+
+.view2, .view1 {
+    cursor: pointer;
+}
+
+.two-cols-select select {
+    border: 0px;
+    padding: 0 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.rateparameter .rate-fetch-parameter {
+    padding: 15px 0;
+}
+
+.select-ul {
+    list-style: none;
+    background-image: url(../images/dd_arrow.png);
+    border: 1px solid #b6b6b6;
+    color: #565656;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    clear: both;
+}
+
+    .select-ul li {
+        padding: 5px;
+        max-width: 115px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .select-ul ul li {
+        max-width: 100%;
+    }
+
+.drop-down {
+    background: #fff;
+}
+
+#searchLocation {
+    width: 110px;
+    margin: 0 5px;
+    background-image: url(../images/lens.png);
+    background-repeat: no-repeat;
+    background-position: 97%;
+    padding-right: 15px;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.grid-arrow-green-classic, .grid-arrow-red-classic {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(../images/rate-grid-arrows-classic.png) top center no-repeat;
+}
+
+.grid-arrow-green-classic {
+    background-position: 0 -25px;
+}
+
+.grid-arrow-red-classic {
+    background-position: 0 0;
+}
+
+.activePage {
+    color: black;
+    cursor: default;
+    text-decoration: none;
+    text-align: center;
+}
+
+.inActivePage {
+    color: blue;
+    cursor: auto;
+    text-decoration: underline !important;
+    text-align: center;
+}
+
+#jobHistory {
+    min-height: 355px;
+}
+
+.ard, .aru {
+    margin: 0px 8px;
+}
+
+.selected,
+.drop-down li:hover,
+.drop-down1 li:hover {
+    background: #328efe;
+    color: #fff;
+}
+
+.not-available {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: url(../images/cancel.png) top center no-repeat;
+}
+
+.select_tym label {
+    display: block;
+    font-weight: normal;
+}
+
+.select_tym {
+    width: 160px;
+}
+
+.checked-ok {
+    margin: 2px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: url(../images/checkmark_ok.png) top center no-repeat;
+    margin-bottom: -2px;
+}
+
+.noResults {
+    display: none;
+    font-size: 1.17em !important;
+}
+
+.noResultsHeader {
+    display: none;
+}
+
+
+.reviewedCheckMark {
+    background-image: url("../images/checkmark_ok.png");
+    background-position: 97%;
+    background-repeat: no-repeat;
+}
+
+#pagingList {
+    position: absolute;
+    bottom: 0;
+    left: 6%;
+}
+
+.all-text {
+    font-size: 11px;
+}
+
+.grey_bg {
+    background: #f4f4f4;
+}
+
+.grey_bg_stopbyFTB {
+    background-color: #fbebeb;
+}
+
+.checkboxMargin {
+    margin-right: 5px;
+}
+
+#error-span {
+    display: inline-block;
+}
+
+.jobschedule, .rateparameter {
+    background-image: url(../images/ac-arrow.png);
+    background-repeat: no-repeat;
+    background-position: 85% 222px;
+}
+
+.span_align {
+    display: inline-block;
+    width: 90px;
+}
+
+.table-responsive:not(#divftbtable) {
+    max-height: 723px;
+}
+
+.tetherCol {
+    display: none;
+}
+
+.suggestedRateHeaders {
+    width: 100%;
+}
+
+    .suggestedRateHeaders tr:last-child td {
+        border-bottom: 0px;
+        border-right: 0px;
+    }
+
+    .suggestedRateHeaders td {
+        /*border-width:0px;*/
+        border-right: 0px;
+    }
+
+.table .brandHeader {
+    padding: 0px;
+}
+
+@media only screen and (min-device-width: 1281px) {
+    #mr_AutoConsoleRuleSet_popup {
+        left: 15%;
+    }
+}
+/*FTB Automation*/
+select {
+    padding: 0.3em 0;
+    background: #fbfbfb;
+    border-radius: 5px;
+}
+/*.show-icon,.initiateSum-icon{
+    background: rgba(0, 0, 0, 0) url("../images/showSummary.png") no-repeat scroll 48% 11px;
+    cursor: default;
+    padding:10px;
+}
+.initiateSum-icon{
+	 background: rgba(0, 0, 0, 0) url("../images/start_summary.png") no-repeat scroll 47% 11px;
+	 cursor: default;
+     padding:10px;
+}*/
+.show {
+    /*background: rgba(0, 0, 0, 0) url("../images/showSummary.png") no-repeat scroll 50% 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite.png") no-repeat scroll -196px 0;
+    cursor: default;
+}
+
+.initiateSum {
+    /*background: rgba(0, 0, 0, 0) url("../images/start_summary.png") no-repeat scroll 50% 0px;*/
+    background: rgba(0, 0, 0, 0) url("../images/sprite.png") no-repeat scroll -139px 0;
+    cursor: default;
+}
+
+.ftb-auto-location #FTBmonths {
+    height: 111px;
+}
+
+.container > .panel-container {
+    min-height: 890px;
+}
+
+.ftbjobtable .hidden {
+    text-align: left;
+}
+
+.spn_R {
+    background-image: url(../images/R.png);
+    position: absolute;
+    left: -1px;
+    top: 0px;
+    height: 22px;
+    width: 30px;
+}
+
+.status_color {
+    color: red;
+}
+.table-ul-right li {
+    margin-right: 1%;
+}
+
+.RateLimit_days {
+    margin-left: 10px !important;
+}
+    .RateLimit_days .selected {
+        background: #fe8881;
+    }
+
+#MinRates .Days_ul {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+    #MinRates .Days_ul li {
+        border: 1px solid #c4c4c4;
+        display: inline;
+        float: left;
+        font-weight: normal;
+        margin: 0;
+        padding: 6px;
+    }
+
+
+/*Automation Console show Daily Classic view */
+
+#searchResultRates, #daily-rates-table {
+    border-spacing: 0;
+    border: 2px solid #e3e3e3;
+    -ms-touch-action: auto !important;
+    touch-action: auto !important;
+}
+
+    #searchResultRates thead th, #daily-rates-table thead th {
+        box-shadow: inset 0px 11px 8px -10px transparent, inset 0px -11px 8px -10px #ccc;
+    }
+
+.daily-rate {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#searchResultRates td, #daily-rates-table td {
+    width: 70px;
+}
+
+#searchResultRates thead tr th, #daily-rates-table thead tr th {
+    width: 70px;
+}
+
+#searchResultRates thead th, #daily-rates-table thead th {
+    border: 1px solid #e3e3e3;
+}
+
+#searchResultRates tbody td, #daily-rates-table tbody td {
+    border: 1px solid #e3e3e3;
+}
+
+#searchResultRates td.empty-square, #daily-rates-table td.empty-square {
+    background: transparent;
+}
+
+#searchResultRates th.company-logo {
+    padding: 0 0 0.6em 0;
+}
+
+    #searchResultRates th.company-logo img {
+        max-height: 70px;
+        max-width: 70px;
+    }
+
+.dailyFilter li {
+    margin-right: 5px;
+}
+
+#searchResultRates td,
+#daily-rates-table td {
+    background: #fff;
+    margin: 1px;
+    font-size: 12px;
+    text-align: center;
+    padding: 0.1em;
+}
+
+.classictable td {
+    padding: 0.7em !important;
+}
+
+#searchResultRates thead th,
+#daily-rates-table thead th {
+    font-size: 0.9em;
+}
+
+#searchResultRates td.car-class-img,
+#daily-rates-table td.day-cell {
+    /*cursor: pointer;*/
+    max-width: 70px;
+    max-height: 70px;
+}
+
+#searchResultRates .highlight {
+    background: #fff42a;
+    padding: 2px;
+}
+
+#searchResultRates .highlightGreen1 {
+    background: #a5f679;
+    padding: 2px;
+}
+
+#classic-rates-table .buttonsRow td,
+#searchResultRates .buttonsRow td {
+    background: none;
+}
+
+    #classic-rates-table .buttonsRow td.reorderResetButtons,
+    #searchResultRates .buttonsRow td.reorderResetButtons {
+        text-align: left;
+    }
+
+
+.carClassLogo {
+    height: 40px;
+    width: 70px;
+}
+
+.spn_i {
+    background-image: url(../images/i.png);
+    position: absolute;
+    right: -4px;
+    top: 0;
+    height: 22px;
+    width: 30px;
+}
+
+.spn_o {
+    background-image: url(../images/i-o.png);
+    position: absolute;
+    right: -4px;
+    top: 0;
+    height: 22px;
+    width: 30px;
+}
+
+.classictable .spn_i, .classictable .spn_o {
+    background: none;
+    position: absolute;
+    right: -4px;
+    top: 0;
+    height: 22px;
+    width: 22px;
+    color: green;
+    font-weight: bold;
+    font-family: serif;
+    cursor: default;
+}
+
+.classictable .spn_o {
+    color: red;
+}
+
+.classic_view #daily-rates-table tbody td:nth-child(5) {
+    background: #fff42a;
+}
+
+.classic-lowest {
+    color: white;
+    font-weight: bold;
+    background-color: green !important;
+    min-width: 40px;
+}
+
+.classic-not-lowest {
+    color: white;
+    font-weight: bold;
+    background-color: red !important;
+    min-width: 40px;
+}
+
+#daily-rates-table thead th {
+    height: 40px;
+    width: 70px;
+}
+td .base-rate-blue {
+    color: #3366ff;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#mr_Opaque_popup {
+    /*25-6*/ /*min-width: 1025px;*/
+    padding: 0;
+    border: 1px solid #ccc;
+    width: auto !important;
+    top: 3%;
+    left: 15%;
+    position: absolute;
+    background: #fff;
+    z-index: 100;
+    /*max-height: 575px;*/
+    overflow: auto;
+    touch-action: auto !important;
+}
+
+    #mr_Opaque_popup thead td {
+        border-bottom: 1px solid #b6b6b6;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #mr_Opaque_popup table td {
+        border: 1px solid transparent;
+        border-right: 1px solid #b6b6b6;
+    }
+
+    #mr_Opaque_popup thead td {
+        background: #2988b9;
+        color: #fff;
+        border-bottom: 1px solid #b6b6b6;
+    }
+
+    #mr_Opaque_popup td {
+        padding: 10px 20px;
+    }
+
+    #mr_Opaque_popup .tethered_rate_tables {
+        padding: 20px 20px 20px 20px;
+    }
+
+    #mr_Opaque_popup .tv1 {
+        padding: 0px 40px 0 0px;
+    }
+    /*#mr_Opaque_popup td input[type=text] {
+        width: 50%;
+        padding: 4px;
+    }*/
+
+    #mr_Opaque_popup tr:nth-child(odd) {
+        background: #f4f4f4;
+    }
+
+    #mr_Opaque_popup #ratecodes {
+        width: 100px !important;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(169, 169, 169);
+        border-image: initial;
+    }
+
+    #mr_Opaque_popup td div {
+        padding: 10px 20px;
+    }

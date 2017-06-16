@@ -1,0 +1,160 @@
+﻿
+<div id="left-col">
+
+    <div id="mtab1">
+        <div class="crs side-section-body">
+            <input type="button" name="CreateRuleset" class="search-button" value="Create Rule Set" id="CreateRuleset">
+        </div>
+        <div class="side-section-top pointer">
+            <img class="collapse" src="~/images/Search-collapse.png" alt="collapse" />
+            <h2 class="open"><span class="uppercase">Filter</span></h2>
+            <img class="toggle" src="~/images/Search-toggle.jpg" alt="toggle" />
+        </div>
+        <div class="side-section-body" id="searchLeftPanel">
+            <table class="table2">
+                <tbody>
+                    <tr class="label-row">
+                        <td>
+                            Lengths
+
+                        </td>
+                        <td>
+                            Brand Locations
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <ul name="lengths" class="newul two-cols-select" id="lengths">
+                                <li class="loader_container_length">
+
+                                    <img src="~/images/ajax_loader_blue_small.gif" style="position:absolute; left:3%; top:25%;" />
+
+                                </li>
+                                <li>
+                                    <select name="leftRuleSetlengths" class="two-cols-select" multiple="multiple" size="6" id="leftRuleSetlengths">
+                                        <!-- ko foreach: rentalLengths -->
+                                        <option data-bind="html:Code, attr:{ value:MappedID, rid:ID  }"></option>
+                                        <!-- /ko -->
+                                    </select>
+                                </li>
+                            </ul>
+
+                        </td>
+                        <td>
+
+                            <ul name="locations" class="newul overflow mright0 two-cols-select" size="5" id="locations">
+                                <div class="loader_container_location">
+                                    <img src="~/images/ajax_loader_blue_small.gif" style="position:absolute; left:11%; top:25%;" />
+                                </div>
+
+                                <li><span class="innersearch"><input class="left" type="text" autocomplete="off" id="RuleSetSearchLocation" placeholder="Search" /><img class="lens" src="~/images/lens.png" alt="L" /> </span></li>
+                                <ul class="list-complt">
+                                    <select name="leftRuleSetlocations" class="two-cols-select" multiple="multiple" size="4" id="leftRuleSetlocations">
+                                        <!-- ko foreach: leftBrandLocations -->
+                                        <option data-bind="html:Location, attr:{ value:LocationID ,LocationBrandID:LocationBrandID ,LocationCode:LocationCode ,BrandID: BrandID}">ATL</option>
+                                        <!-- /ko -->
+                                    </select>
+                                </ul>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="label-row hidden">
+                        <td>
+                            Length
+                        </td>
+                        <td>
+                            Car Class
+                        </td>
+                    </tr>
+
+                    <tr class="hidden">
+                        <td>
+                            <ul name="source" class="newul two-cols-select" multiple="multiple" size="5" id="source">
+                                <div class="loader_container_days">
+                                    <div class="loader-bga"></div>
+                                    <div class="loader mhide thide">
+                                        <img src="~/images/ajax_loader_blue_small.gif" />
+                                    </div>
+                                </div>
+                                <li>
+                                    <select name="leftRuleSetDays" class="two-cols-select" multiple="multiple" size="6" id="leftRuleSetDays">
+                                        <!-- ko foreach: weekDays -->
+                                        <option data-bind="html:Day,attr:{value:ID}"></option>
+                                        <!-- /ko -->
+                                    </select>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            @*<div class="loader_container_carclass">
+                                    <div class="loader-bga"></div>
+                                    <div class="loader mhide thide">
+                                        <img src="~/images/ajax_loader_blue_small.gif" />
+                                    </div>
+                                </div>*@
+                            <ul name="carClass" class="newul mright0 two-cols-select" id="carClass">
+                                <li>
+                                    <select name="leftRuleSetCarClass" class="two-cols-select" multiple="multiple" size="6" id="leftRuleSetCarClass">
+                                        <!-- ko foreach: leftCarClasses -->
+                                        <option data-bind="html: Code, attr:{ value:ID }">ECAR</option>
+                                        <!-- /ko -->
+                                    </select>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td align="left">
+                            <input type="button" name="Filter" class="search-button" value="Filter " id="Filter">
+                        </td>
+
+                        <td align="right" id="resetSelection" style="cursor:pointer">
+                            <img src="~/images/filter.png" /> Reset Filter
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+    <div id="mtab2">
+        <div class="side-section-top pointer">
+            <img class="collapse" src="~/images/Search-collapse.png" alt="collapse" />
+            <h2 class="open"><span class="uppercase">Rule sets</span></h2>
+        </div>
+        <div class="side-section-body" id="searchLeftPanelSecond">
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <ul class="four-cols-select pastSearchul pointer" size="5" id="RuleSetList">
+                                <!-- ko foreach:ruleSets-->
+                                <li data-bind="attr:{id:'selectedRuleSetID_'+RuleSetID,value:RuleSetID, carClassID:CarClassID, rentalLengthID:RentalLengthID, weekDaysID:WeekDaysID, locationBrandID:LocationBrandID, companyPositionAbvAvg:CompanyPositionAbvAvg, isPositionOffset:IsPositionOffset, isWideGapTemple:IsWideGapTemple, isGov:IsGov},click:function(data){selectedRuleSet(data)}">
+                                    <span data-bind="html:RuleSetName">
+                                    </span>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="left">
+                            <input name="userId" type="hidden" value="52">
+                            <input type="button" name="Search" class="search-button" value="Delete " id="Delete">
+                            <input type="button" name="CopyAndCreateRuleSet" class="search-button" value="Copy & Create Rule Set" id="CopyAndCreateRuleSet">
+                        </td>
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

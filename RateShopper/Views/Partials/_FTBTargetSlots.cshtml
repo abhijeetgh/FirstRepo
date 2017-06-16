@@ -1,0 +1,64 @@
+﻿
+<table class="uppercase" id="TblTargetDetails">
+    <thead>
+        <tr>
+            <td>Days</td>
+            <td>Target<label style="color:red">*</label></td>
+            <td class="no-right-border">Target<label style="color:red">*</label> %</td>
+            <td>Increase<label style="color:red">*</label> %</td>
+            <td class="no-right-border">Target<label style="color:red">*</label> %</td>
+            <td>Increase<label style="color:red">*</label> %</td>
+            <td class="no-right-border">Target<label style="color:red">*</label> %</td>
+            <td>Increase<label style="color:red">*</label> %</td>
+            <td class="no-right-border">Target<label style="color:red">*</label> %</td>
+            <td>Increase<label style="color:red">*</label> %</td>
+            <td class="no-right-border">Target<label style="color:red">*</label> %</td>
+            <td>Increase<label style="color:red">*</label> %</td>
+        </tr>
+    </thead>
+    <tbody id="createMode" data-bind="foreach: TargetDTO">
+
+
+        <tr>
+            <td><span data-bind="attr:{id:DayOfWeekId,IsUpdateMode:IsUpdate,FTBTargetId:FTBTargetId},html:Day"></span><input type="hidden" id="targetID" /></td>
+            <td class="Target"><input data-bind="attr:{id:'target_'+DayOfWeekId,value:Target,oldValue:Target},html:Day" class="targetInit" type="text" /></td>
+            <!-- ko foreach: FTBTargetsDetailDTO -->
+            <td data-bind="attr:{slot:($index()+1),id:'slot_target_'+($index()+1)}" class="slotOrder no-right-border">
+                <input type="text" data-bind="attr:{id:'target_slot_'+$parent.DayOfWeekId+'_'+($index()+1),value:PercentTarget,oldvalue:PercentTarget,FTBTargetDetailId:FTBTargetDetailId}"> %
+            </td>
+            <td data-bind="attr:{slot:($index()+1),id:'slot_increase_'+($index()+1)}">
+                <input type="text" data-bind="attr:{id:'increase_slot_'+$parent.DayOfWeekId+'_'+($index()+1),value:PercentRateIncrease,oldvalue:PercentRateIncrease,FTBTargetDetailId:FTBTargetDetailId}"> %
+            </td>
+            <!-- /ko -->
+        </tr>
+
+    </tbody>
+
+    @*@{
+            foreach (var weekDayItem in @ViewBag.WeekDayList)
+            {
+
+                <tr>
+                    <td><span id="@weekDayItem.ID">@weekDayItem.Day</span><input type="hidden" id="targetID" /></td>
+                    <td><input id="target_@weekDayItem.ID" type="text"></td>
+                    <td slot="1" class="slotOrder no-right-border" id="slot_target_1"><input type="text" id="target_1"> %</td>
+                    <td slot="1" id="slot_increase_1"><input type="text" id="increase_1"> %</td>
+                    <td slot="2" class="slotOrder no-right-border" id="slot_target_2"><input type="text" id="target_2"> %</td>
+                    <td slot="2" id="slot_increase_2"><input type="text" id="increase_2"> %</td>
+                    <td slot="3" class="slotOrder no-right-border" id="slot_target_3"><input type="text" id="target_3"> %</td>
+                    <td slot="3" id="slot_increase_3"><input type="text" id="increase_3"> %</td>
+                    <td slot="4" class="slotOrder no-right-border" id="slot_target_4"><input type="text" id="target_4"> %</td>
+                    <td slot="4" id="slot_increase_4"><input type="text" id="increase_4"> %</td>
+                    <td slot="5" class="slotOrder no-right-border" id="slot_target_5"><input type="text" id="target_5"> %</td>
+                    <td slot="5" id="slot_increase_5"><input type="text" id="increase_5"> %</td>
+                </tr>
+            }
+        }*@
+    <tbody id="updateMode"></tbody>
+</table>
+<input type="button" class="search-button validatepastdate" id="TargetCancel" value="Reset" />
+<input type="button" class="search-button orng validatepastdate" id="TargetSave" value="Save" />
+<span id="targeterrormsgnotfilled" style="display: none; color: red; font-weight: bold;">Please fill up the data.</span>
+<span id="targeterrormsg" style="display: none; color: red; font-weight: bold;">Please review the fields highlighted in Red.</span>
+<span id="targetmsg" style="display: none; color: green; font-weight: bold;">Target saved successfully.</span>
+<span id="targetothermsg" style="display: none; color: red; font-weight: bold;"></span>

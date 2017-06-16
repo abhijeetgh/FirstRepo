@@ -1,0 +1,114 @@
+﻿
+<div id="popup-main" class="mhide" style="overflow: visible;">
+    <div id="popup-main-inner">
+        <div class="popup-top">
+            <span class="uppercase bold"> RESERVATION TARGET MANAGEMENT </span>
+            <img src="images/tether_ratesClose.png" class="fright pointer closeP" alt="close" />
+        </div>
+        <div class="side-section-top">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <h2 class="open"><span class="uppercase">RESERVATION TARGET PER MONTH</span></h2>
+        </div>
+        <div id="reservation-target" class="wide-body-side-container">
+            <div>
+                <ul class="table-ul-right">
+                    <li>
+                        <span class="key bold">Brand Location</span> :<input type="hidden" id="selectedRateLocationBrandId" /><span class="value" id="RateLocationBrand">ATL-AD</span>
+                    </li>
+                    <li>
+                        <span class="bold">Month</span> : <span class="value" id="RateMonth">January</span>
+                    </li>
+                    <li>
+                        <span class="bold">Year</span> : <span class="value" id="RateYear">2016</span>
+                    </li>
+                </ul>
+                <ul class="table-ul-right">
+                    <span class="bold">Copy From</span>
+                    <li>
+                        <span class="bold">Month</span> :
+                        @*<select name="targetmonth" id="targetmonth">
+                                <option value="0">--select--</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>*@
+                        <ul name="targetmonth" id="targetmonth" class="relative pointer dropdown" style="width:70px">
+                            <li value="0">--select--</li>
+                            <ul class="hidden drop-down1" style="overflow-x: hidden;">
+                                <li value="0">--select--</li>
+                                <li value="1">January</li>
+                                <li value="2">February</li>
+                                <li value="3">March</li>
+                                <li value="4">April</li>
+                                <li value="5">May</li>
+                                <li value="6">June</li>
+                                <li value="7">July</li>
+                                <li value="8">August</li>
+                                <li value="9">September</li>
+                                <li value="10">October</li>
+                                <li value="11">November</li>
+                                <li value="12">December</li>
+                            </ul>
+                        </ul>
+
+                        @*<ul  id="month" class="relative pointer">
+                                <li></li>
+                                <ul class="hidden drop-down1" style="display:block">
+                                    <li>January  </li>
+                                    <li>February </li>
+                                    <li>March    </li>
+                                    <li>April    </li>
+                                    <li>May      </li>
+                                    <li>June     </li>
+                                    <li>July     </li>
+                                    <li>August   </li>
+                                    <li>September</li>
+                                    <li>October  </li>
+                                    <li>November </li>
+                                    <li>December </li>
+                                </ul>
+                            </ul>*@
+                    </li>
+                    <li>
+                        <span class="bold">Year</span> :
+
+                        <ul id="targetyear" class="relative pointer dropdown">
+                            <li value="0">--select--</li>
+                            <ul class="hidden drop-down1">
+                                <li value="0">--select--</li>
+                                @if (ViewBag.Years != null)
+                                {
+                                    foreach (var year in ViewBag.Years)
+                                    {
+                                        <li value="@year">@year</li>
+                                    }
+                                }
+                            </ul>
+                        </ul>
+                        @*<select name="targetyear" id="targetyear">
+                                <option value="0">--select--</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>*@
+                    </li>
+                </ul>
+            </div>
+            <div id="reservation-table">
+                @{Html.RenderPartial("~/Views/Partials/_FTBTargetSlots.cshtml");}
+            </div>
+        </div>
+    </div>
+</div>

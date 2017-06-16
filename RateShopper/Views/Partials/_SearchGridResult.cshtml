@@ -1,0 +1,795 @@
+﻿<form method="post">
+    <div id="result-section" class="hideNoSummary">
+        <div class="body-section-top pointer bold">
+            <span class="uppercase" id="headersection">Results</span>
+            <span class="LOR red" style="display:none">LOR was changed.</span>
+            <span id="tsdNotification" style="padding-left:100px; color: green; display:none; font-weight:bold;">Sending Rates to TSD..</span>
+            <span id="quickviewgridmessage" style="padding-left:100px; color: green; display:none; font-weight:bold;"></span>
+            <label id="lblDragMessage" style="padding-left:100px; color: green; display:none; font-weight:bold;"></label>
+            <span class="fright">
+                <input type="hidden" name="viewToggleSearchParam" id="viewToggleSearchParam" value="">
+
+            </span>
+        </div>
+
+        <div class="wide-body-side-container">
+            <div class="side-section-body-new">
+                <ul class="w100 table-ul-right mhide bold dailyFilter">
+
+                    <li>
+                        Source
+                        <ul id="dimension-source" class="relative pointer">
+                            <li></li>
+                            <ul class="hidden drop-down1">
+                                <li></li>
+                            </ul>
+                        </ul>
+
+                    </li>
+                    <li class="classic_hide next-prev-width">
+                        <a href="#" class="left-arrow dailyViewPrevDay" style="display: none;"><img class=" middle" src="images/Search-left_arrow.jpg"></a>
+                        <img class="right-arrow dailyViewPrevDayDisabled middle" style="opacity:0.4" src="images/Search-left_arrow.jpg">
+                        <span class="uppercase showSelectedDate"></span>
+                        <a href="#" class="right-arrow dailyViewNextDay"><img class="middle" src="images/Search-right_arrow.jpg"></a>
+                        <img class="right-arrow dailyViewNextDayDisabled middle" style="display: none; opacity: 0.4" src="images/Search-right_arrow.jpg">
+                        <!--</div>-->
+                    </li>
+                    <li>
+                        Location
+                        <ul id="location" class="relative pointer">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li></li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <!--  Hide this item in quick view serach -->
+                    <li class="noQuickView">
+
+                        <span class="bold">
+                            Length
+                        </span>
+                        <ul id="length" class="relative pointer">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li value=""></li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <!--  Hide this item in quick view serach -->
+                    <li class="classic_hide noQuickView">
+                        Date
+                        <ul id="displayDay" class="relative pointer">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li value=""></li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li class="classic_view carClassItem">
+                        Car Class
+                        <ul id="carClass" class="relative pointer">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li value="" selected="selected"></li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li class="quickView QuickViewFilter changed-unChanged">
+                        <input type="radio" name="quickview-change-status" class="quickview-change-status" id="rbChanged" /><span>Changed</span>
+                        <input type="radio" name="quickview-change-status" class="quickview-change-status left5" id="rbUnChanged" /><span>Unchanged</span>
+
+                    </li>
+                    <li class="quickView QuickViewFilter" style="display:none;">
+                        <span class="left5">
+                            Length + Date Combination
+                            <ul id="lengthDateCombinationChanged" class="relative pointer dropdownHscroll">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <!-- ko foreach:lengthDateCombinationChanged -->
+                                    <li data-bind="html:displayText, attr:{rentalLengthId:rentalLengthId, formattedDate:formattedDate}, click:hitCall" value=""></li>
+                                    <!-- /ko -->
+
+                                </ul>
+
+                            </ul>
+                            <ul id="lengthDateCombinationUnChanged" class="relative pointer dropdownHscroll">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <!-- ko foreach:lengthDateCombinationUnChanged -->
+                                    <li data-bind="html:displayText, attr:{rentalLengthId:rentalLengthId, formattedDate:formattedDate}, click:hitCall" value=""></li>
+                                    <!-- /ko -->
+                                </ul>
+                            </ul>
+
+                        </span>
+
+                    </li>
+                    <li class="mhide thide viewSelect mobtodeshide">
+                        View
+                        <ul name="viewSelect" class="relative pointer" id="viewSelect">
+                            <li value="daily">daily</li>
+                            <ul class="hidden drop-down1">
+                                <li value="daily" class="selected">daily</li>
+                                <li value="classic">classic</li>
+
+                            </ul>
+                        </ul>
+                    </li>
+                    <li class="classic_view viewTwoLetterSearch">
+                        <span>Find company code: </span>
+                        <input class="left bglens" type="text" id="search2letter" style="width: 40px;padding: 5px;" maxlength="2">
+                    </li>
+                    <li>
+                        <input type="button" name="" value="Tethered Rates " class="search-button" id="TetherRate">
+                        <input type="checkbox" checked="checked" id="IsTetherUser"><label class="normal"> Activate Tether</label>
+                    </li>
+                    <li>
+                        <input type="button" name="" value="Opaque Rates " class="search-button" id="OpaqueRate">
+                        <input type="checkbox" checked="checked" id="IsOpaqueChk"><label class="normal"> Activate Opaque</label>
+                    </li>
+
+                </ul>
+                <div class="mhide thide classic_hide" style="margin:10px 0px 3px 0px">
+                    <span class="bold">Gap Value</span>
+                    <label><input type="radio" name="gapvalue" value="1.0" style="margin:0px 2px 0px 7px">1.0</label>
+                    <label><input type="radio" name="gapvalue" value="4.0" style="margin:0px 2px 0px 7px">4.0</label>
+                    <label><input type="radio" name="gapvalue" value="6.0" style="margin:0px 2px 0px 7px">6.0</label>
+                    <label><input type="radio" name="gapvalue" value="8.0" style="margin:0px 2px 0px 7px">8.0</label>
+                    <span class="bold" style="margin:0px 4px 0px 4px;">OR</span>
+                    <input class="left" type="text" id="txtDragGapValue" style="width: 45px;padding: 5px;margin-left:2px;" maxlength="4" placeholder="custom">
+                    <span class="bold" style="margin-left:7px">Position</span>
+                    @*<label><input type="radio" name="position" value="below" checked="checked" style="margin:0px 2px 0px 7px">Below</label>
+                        <label><input type="radio" name="position" value="above" style="margin:0px 2px 0px 7px">Above</label>*@
+                    <label><input type="checkbox" id ="chkAbovePos"name="position" value="above" style="margin:0px 2px 0px 7px">Above</label>
+                </div>
+                <div class="portrait">
+                    <div class="mshow small-font">
+                        <div class="fleft complete-width table-ul-right" id="divMobileTether">
+                            <ul id="dimension-source_m" class="relative pointer ul_m" style="display:none">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+                            <!--commented,added two input tags 24-June-->
+                            <input type="button" name="" value="Tethered Rates " class="search-button left0 right0 small-font" id="TetherRate">
+                            <input type="checkbox" checked="checked" id="IsTetherUser"><label class="normal mat activate-tether-label"> Activate Tether</label>
+
+
+                            <div class="bold rateCode  display-inline">
+                                Rate Code:
+                            </div>
+
+
+                            <span class="bold" id="lorRateCode">
+                                STD
+                            </span>
+                            <select name="source" class="two-cols-select mwidth lor-m" multiple="multiple" size="2" id="LOR_m"></select>
+                            <span class="edrp bold vertical-middle">
+                                Extra Day Rate:
+                                <br />
+                                <span id="rentalLengthText">  Daily Rate</span>
+                                <span class="red" id="calcOperation">*</span>
+                            </span>
+                            <span>
+                                <input type="text" class="EDR numbersOnly extraDayRateFactor m-EDR" />
+                            </span>
+
+
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="mshow clear mtb10 table-ul-right LORSection small-font">
+                        <span class="bold">
+                            Location
+                        </span>
+                        <ul id="location_m" class="relative pointer ul_m">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li value=""></li>
+                            </ul>
+                        </ul>
+
+                        <!--  Hide this item in quick view serach -->
+                        <span class="noQuickView">
+
+                            <span class="bold">
+                                Length
+                            </span>
+                            <ul id="length_m" class="relative pointer ul_m">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+                            <span class="bold">
+                                Date
+                            </span>
+                            <ul id="displayDay_m" class="relative pointer ul_m">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+
+                        </span>
+
+                        <span class="display-inline QuickViewFilter vertical-middle changed-unChanged">
+                            <input type="radio" name="quickview-change-status_portrait" class="quickview-change-status " id="rbChanged"><span>Changed</span><br />
+                            <input type="radio" name="quickview-change-status_portrait" class="quickview-change-status  " id="rbUnChanged"><span>Unchanged</span>
+                        </span>
+
+                        <div class="display-inline QuickViewFilter vertical-middle ">
+                            <div class="display-inline vertical-middle">
+                                <div class="bottom3">Length +</div>
+                                <div>Date Combination</div>
+                            </div>
+                            <div class="display-inline vertical-middle">
+                                <ul id="lengthDateCombinationChanged" class="relative pointer length-date-combination-select">
+                                    <li value="" selected="selected"></li>
+                                    <ul class="hidden drop-down1">
+                                        <!-- ko foreach:lengthDateCombinationChanged -->
+                                        <li data-bind="html:displayText, attr:{rentalLengthId:rentalLengthId, formattedDate:formattedDate}, click:hitCall" value=""></li>
+                                        <!-- /ko -->
+
+                                    </ul>
+
+                                </ul>
+                                <ul id="lengthDateCombinationUnChanged" class="relative pointer length-date-combination-select">
+                                    <li value="" selected="selected"></li>
+                                    <ul class="hidden drop-down1">
+                                        <!-- ko foreach:lengthDateCombinationUnChanged -->
+                                        <li data-bind="html:displayText, attr:{rentalLengthId:rentalLengthId, formattedDate:formattedDate}, click:hitCall" value=""></li>
+                                        <!-- /ko -->
+                                    </ul>
+                                </ul>
+
+
+                            </div>
+
+                            @*<div class="mshow clear">
+                                    <div class="fleft">
+                                        <input type="button" name="Search" class="search-button" value="Update " id="update">
+                                        <input type="button" name="Search" class="search-button" value="Update & Next " id="updaten">
+                                        <input type="button" name="Reset" class="search-button resetEdit" value="Reset " id="resetEdit_m">
+
+                                    </div>
+
+
+                                </div>*@
+                        </div>
+
+                        <div class=" mshow table-ul-right small-font mtb5">
+
+                            <input type="button" name="Search" class="small-font search-button   force-left-padding3 force-right-padding3 " value="Update " id="update">
+                            <input type="button" name="Search" class="small-font search-button   force-left-padding3 force-right-padding3  " value="Update & Next " id="updaten">
+                            <input type="button" name="Reset" class="small-font search-button resetEdit    force-left-padding3 force-right-padding3 left0 " value="Reset " id="resetEdit_m">
+
+                            <span class="nextPrev display-inline vertical-middle result-navigation-container">
+
+                                <a href="#" class="left-arrow dailyViewPrevDay_m" style="display: none;"><img class="middle" src="images/Search-left_arrow.jpg"></a>
+                                <img class="right-arrow dailyViewPrevDay_mDisabled middle" style="opacity:0.4" src="images/Search-left_arrow.jpg">
+                                <a href="#" class="right-arrow dailyViewNextDay_m"><img class="middle" src="images/Search-right_arrow.jpg"></a>
+                                <img class="right-arrow dailyViewNextDay_mDisabled middle" style="display: none; opacity: 0.4" src="images/Search-right_arrow.jpg">
+
+                            </span>
+
+                        </div>
+                        <div class="mshow clear small-font">
+                            <div class="fleft">
+                                <input type="button" class="quick-view-button small-font btnSetAsQuickView" value="Set as Quick View">
+                                @*<input type="button" class="set-run-quick-view-button small-font btnSetAndRunQuickView" style="display:none;" value="Set & Run QuickView">*@
+                                <input type="button" class="ignore-quick-view-button" id="IgnoreAndNext" value="Ignore & Next">
+                                <input type="button" name="updateAllTSD" class="search-button" value="Update All" id="UpdateAllTSD">
+                                <span class="spanlastdayshop red bold" style="display: none;white-space: nowrap;">Last Shop Day</span>
+                            </div>
+                            <div class="fright">
+                                <img src="images/mfullscr.png" class="mfullscr" alt="fullscreen">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="landscape">
+                    <div class="mshow">
+                        <div class="fleft  table-ul-right">
+                            @*<span class="bold">
+                                    Filter
+                                </span>
+                                <ul id="filter_ml" class="relative pointer">
+                                    <li value="location_m" selected="selected">Location</li>
+                                    <ul class="hidden drop-down1">
+                                        <li value="location_ml">Location</li>
+                                        <li value="length_ml">Length</li>
+                                        <li value="displayDay_ml">Date</li>
+                                        <li value="dimension-source_ml">Source</li>
+                                    </ul>
+                                </ul>*@
+                            <!--<span class="bold">
+                                Source
+                            </span>-->
+                            <ul id="dimension-source_ml" class="relative pointer ul_ml" style="display:none">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+                            <input type="button" name="" value="Tethered Rates " class="search-button left0" id="TetherRate">
+                            <input type="checkbox" checked="checked" id="IsTetherUser"><label class="normal mat"> Activate Tether</label>
+
+                            <span class="edrp bold vertical-middle display-inline">
+                                Extra Day Rate:
+                                <br>
+                                <span id="rentalLengthText">Daily Rate</span>
+                                <span class="red" id="calcOperation">*</span>
+                            </span>
+                            <input type="text" class="EDR numbersOnly extraDayRateFactor" />
+
+                            <span class="bold">
+                                Location
+                            </span>
+                            <ul id="location_ml" class="relative pointer ul_ml">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+
+                            <div class="bold rateCode display-inline  ">
+                                Rate Code
+                            </div>
+                            <span class="bold" id="lorRateCode" style="display:none">
+                                STD
+                            </span>
+                            <select name="source" class="two-cols-select mwidth middle lor-m" multiple="multiple" size="2" id="LOR_ml"></select>
+                        </div>
+
+                        <div class="fright  w50 aright table-ul-right LORSection hidden">
+                            @*<span class="bold">
+                                    Extra Day Rate:
+                                    <span id="rentalLengthText">  Daily Rate</span>
+                                </span> <span class="red" id="calcOperation">*</span>*@
+
+
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="mshow clear table-ul-right fleft left">
+
+
+                        <!--  Hide this item in quick view serach -->
+                        <div class="display-inline noQuickView">
+                            <span class="bold">
+                                Date:
+                            </span>
+                            <ul id="displayDay_ml" class="relative pointer ul_ml">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+                            <span class="bold">
+                                Length
+                            </span>
+                            <ul id="length_ml" class="relative pointer ul_ml">
+                                <li value="" selected="selected"></li>
+                                <ul class="hidden drop-down1">
+                                    <li value=""></li>
+                                </ul>
+                            </ul>
+                        </div>
+
+                        <span class="display-inline QuickViewFilter vertical-middle changed-unChanged">
+                            <input type="radio" name="quickview-change-status_landscape" class="quickview-change-status " id="rbChanged"><span>Changed</span><br>
+                            <input type="radio" name="quickview-change-status_landscape" class="quickview-change-status  " id="rbUnChanged"><span>Unchanged</span>
+                        </span>
+                        <div class="display-inline QuickViewFilter vertical-middle ">
+                            <div class="display-inline vertical-middle left3 right3">
+                                <div class="bottom3">Length +</div>
+                                <div>Date Combination</div>
+                            </div>
+                            <div class="display-inline vertical-middle">
+                                <ul id="lengthDateCombinationChanged" class="relative pointer length-date-combination-select">
+                                    <li value="" selected="selected"></li>
+                                    <ul class="hidden drop-down1">
+                                        <!-- ko foreach:lengthDateCombinationChanged -->
+                                        <li data-bind="html:displayText, attr:{rentalLengthId:rentalLengthId, formattedDate:formattedDate}, click:hitCall" value=""></li>
+                                        <!-- /ko -->
+
+                                    </ul>
+
+                                </ul>
+                                <ul id="lengthDateCombinationUnChanged" class="relative pointer length-date-combination-select">
+                                    <li value="" selected="selected"></li>
+                                    <ul class="hidden drop-down1">
+                                        <!-- ko foreach:lengthDateCombinationUnChanged -->
+                                        <li data-bind="html:displayText, attr:{rentalLengthId:rentalLengthId, formattedDate:formattedDate}, click:hitCall" value=""></li>
+                                        <!-- /ko -->
+                                    </ul>
+                                </ul>
+
+                                @*<ul class="relative pointer length-date-combination-select">
+                                        <li value="1" selected="selected">D1 thu sep 01 </li>
+                                        <ul class="hidden drop-down1" style="display: none;">
+                                            <li value="1" selected="selected">D1 thu sep 01 </li>
+                                            <li value="2" selected="selected">D2 thu sep 01 </li>
+                                        </ul>
+                                    </ul>*@
+                            </div>
+                        </div>
+                        <input type="button" name="Search" class="search-button right0" value="Update " id="update">
+                        <input type="button" name="Search" class="search-button left0 right0" value="Update & Next " id="updaten">
+                        <input type="button" name="Reset" class="search-button resetEdit left0 right0" value="Reset " id="resetEdit_ml">
+
+                        <a href="#" class="left-arrow dailyViewPrevDay_ml" style="display: none;"><img class="middle" src="images/Search-left_arrow.jpg"></a>
+                        <img class="right-arrow dailyViewPrevDay_mlDisabled middle" style="opacity:0.4" src="images/Search-left_arrow.jpg">
+
+                        <a href="#" class="right-arrow dailyViewNextDay_ml"><img class="middle" src="images/Search-right_arrow.jpg"></a>
+                        <img class="right-arrow dailyViewNextDay_mlDisabled middle" style="display: none; opacity: 0.4" src="images/Search-right_arrow.jpg">
+
+                    </div>
+                    <div class="mshow clear">
+                        <div class="fleft">
+
+                            <input type="button" class="quick-view-button left0 right0 btnSetAsQuickView" value="Set as Quick View">
+                            @*<input type="button" class="set-run-quick-view-button left0 right0 btnSetAndRunQuickView" style="display:none;" value="Set & Run QuickView">*@
+                            <input type="button" class="ignore-quick-view-button" id="IgnoreAndNext" value="Ignore & Next">
+                            <input type="button" name="updateAllTSD" class="search-button" value="Update All " id="UpdateAllTSD">
+                            <span class="spanlastdayshop red bold" style="display: none; white-space: nowrap;">Last Shop Day</span>
+                        </div>
+
+                        @*<div class="fleft left w50 table-ul-right">
+
+
+                                <span class="bold">
+                                            Length
+                                        </span>
+                                        ul id="LOR_ml" class="relative pointer">
+                                            <li value="1" selected="selected">D1</li>
+                                            <ul class="hidden drop-down1">
+                                                <li value="2">D2</li>
+                                                <li value="3">D3</li>
+                                                <li value="4">D4</li>
+                                            </ul>
+                                    <span class="bold">
+                                        Length
+                                    </span>
+                                    <ul id="length_ml" class="relative pointer ul_ml">
+                                        <li value="" selected="selected"></li>
+                                        <ul class="hidden drop-down1">
+                                            <li value=""></li>
+                                        </ul>
+                                    </ul>
+                            </div>*@
+                        <div class="fright">
+                            <img src="images/mfullscr.png" class="mfullscr" alt="fullscreen" />
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="daily_view">
+            <div class="body-section-body">
+                <input type="hidden" name="day" value="">
+                <input type="hidden" name="search" value="142707">
+                <input type="hidden" name="increment" value="">
+                <table id="daily-rates-table" class="dailytable grid">
+                    <thead>
+                        <tr>
+                            <td id="all-car-classes" style="cursor:pointer;" class="ui-selectee">All Car Classes</td>
+                            <td class="thide mhide">Applied RuleSet</td>
+                            <td id="dailyEdit">
+                                Base
+                                <br> Edit
+                            </td>
+                            <td class="additionalBaseCol">
+                                Additional
+                                <br> Base
+                            </td>
+                            <td id="totalEdit">
+                                Total
+                                <br> Edit
+                            </td>
+                            <!-- ko foreach:headers -->
+                            <td class="company-logo relative" align="center">
+                                <img data-bind=" css: companyID, attr:{src:logo, alt:companyName}">
+                                <!-- ko if:inside() != null || inside() != undefined  -->
+                                <span data-bind="css : inside() == true ? 'spn_i' : 'spn_o', attr:{ title : inside() == true ? 'Inside' : 'Outside'}"></span>
+                                <!-- /ko -->
+
+                                <input type="button" data-bind="css: dragClass()+' mhide thide', attr:{cname:companyName, cid:companyID}">
+                            </td>
+                            <!-- /ko -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach:rates -->
+                        <tr>
+                            <td align="center" class="car-class-img ui-selectee">
+                                <img data-bind=" attr:{classId: carClassID, src:carClassLogo, alt:carClass}" class="carClassLogo">
+                            </td>
+                            <td class="thide mhide">
+                                @*<a id="" href="" class="ruleSetLink">All Year</a>*@
+                                <input type="button" style="" onclick="RuleSetPopup(this);" value="" class="ruleSetLink" id="rulesetLink" />
+                            </td>
+                            <td>
+                                <span class="suggestedRateId"></span>
+                                <input type="text" size="5" class="bold baseEdit numbersOnly">
+                                <br><span class="arrowb"></span>
+                            </td>
+                            <td class="additionalBaseCol">
+                                <input type="text" size="5" readonly="readonly" tabindex="-1" class="bold additionalBase">
+                                <br><span class="arrowb"></span>
+                            </td>
+                            <td>
+                                <input type="text" size="5" class="bold totalEdit numbersOnly"><br> <span class="arrow"></span>
+                            </td>
+                            <!-- ko if: IsGOV  -->
+                            <!-- ko foreach:companyDetails -->
+                            <td data-bind="attr:{companyID:companyID, companyAndCarId:companyID()+'_'+$parent.carClassID(), bv:baseValue, class:'companyRates '+postionChangeCss}" class="companyRates">
+                                <span data-bind="html:baseValue,css:islowest()== true ? 'highlight '+ moveUpDownCSS : islowestAmongCompetitors() == true ? 'highlightGreen '+ moveUpDownCSS : moveUpDownCSS" class="daily-rate dummybase"></span><span class="perDay" data-bind="html:perDay,css: moveUpDownCSS"></span><br>
+                                <span class="tv" data-bind="html:totalValue"><span class="total-cost"></span></span>
+                            </td>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko ifnot: IsGOV-->
+                            <!-- ko foreach:companyDetails -->
+                            <td data-bind="attr:{companyID:companyID, companyAndCarId:companyID()+'_'+$parent.carClassID(), tv:totalValue, class:'companyRates '+postionChangeCss}" class="companyRates">
+                                <span data-bind="html:baseValue, css:moveUpDownCSS" class="daily-rate"></span><span class="perDay" data-bind="html:perDay, css:moveUpDownCSS"></span><br>
+                                <span class="tv" data-bind="html:totalValue, css:islowest()== true ? 'highlight': islowestAmongCompetitors() == true ? 'highlightGreen' : ''"><span class="total-cost"></span></span>
+                            </td>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+
+        <div class="classic_view">
+            <div id="classic" class="bold mhide">
+                <div class="fleft">
+                    <div>
+                        <span class="classic_large">
+                            Base
+                            <input type="text" class="baseEditRange numbersOnly row1" />
+                        </span>
+                        <span class="classic_large additionalBaseCol">
+                            Additional Base
+                            <input type="text" readonly="readonly" tabindex="-1" class="additionalBaseRange row1">
+                        </span>
+                        <span class="classic_large">
+                            Total
+                            <input type="text" class="totalEditRange numbersOnly row1" />
+                        </span>
+                        <span class="classic_large">
+                            Range Start
+                            <input type="text" style="z-index:-1; position:absolute; width:0px" />
+                            <input type="text" readonly="readonly" id="rangeStart1" class="dp date-picker rangeStart row1" autocomplete="off">
+                        </span>
+                        <span class="classic_large">
+                            Range End
+                            <input type="text" readonly="readonly" id="rangeEnd1" class="dp date-picker rangeEnd row1" autocomplete="off">
+                            <input type="text" style="z-index:-1; position:absolute; width:0px" />
+                        </span>
+                    </div>
+                    <div>
+                        <span class="classic_large">
+                            Base
+                            <input type="text" class="baseEditRange numbersOnly row2" />
+                        </span>
+                        <span class="classic_large additionalBaseCol">
+                            Additional Base
+                            <input type="text" readonly="readonly" tabindex="-1" class="additionalBaseRange row2">
+                        </span>
+                        <span class="classic_large">
+                            Total
+                            <input type="text" class="totalEditRange numbersOnly row2" />
+                        </span>
+                        <span class="classic_large">
+                            Range Start
+                            <input type="text" style="z-index:-1; position:absolute; width:0px" />
+                            <input type="text" readonly="readonly" id="rangeStart2" class="dp date-picker rangeStart row2" autocomplete="off">
+                        </span>
+                        <span class="classic_large">
+                            Range End
+                            <input type="text" readonly="readonly" id="rangeEnd2" class="dp date-picker rangeEnd row2" autocomplete="off">
+                        </span>
+                    </div>
+                </div>
+                <div class="fleft">
+                    <input type="button" class="search-button capply apply-button" value="Apply" />
+                </div>
+                <div class="fleft">
+                    <div class="weeklyfst row1">
+                        <input type="checkbox" class="weeklyAll" />All
+                        <ul name="weekly" class="weekly_large" id="weekly1" style="cursor: pointer;">
+                            <li value="1">Mon</li>
+                            <li value="2">Tue</li>
+                            <li value="3">Wed</li>
+                            <li value="4">Thu</li>
+                            <li value="5">Fri</li>
+                            <li value="6">Sat</li>
+                            <li value="0">Sun</li>
+                        </ul>
+
+                    </div>
+                    <div class="row2">
+                        <input type="checkbox" class="weeklyAll" />All
+                        <ul name="weekly" class="weekly_large" id="weekly2" style="cursor: pointer;">
+                            <li value="1">Mon</li>
+                            <li value="2">Tue</li>
+                            <li value="3">Wed</li>
+                            <li value="4">Thu</li>
+                            <li value="5">Fri</li>
+                            <li value="6">Sat</li>
+                            <li value="0">Sun</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div id="filterError" class="error-msg fleft" style="display: none;"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="body-section-body classictable">
+                <table id="daily-rates-table" class="classictable grid">
+                    <thead class="bold">
+                        <tr class="classicheader">
+                            <td class="all-dates ui-selectee" style="cursor: pointer; min-width:36px; ">Select All </td>
+                            <td>Applied RuleSet</td>
+                            <td id="dailyEdit">
+                                Base
+                                <br> Edit
+                            </td>
+                            <td class="additionalBaseCol">
+                                Additional
+                                <br> Base
+                            </td>
+                            <td id="totalEdit">
+                                Total
+                                <br> Edit
+                            </td>
+                            @*<td class="company-logo classicBrand" align="center"></td>*@
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach:ratesClassic -->
+                        <tr data-bind="attr:{date:date}">
+                            <td data-bind="html:dateInfo,attr:{FormatDate:DateFormat}" class="ui-selectee dates bold"></td>
+                            <td>
+                                <input type="button" onclick="RuleSetPopup(this);" value="" class="ruleSetLink" id="rulesetLink" />
+                            </td>
+                            <td>
+                                <span class="suggestedRateId"></span>
+                                <input type="text" size="5" class="bold baseEdit numbersOnly">
+                                <br><span class="arrowb"></span>
+                            </td>
+                            <td class="additionalBaseCol">
+                                <input type="text" size="5" readonly="readonly" tabindex="-1" class="bold additionalBase">
+                                <br><span class="arrowb"></span>
+                            </td>
+                            <td>
+                                <input type="text" size="5" class="bold totalEdit numbersOnly">
+                                <br> <span class="arrow"></span>
+                            </td>
+                            <!-- ko foreach:companyDetailsClassic -->
+                            <td class="relative" data-bind="attr:{companyID:companyID}">
+                                <span class="bold"><span class="cname" data-bind="html:companyCode"></span>:<span class="daily-rate" data-bind="html:baseValue, css:islowestAmongCompetitors == true ? 'base-rate-blue' :''"></span></span>
+                                <br />(<span class="tv" data-bind="html:totalValue"></span>)
+                                <!-- ko if:inside != null || inside != undefined  -->
+                                <span data-bind="css : inside == true ? 'spn_i' : 'spn_o', html : inside == true ? 'I' : 'O', attr:{ title : inside == true ? 'Inside' : 'Outside'}"></span>
+                                <!-- /ko -->
+                            </td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="wide-body-side-container margint5 hideNoSummary">
+
+        <div class="side-section-body-new">
+
+
+
+
+            <div class="mhide">
+
+
+                <input type="button" name="Search" class="search-button" value="Update " id="update">
+                <input type="button" name="Search" class="search-button" value="Update & Next " id="updaten">
+                <input type="button" name="Reset" class="search-button resetEdit" value="Reset " id="resetEdit">
+                <input type="button" class="quick-view-button btnSetAsQuickView" id="btnSetAsQuickView" value="Set as Quick View">
+                @*<input type="button" class="set-run-quick-view-button btnSetAndRunQuickView" style="display:none;" value="Set & Run QuickView">*@
+                <input type="button" class="ignore-quick-view-button" id="IgnoreAndNext" value="Ignore & Next">
+                <input type="button" name="updateAllTSD" class="search-button" value="Update All Rates" id="UpdateAllTSD">
+                <span class="spanlastdayshop red bold" style="display: none; white-space: nowrap;">Last Shop Day</span>
+
+                <div class="fright mhide thide mobtodeshide" id="excelButton">
+                    <a class="astyle " href="javascript:void(0);" id="ExportToCSV">Export to Excel</a>
+                    <img src="images/excel.png" alt="excel" />
+                </div>
+            </div>
+            <div class="weblink_new">
+                <div class="fleft LORSection">
+                    <span class="bold rateCode">
+                        LOR
+                    </span>
+                    <span class="bold" id="lorRateCode" style="display:none">
+                        STD
+                    </span>
+                    <ul name="tsdSystemSelect_Weblink" size="14" id="tsdSystemSelect_Weblink">
+                        <li value="D1" selected="selected">D1</li>
+                        <li value="D2">D2</li>
+                        <li value="D12">D12</li>
+                        <li value="D3">D3</li>
+                        <li value="D4">D4</li>
+                        <li value="D34">D34</li>
+                        <li value="W5">W5</li>
+                        <li value="W6">W6</li>
+                        <li value="W56">W56</li>
+                        <li value="W7">W7</li>
+                        <li value="W8">W8</li>
+                        <li value="W9">W9</li>
+                        <li value="W10">W10</li>
+                        <li value="W11">W11</li>
+                        <li value="W12">W12</li>
+                        <li value="W13">W13</li>
+                        <li value="W14">W14</li>
+                        <li value="M30">M30</li>
+                    </ul>
+                </div>
+                <div class="tleft LORSection">
+                    <span>
+                        Extra Day Rate:
+                    </span> <span id="rentalLengthText">  Daily Rate</span><span class="red" id="calcOperation">*</span>
+                    <input type="text" class="EDR numbersOnly extraDayRateFactor" style="width:32px" />
+
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <!--commented 26-6-->
+            <!--<div>
+                <input type="button" name="" value="Tethered Rates " class="search-button" id="TetherRate">
+                <input type="checkbox" checked="checked" id="IsTetherUser"><label class="normal"> Activate Tether</label>
+            </div>-->
+            <div class="lastup">
+                <p class="red fleft marginl20 bold"></p>
+                <span class="fright wl" id="RateSystemSource">Weblink</span>
+            </div>
+
+
+        </div>
+
+    </div>
+    <select name="lorDummy" id="dummyLor" style="display:none"></select>
+    <input type="hidden" id="hdnUseRateCode" />
+    <div id="noRecords" style="display:none;">
+        <span class="red bold" style="text-align:center ;padding-left:150px">No Results found</span>
+    </div>
+</form>
+
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetSearchShopCSV: '@Url.Action("GetSearchShopCSV", "Search")',
+        GetSearches :'@Url.Action("GetSearchSummary", "Search")'
+    }
+</script>

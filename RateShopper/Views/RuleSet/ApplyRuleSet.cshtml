@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Apply Rule Sets";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@Styles.Render("~/css/applied_rules.css")
+
+<div class="loader_container_main" style="display: none;">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;">
+    </div>
+</div>
+<div id="applied_rule">
+    <div class="pageminht">
+        <div class="gt-top">
+            <span class="uppercase bold">Manage Rule Sets</span>
+        </div>
+        <div class="side-section-top">
+            <img class="collapse" src="~/images/Search-collapse.png" alt="collapse"><h2 class="open"><span class="uppercase">Applied Rule Sets</span></h2>
+        </div>
+        <div id="topSection">
+            <ul class="wide-body-side-container table-ul-right">
+
+                <li>
+                    Brand Location
+                    <ul id="Location" class="relative pointer">
+                        <li>Choose Brand Location..</li>
+                        <ul class="hidden drop-down1">
+                            @if (ViewBag.LocationBrands != null)
+                            {
+                                foreach (var locationBrand in ViewBag.LocationBrands)
+                                {
+                                    <li value="@locationBrand.ID" id="@locationBrand.ID">@locationBrand.LocationBrandAlias</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clear"></div>
+            <div class="fleft" id="appliedRuleSetGrid" style="display:none;">
+                <table>
+                    <thead>
+                        <tr id="AppliedRuleSetsFound">
+                            <!-- ko foreach: headers -->
+                            <td data-bind="attr:{value:sortPropertyName}, click: $parent.sort" style="cursor:pointer;">
+                                <span data-bind="text: title"></span>
+                                <img class="ard" src="~/images/ardown.png" alt="arrow">
+                                <img class="aru" src="~/images/arup.png" alt="arrow" style="display:none;">
+                            </td>
+                            <!-- /ko -->
+                            <td>ACTIONS</td>
+                        </tr>
+                        <tr id="AppliedRuleSetsNotFound" style="display:none;">
+                            <!-- ko foreach: headers -->
+                            <td>
+                                <span data-bind="text: title"></span>
+                            </td>
+                            <!-- /ko -->
+                            <td>ACTIONS</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach: appliedRuleSets -->
+                        <tr data-bind="attr: {Id: Id, class: WideGapClass}">
+                            <td data-bind="html: StatusText, attr:{value: NotActive}"></td>
+                            <td data-bind="html: Name, attr:{id: RuleSetNameTdId}"></td>
+                            <td data-bind="html: StartEndDate, attr:{value:StartDate}"></td>
+                            <td>
+                                <img data-bind="attr:{Id: ActivateImgId}, visible: StatusText() == 'INACTIVE'" title="Activate" alt="ActivateImage" src="~/images/ar_tab1.png" />
+                                <img data-bind="attr:{Id: DeactivateImgId}, visible: StatusText() == 'ACTIVE'" title="Deactivate" alt=" deactivateimage" src="~/images/MRdeactivate.jpg" />
+                                <img data-bind="attr:{Id:DeleteImgId}" src="~/images/ar_tab2.png" title="Delete" alt="delete">
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+                <div id="divNoAppliedRuleSet" style="display: none; margin: 50px 20px 10px 20px; padding: 0 10px;" class="record">
+                    <h3 class="bold red" style="padding: 20px 0;">No Rule Sets have been applied to this location.</h3>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+        <div id="bottomSection" style="display:none;">
+            <div class="side-section-top">
+                <img class="collapse" src="~/images/Search-collapse.png" alt="collapse"><h2 class="open"><span class="uppercase">Rule sets Details</span></h2>
+            </div>
+            <div class="padding15" id="divShowAllTemplates">
+                <div>
+                    <span class="relative">
+                        <input type="text" placeholder="Search Rule Set Name" class="arsearch">
+                        <img src="~/images/lens.png" alt="lens" class="arlens">
+                    </span>
+                </div>
+                <!-- ko foreach: ruleSetDetails-->
+                <div class="mtb15" data-bind="attr:{id:Id}">
+                    <h3 class="bold record_heading">Rule Set Name: <span data-bind="html: Name"> </span></h3>
+                    <div class="padding15 record" data-bind="attr:{class: WideGapClass}">
+                        Start Date:<span class="relative">
+                            <input value="mm/dd/yyyy" type="text" autocomplete="off" readonly="readonly" name="startDate" class="date-picker dp" data-bind="attr:{id:startCalendarId}">
+
+                        </span>
+                        End Date:<span class="relative">
+                            <input value="mm/dd/yyyy" type="text" autocomplete="off" readonly="readonly" name="Enddate" class="date-picker dp" data-bind="attr:{id:endCalendarId}">
+
+                        </span>
+                        <input type="submit" class="search-button" value="Apply" data-bind="attr:{id:applyButtonId}">
+                        <div class="mtb10">
+                            <span>Companies: </span><span class="content-holder" data-bind="html: Companies"></span><br>
+                            <span>Car Classes: </span><span class="content-holder" data-bind="html: CarClasses"></span><br>
+                            <span>Rental Lengths: </span><span class="content-holder" data-bind="html: RentalLengths"></span><br>
+                            <span>Days of Week: </span><span class="content-holder" data-bind="html: DaysOfWeeks"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div id="divNoTemplate" style="display: none; margin: 10px 0px; padding: 0 10px; " class="record">
+                    <h3 class="bold red" style="padding:20px 0;">No Rule Set found</h3>
+                </div>
+                <div id="divNoShowAllTemplates" style="display: none; margin: 20px 0; padding: 0 10px;" class="record">
+                    <h3 class="bold red" style="padding:20px 0;">No Rule sets are available to be applied for this location.</h3>
+                </div>
+            </div>
+            <select name="carClass" class="two-cols-select" multiple="multiple" size="6" id="carClass" style="display:none;">
+                @if (ViewBag.CarClasses != null)
+                {
+                    foreach (var CarClass in ViewBag.CarClasses)
+                    {
+                        <option value="@CarClass.ID">@CarClass.Code</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    @{Html.RenderPartial("ChildFooter");}
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+
+    </div>
+</div>
+
+
+@Scripts.Render("~/scripts/AppliedRuleSet.js")
+
+<script>
+    var AjaxURLSettings = {
+        AppliedRuleSetUrl: '@Url.Action("GetAppliedRuleSets", "Ruleset")',
+        ActivateDeactivateRuleSetUrl: '@Url.Action("ActivateDeactivateRuleSet", "Ruleset")',
+        DeleteRuleSet: '@Url.Action("DeleteRuleSet", "Ruleset")',
+        AppliedRuleSetDetails: '@Url.Action("GetAppliedRuleSetDetails", "Ruleset")',
+        ApplyNewRuleSet: '@Url.Action("ApplyNewRuleSet", "Ruleset")'
+    }
+</script>

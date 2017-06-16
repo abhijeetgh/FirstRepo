@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+<div class="container">
+    <div class="loader_container_main" style="display:none;">
+        <div class="loader-bg"></div>
+        <div class="loader">
+            <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+        </div>
+    </div>
+    <div id="ftb-rating" class="pageminht">
+        <div class="ftb-rating-head"> FTB RATE SETTING </div>
+        <div>
+            <div>
+                <ul class="table-ul-right marginbottom0">
+                    <li class="brandLocation">
+                        <span class="bold">Brand location</span> :
+                        <ul id="ratesettingslocation" class="relative pointer dropdown">
+                            <li class="pointer">Choose Brand Location..</li>
+                            <ul class="hidden drop-down1">
+                                @if (ViewBag.LocationBrands != null)
+                                {
+                                    foreach (var locationBrand in ViewBag.LocationBrands)
+                                    {
+                                        <li value="@locationBrand.BrandLocationId" id="FTBLB_+@locationBrand.BrandLocationId">@locationBrand.Alias</li>
+                                    }
+                                }
+                            </ul>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="FTB_setting_details" style="display:none;">
+                <ul class="table-ul-right">
+                    <li>
+                        <span class="bold">Month</span> :
+                        <ul id="months" class="relative pointer dropdown" style="width: 70px;">
+                            <li value="1">January</li>
+                            <ul class="hidden drop-down1" style="overflow-x: hidden;">
+                                <li value="1">January</li>
+                                <li value="2">February</li>
+                                <li value="3">March</li>
+                                <li value="4">April</li>
+                                <li value="5">May</li>
+                                <li value="6">June</li>
+                                <li value="7">July</li>
+                                <li value="8">August</li>
+                                <li value="9">September</li>
+                                <li value="10">October</li>
+                                <li value="11">November</li>
+                                <li value="12">December</li>
+                            </ul>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <span class="bold">Year</span> :
+                        <ul id="year" class="relative pointer dropdown">
+                            <li value="2016">2016</li>
+                            <ul class="hidden drop-down1">
+                                @if (ViewBag.Years != null)
+                                {
+                                    foreach (var year in ViewBag.Years)
+                                    {
+                                        <li value="@year">@year</li>
+                                    }
+                                }
+                            </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="bold">Length</span> :
+                        <ul id="ratesettingsLOR" class="relative pointer dropdown">
+                            <li value=""></li>
+                            <ul class="hidden drop-down1">
+                                @*@if (ViewBag.RentalLengths != null)
+                                {
+                                    foreach (var lor in ViewBag.RentalLengths)
+                                    {
+                                    <li value="@lor.MappedID" id="@lor.ID">@lor.Code</li>
+                                    }
+                                }*@
+                            </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chkSplit">
+                        <label for="chkSplit">Split Month</label>
+                        <span id="lblMessage" style="display:none; font-weight:bold;width:300px; margin-left:50px;">Please review all fields hi-lighted in red</span>
+                        <label id="lblNotAllowedToModify" class="red bold" style="display: none; margin-left: 50px;">Previous month data is not allowed to modify</label>
+                    </li>
+                </ul>
+
+                @{Html.RenderPartial("~/Views/Partials/_FTBRateSetting.cshtml");}
+
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+        @{Html.RenderPartial("ChildFooter");}
+        <div id="footer-links">
+            @{Html.RenderPartial("MasterFooter");}
+        </div>
+    </div>
+</div>
+<div class="popup_bg" id="popupbgFTB" style="display:none;"></div>
+<div id="TargetReservationMgtPopup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_FTBTargetReservation.cshtml");}
+</div>
+<input type="hidden" id="hdnServerDate" value="@ViewBag.ServerDate" />
+@Styles.Render("~/css/responsive-tabs.css")
+@Styles.Render("~/css/ftb_rating.css")
+@Scripts.Render("~/bundles/FTBRateBundleJS")
+<script>
+    var AjaxURLSettings = {
+        CopyFTBRates: '@Url.Action("CopyFTBRates", "FTBRates")',
+        SaveFTBRates: '@Url.Action("SaveFTBRates", "FTBRates")',
+        GetFTBRate: '@Url.Action("GetFTBRate", "FTBRates")',
+        GetTargetTemplate: '@Url.Action("GetTargetTemplate", "FTBRates")',
+        SaveTargetDetails: '@Url.Action("SaveTargetDetails", "FTBRates")',
+        FetchTargetDetails: '@Url.Action("FetchTargetDetails", "FTBRates")'
+    }
+</script>

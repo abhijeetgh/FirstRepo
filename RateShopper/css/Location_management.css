@@ -1,0 +1,247 @@
+#gt-btn
+{
+margin:15px;	
+}
+.orng {
+  background: #d46f33 !important;
+  margin-left: 10px;
+}
+#location_management table{
+  float: left;
+  border-spacing: 0;
+  margin: 0 0 0 15px;
+  border: 1px solid #b6b6b6;
+  border-right: 0;
+}
+#location_management ul
+{
+list-style:none;	
+
+}
+
+#location_management td:nth-child(3) {
+  text-align:center
+}
+
+#location_management thead td {
+  background: #2988b9;
+  color: #fff;
+}
+#location_management table td {
+  border-right: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+}
+#location_management thead td {
+  border-bottom: 1px solid #b6b6b6;
+  font-weight: bold;
+
+}
+#location_management td {
+  padding: 10px 20px;
+}
+#location_management .wide-body-side-container select {
+  padding: 0.7em 0;
+  background: #fbfbfb;
+  border-radius: 5px;
+  margin-left:10px
+}
+.gt-top{
+  background: #e5e5e5;
+  font-size: 1.2em;
+  padding: 13px 15px;
+}
+#footer-Ulinks
+{
+font-size:0.89em;
+background:#f5f5f5
+}
+.lmlens
+{
+position: absolute;
+  top: 10%;
+ 
+  right: 5%;
+}
+.table-bottom{background:#efefef;
+margin:0 15px 0 15px;
+padding:8px;
+border:1px solid #b6b6b6;
+}
+.table-bottom ul 
+{
+list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.table-bottom ul li
+{
+display: inline;
+  border: 1px solid #c4c4c4;
+  padding: 8px;
+  margin: 0;
+  float: left;
+}
+.side-section-top{
+margin:20px 15px 0 15px
+}
+.record input.date-picker {
+  width: 13%;
+  padding-left: 5px !important;
+  padding: 7px 0px;
+  margin-right:15px;
+}
+.record
+{
+background:#f4f4f4;
+border:1px solid #d2d2d2;
+
+
+}
+.calender
+{
+position:absolute;
+right:11%;
+top:0%;
+}
+.content-holder
+{
+font-weight:bold;
+}
+.record_heading
+{
+margin:3px;
+}
+.lmsearch
+{
+padding:8px
+}
+.ard
+{
+margin:0px 8px;
+}
+#rcontainer
+{
+border:1px solid #b6b6b6;
+padding:15px 30px;
+margin:0px 15px;
+min-width:650px;
+}
+#lmform span
+{
+display:inline-block;
+width:212px;
+  margin-bottom: 12px;
+
+}
+#lmform input[type="text"],#lmform input[type="password"]
+{
+padding:8px;
+border-radius:5px
+
+}
+#lmform  div
+{
+margin:15px 0px
+
+}
+#lmform label
+{
+margin-right:50px
+}
+.lmcontent
+{
+margin-bottom:30px;
+min-height:675px
+}
+.checkbox-holder label
+{
+display:inline-block;
+width:59px
+}
+.lmcontainer,.ucontainer   /*changes for user 2nd class */
+{
+padding-bottom:15px;
+border-bottom:1px solid #b6b6b6;
+}
+/*Changes for USER */
+#lmform .ucontainer label {
+    width: auto;
+    margin-right: 25px;
+}
+#user_m td
+{
+padding:10px
+}
+#user_m td:nth-child(4) {
+  text-align: center;
+}
+.grey_bg {
+    background: #f4f4f4;
+}
+.grey_bg a {
+    color:chocolate!important;
+}
+.Asc div {
+    float: right;
+    margin: 0;
+    padding: 0;
+    transform: rotate(180deg);
+}
+.Desc div {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+.btnDisabled {
+    cursor: default;
+    background: #FFCC99 !important;
+}
+.ut
+{
+    font-weight:normal;
+    border-bottom:1px solid #ccc;
+    padding-bottom:15px;
+
+}
+.ut input
+{
+    margin-left:15px;
+    margin-right:5px;
+}
+.ut input:nth-child(2){
+    margin-left:0 !important;
+}
+#updateMesage{
+
+    font-weight: bold;
+     width: 100%; 
+    padding: 5px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-color: #f4f4f4;
+    color: #2988b9;
+    margin: 8px 0;
+}
+.errormsg{
+
+   display:none;
+    font-weight: bold;
+   
+    margin-left: 205px;
+}
+.selected,
+.drop-down li:hover,
+.drop-down1 li:hover {
+    background: #328efe;
+    color: #fff;
+}
+
+.deactive {
+    background-color:#e5e5e5!important;
+    cursor:default;
+}
+.trading-competitors , .direct-competitors {
+    width:210px;
+}

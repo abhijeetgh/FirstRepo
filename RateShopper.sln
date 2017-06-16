@@ -1,0 +1,128 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Web", "RateShopper\RateShopper.Web.csproj", "{15FDD9EA-A2FB-4FE7-A8E8-72CB6C03CFB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Domain", "RateShopper.Domain\RateShopper.Domain.csproj", "{D862AB63-93E8-48D8-A7A2-3FB13CA08414}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Data", "RateShopper.Data\RateShopper.Data.csproj", "{5810210B-6422-4E8C-ACF5-5FA9D0DE8265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Services", "RateShopper.Services\RateShopper.Services.csproj", "{E3714CD3-078E-44A6-804D-3DDF7B902B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Core", "RateShopper.Core\RateShopper.Core.csproj", "{0D81E383-953C-44CD-934C-BC5A5823EB3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{22EC06BD-F059-4810-9721-69D7BDCC569E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.ScrapperAPIService", "RateShopper.ScrapperAPIService\RateShopper.ScrapperAPIService.csproj", "{87B0A17A-0599-487B-91A7-2772358A823B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Scheduler", "RateShopper.Scheduler\RateShopper.Scheduler.csproj", "{C381BD31-61AA-44F0-A671-16EA0B119BDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Providers", "RateShopper.Providers\RateShopper.Providers.csproj", "{2355F18F-1AE5-476E-AA50-4D7414292ABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.QuickView.Scheduler", "RateShopper.QuickView.Scheduler\RateShopper.QuickView.Scheduler.csproj", "{F5A0AFCC-ABF1-4F78-92DE-C98839A081ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.Analytics.PostXML", "RateShopper.Analytics.PostXML\RateShopper.Analytics.PostXML.csproj", "{29E01A65-978C-4AF1-84C7-F7EA7E2C104F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateShopper.FTB.Scheduler", "RateShopper.FTB.Scheduler\RateShopper.FTB.Scheduler.csproj", "{3D30D486-4F67-4A9D-9C54-4933C27CC6C5}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/tfs/ez-rent-a-car
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = RateShopper.Data\\RateShopper.Data.csproj
+		SccProjectName1 = RateShopper.Data
+		SccLocalPath1 = RateShopper.Data
+		SccProjectUniqueName2 = RateShopper.Domain\\RateShopper.Domain.csproj
+		SccProjectName2 = RateShopper.Domain
+		SccLocalPath2 = RateShopper.Domain
+		SccProjectUniqueName3 = RateShopper.Services\\RateShopper.Services.csproj
+		SccProjectName3 = RateShopper.Services
+		SccLocalPath3 = RateShopper.Services
+		SccProjectUniqueName4 = RateShopper.Core\\RateShopper.Core.csproj
+		SccProjectName4 = RateShopper.Core
+		SccLocalPath4 = RateShopper.Core
+		SccProjectUniqueName5 = RateShopper\\RateShopper.Web.csproj
+		SccProjectName5 = RateShopper
+		SccLocalPath5 = RateShopper
+		SccProjectUniqueName6 = RateShopper.ScrapperAPIService\\RateShopper.ScrapperAPIService.csproj
+		SccProjectName6 = RateShopper.ScrapperAPIService
+		SccLocalPath6 = RateShopper.ScrapperAPIService
+		SccProjectUniqueName7 = RateShopper.Scheduler\\RateShopper.Scheduler.csproj
+		SccProjectName7 = RateShopper.Scheduler
+		SccLocalPath7 = RateShopper.Scheduler
+		SccProjectUniqueName8 = RateShopper.Providers\\RateShopper.Providers.csproj
+		SccProjectName8 = RateShopper.Providers
+		SccLocalPath8 = RateShopper.Providers
+		SccProjectUniqueName9 = RateShopper.QuickView.Scheduler\\RateShopper.QuickView.Scheduler.csproj
+		SccProjectName9 = RateShopper.QuickView.Scheduler
+		SccLocalPath9 = RateShopper.QuickView.Scheduler
+		SccProjectUniqueName10 = RateShopper.Analytics.PostXML\\RateShopper.Analytics.PostXML.csproj
+		SccProjectName10 = RateShopper.Analytics.PostXML
+		SccLocalPath10 = RateShopper.Analytics.PostXML
+		SccProjectUniqueName11 = RateShopper.FTB.Scheduler\\RateShopper.FTB.Scheduler.csproj
+		SccProjectName11 = RateShopper.FTB.Scheduler
+		SccLocalPath11 = RateShopper.FTB.Scheduler
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15FDD9EA-A2FB-4FE7-A8E8-72CB6C03CFB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15FDD9EA-A2FB-4FE7-A8E8-72CB6C03CFB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15FDD9EA-A2FB-4FE7-A8E8-72CB6C03CFB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15FDD9EA-A2FB-4FE7-A8E8-72CB6C03CFB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D862AB63-93E8-48D8-A7A2-3FB13CA08414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D862AB63-93E8-48D8-A7A2-3FB13CA08414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D862AB63-93E8-48D8-A7A2-3FB13CA08414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D862AB63-93E8-48D8-A7A2-3FB13CA08414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5810210B-6422-4E8C-ACF5-5FA9D0DE8265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5810210B-6422-4E8C-ACF5-5FA9D0DE8265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5810210B-6422-4E8C-ACF5-5FA9D0DE8265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5810210B-6422-4E8C-ACF5-5FA9D0DE8265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3714CD3-078E-44A6-804D-3DDF7B902B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3714CD3-078E-44A6-804D-3DDF7B902B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3714CD3-078E-44A6-804D-3DDF7B902B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3714CD3-078E-44A6-804D-3DDF7B902B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D81E383-953C-44CD-934C-BC5A5823EB3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D81E383-953C-44CD-934C-BC5A5823EB3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D81E383-953C-44CD-934C-BC5A5823EB3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D81E383-953C-44CD-934C-BC5A5823EB3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B0A17A-0599-487B-91A7-2772358A823B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B0A17A-0599-487B-91A7-2772358A823B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B0A17A-0599-487B-91A7-2772358A823B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B0A17A-0599-487B-91A7-2772358A823B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C381BD31-61AA-44F0-A671-16EA0B119BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C381BD31-61AA-44F0-A671-16EA0B119BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C381BD31-61AA-44F0-A671-16EA0B119BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C381BD31-61AA-44F0-A671-16EA0B119BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2355F18F-1AE5-476E-AA50-4D7414292ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2355F18F-1AE5-476E-AA50-4D7414292ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2355F18F-1AE5-476E-AA50-4D7414292ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2355F18F-1AE5-476E-AA50-4D7414292ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5A0AFCC-ABF1-4F78-92DE-C98839A081ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5A0AFCC-ABF1-4F78-92DE-C98839A081ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5A0AFCC-ABF1-4F78-92DE-C98839A081ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5A0AFCC-ABF1-4F78-92DE-C98839A081ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29E01A65-978C-4AF1-84C7-F7EA7E2C104F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E01A65-978C-4AF1-84C7-F7EA7E2C104F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E01A65-978C-4AF1-84C7-F7EA7E2C104F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E01A65-978C-4AF1-84C7-F7EA7E2C104F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D30D486-4F67-4A9D-9C54-4933C27CC6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D30D486-4F67-4A9D-9C54-4933C27CC6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D30D486-4F67-4A9D-9C54-4933C27CC6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D30D486-4F67-4A9D-9C54-4933C27CC6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

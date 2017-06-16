@@ -1,0 +1,215 @@
+﻿<div class="popup-top">
+    <span class="uppercase bold">Search Results</span>
+    <img src="images/tether_ratesClose.png" id="closepopup" class="fright pointer closeP" alt="close">
+</div>
+<div class="ui-draggable ui-draggable-handle relative" id="markResultsDiv">
+    <div class="fleft left-panel">
+        <ul id="jobHistory" data-bind="foreach:scheduledRun">
+            <li data-bind="attr:{value:SummaryId,reviewStatus:Reviewed,class:reviewClass,id:liItemId,isGOV:isGOVShop} ,html:ocurrence">
+            </li>
+        </ul>
+        <div id="pagingList" class="padding15 center">
+
+        </div>
+    </div>
+    <div class="fleft padding15 right-panel">
+        <ul class="w100 table-ul-right mhide bold dailyFilter">
+            <li>
+                Source
+                <ul id="scrapper-source" class="dropdown relative pointer">
+                    <li></li>
+                    <ul class="hidden drop-down1" id="scrapperSources" data-bind="foreach:sources">
+                        <li data-bind="attr:{value:ID},html:Name"></li>
+                    </ul>
+                </ul>
+                @*<label for="scrapper-source1" id="scrapper-source1" data-bind="attr:{value:ID},html:Name"></label>*@
+            </li>
+            <li>
+                Location
+                <ul id="location" class="dropdown relative pointer">
+                    <li></li>
+                    <ul class="hidden drop-down1" id="locationFilter" data-bind="foreach:locations">
+                        <li data-bind="attr:{value:LocationID,lbid:LBID},html:Code"></li>
+                    </ul>
+                </ul>
+            </li>
+            <li class="classic_hide next-prev-width">
+                <a href="#" class="left-arrow dailyViewPrevDay" style="display: none;"><img class=" middle" src="images/Search-left_arrow.jpg"></a>
+                <img class="right-arrow dailyViewPrevDayDisabled middle" style="opacity:0.4" src="images/Search-left_arrow.jpg">
+                <span class="uppercase showSelectedDate"></span>
+                <a href="#" class="right-arrow dailyViewNextDay"><img class="middle" src="images/Search-right_arrow.jpg"></a>
+                <img class="right-arrow dailyViewNextDayDisabled middle" style="display: none; opacity: 0.4" src="images/Search-right_arrow.jpg">
+            </li>
+            <li>
+                <span class="bold">
+                    Length
+                </span>
+                <ul id="length" class="dropdown relative pointer">
+                    <li>D1</li>
+                    <ul class="hidden drop-down1" id="lorFilter" data-bind="foreach:lorsFilter">
+                        <li data-bind="attr:{value:MappedID},html:Code"></li>
+                    </ul>
+                </ul>
+            </li>
+            <li class="classic_hide">
+                Date
+                <ul id="displayDay" class="dropdown relative pointer">
+                    <li>today</li>
+                    <ul class="hidden drop-down1" data-bind="foreach:daysFilter">
+                        <li data-bind="attr:{value:StartDate,filter:StartDateVal},html:StartDate"></li>
+                    </ul>
+                </ul>
+            </li>
+            <li class="classic_view carClassItem">
+                Car Class
+                <ul id="carClassFilter" class="dropdown relative pointer">
+                    <li value="" selected="selected"></li>
+                    <ul class="hidden drop-down1" data-bind="foreach:cars">
+                        <li data-bind="attr:{value:ID},html:Code"></li>
+                    </ul>
+                </ul>
+            </li>
+            <li class="viewSelect">
+                View
+                <ul name="viewSelect" class="dropdown relative pointer" id="viewSelect">
+                    <li value="daily">daily</li>
+                    <ul class="hidden drop-down1">
+                        <li value="daily" class="selected">daily</li>
+                        <li value="classic">classic</li>
+
+                    </ul>
+                </ul>
+            </li>
+        </ul>
+        <div class="ptb15">
+            <table id="searchResultRates" class="daily_view">
+                <thead class="dailyHeader">
+                    <tr>
+                        <th>Car Class</th>
+
+                        <th id="dailyEdit">Base</th>
+                        <th class="additionalBaseCol" style="display: none;">
+                            Additional<br> Base
+                        </th>
+                        <th id="totalEdit">Total</th>
+
+                        <!-- ko foreach:headers -->
+                        <th class="company-logo relative" align="center">
+                            <img data-bind=" css: companyID, attr:{src:logo, alt:companyName}">
+                            <!-- ko if:inside() != null || inside() != undefined  -->
+                            <span data-bind="css : inside() == true ? 'spn_i' : 'spn_o', attr:{ title : inside() == true ? 'Inside' : 'Outside'}"></span>
+                            <!-- /ko -->
+                        </th>
+                        <!-- /ko -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach:rates -->
+                    <tr>
+
+                        <td align="center" class="car-class-img">
+                            <img data-bind=" attr:{classId: carClassID, src:carClassLogo, alt:carClass}" class="carClassLogo">
+                        </td>
+
+                        <td>
+                            <span class="bold baseEdit numbersOnly suggested"></span>
+                        </td>
+                        <td class="additionalBaseCol">
+                            <span class="bold additionalBase suggested"></span>
+                        </td>
+                        <td>
+                            <span class="bold totalEdit numbersOnly suggested"></span>
+                        </td>
+
+                        <!-- ko foreach:companyDetails -->
+                        <td data-bind="attr:{companyID:companyID, companyAndCarId:companyID()+'_'+$parent.carClassID(), tv:totalValue}" class="companyRates">
+                            <span data-bind="html:baseValue" class="daily-rate dummybase"></span><span class="perDay" data-bind="html:perDay"></span><br>
+                            <span class="tv" data-bind="html:totalValue, css:islowest()== true ? 'highlight': islowestAmongCompetitors() == true ? 'highlightGreen' : ''"><span class="total-cost"></span></span>
+                        </td>
+                        <!-- /ko -->
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+
+            </table>
+
+            <div class="classic_view">
+                <div class="body-section-body classictable">
+                    <table id="daily-rates-table" class="classictable grid">
+                        <thead class="bold">
+                            <tr class="classicheader">
+                                <th class="all-dates" style="min-width:80px;">Dates</th>
+                                <th id="dailyEdit">
+                                    Base
+                                </th>
+                                <th class="additionalBaseCol">
+                                    Additional
+                                    <br> Base
+                                </th>
+                                <th id="totalEdit">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ko foreach:ratesClassic -->
+                            <tr data-bind="attr:{date:date}">
+                                <td data-bind="html:dateInfo,attr:{FormatDate:DateFormat}" class="dates bold"></td>
+                                <td>
+                                    <span class="suggestedRateId bold baseEdit"></span>
+                                </td>
+                                <td class="additionalBaseCol">
+                                    <span class="bold additionalBase"></span>
+                                </td>
+                                <td>
+                                    <span class="bold totalEdit"></span>
+                                </td>
+                                <!-- ko foreach:companyDetailsClassic -->
+                                <td class="relative" data-bind="attr:{companyID:companyID}">
+                                    <span class="bold"><span class="cname" data-bind="html:companyCode"></span>:<span class="daily-rate" data-bind="html:baseValue, css:islowestAmongCompetitors == true ? 'base-rate-blue' :''"></span></span>
+                                    <br />(<span class="tv" data-bind="html:totalValue"></span>)
+                                    <!-- ko if:inside != null || inside != undefined  -->
+                                    <span data-bind="css : inside == true ? 'spn_i' : 'spn_o', html : inside == true ? 'I' : 'O', attr:{ title : inside == true ? 'Inside' : 'Outside'}"></span>
+                                    <!-- /ko -->
+                                </td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="error-msg" id="errorMessage" style="display:none;margin-bottom:50px;">
+        </div>
+        <div class="error-msg" id="NoRecordFoundMessage" style="display:none;margin-bottom:50px;">
+        </div>
+        <input type="hidden" id="CurrentJobSearchSummaryStatus" />
+        <div>
+            <a href="#" onclick="markResults();" id="reviewButton" style="display:none">Mark result as reviewed</a>
+            <span id="spnReviewedStatus" style="display:none">Results are reviewed</span>
+            <span class="spanlastdayshop red bold" style="display: none; white-space: nowrap;padding-left:98px;">Last Shop Day</span>
+            <input type="button" class="search-button fright" value="Close" id="closepopup">
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="loader_container_location" style="display: none;" id="reviewWaitSpinner">
+        <div class="loader-bga"></div>
+        <div class="loader mhide thide">
+            <img src="images/ajax_loader_blue_small.gif">
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    var MarkResult = {
+        GetJobLog: '@Url.Action("GetJobOccurences", "AutomationConsole")',
+        GetJobDetails: '@Url.Action("GetHistoryDetails", "AutomationConsole")',
+        MarkResultsReviewed: '@Url.Action("MarkResults", "AutomationConsole")',
+    }
+</script>

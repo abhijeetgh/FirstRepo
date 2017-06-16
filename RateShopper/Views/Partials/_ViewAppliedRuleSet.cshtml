@@ -1,0 +1,184 @@
+﻿
+<div class="rule-set-pop-up-container mhide" id="viewAppliedRuleSet">
+    <div class="popup-top">
+        <span class="uppercase bold"> View Applied Rule Set</span>
+        <img src="images/tether_ratesClose.png" id="closerulesetpopup" class="fright pointer closeP" alt="close">
+    </div>
+    <div class="padding15">
+        <table class="rule-set" cellspacing="0">
+            <thead>
+                <tr class="border">
+                    <th align="left">Source</th>
+                    <th align="left">Location</th>
+                    <th align="left">Length</th>
+                    <th align="left">Car Class</th>
+                    <th align="left">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="last-row border">
+                    <td id="RuleSetSource">Travelocity</td>
+                    <td id="RuleSetLocation">DFW</td>
+                    <td id="RuleSetRentalLength">D1</td>
+                    <td id="RuleSetCarClass">ECAR</td>
+                    <td id="RuleSetDate">2015-04-19</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="spacer"></div>
+        <table class="rule-set" cellspacing="0">
+            <thead>
+                <tr class="border">
+                    <th colspan="4" align="left">Rate Suggestion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border">
+                    <td>Current Base Rate:</td>
+                    <td id="RuleSetCurrentBaseRate"></td>
+                    <td>Current Total Cost:</td>
+                    <td id="RuleSetCurrentTotalRate"></td>
+                </tr>
+                <tr class="border">
+                    <td>Suggested Base Rate:</td>
+                    <td id="SuggestedBaseRate"></td>
+                    <td>Suggested Total Cost:</td>
+                    <td id="SuggestedTotalRate"></td>
+                </tr>
+                <tr class="last-row border">
+                    <td>Base Rate Difference:</td>
+                    <td id="RuleSetBaseRateDiff">-4.37</td>
+                    <td>Total Cost Difference:</td>
+                    <td id="RuleSetTotalRateDiff">-6.21</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="spacer"></div>
+        <table class="rule-set" cellspacing="0">
+            <thead>
+                <tr class="border">
+                    <th align="left">Reasons/Rules</th>
+                    <th>&nbsp;</th>
+                    <th align="right">Current Rate</th>
+                    <th>&nbsp;</th>
+                    <th align="right">Rate Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border">
+                    <td>Minimum Rate (Base):</td>
+                    <td align="right" id="RuleSetMinRate"></td>
+                    <td align="right" id="RuleSetTotalMinRate"></td>
+                    <td align="center">
+                        <span class="green-txt bold" id="RuleSetStatusMin"></span>
+                    </td>
+                    <td align="right" id="RuleSetTotalMinRateChange"></td>
+                </tr>
+                <tr class="border">
+                    <td>Maximum Rate (Base):</td>
+                    <td align="right" id="RuleSetMaxRate"></td>
+                    <td align="right" id="RuleSetTotalMaxRate"></td>
+                    <td align="center">
+                        <span class="green-txt bold" id="RuleSetStatusMax"></span>
+                    </td>
+                    <td align="right" id="RuleSetTotalMaxRateChange"></td>
+                </tr>
+                <tr class="last-row border">
+                    <td>Lowest Comp <span id="RuleSetLowestGapTitle">-</span> Gap <span id="RulesetLowestGapRateType"></span>:</td>
+                    <td align="right" id="RuleSetLowestCompanyGap"></td>
+                    <td align="right" id="RuleSetCurrentTotalRateRules"></td>
+                    <td align="center">
+                        <span class="red-txt bold" id="RuleSetStatus"></span>
+                    </td>
+                    <td align="right" id="SuggestedTotalRateRules"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="spacer"></div>
+        <div class="rule-set-txt">
+            <p><span class="bold">Template Name :</span><span id="RuleSetTemplateName"></span></p>
+            <p>
+                <span class="bold">Companies :</span>
+                <!-- ko foreach: RuleSetCompanies -->
+                <span class="RuleSetlstCompany" data-bind="html:Code,attr:{companyID:ID}"></span>,
+                <!-- /ko -->
+            </p>
+            <p><span class="bold">Car Classes : &nbsp;</span> <span id="RuleSetCarClassSpan"></span></p>
+            <p><span class="bold">Rental Lengths : &nbsp;</span><span id="RuleSetRentalLengthSpan"></span></p>
+            <p><span class="bold">Days Of Week : &nbsp;</span><span id="RuleSetDayOfWeekSpan"></span></p>
+        </div><br />
+        <a href="#" class="rule-set-gaps-link" id="ShowGaplink">+Show Gaps</a>
+        <div id="ShowGapTable" style="display:none;">
+            <br />
+            <!--ko foreach:RuleSetGroups-->
+            <div class="rule-set-gaps-container" id="RuleSetGroup">
+
+                <p class="clear rulesetpara">Total Rate Price Gaps - <span data-bind="html:GroupName,attr:{GroupID:GroupID}"></span>,&nbsp;<b>Companies</b> : (<span data-bind="html:CompanyName"></span><input type="hidden" id="GroupCompannyId" data-bind="value:CompanyId" />)</p>
+
+                <table class="rule-set fleft table_3" cellspacing="0" id="daystable">
+                    <tbody>
+                        <!--ko foreach:RuleSetGapSettingsDay-->
+                        <tr class="border">
+                            <td><span data-bind="html:RangeName"></span>&nbsp;<span data-bind="html:$index()+1"></span></td>
+                            <td data-bind="html:MinAmount" id="MinAmount"></td>
+                            <!-- ko if: $index()+1 == 5 -->
+                            <td>UP</td>
+                            <!--/ko-->
+                            <!-- ko if: $index()+1 != 5 -->
+                            <td data-bind="html:MaxAmount" id="MaxAmount"></td>
+                            <!-- /ko -->
+                            <td>Gap</td>
+                            <td data-bind="html:GapAmount" id="GapAmount"></td>
+                        </tr>
+
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+                <table class="rule-set fleft table_3" cellspacing="0" id="weekstable">
+                    <tbody>
+                        <!--ko foreach:RuleSetGapSettingsWeek-->
+                        <tr class="border">
+                            <td><span data-bind="html:RangeName"></span>&nbsp;<span data-bind="html:$index()+1"></span></td>
+                            <td data-bind="html:MinAmount" id="MinAmount"></td>
+                            <!-- ko if: $index()+1 == 5 -->
+                            <td>UP</td>
+                            <!--/ko-->
+                            <!-- ko if: $index()+1 != 5 -->
+                            <td data-bind="html:MaxAmount" id="MaxAmount"></td>
+                            <!-- /ko -->
+                            <td>Gap</td>
+                            <td data-bind="html:GapAmount" id="GapAmount"></td>
+
+                        </tr>
+
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+                <table class="rule-set fleft table_3" cellspacing="0" id="monthstable">
+                    <tbody>
+                        <!--ko foreach:RuleSetGapSettingsMonth-->
+                        <tr class="border">
+                            <td><span data-bind="html:RangeName"></span>&nbsp;<span data-bind="html:$index()+1"></span></td>
+                            <td data-bind="html:MinAmount" id="MinAmount"></td>
+                            <!-- ko if: $index()+1 == 5 -->
+                            <td>UP</td>
+                            <!--/ko-->
+                            <!-- ko if: $index()+1 != 5 -->
+                            <td data-bind="html:MaxAmount" id="MaxAmount"></td>
+                            <!-- /ko -->
+                            <td>Gap</td>
+                            <td data-bind="html:GapAmount" id="GapAmount"></td>
+
+                        </tr>
+
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

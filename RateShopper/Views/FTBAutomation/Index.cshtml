@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+<div class="auto-console-div"> FTB AUTOMATION </div>
+<div class="container">
+    <div class="loader_container_main" style="display: none; padding:0px;">
+        <div class="loader-bg"></div>
+        <div class="loader">
+            <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;">
+        </div>
+    </div>
+    @{Html.RenderPartial("~/Views/Partials/_FTBAutomationViewJob.cshtml");}
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+<div class="popup_bg" id="popupbgFTB" style="display:none;"></div>
+<div id="CreateFTBJobPopup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_FTBAutomationCreateJob.cshtml");}
+</div>
+@Styles.Render("~/css/jquery-ui-timepicker-addon.css")
+@Styles.Render("~/css/automation.css")
+@Scripts.Render("~/bundles/FTBScheduledJobBundleJS")
+<script>
+    var AjaxURLSettings = {
+        GetLocations: '@Url.Action("GetLocations", "FTBAutomation")',
+        SaveFTBJob: '@Url.Action("SaveJob", "FTBAutomation")',
+        GetFTBJobDetails: '@Url.Action("GetFTBJob", "FTBAutomation")',
+        GetLocationJobMonths: '@Url.Action("GetScheduledJobMonths", "FTBAutomation")',
+        GetFTBAutomationJobListURL : '@Url.Action("GetFTBAutomationJobList", "FTBAutomation")',
+        DeleteFTBScheduledJobURL: '@Url.Action("DeleteFTBScheduledJob", "FTBAutomation")',
+        StartStopFTBScheduledJobURL: '@Url.Action("StartStopFTBScheduledJob", "FTBAutomation")',
+        InitiateSummaryShop: '@Url.Action("InitiateSummaryShop", "FTBAutomation")',
+        ShowSummary: '@Url.Action("Index", "Summary")',
+        DeleteSummaryShop: '@Url.Action("DeleteSummaryShop", "FTBAutomation")'
+    }
+</script>

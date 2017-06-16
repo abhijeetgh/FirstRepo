@@ -1,0 +1,273 @@
+/*ftb rating*/
+
+.ftb-rating-head {
+    padding: 14px 0 14px 17px;
+    background-color: #e5e5e5;
+    margin-bottom: 3px;
+    color: #000;
+    font-weight: bold;
+}
+
+.brandLocation {
+    padding: 0px 0px 4px 0px;
+}
+
+
+
+.ftb-rating-table {
+
+    padding: 0px 20px 15px 20px;
+    font-weight: bold;
+}
+
+    .ftb-rating-table table {
+        margin: 15px 0px;
+        font-weight: normal;
+        width: 100%;
+    }
+
+        .ftb-rating-table table tbody {
+            color: #565656;
+        }
+
+    .ftb-rating-table input[type="text"] {
+        width: 90%;
+        padding: 4px;
+    }
+
+.ftbSelect {
+    /*height: 32px;*/
+    padding: 30px 0 0 30px;
+    margin-bottom: 30px;
+}
+
+    .ftbSelect ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+        .ftbSelect ul li {
+            display: inline;
+            border: 1px solid #c4c4c4;
+            padding: 8px 0;
+            min-width: 35px;
+            /*min-height:35px;*/
+            margin: 0;
+            float: left;
+            text-align: center;
+        }
+
+    .ftbSelect span {
+        color: #000;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .ftbSelect .selected {
+        background: #fe8881;
+    }
+
+#ftbBottomBar {
+    padding: 14px;
+}
+
+table.table-bordered td, table.table-bordered th {
+    border-right: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+}
+
+table.table-bordered tbody td {
+    text-align: center;
+}
+
+.ftb-rating .table-ul-right {
+    padding-right: 66px;
+    padding-top: 17px;
+}
+
+/*ftb rating*/
+/*ftb rating popup*/
+#popup-main {
+    width: auto !important;
+    position: absolute;
+    z-index: 100;
+    overflow: auto;
+    touch-action: auto !important;
+    top: 0;
+    height:100%;
+}
+
+#reservation-target ul.table-ul-right,
+#ftb-rating ul.table-ul-right {
+    list-style: none;
+    margin: 8px 15px;
+    display: inline-block;
+    padding: 5px;
+}
+
+
+#ftb-rating ul.split-month-box {
+    margin: 0px 40px 0px 0px;
+    border: 1px solid #b6b6b6;
+    width:458px;
+}
+
+#reservation-target ul.table-ul-right li, #ftb-rating ul.table-ul-right li {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 10px;
+}
+/*#reservation-target ul.table-ul-right li,
+#ftb-rating ul.table-ul-right li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 0px;
+}*/
+
+.popup-top {
+    background: #e5e5e5;
+    font-size: 1.2em;
+    padding: 13px 10px;
+}
+
+.popup_bg_master {
+    background-color: #000;
+    opacity: 0.2;
+}
+
+#popup-main-inner {
+    margin: 0 auto;
+    width: 90%;
+    background: #fff;
+    margin-top: 5%;
+    border: 1px solid black;
+    padding: 1px;
+}
+
+.wide-body-side-container {
+    display: inline-block;
+}
+
+.bordered {
+    border: 1px solid black;
+}
+
+select {
+    padding: 0.3em 0;
+    background: #fbfbfb;
+    border-radius: 5px;
+}
+
+#reservation-target table,
+.ftb-rating-table table {
+    border-spacing: 0;
+    border: 1px solid #b6b6b6;
+    border-right: 0;
+}
+
+#reservation-target input[type="text"] {
+    padding: 4px;
+    width: 60%;
+}
+
+#reservation-target .gtleft td:nth-child(2) {
+    width: 200px;
+}
+
+#reservation-target thead td,
+.ftb-rating-table thead td {
+    background: #2988b9;
+    color: #fff;
+}
+
+#reservation-target table td,
+.ftb-rating-table table td {
+    border-right: 1px solid #b6b6b6;
+}
+
+#reservation-target thead td,
+.ftb-rating-table thead td {
+    border-bottom: 1px solid #b6b6b6;
+    font-weight: bold;
+}
+
+#reservation-target td,
+.ftb-rating-table td {
+    padding: 10px;
+}
+
+.ard,
+.aru {
+    margin: 0px 8px;
+}
+
+#reservation-target .value,
+#ftb-rating .value {
+    color: #565656;
+}
+
+#reservation-table {
+    padding: 2px 0;
+    display: inline-block;
+}
+
+#ftb-rating .fright {
+    padding-right: 10px;
+}
+
+.blackOut {
+    color: #565656;
+    padding: 0.2em 0px 0 2px;
+    padding-left: 5px;
+}
+
+    .blackOut input[type="text"] {
+        /* background: #cde3f0; */
+        padding: 5px 0px;
+    }
+
+.calender {
+    position: absolute;
+    right: 7px;
+    top: 0px;
+}
+.selected,
+.drop-down li:hover,
+.drop-down1 li:hover {
+    background: #328efe;
+    color: #fff;
+}
+
+.marginbottom0 {
+    margin-bottom:0px;
+}
+
+.splitoptions .search-button {
+    margin-left:20px;
+}
+.ui-selectable li {
+    cursor:pointer;
+}
+
+.green {
+    color:green;
+}
+
+.red {
+    color:red;
+}
+
+/* background popup operation */
+.popup_bg {
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    opacity: 0.2;
+}
+/*ftb rating popup*/

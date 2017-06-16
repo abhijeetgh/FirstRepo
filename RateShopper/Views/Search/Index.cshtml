@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+<div class="container pageminht">
+    <ul class="view-tabs mhide">
+        <li class="selected defaultViewTab" data-target=".search-results"><a>Default View</a></li>
+        <li data-target=".quick-view"><a>Quick View</a></li>
+    </ul>
+    <div class="panel-container pageminht">
+        <div class="loader_container_main" style="display:none;">
+            <div class="loader-bg"></div>
+            <div class="loader">
+                <img src="images/ajax_loader_blue_large.gif" style="height: 150px;" />
+            </div>
+        </div>
+        <div id="progress">
+            <h3 style="color:#fff">Please wait. Sending rates ... </h3>
+        </div>
+        <div id="main">
+            <div id="mobile-header">
+                <span class="left-section fleft spanMainheader">
+
+                    Rate Management System
+                </span>
+
+                <span class=" fright">
+                    <img src="images/mobile-search.jpg" class="pointer activebg mobileSearchICO" alt="src" data-target=".search-results">
+                    <img src="images/mobile-quick-view.png" class="pointer activebg quick-view-icon" alt="src" data-target=".quick-view">
+                    <img src="images/mobile-account.png" class="pointer profile" alt="account">
+
+                </span>
+                <div class="clear"></div>
+            </div>
+
+            <div>
+                <div class="search-results">
+
+                    <div class="left-col-toggle pointer">
+                        <img src="images/search-toggle-e.png" alt="toggle" />
+                    </div>
+                    <div id="left-col">
+                        @{Html.RenderPartial("~/Views/Partials/_SearchSelectionPanel.cshtml");}
+                        @{Html.RenderPartial("~/Views/Partials/_SearchSummaryPanel.cshtml");}
+                    </div>
+                    <div id="right-col">
+                        @{Html.RenderPartial("~/Views/Partials/_SearchGridResult.cshtml");}
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="quick-view" style="display:none;">
+                    @{Html.RenderPartial("~/Views/Partials/_QuickViewPanel.cshtml");}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+@*<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>*@
+<div class="popup_bg" style="display:none;"></div>
+<div class="quickview-schedule-modal hidden" id="quickViewEnhancement">
+
+    @{Html.RenderPartial("~/Views/Partials/_QuickViewSchedule.cshtml");}
+</div>
+<div class="modal-backdrop fade in hidden"></div>
+
+<div id="tethered_rates" style="display:none;">
+    @{Html.RenderPartial("~/Views/Partials/_TetheredRates.cshtml");}
+</div>
+<div id="opaque_rates" style="display:none;">
+    @{Html.RenderPartial("~/Views/Partials/_OpaqueRates.cshtml");}
+</div>
+<div id="updateAllTSD_popup" style="display:none;">
+    @{Html.RenderPartial("~/Views/Partials/_UpdateTSD.cshtml");}
+</div>
+<div id="ViewApplied_RuleSet" class="mhide" style="display:none;">
+    @{Html.RenderPartial("~/Views/Partials/_ViewAppliedRuleSet.cshtml");}
+</div>
+
+
+@Styles.Render("~/css/search.css")
+@Styles.Render("~/css/RuleSet-popup.css")
+@Scripts.Render("~/bundles/searchBundleJS")

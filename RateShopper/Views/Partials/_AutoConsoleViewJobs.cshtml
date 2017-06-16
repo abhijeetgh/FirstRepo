@@ -1,0 +1,191 @@
+﻿<div id="view2">
+    <div class="edit-del-box">
+        <div class="Sch-loc-status-user-box fleft">
+            <button class="search-button scheduleNewJob">Schedule New Job</button>
+            <button id="refreshAutomationJob" class="search-button">Refresh Scheduled Jobs</button>
+            <ul class="table-ul-right">
+                <li>
+                    <span id="spanDelete" style="padding-left:10px; color: green; display:none; font-weight:bold;">Job Deleted Successfully.</span>
+                    <span id="spanError" style="padding-left:10px; color: red; display:none; font-weight:bold;">Something went wrong. Please try again!</span>
+                    <span id="spanNoNextRun" style="padding-left:10px; color: red; display:none; font-weight:bold;">Please edit the Job. Start Failed!</span>
+                </li>
+            </ul>
+        </div>
+        <div class="fleft" style="width: 65%; margin-top: 15px; ">
+            <ul class="table-ul-right">
+                <li>
+                    Location
+                    <ul id="location" class="relative pointer" style="width:90px;">
+                        <li value="0">Any Location</li>
+                        <ul class="hidden drop-down1">
+                            <li value="0" class="selected">Any Location</li>
+                            @if (ViewBag.LocationBrands != null)
+                            {
+                                foreach (var locationBrand in ViewBag.LocationBrands)
+                                {
+                                    <li value="@locationBrand.BrandLocationId" id="@locationBrand.BrandLocationId">@locationBrand.Alias</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+                </li>
+                <li>
+                    User
+                    <ul id="user" class="relative pointer" style="width: 140px;">
+                        <li value="0">Any User</li>
+                        <ul class="hidden drop-down1" style="overflow-x: hidden">
+                            <li value="0">Any User</li>
+                            @if (ViewBag.Users != null)
+                            {
+                                foreach (var user in ViewBag.Users)
+                                {
+                                    <li value="@user.Id" id="@user.Id">@(user.FirstName + " " + user.LastName)</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+                </li>
+                <li><input id="chkFinished" type="checkbox" class="checkboxMargin" />Finished</li>
+                <li><input id="chkInProgress" type="checkbox" class="checkboxMargin" />In Progress</li>
+                <li><input id="chkStopped" type="checkbox" class="checkboxMargin" />Stopped</li>
+                <li><input id="chkScheduled" type="checkbox" class="checkboxMargin" />Scheduled</li>
+                <li><input id="chkWideGap" type="checkbox" class="checkboxMargin" />Wide Gap</li>
+                <li><input id="chkIsGov" type="checkbox" class="checkboxMargin" />Gov</li>
+                <li><input id="chkIsReadOnly" type="checkbox" class="checkboxMargin" />Read Only</li>
+
+
+                <li>
+                    <span id="spanDelete" style="padding-left:10px; color: green; display:none; font-weight:bold;">Job Deleted Successfully.</span>
+                    <span id="spanError" style="padding-left:10px; color: red; display:none; font-weight:bold;">Something went wrong. Please try again!</span>
+                    <span id="spanNoNextRun" style="padding-left:10px; color: red; display:none; font-weight:bold;">Please edit the Job. Start Failed!</span>
+                </li>
+            </ul>
+        </div>
+        <div class="review-delete-box fright">
+            <ul>
+                <li class="start-icon" title="Start"><span>Start</span></li>
+                <li class="stop-icon" title="Stop"><span>Stop</span></li>
+                <li class="edit-icon" title="Edit"><span>Edit</span></li>
+                <li class="delete-icon" title="Delete"><span>Delete</span> </li>
+                <li class="pending-icon" title="Results (unreviewed)"><span>Pending</span></li>
+                <li class="review-icon" title="Results"><span>Reviewed</span></li>
+                <li class="initiateSum-icon" title="Initiate Shop"><span>Initiate Shop</span></li>
+                <li class="show-icon" title="Show Summary"><span>Show Summary</span></li>
+                <li class="read-only-shop-icon" title="Read-only shops"><span>Read-Only Shop</span></li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div style="clear:both;"></div>
+    <label id="lblMessage" style="font-weight:bold"></label>
+    <div class="data-panel">
+        <div class="table-responsive overflowA">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="table-tr-sch-new-job resultsHeader">
+                        <th style="min-width:190px;">Actions</th>
+                        <!-- ko foreach: headersFirstGrp -->
+                        <th data-bind="attr:{value:sortPropertyName, asc:asc, id:sortPropertyName}, click: $parent.sort" style="cursor:pointer;">
+                            <span data-bind="text: title"></span><img class="ard" src="~/images/ardown.png" alt="arrow">
+                            <img class="aru" src="~/images/arup.png" alt="arrow" style="display:none;">
+                        </th>
+                        <!-- /ko -->
+                        <th>Last Run Time</th>
+                        <th>Next Run Time</th>
+                        <th>Run Dates</th>
+                        <th>Shop Dates</th>
+                        <th>Source</th>
+                        <th>Locations </th>
+                        <th>Lengths</th>
+                        <th>Car Classes</th>
+                        <!-- ko foreach: headersSecondGrp -->
+                        <th data-bind="attr:{value:sortPropertyName, asc:asc, id:sortPropertyName}, click: $parent.sort" style="cursor:pointer;">
+                            <span data-bind="text: title"></span><img class="ard" src="~/images/ardown.png" alt="arrow">
+                            <img class="aru" src="~/images/arup.png" alt="arrow" style="display:none;">
+                        </th>
+                        <!-- /ko -->
+                        <!-- ko foreach: headersThirdGrp -->
+                        <th data-bind="attr:{value:sortPropertyName, asc:asc, id:sortPropertyName}, click: $parent.sort" style="cursor:pointer;">
+                            <span data-bind="text: title"></span><img class="ard" src="~/images/ardown.png" alt="arrow">
+                            <img class="aru" src="~/images/arup.png" alt="arrow" style="display:none;">
+                        </th>
+                        <!-- /ko -->
+                        <th style="min-width: 105px;">SUMMARY ACTIONS	</th>
+                        <th>Summary Status</th>
+                    </tr>
+                    <tr class="table-tr-sch-new-job noResultsHeader">
+                        <th>Actions</th>
+                        <th>Status</th>
+                        <th>Date Created</th>
+                        <th>Last Run Time</th>
+                        <th>Next Run Time</th>
+                        <th>Run Dates</th>
+                        <th>Shop Dates</th>
+                        <th>Source</th>
+                        <th>Locations </th>
+                        <th>Lengths</th>
+                        <th>Car Classes</th>
+                        <th>Wide Gap</th>
+                        <th>Submitted By</th>
+                        <th>SUMMARY ACTIONS	</th>
+                        <th>Summary Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: jobDetails -->
+                    @*,style:{'background-color':(IsStopByFTB==true?'#fbebeb':'#ffffff')}*@
+                    <tr class="table-tr-sch-new-job-content" data-bind="attr:{id: Id, ExecutionInProgress:ExecutionInProgress}">
+                        <td style="position:relative">
+                            <span data-bind="attr:{class:(IsReadOnly!=true?'spn_R':'')}" class=""></span>
+                            <ul>
+                                <li><span class="icon stop" title="Stop" data-bind="attr:{id:stopId}, visible: IsEnabled && (Status != 'FINISHED')"></span></li>
+                                <li><span class="icon start" title="Start" data-bind="attr:{id:startId}, visible: !IsEnabled && (Status != 'FINISHED')"></span></li>
+                                <li><span class="icon start" data-bind=" visible: (Status == 'FINISHED')" style="cursor: default !important;opacity:0.2;"></span></li>
+                                <li><span class="icon edit" title="Edit" data-bind="attr:{id:editId}"></span></li>
+                                <li><span class="icon del" title="Delete" data-bind="attr:{id:deleteId}"></span></li>
+                                <li><span class="icon pending" title="Results (unreviewed)" data-bind="attr:{id:pendingId}, style : { visibility : IsReviewPending && AreReviewButtonsRequired  ? '' : 'hidden' }"></span></li>
+                                <li><span class="icon review" title="Results" data-bind="visible : !IsReviewPending && AreReviewButtonsRequired , attr:{id:pendingId}"></span></li>
+                            </ul>
+                        </td>
+                        <td data-bind="html: Status,attr:{class:(IsStopByFTB==true?'status_color':''),title:(IsStopByFTB==true?'Automation stopped by FTB':'')}"></td>
+                        <td data-bind="html: CreatedDateAsString, attr:{value: CreatedDate}"></td>
+                        <td data-bind="html: LastRunDate" class="lastruntime"></td>
+                        <td data-bind="html: NextRunDate" class="nextruntime"></td>
+                        <td data-bind="html: RunDates"></td>
+                        <td data-bind="html: ShopDates"></td>
+                        <td data-bind="html: Source"></td>
+                        <td data-bind="html: LocationBrands, attr:{value: LocationBrandsIds}"></td>
+                        <td data-bind="html: RentalLengths"></td>
+                        <td data-bind="html: CarClasses"></td>
+                        <td data-bind="html: IsWideGapTemplate, attr:{value: IsWideGap}"></td>
+                        <td data-bind="html: CreatedBy, attr:{value: CreatedByID}"></td>
+                        <td>
+                            <ul>
+                                <li><span class="icon initiateSum" title="Initiate Shop" data-bind="visible: CanInititateShop && !IsInitiateShopEnable()" style="cursor: default !important;opacity:0.2;"></span></li>
+                                <li><span class="icon initiateSum" title="Initiate Shop" data-bind="click: $root.InitiateShop, attr:{id:initiateShop}, visible: CanInititateShop && IsInitiateShopEnable()"></span></li>
+                                <li><span class="icon show" title="Show Summary" data-bind="click: $root.ShowSummaryForScheduledJob, attr:{id:showSummaryForScheduledJob}, visible: IsShopComplete"></span></li>
+                            </ul>
+                        </td>
+                        <td data-bind="html: SearchSummaryStatus, attr:{value: SearchSummaryStatus}"></td>
+                    </tr>
+                    <!-- /ko -->
+                    <tr class="table-tr-sch-new-job-content bold red"><td class="noResults" colspan="15">No Job Schedule found.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    var AjaxURLSettingsScheduledJobs = {
+        GetAllScheduledJobsUrl: '@Url.Action("GetAllScheduledJobs", "AutomationConsole")',
+        StartStopScheduledJob: '@Url.Action("StartStopScheduledJob", "AutomationConsole")',
+        DeleteScheduledJob: '@Url.Action("DeleteScheduledJob", "AutomationConsole")',
+        InitiateShopForScheduledJob: '@Url.Action("InitiateShopForScheduledJob", "AutomationConsole")',
+        ShowSummaryForScheduledJob: '@Url.Action("Index", "Summary")'
+
+    }
+</script>

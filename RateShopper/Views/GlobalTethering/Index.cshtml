@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Global Tether Settings";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@Styles.Render("~/css/global_tethering.css")
+
+<div id="globalTether" class="pageminht">
+    <div class="gt-top">
+        <span class="uppercase bold">Global Tether Setting</span>
+    </div>
+    <ul class="wide-body-side-container table-ul-right">
+
+        <li>
+            Tether
+            <ul name="source" id="dimension-source" class="dropdown relative pointer">
+                <li>EZ Rent A Car</li>
+                <ul class="hidden drop-down1">
+                    @if (ViewBag.Companies != null)
+                    {
+                        foreach (var company in ViewBag.Companies)
+                        {
+                            <li value="@company.ID" id="@company.ID">@company.Name</li>
+                        }
+                    }
+                </ul>
+            </ul>
+
+        </li>
+
+        <li>
+            to
+            <ul id="location" name="location" class="dropdown relative pointer">
+                <li>EZ Rent A Car</li>
+                <ul class="hidden drop-down1">
+                    @if (ViewBag.Companies != null)
+                    {
+                        foreach (var company in ViewBag.Companies)
+                        {
+                            <li value="@company.ID" id="@company.ID">@company.Name</li>
+                        }
+                    }
+
+                </ul>
+            </ul>
+        </li>
+        <li>
+            <span id="spanError" style="padding-left:10px; color: red; display:none; font-weight:bold;">Please review the fields highlighted in Red.</span>
+            <span id="spantetherSetingExists" style="padding-left:10px; color: red; display:none; font-weight:bold;">Tether settings already exist for this location.</span>
+            <span id="spanSave" style="padding-left:10px; color: green; display:none; font-weight:bold;">The results are saved successfully.</span>
+            <span id="spanDelete" style="padding-left:10px; color: green; display:none; font-weight:bold;">The Tether settings deleted successfully.</span>
+        </li>
+    </ul>
+
+    <div class="clear"></div>
+    <div class="fleft gtleft">
+        <table id="tblLocations">
+            <thead class="uppercase">
+                <tr>
+                    <td>Select Location</td>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="relative">
+                        <input type="text" class="w95" id="searchLocation">
+                        <img src="images/gt-lens.jpg" alt="search" class="lens">
+                    </td>
+
+                </tr>
+                @if (ViewBag.Locations != null)
+                {
+                    foreach (var location in ViewBag.Locations)
+                    {
+                        <tr class="grey_bg location">
+                            <td style="cursor:pointer;"><a href='#' id="location_@location.ID" class='spnTetheredLocations'>@location.Code</a></td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <table id="tblTetherRates">
+            <thead class="uppercase">
+                <tr>
+                    <td>Car Classes</td>
+                    <td>Add Tether Values</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>All Car Classes</td>
+                    <td>
+                        <input type="text" id="allPercentage"> % OR
+                        <input type="text" id="allDollar"> $
+                    </td>
+                </tr>
+                <!-- ko foreach: carClasses -->
+                <tr class="trTetherValues">
+                    <td data-bind="html:Code, attr:{ value:ID }">ECAR</td>
+                    <td>
+                        <input data-bind="attr:{id: PercentTextBoxId}" type="text"> % OR
+                        <input data-bind="attr:{id: DollarTextBoxId}" type="text"> $
+                    </td>
+                </tr>
+                <!-- /ko -->
+
+            </tbody>
+        </table>
+        <div class="clear"></div>
+        <div id="gt-btn" class="aright">
+            <input type="submit" class="search-button disable-button" value="Delete" id="btnDelete" disabled="disabled">
+            <input type="submit" class="search-button" value="Copy to All" id="btnCopyToAll">
+            <input type="submit" class="search-button orng btnDisabled" value="Save" id="btnSave" disabled="disabled">
+        </div>
+    </div>
+    <table id="tblTetheredLocations">
+        <thead class="uppercase">
+            <tr>
+
+                <td>Tethered Brands</td>
+                <td>Tethered Locations</td>
+
+            </tr>
+
+        </thead>
+        <tbody data-bind="foreach: existingTetheredLocations">
+            <tr>
+
+                <td><span data-bind="html: DependantBrand, attr:{id:DependantBrandId}"></span> to <span data-bind="html: DominantBrand, attr:{id:DominantBrandId}"></span></td>
+                <td class="tetheredLocations" data-bind="attr:{LocationIds:LocationIds, Locations:Locations}"></td>
+
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="clear">
+    @{Html.RenderPartial("ChildFooter");}
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+
+
+@Scripts.Render("~/Scripts/GlobalTetherSettings.js")
+<script type="text/javascript">
+    var GlobalTetherURLSettings = {
+        DeleteTether: '@Url.Action("DeleteLocationTethering", "GlobalTethering")',
+    }
+</script>

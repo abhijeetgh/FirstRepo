@@ -1,0 +1,67 @@
+﻿@{
+    //Get userName saved in the claim
+    string UserName = string.Empty;
+    var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+    if (identity != null)
+    {
+        UserName = identity.Name;
+    }
+
+    //Get user Role and accordingly show the navigation items
+    bool isAdmin = false, isAutomation = false, isFTBAutomation = false;
+    string userRole = identity.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).FirstOrDefault();
+    string UserID = identity.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Sid).Select(c => c.Value).FirstOrDefault();
+    string loggedInUserName = identity.Claims.Where(c => c.Type == "UserName").Select(c => c.Value).FirstOrDefault();
+    isAutomation = Convert.ToBoolean(identity.Claims.Where(c => c.Type == "IsAutomation").Select(c => c.Value).FirstOrDefault());
+    string isTetheringAccess = identity.Claims.Where(c => c.Type == "IsTetheringAccess").Select(c => c.Value).FirstOrDefault();
+    string isTSDUpdateAccess = identity.Claims.Where(c => c.Type == "IsTSDUpdateAccess").Select(c => c.Value).FirstOrDefault();
+    if (userRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+    {
+        isAdmin = true;
+    }
+    decimal garsFees = Convert.ToDecimal(System.Configuration.ConfigurationManager.AppSettings["GARSFee"]);
+    isFTBAutomation = Convert.ToBoolean(identity.Claims.Where(c => c.Type == "ftbautomation").Select(c => c.Value).FirstOrDefault());
+
+}
+
+<span class="left-section fleft spanMainFooter">
+    @*<img src="~/images/Search-footer_logo.png" alt="footer-logo" class="fleft">*@
+    Rate Management System
+</span>
+<span class="footer-links-inner">
+    @Html.ActionLink("Search", "Index", "Search", null, new { @class = "mhide thide mobtodeshide", currentNav = "search" })
+    @Html.ActionLink("Summary Search", "Index", "Summary", null, new { @class = "mhide thide mobtodeshide", currentNav = "summary" })
+    @if (Convert.ToBoolean(isTSDUpdateAccess))
+    {
+    @Html.ActionLink("REZ CENTRAL UPDATE", "Index", "RezCentral", null, new { @class = "mhide thide mobtodeshide", currentNav = "rezcentral" })
+    }
+    @if (isFTBAutomation)
+    {
+        @Html.ActionLink("FTB Automation", "Index", "FTBAutomation", null, new { @class = "mhide thide mobtodeshide", currentNav = "ftbautomation" })
+    }
+    @if (isAutomation)
+    {
+        @Html.ActionLink("Automation Console", "Index", "AutomationConsole", null, new { @class = "mhide thide mobtodeshide", currentNav = "automationconsole" })
+    }
+    @if (isAdmin)
+    {
+        @Html.ActionLink("Application Management", "Index", "Location", null, new { @class = "mhide thide mobtodeshide", currentNav = "applicationManagement" })
+    }
+</span>
+<span id="spnUserName" class="account fright relative">
+    <span>@UserName</span><img src="~/images/Search-arrow_down.jpg" alt="arrow">
+
+    <span class="logout" style="display:none;">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+        <a id="aLogout">Logout</a>
+    </span>
+</span>
+<input type="hidden" value="@UserID" id="LoggedInUserId" />
+<input type="hidden" value="@isTetheringAccess" id="IsTetheringAccess" />
+<input type="hidden" value="@loggedInUserName" id="hdnUserName" />
+<input type="hidden" value="@garsFees" id="hdnGARSFees" />
+<input type="hidden" value="@isTSDUpdateAccess" id="hdnIsTSDUpdateAccess" />
+<input type="hidden" value="@Convert.ToString(isAdmin)" id="hdnIsAdminUser" />

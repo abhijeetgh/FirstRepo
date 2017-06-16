@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E3714CD3-078E-44A6-804D-3DDF7B902B38}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RateShopper.Services</RootNamespace>
+    <AssemblyName>RateShopper.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\BaseService.cs" />
+    <Compile Include="Data\CallbackResponseService.cs" />
+    <Compile Include="Data\CarClassService.cs" />
+    <Compile Include="Data\CompanyService.cs" />
+    <Compile Include="Data\FormulaService.cs" />
+    <Compile Include="Data\FTBRatesSplitMonthsService.cs" />
+    <Compile Include="Data\FTBScheduleJobService.cs" />
+    <Compile Include="Data\FTBRateDetailsService.cs" />
+    <Compile Include="Data\FTBRatesService.cs" />
+    <Compile Include="Data\FTBTargetsDetailService.cs" />
+    <Compile Include="Data\FTBTargetService.cs" />
+    <Compile Include="Data\GlobalLimitDetailService.cs" />
+    <Compile Include="Data\GlobalLimitService.cs" />
+    <Compile Include="Data\GlobalTetherSettingService.cs" />
+    <Compile Include="Data\IBaseService.cs" />
+    <Compile Include="Data\ICallbackResponseService.cs" />
+    <Compile Include="Data\IRateCodeDateRangeService.cs" />
+    <Compile Include="Data\IRateCodeService.cs" />
+    <Compile Include="Data\ICarClassService.cs" />
+    <Compile Include="Data\ICompanyService.cs" />
+    <Compile Include="Data\IFormulaService.cs" />
+    <Compile Include="Data\IFTBRatesDetailService.cs" />
+    <Compile Include="Data\IFTBRatesService.cs" />
+    <Compile Include="Data\IFTBRatesSplitMonthsService.cs" />
+    <Compile Include="Data\IFTBScheduleJobService.cs" />
+    <Compile Include="Data\IFTBTargetsDetailService.cs" />
+    <Compile Include="Data\IFTBTargetService.cs" />
+    <Compile Include="Data\IGlobalLimitDetailService.cs" />
+    <Compile Include="Data\IGlobalLimitService.cs" />
+    <Compile Include="Data\IGlobalTetherSettingService.cs" />
+    <Compile Include="Data\IJobTypeMapperService.cs" />
+    <Compile Include="Data\ILocationBrandCarClassService.cs" />
+    <Compile Include="Data\ILocationBrandRentalLengthService.cs" />
+    <Compile Include="Data\ILocationBrandService.cs" />
+    <Compile Include="Data\ILocationCompanyService.cs" />
+    <Compile Include="Data\IPostJSONLogService.cs" />
+    <Compile Include="Data\IPostXMLLogsService.cs" />
+    <Compile Include="Data\IProvidersService.cs" />
+    <Compile Include="Data\IQuickViewResultsService.cs" />
+    <Compile Include="Data\IQuickViewService.cs" />
+    <Compile Include="Data\IRangeIntervalsService.cs" />
+    <Compile Include="Data\IRuleSetCarClassesService.cs" />
+    <Compile Include="Data\IRuleSetDefaultSettingService.cs" />
+    <Compile Include="Data\IRuleSetGapSettingService.cs" />
+    <Compile Include="Data\IRuleSetGroupCompanyService.cs" />
+    <Compile Include="Data\IRuleSetGroupService.cs" />
+    <Compile Include="Data\IRuleSetRentalLengthService.cs" />
+    <Compile Include="Data\IRuleSetsAppliedService.cs" />
+    <Compile Include="Data\IRuleSetService.cs" />
+    <Compile Include="Data\IRuleSetWeekDayService.cs" />
+    <Compile Include="Data\IScheduledJobFrequencyService.cs" />
+    <Compile Include="Data\IScheduledJobMinRatesService.cs" />
+    <Compile Include="Data\IScheduledJobOpaqueValuesService.cs" />
+    <Compile Include="Data\IScheduledJobService.cs" />
+    <Compile Include="Data\IScheduledJobTetheringsService.cs" />
+    <Compile Include="Data\IScrappingServersService.cs" />
+    <Compile Include="Data\IScrapperSourceService.cs" />
+    <Compile Include="Data\ISearchJobUpdateAllService.cs" />
+    <Compile Include="Data\ISearchResultProcessedDataService.cs" />
+    <Compile Include="Data\ISearchResultRawDataService.cs" />
+    <Compile Include="Data\ISearchResultSuggestedRatesService.cs" />
+    <Compile Include="Data\ISearchSummaryService.cs" />
+    <Compile Include="Data\ILocationService.cs" />
+    <Compile Include="Data\IRentalLengthService.cs" />
+    <Compile Include="Data\ISearchResultRawData.cs" />
+    <Compile Include="Data\ISearchResultsService.cs" />
+    <Compile Include="Data\ISplitMonthDetailsService.cs" />
+    <Compile Include="Data\IStatusesService.cs" />
+    <Compile Include="Data\ITSDTransactionsService.cs" />
+    <Compile Include="Data\IUserLocationBrandsService.cs" />
+    <Compile Include="Data\IUserPermissionService.cs" />
+    <Compile Include="Data\IUserRolesService.cs" />
+    <Compile Include="Data\IUserScrapperSourcesService.cs" />
+    <Compile Include="Data\IUserService.cs" />
+    <Compile Include="Data\IWeekDayService.cs" />
+    <Compile Include="Data\JobTypeMapperService.cs" />
+    <Compile Include="Data\LocationBrandCarClassService.cs" />
+    <Compile Include="Data\LocationBrandRentalLengthService.cs" />
+    <Compile Include="Data\LocationBrandService.cs" />
+    <Compile Include="Data\LocationCompanyService.cs" />
+    <Compile Include="Data\PostJSONLogService.cs" />
+    <Compile Include="Data\PostXMLLogsService.cs" />
+    <Compile Include="Data\ProvidersService.cs" />
+    <Compile Include="Data\QuickViewResultService.cs" />
+    <Compile Include="Data\QuickViewService.cs" />
+    <Compile Include="Data\RangeIntervalsService.cs" />
+    <Compile Include="Data\RateCodeDateRangeService.cs" />
+    <Compile Include="Data\RateCodeService.cs" />
+    <Compile Include="Data\RuleSetCarClassesService.cs" />
+    <Compile Include="Data\RuleSetDefaultSettingService.cs" />
+    <Compile Include="Data\RuleSetGapSettingService.cs" />
+    <Compile Include="Data\RuleSetGroupCompanyService.cs" />
+    <Compile Include="Data\RuleSetGroupService.cs" />
+    <Compile Include="Data\RuleSetRentalLengthService.cs" />
+    <Compile Include="Data\RuleSetsAppliedService.cs" />
+    <Compile Include="Data\RuleSetService.cs" />
+    <Compile Include="Data\RuleSetWeekDayService.cs" />
+    <Compile Include="Data\ScheduledJobFrequencyService.cs" />
+    <Compile Include="Data\ScheduledJobMinRatesService.cs" />
+    <Compile Include="Data\ScheduledJobOpaqueValuesService.cs" />
+    <Compile Include="Data\ScheduledJobService.cs" />
+    <Compile Include="Data\ScheduledJobTetheringsService.cs" />
+    <Compile Include="Data\ScrappingServersService.cs" />
+    <Compile Include="Data\ScrapperSourceService.cs" />
+    <Compile Include="Data\SearchJobUpdateAllService.cs" />
+    <Compile Include="Data\SearchResultProcessedDataService.cs" />
+    <Compile Include="Data\SearchResultsService.cs" />
+    <Compile Include="Data\SearchResultSuggestedRatesService.cs" />
+    <Compile Include="Data\SearchSummaryService.cs" />
+    <Compile Include="Data\LocationsService.cs" />
+    <Compile Include="Data\RentalLengthService.cs" />
+    <Compile Include="Data\SearchResultRawDataService.cs" />
+    <Compile Include="Data\SplitMonthDetailsService.cs" />
+    <Compile Include="Data\StatusesService.cs" />
+    <Compile Include="Data\TSDTransactionService.cs" />
+    <Compile Include="Data\UserLocationBrandsService.cs" />
+    <Compile Include="Data\UserPermissionService.cs" />
+    <Compile Include="Data\UserRolesService.cs" />
+    <Compile Include="Data\UserScrapperSourcesService.cs" />
+    <Compile Include="Data\UserService.cs" />
+    <Compile Include="Data\WeekDayService.cs" />
+    <Compile Include="Helper\Common.cs" />
+    <Compile Include="Helper\EmailTemplateHelper.cs" />
+    <Compile Include="Helper\ListToDataTable.cs" />
+    <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\TSDReservationHelper.cs" />
+    <Compile Include="Helper\XMLHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RateShopper.Core\RateShopper.Core.csproj">
+      <Project>{0d81e383-953c-44cd-934c-bc5a5823eb3d}</Project>
+      <Name>RateShopper.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RateShopper.Data\RateShopper.Data.csproj">
+      <Project>{5810210b-6422-4e8c-acf5-5fa9d0de8265}</Project>
+      <Name>RateShopper.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RateShopper.Domain\RateShopper.Domain.csproj">
+      <Project>{d862ab63-93e8-48d8-a7a2-3fb13ca08414}</Project>
+      <Name>RateShopper.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

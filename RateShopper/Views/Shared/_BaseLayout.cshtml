@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        var MasterAjaxURL = {
+            GetLastUpdated: '@Url.Action("GetLastUpdateOnTSD", "Search")',
+            GetLoginUrl: '@Url.Action("Login", "Account")'
+        }
+        var Server_TZO = parseInt('@DateTimeOffset.Now.Offset.TotalMinutes')        
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0  user-scalable=yes">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+    <title>Rate Management System</title>
+
+
+    @Styles.Render("~/css/master.css")
+    @Styles.Render("~/css/jquery-ui.css")
+    @Scripts.Render("~/bundles/masterBundleJS")
+
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+</head>
+<body>
+
+    @RenderBody()
+    <div class="popup_bg_master" style="display:none;"></div>
+
+    <div id="alertbox" style="" class="ui-draggable ui-draggable-handle">
+
+
+        <div class="popup-top">
+            <span>Rate Shopper</span>
+            <img src="~/images/tether_ratesClose.png" id="closepopup" class="fright pointer closeP" alt="close">
+            <div class="clear"></div>
+        </div>
+        <div class="padding15">
+            <div id="ConfirmText" class="mtb10">Are You Sure you want to discard this changes?</div>
+            <div class="fright mtb10">
+                <input type="button" class="search-button orng" id="ConfirmOk" value="OK" />
+                <input type="button" class="search-button" id="ConfirmCancel" value="Cancel" />
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿@Styles.Render("~/css/manage_rules.css")
+<span style="display:none" id="IntermediateID"></span>
+<div id="MainRuleSetPage" class="MainRuleSetPage" style="width:1220px; ">
+    <div class="popup-top">
+        <span class="uppercase bold">Automation RuleSet</span>
+        <img src="images/tether_ratesClose.png" id="closepopupAutoRuleSet" class="fright pointer closeP" alt="close">
+    </div>
+    <div class="ui-draggable ui-draggable-handle">
+        @{Html.RenderPartial("~/Views/Partials/_LeftPanelAutoRuleSet.cshtml");}
+        @{Html.RenderPartial("~/Views/Partials/_RightPanelRuleSet.cshtml");}
+    </div>
+</div>

@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "Location";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/location_management.css")
+@Scripts.Render("~/Scripts/LocationManagment.js")
+<div class="loader_container_main">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="location_management" class="pageminht">
+    <div class="gt-top">
+        <span class="uppercase bold">Location Management</span>
+    </div>
+    <div class="padding15">
+        <span class="relative">
+            <input type="text" class="lmsearch" placeholder="Search Location" id="searchLocation" />
+            <img src="~/images/lens.png" class="lmlens" alt="lens" />
+        </span>
+        <input type="submit" class="search-button" value="Create Location" id="btnAddLocation" />
+        <span id="lblMessage" style="display:none; font-weight:bold;width:300px;margin-left:185px;">Please review all fields hi-lighted in red</span>
+    </div>
+
+    <div class="clear"></div>
+    <div class="lmcontent">
+        <div id="divListing" class="fleft" style="overflow:auto; max-height:780px;">
+            <table id="tblLocations">
+                <thead class="uppercase">
+                    <tr id="no_rows" style="display:none;">
+                        <td style="width: 152px;">Brand Location</td>
+                        <td style="width: 120px;">Name</td>
+                        <td>Delete</td>
+                    </tr>
+                    <tr id="locationheaders">
+                        <td onclick="ApplySorting(this,'Code')" class="Asc" style="cursor: pointer;width:152px;">Brand Location<div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div></td>
+                        <td onclick="ApplySorting(this,'Description')" class="Asc" style="cursor: pointer;width:120px;">Name<div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div></td>
+                        <td>Delete</td>
+                    </tr>
+
+                </thead>
+                <tbody data-bind="foreach: locations()">
+
+                    <tr data-bind="click: $root.EditLocation, attr:{ value:ID, id:'locationBrand_'+LocationBrandID }" title="Edit" class="pointer">
+                        <td data-bind="html:LocationBrandAlias" class="code"></td>
+
+                        <td data-bind="html:Description" style="width:120px;"></td>
+                        <td>
+                            @*<img src="~/images/ar_tab2.png" alt="" title="Edit" style="cursor:pointer" data-bind="click: $root.EditLocation, attr:{ value:ID }" />*@
+                            <img src="~/images/ar_tab2.png" alt="" title="Delete" style="cursor:pointer;margin-left:5px;" data-bind="click: $root.DeleteLocation,attr:{ value:ID }" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+        <div class="fleft" id="rcontainer" style="width:54%">
+            <h3 class="uppercase" id="HaddingTitle">Create Location</h3>
+            <form method="post" name="lmform" id="lmform">
+                @*<span id="lblMessage" style="display:none; font-weight:bold;width:300px;">Please review all fields hi-lighted in red</span>*@
+                @*<span id="spanError" style="color: red; display:none; font-weight:bold;width:300px;">Please review all fields hi-lighted in red</span>
+                    <span id="spanSaveError" style="color: red; display:none; font-weight:bold;width:300px;"></span>
+                    <span id="spanSuccess" style="color: green; display:none; font-weight:bold;">Location Saved Successfully</span>*@
+                <div class="bold textfields">
+                    <div>
+                        <span>
+                            Code<label style="color:red">*</label><br />
+                            <input type="text" id="txtCode-loc" maxlength="6" placeholder="e.g. 'ATL'" />
+                        </span>
+                        <span>
+                            Branch Code<br />
+                            <input type="text" id="txtBranchCode-loc" maxlength="20" />
+                        </span>
+                        <span>
+                            Name<label style="color:red">*</label><br />
+                            <input type="text" id="txtDescription-loc" maxlength="50" />
+                        </span>
+
+                        <span>
+                            Weekly Extra Day Denominator<label style="color:red">*</label><br />
+                            <input type="text" id="txtWeeklyExtraDenominator-loc" maxlength="7" />
+                        </span>
+                        <span>
+                            Daily Extra Day Factor<label style="color:red">*</label><br />
+                            <input type="text" id="txtDailyExtraDayFactor-loc" maxlength="7" />
+                        </span>
+                        <span>
+                            TSD Customer Number<br />
+                            <input type="text" id="txtTSDCustomerNumber-loc" maxlength="200" />
+                        </span>
+
+                        <span>
+                            TSD Passcode<br />
+                            <input type="text" id="txtTSDPassCode-loc" maxlength="200" />
+                        </span>
+                    </div>
+
+                    <section class="fleft">
+                        <div class="fleft">
+                            <input type="checkbox" id="chkUse-LOR" />
+                            <label for="chkUse-LOR">Use Length Of Rent Rate Codes</label>
+                        </div>
+                        <div class="fleft" style="margin: 9px 0px 0px;width:230px;">
+
+                            <ul class="wide-body-side-container table-ul-right">
+
+                                <li>
+                                    Select Brand
+                                    <ul name="source" id="dimension-source" class="dropdown relative pointer LocationMgmtDropdown">
+                                        <li>EZ Rent A Car</li>
+                                        <ul class="hidden drop-down1" id="ddlBrand-loc">
+                                            @if (ViewBag.Companies != null)
+                                            {
+                                                foreach (var company in ViewBag.Companies)
+                                                {
+                                                    <li id="@company.ID" value="@company.Code">@company.Name</li>
+                                                }
+                                            }
+                                        </ul>
+                                    </ul>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <span style="margin: 9px 0px 0px;width:265px;" id="LocPriceMgrRootSpan">
+                            Pricing Manager: &nbsp;<label style="width:128px; " id="LocationPriceMgr"></label>
+                        </span>
+
+                    </section>
+
+                    <div style="clear:both"></div>
+                    <div>
+                        <div class="fleft">
+                            <span>
+                                Direct Competitors<label style="color:red">*</label><br />
+                                @*<select size="6" class="direct-competitors" multiple>
+                                        <option value="2">Southwest</option>
+                                        <option value="3">Airport Rental Cars</option>
+                                        <option value="7">Orbitz</option>
+                                        <option value="6">CheapTickets</option>
+                                        <option value="8">Official Car Rentals</option>
+                                        <option value="9">CarRentals</option>
+                                    </select>*@
+                                <select name="competitorCompanyIds" multiple="multiple" size="6"
+                                        id="competitorCompanyIds" onclick="AutoPopulateCompanies(this)" onchange="AutoPopulateCompanies(this)" selectedcompanyids="" class="direct-competitors selectlist">
+                                    <!-- ko foreach: companies -->
+                                    <option data-bind="html:Name, attr:{value:ID,isBrand:IsBrand}"></option>
+                                    <!-- /ko -->
+                                </select>
+                            </span>
+                            <span style="width:265px">
+                                Quick View Tracking Competitors<label style="color:red">*</label><br />
+                                @*<select size="6" class="trading-competitors" multiple>
+                                        <option value="2">Southwest</option>
+                                        <option value="3">Airport Rental Cars</option>
+                                        <option value="7">Orbitz</option>
+                                        <option value="6">CheapTickets</option>
+                                        <option value="8">Official Car Rentals</option>
+                                        <option value="9">CarRentals</option>
+                                    </select>*@
+                                <select name="ignoreCompanyIds" multiple="multiple" size="6" id="ignoreCompanyIds"
+                                        selectedcompanyids="" class="trading-competitors selectlist" onclick="SelectedCompanies(this)">
+                                    <!-- ko foreach: companies -->
+                                    <option data-bind="html:Name, attr:{value:ID,isBrand:IsBrand,autoSelected:true}"></option>
+                                    <!-- /ko -->
+                                </select>
+                            </span>
+                            
+                        </div>
+
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+
+                <div class="lmcontainer" id="divRentalLengths" style="display:none">
+                    <label><b>Available Rental Lengths</b> (Note: After modification in rental length(s), kindly verify Automation jobs of this location)</label>
+                    <div class="checkbox-holder" id="divRentalCheckboxes">
+                        @if (ViewBag.RentalLengths != null)
+                        {
+                            foreach (var rentalLength in ViewBag.RentalLengths)
+                            {
+                                <div style="float:left;margin:8px 0px;">
+                                    <input type="checkbox" id="chkRL_@rentalLength.MappedID" @(rentalLength.MappedID > 7 ? "" : "checked") associatedId="@rentalLength.AssociateMappedId" />
+                                    <label for="chkRL_@rentalLength.MappedID">@rentalLength.Code</label>
+                                </div>
+                            }
+                            
+                        }
+                        
+                        <div style="clear:both"></div>
+                        @*<input type="checkbox" id="chkSameBrand-LOR" /><h4 class="bold">Apply same rental length configuration to both AD and EZ brand</h4>*@
+                    </div>
+
+                    <div class="checkbox-holder" id="divSameRentalLength">
+                        <input type="checkbox" id="applyDependantLOR"/> Apply same rental length configuration to both AD and EZ brand
+                    </div>                   
+                </div>
+                <div class="checkbox-holder lmcontainer" id="divCarClasses">
+                    <h4 class="bold fleft">Available Car Classes<label style="color:red">*</label></h4>
+                    <span id="spanCarClassError" class="fleft" style="color: red; display:none; font-weight:bold;width:300px;margin-left:12px;">Please select car classes</span>
+                    <div class="clear" style="margin:0px;"></div>
+                    <div class="checkbox-holder">
+                        @if (ViewBag.CarClasses != null)
+                        {
+                            foreach (var carClass in ViewBag.CarClasses)
+                            {
+                                <div style="float: left; margin: 8px 0px;">
+                                    <input type="checkbox" id="chkCC_@carClass.ID" />
+                                    <label for="chkCC_@carClass.ID">@carClass.Code</label>
+                                </div>
+                            }
+                        }
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+                <input type="button" class="search-button disable-button" disabled="disabled" value="Cancel" id="btnCancel" />
+                <input type="button" class="search-button orng btnDisabled" disabled="disabled" value="Save" id="btnSaveLocation" />
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="clear">
+        @{Html.RenderPartial("ChildFooter");}
+        <div id="footer-links">
+            @{Html.RenderPartial("MasterFooter");}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetLocations: '@Url.Action("GetLocations", "Location")',
+        GetLocation: '@Url.Action("GetLocation", "Location")',
+        DeleteLocation: '@Url.Action("DeleteLocation", "Location")',
+        SaveLocation: '@Url.Action("SaveLocation", "Location")',
+        GetCompanies: '@Url.Action("GetCompanies", "Location")'
+    }
+</script>

@@ -1,0 +1,53 @@
+﻿
+
+<div class="popup-top">
+    <span class="uppercase bold">Tethered Rates</span>
+    <img src="images/tether_ratesClose.png" id="closepopupTetherRate" class="fright pointer closeP" alt="close">
+</div>
+<div class="ui-draggable ui-draggable-handle" id="TetherRates">
+
+    <div class="fleft padding15">
+
+        <div class="ptb15">
+            <table id="TehterTableValue" class="table" style="min-width: 440px;">
+                <thead class="uppercase">
+                    <tr>
+                        <th>Car Classes</th>
+                        <th>Tethered Values</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>All Car Classes</td>
+                        <td>
+                            <input type="text" id="PercentageID_All" value="" /> % or
+                            <input type="text" id="DollerID_All" value="" /> $
+                            <input type="hidden" id="hiddenCurrentTxtName" value="" />
+                        </td>
+                    </tr>
+                    <!-- ko foreach: TetherRateList -->
+                    <tr>
+                        <td><span data-bind="html: carClass,attr:{carClassID:ID,DominentBrandID:DominentBrandID,DependantBrandID:DependantBrandID}"></span></td>
+                        <td>
+                            <input type="Text" name="percentageValue" class="percentageValue" data-bind="attr: { id: 'PercentageID_' + ID ,carClassID:ID,defaultPercentValue:PercentageValue},value:PercentageValue" /> % or
+                            <input type="Text" name="dollerValue" class="dollerValue" data-bind="attr:{id:'DollerID_'+ID,carClassID:ID,defaultDollerValue:DollarValue},value:DollarValue " /> $
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <input type="button" class="search-button orng fright" id="TetherRateSave" value="Save">
+            <input type="button" id="copytoall" class="search-button fright" value="Copy to All">
+            <input type="button" class="search-button fright" id="GlobalTetherPreload" value="Preload">
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript">
+    var TetherRates = {
+        GetJobSelectedTetherSettingsURL:'@Url.Action("GetJobSelectedTetherSettings", "AutomationConsole")',
+        GetGlobalTetheringURL: '@Url.Action("GetGlobalTetherSettingsLocationSpecific", "Search")'
+    }
+</script>

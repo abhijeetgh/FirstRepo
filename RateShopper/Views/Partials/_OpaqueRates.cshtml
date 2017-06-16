@@ -1,0 +1,90 @@
+﻿<div class="popup-top">
+    <span class="uppercase bold"> Opaque rates</span>
+    <span id="OpaqueError" style="display: none; color: rgb(255, 0, 0);margin-left:20px;">Please review the fields highlighted in Red.</span>
+    <img src="images/tether_ratesClose.png" id="closepopup" class="fright pointer closeP" alt="close">
+</div>
+<div id="OpaqueSourceLocation" class="tv1 bold fleft">
+    Source: <span class="src normal" id="opaqueSource"></span>
+    Location:<span class="loc normal" id="opaqueLocationID"></span><br />
+    <div class="clear"></div>
+    <br/>
+    Date:<span class="loc normal" id="opateDate"></span>
+</div>
+<div id="popup-btn" style="padding: 6px 9px 0 0; " class="fright">
+
+    <input type="button" id="opaque_reset" class="search-button" value="Preload">
+    <input type="button" id="opaque_copytoall" class="search-button" value="Copy to All">
+    <input type="button" id="closeOpaquePopup" class="search-button orng  pointer closeP" value="Submit">
+</div>
+<div class="tethered_rate_tables clear" id="divTetherd" style="padding:15px;">
+    <div class="tv1 fleft" style="padding:0px 40px 0px 0px">
+        <div>
+            <table id="tblRateCodes" class="table">
+                <thead>
+                    <tr>
+                        <td>Rate Code</td>
+                        <td>Date Range</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--ko foreach:ApplicableRateCodes()-->
+                    <tr>
+                        <td data-bind="html:Code"></td>
+                        <td style="padding:0px;" data-bind="foreach:ApplicableDates()">
+                            <div data-bind="html:StartEndDateRange"></div>
+                        </td>
+                    </tr> 
+                    <!--/ko-->  
+                    <tr data-bind="visible:ApplicableRateCodes().length==0">
+                        <td style="text-align:center;font-weight:bold;text-transform:none;" colspan="2">No Rate code applicable for the shop date(s)</td>
+                    </tr>                 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="fright">
+        <table class="tablep1 table" id="DailyOpaqueCarClass">
+            <thead>
+                <tr>
+                    <td>Car Classes</td>
+                    <td>Opaque Percent</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="text-align:center">
+                    <td>All Car Classes</td>
+                    <td><input type="text" id="AllCarClass" style="width: 50%; padding: 4px;" />%</td>
+                </tr>
+                <!-- ko foreach: OpaqueRateData -->
+                <tr style="text-align:center">
+                    <td><span data-bind="html:CarClass"></span></td>
+                    <td><input type="text" style="width: 50%; padding: 4px;" data-bind="attr:{id:'Percent_'+ID,defaultValue:PercentValue},value:PercentValue" />%</td>
+                </tr>
+                <!--/ko-->
+            </tbody>
+        </table>
+        @*<table class="tablep1" id="ClassicOpaqueCarClass">
+                <thead>
+                    <tr>
+                        <td>Car Classes</td>
+                        <td>Opaque Percent</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>All Car Classes</td>
+                        <td><input type="text" id="AllCarClass" /></td>
+                    </tr>
+                    <!-- ko foreach: ClassicOpaqueRateData -->
+                    <tr data-bind="attr:{id:Dates}">
+                        <td><span data-bind="html:ClassicDates"></span></td>
+                        <td><input type="text" data-bind="attr:{id:'Percent_'+Dates}" /></td>
+                    </tr>
+                    <!--/ko-->
+                </tbody>
+            </table>*@
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div style="font-weight:bold;color:red;padding-top: 17px;">Note: Opaque Rates would be pushed only for D3 or D34 and W7 LOR</div>
+</div>

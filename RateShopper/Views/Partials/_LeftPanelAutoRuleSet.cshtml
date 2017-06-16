@@ -1,0 +1,87 @@
+﻿@*@Styles.Render("~/css/manage_rules.css")*@
+<div id="left-col" style="width:300px; padding:15px 0 0 15px;">
+
+    <div id="mtab1">
+        <div class="side-section-body" id="searchLeftPanel">
+            <table class="table2">
+                <tbody>
+                    <tr class="label-row">
+                        <td>
+                            Lengths
+
+                        </td>
+                        <td>
+                            Brand Locations
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <ul name="lengths" class="newul two-cols-select" id="lengths">
+                                @*<li class="loader_container_length">
+
+                                        <img src="~/images/ajax_loader_blue_small.gif" style="position:absolute; left:3%; top:25%;" />
+
+                                    </li>*@
+                                <li>
+                                    <select name="leftRuleSetlengths" class="two-cols-select" multiple="multiple" size="6" id="leftRuleSetlengths" disabled="disabled">
+                                        <!-- ko foreach: AutomationRentalLengths -->
+                                        <option data-bind="html:Code, attr:{ value:MappedID, rid:ID  }" selected="selected"></option>
+                                        <!-- /ko -->
+                                    </select>
+                                </li>
+                            </ul>
+
+                        </td>
+                        <td>
+
+                            <ul name="locations" class="newul overflow mright0 two-cols-select" size="6" id="locations">
+                                @*<div class="loader_container_location">
+                                        <img src="~/images/ajax_loader_blue_small.gif" style="position:absolute; left:11%; top:25%;" />
+                                    </div>*@
+                                <li>
+
+
+                                    <select name="leftRuleSetlocations" class="two-cols-select" multiple="multiple" size="6" id="leftRuleSetlocations" disabled="disabled">
+                                        <!-- ko foreach: leftAutomationBrandLocations -->
+                                        <option data-bind="html:Location, attr:{ value:LocationID ,LocationBrandID:LocationBrandID ,LocationCode:LocationCode ,BrandID: BrandID}" selected="selected">ATL</option>
+                                        <!-- /ko -->
+                                    </select>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr></tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+    <div id="mtab2">
+        <div class="side-section-top pointer">
+            &nbsp;
+            <h2 class="open"><span class="uppercase">Rule sets</span></h2>
+        </div>
+        <div class="side-section-body" id="searchLeftPanelSecond">
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <ul class="four-cols-select pastSearchul pointer" size="5" id="RuleSetList">
+                                <!-- ko foreach:automationRuleSets-->
+                                <li data-bind="attr:{id:'selectedRuleSetID_'+RuleSetID,value:RuleSetID, carClassID:CarClassID, rentalLengthID:RentalLengthID, weekDaysID:WeekDaysID, locationBrandID:LocationBrandID, companyPositionAbvAvg:CompanyPositionAbvAvg, isPositionOffset:IsPositionOffset, isWideGapTemple:IsWideGapTemple, isGov:IsGov,AppliedEndDate:AppliedEndDate,ScheduledJobRuleSetID:ScheduledJobRuleSetID,OriginalRuleSetID:OriginalRuleSetID,IsAutoRuleSetInsertUpdate:IsAutoRuleSetInsertUpdate},click:function(data){selectedRuleSet(data)}">
+                                    <span data-bind="html:RuleSetName">
+                                    </span>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    string errorMessage = "An error occurred while processing the request.";
+    if (ViewBag.ErrorMessage != null && !string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        errorMessage = ViewBag.ErrorMessage;
+    }
+
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <table class="login-container" cellspacing="0" align="center" border="0">
+            <thead>
+                <tr class="border">
+                    <th colspan="2" align="left">Rate Management System</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: 30%"><img id="detail-icon-img" src="~/images/Error-Warning.png" alt="error, warning icon" width="128" height="128"></td>
+                    <td class="login-label" style="text-align: left; font-weight: bold;">@errorMessage</td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+@Styles.Render("~/css/login.css")

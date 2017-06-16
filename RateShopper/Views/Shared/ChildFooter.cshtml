@@ -1,0 +1,24 @@
+﻿
+@*<p class="red bold">Last updated by cybage at June 22, 2015, 04:24 AM, Eastern Standard Time (EST)</p>*@
+<div id="footer-Ulinks">
+    <span class="footer-links-inner wl">
+        @Html.ActionLink("LOCATION MANAGEMENT", "Index", "Location", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        @Html.ActionLink("USER MANAGEMENT", "Index", "User", null, new { currentNav = "userindex", parentNav = "applicationManagement" })
+        @Html.ActionLink("Rate Code Management", "Index", "RateCode", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        <span class="subruleC relative">
+            @Html.ActionLink("RULESET", "RuleSetIndex", "RuleSet", null, new { currentNav = "rulesetindex", parentNav = "applicationManagement" })
+            <span class="subrules">
+                @Html.ActionLink("Rule Set Templates", "RuleSetIndex", "RuleSet", null, new { currentNav = "rulesetindex", parentNav = "applicationManagement" })
+                @Html.ActionLink("Applied Rule sets", "applyruleset", "RuleSet", null, new { currentNav = "rulesetindex", parentNav = "applicationManagement" })
+            </span>
+        </span>
+        @Html.ActionLink("Tethering Settings", "Index", "GlobalTethering", null, new { currentNav = "tetherSettings", parentNav = "applicationManagement" })
+        @Html.ActionLink("GLOBAL LIMITS", "Index", "GlobalLimit", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        @Html.ActionLink("FORMULAS", "Index", "Formula", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        @Html.ActionLink("TSD AUDITS", "Index", "TSDAudit", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        @Html.ActionLink("COMPANY MANAGEMENT", "Index", "Company", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        @Html.ActionLink("CAR CLASS MANAGEMENT", "Index", "CarClass", null, new { currentNav = "index", parentNav = "applicationManagement" })
+        @Html.ActionLink("FTB RATE SETTINGS", "Index", "FTBRates", null, new { currentNav = "index", parentNav = "applicationManagement" })
+
+    </span>
+</div>

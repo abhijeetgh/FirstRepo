@@ -1,0 +1,151 @@
+﻿
+<div id="popup-main" class="mhide pageminht">
+    <div id="popup-main-inner">
+
+        <div class="loader_container_updateAll" style="display: none;" id="ftbjobSpinner">
+            <div class="loader-ftbScheduleJob"></div>
+            <div class="ftbScheduleJobloader">
+                <img src="images/ajax_loader_blue_small.gif">
+            </div>
+        </div>
+
+        <div class="heading">
+            JOB SCHEDULE
+            <img src="images/tether_ratesClose.png" class="fright pointer closeP" alt="close" />
+        </div>
+        <div class="jobScheduleBody">
+
+            <ul class="jobScheduleLi">
+                <li class="red-square">
+                    <span>Not Scheduled</span>
+                </li>
+                <li class="blue-square">
+                    <span>Scheduled but stopped</span>
+                </li>
+                <li class="grey-square">
+                    <span>Scheduled</span>
+                </li>
+
+            </ul>
+            <div>
+                <span id="error-span" class="error-msg" style="display: none;margin-top:5px; text-align: center;">ERROR</span>
+
+            </div>
+            <div class="job-shedule-form">
+                <div class="ftb-auto-location">
+                    <div class="sourc-loc-inner-box">
+                        <div class="location">
+                            <div class="location-inner-box">
+                                <span>Brand Location</span>
+                                <div class="locationbox" id="locationdiv">
+                                    <ul name="locations" class="mright0 two-cols-select relative" size="5" id="locations">
+                                        <li>
+                                            <span class="innersearch">
+                                                <input class="left" type="text" id="searchLocation">
+                                            </span>
+                                        </li>
+                                        <ul class="list-complt">
+                                            <select name="locations" class="two-cols-select" size="5" id="FTBlocations" onchange="GetLocationSpecificMonths(this)">
+                                                <!-- ko foreach: locations -->
+                                                <option data-bind="html:Location, attr:{ value:LocationID ,LocationBrandID:LocationBrandID ,Tether:IsActiveTether,class:FtbJobStatus,BranchCode:BranchCode}"></option>
+                                                <!-- /ko -->
+                                            </select>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ftb-auto-location">
+                    <div class="sourc-loc-inner-box">
+                        <div class="location">
+                            <div class="location-inner-box">
+                                <span>Next 11 Month</span>
+                                <div class="locationbox" id="monthsdiv">
+                                    <ul name="months" class="mright0 two-cols-select relative" size="5" id="months">
+                                        <div class="loader_container_months" style="display: none;">
+                                            <div class="loader-bga"></div>
+                                            <div class="loader mhide thide">
+                                                <img src="images/ajax_loader_blue_small.gif">
+                                            </div>
+                                        </div>
+                                        <ul class="list-complt">
+                                            <select name="locations" class="two-cols-select" size="5" id="FTBmonths">
+                                                @if (ViewBag.NextMonths != null)
+                                                {
+                                                    foreach (var Month in ViewBag.NextMonths)
+                                                    {
+                                                        <option value="@Month.Year" month="@Month.Month">@Month.MonthYear</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </ul>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="activate-tether"><input type="checkbox" id="Tether"><label for="Tether">Activate Tether</label></div>
+                <div class="frequency">
+                    <span>Frequency</span>
+                    <ul class="freq-ul">
+                        @if (ViewBag.Frequencies != null)
+                        {
+                            foreach (var Frequency in ViewBag.Frequencies)
+                            {
+                                <li>
+                                    <input type="radio" id="@Frequency.UIControlID.Trim()" freqid="@Frequency.ID" name="freq">
+                                    @Html.Raw(Frequency.Name)
+                                </li>
+
+                            }
+                        }
+
+                    </ul>
+
+                </div>
+                <div class="start-date">
+                    <span style="width:20.5%">Start Date</span>
+                    <input type="text" placeholder="mm/dd/yyyy" readonly name="runStartDate" class="date-picker dp" id="runStartDate" autocomplete="off">
+                </div>
+                <div class="run-time">
+                    <span>Set Run Time</span>
+                    <input type="text" name="jobTime" id="jobTime" value="12:00 am" readonly="readonly" class="e1day e1week e1month">
+                </div>
+                <div class="ftb-auto-days">
+                    <div class="sourc-days-inner-box">
+                        <div class="days">
+                            <div class="days-inner-box">
+                                <span>Days</span>
+                                <span class="all-text">
+                                    <input type="checkbox" class="jobScheduleWeekDays" id="chkAllDays" onclick="selectAllDays(this, 'jobScheduleWeekDays')" multiple="multiple">
+                                    All
+                                </span>
+                                <div class="daysbox" id="jobScheduleWeekDays">
+                                    <ul class="list-complt two-cols-select">
+                                        <select name="days" class="two-cols-select jobScheduleWeekDays e15min e1day e30min e1week e1hour custom-time" size="7" id="jobDay" onchange="checkUncheckWeekDays('jobScheduleWeekDays')">
+                                            @if (ViewBag.WeekDays != null)
+                                            {
+                                                foreach (var WeekDay in ViewBag.WeekDays)
+                                                {
+                                                    <option value="@WeekDay.ID">@WeekDay.Day</option>
+                                                }
+                                            }
+                                        </select>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="button" class="search-button orng" value="Save" id="SaveFTBJob" />
+                <span id="spanSave" style="padding: 10px 20px; color: green; display: none; font-weight: bold;">Job saved successfully.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/css/ftb_jobSchedule.css")

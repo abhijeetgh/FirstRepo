@@ -1,0 +1,484 @@
+﻿
+<div id="right-col">
+    <div class="side-section-body-new">
+
+        <h3 class="uppercase fleft" id="HaddingTitle">Create rule set</h3>
+        <span id="spanSave" class="fleft" style="padding-left:2%; color: green; display:none; font-weight:bold;">The RuleSet saved successfully.</span>
+        <span id="lblMessage" class="errormsg" style="color: rgb(255, 0, 0);">Please review the fields highlighted in Red. <span id="lblMessageCheckRuleSetName" class="" style="color: rgb(255, 0, 0); font-weight: bold;">The Ruleset name exists.</span></span>
+        <div class="clear"></div>
+        <div class="crs-blk mtb15 bg_grey padding15 border" id="rightPanelControl">
+            <div class="table-ul-right fleft spn_container">
+                <div class="spn1">
+                    <span class="bold">Name<label style="color:red">*</label></span>
+                    <input type="text" id="rightRuleSetName" autocomplete="off" />
+                </div>
+                <div class="spn1">
+                    <span class="bold mrlabel">Brand Location<label style="color:red">*</label></span>
+                    <input type="text" disabled="disabled" style="display:none" id="rightRuleSetlocationslbl" />
+                    <ul id="rightRuleSetlocations" class="relative pointer uppercase">
+                        <li value="0">---select---</li>
+                        <ul class="hidden drop-down1" style="display: block;">
+                            <li value="0">---select---</li>
+                            <!-- ko foreach: rightBrandLocations -->
+                            <li data-bind="html:Location, attr:{ value:LocationID ,LocationBrandID:LocationBrandID ,LocationCode:LocationCode, BrandID:BrandID }"></li>
+                            <!-- /ko -->
+                        </ul>
+                    </ul>
+                </div>
+                <div class="spn1">
+                    <input type="checkbox" id="rightRuleSetIsWideGapTemplate" /><label>Is Wide Gap</label>
+                    <input type="checkbox" id="isGOV" /><label>Is GOV</label>
+                </div>
+            </div>
+            <span class="">
+                <span class="bold mrlabel">Rental Lengths<label style="color:red">*</label></span>
+                <select name="rightRuleSetlengths" class="two-cols-select" multiple="multiple" size="6" id="rightRuleSetlengths">
+                    <!-- ko foreach: rentalLengths -->
+                    <option data-bind="html:Code, attr:{ value:MappedID, rid:ID  }"></option>
+                    <!-- /ko -->
+                </select>
+            </span>
+            <span>
+                <span class="bold mrlabel">Companies<label style="color:red">*</label></span>
+                <select name="rightRuleSetCompanies" class="two-cols-select" multiple="multiple" size="6" id="rightRuleSetCompanies" onclick="AutoPopulateCompanies(this)" selectedcompanyids="">
+                    <!-- ko foreach: masterCompanies -->
+                    <option data-bind="html:Name, attr:{value:ID,isBrand:IsBrand}"></option>
+                    <!-- /ko -->
+                </select>
+            </span>
+            <span>
+                <span class="bold mrlabel">Car Classes<label style="color:red">*</label></span>
+                <select name="rightRuleSetCarClass" class="two-cols-select" multiple="multiple" size="6" id="rightRuleSetCarClass">
+                    <!-- ko foreach: rightCarClasses -->
+                    <option data-bind="html: Code, attr:{ value:ID }">ECAR</option>
+                    <!-- /ko -->
+                </select>
+            </span>
+            <span>
+                <span class="bold mrlabel">Days of Week<label style="color:red">*</label></span>
+                <select name="rightRuleSetDays" class="two-cols-select" multiple="multiple" size="6" id="rightRuleSetDays">
+                    <!-- ko foreach: weekDays -->
+                    <option data-bind="html:Day,attr:{value:ID}"></option>
+                    <!-- /ko -->
+                </select>
+            </span>
+            <div class="rg_grp clear">
+                <input type="radio" name="rg1" id="rg1" value="IsPositionOffsetON"><label id="PositionCompetitor">Position of EZ-RAC </label><input type="text" id="rightRuleSetIsPositionOffset" style="background-color:white;" /><br />
+                <input type="radio" name="rg1" id="rg1" value="IsPositionOffsetOFF"><label>Position above the average of the competitors <input type="text" id="rightRuleSetCompanyPositionAbvAvg" style="background-color:white;" /></label>
+                <div id="error-span" class="error-msg" style="display:none;">Please select the position value</div>
+            </div>
+
+        </div>
+        <div id="RuleSetGroupUpdateTemplate" class="RuleSetGroupUpdateTemplate">
+            <!--ko foreach: SeletedRuleSetGapSettings -->
+            <div class="border RuleSetDefaultTemplate" id="RuleSetDefaultTemplate" default="DefaultTemplate">
+                <div class="side-section-top pointer">
+                    <img class="collapse" src="~/images/Search-collapse.png" alt="collapse" data-bind="attr:{id:'RuleSetGroupCollapase_'+($index()+1)}">
+                    <h2 class="open"><span class="RuleSetGroupTitle">RULE 1 (Total Cost)</span></h2>
+                </div>
+                <div class="crs-blk padding15">
+                    <input type="hidden" id="HiddenRuleSetGroupID" data-bind="attr:{value:RuleSetGroupID}" />
+                    <div>
+                        <span class="fleft cmp mr2p">
+                            <span class="bold">Competitors</span>
+                            <select name="RuleSetTemplateCompanies" class="two-cols-select RuleSetTemplateCompanies" multiple="multiple" size="6" onchange="AutoPopulateGroupCompanies(this)" id="RuleSetTemplateCompanies" data-bind="attr:{CompanyIDs:CompanyIDs,RuleSetGroupID:RuleSetGroupID,selecteditem:''}">
+                                <!-- ko foreach: lstGroupCompany -->
+                                <option data-bind="html:CompanyName, attr:{value:CompanyID,isBrand:IsBrand}" selected="selected"></option>
+                                <!-- /ko -->
+                            </select>
+                        </span>
+                    </div>
+                    <div>
+                        <div id="TotalMasterDiv">
+                            <span class="bold" style="margin-left: 5px; margin-bottom: 4px;">Total Rate</span>
+                            <div id="TotalMasterDiv">
+                                <table class="CRS_table fleft mr2p" id="GroupDayTemplate">
+                                    <thead class="bold">
+                                        <tr>
+                                            <td>Day Range</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>Gap</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--ko foreach:lstRuleSetGapSettingDay-->
+                                        <tr>
+                                            <td class="RangeIntervalID" data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,RuleSetGapSettingID:ID,IsChanged:IsChanged}"></td>
+                                            <td><input type="text" name="DayMinAmount" data-bind="value:MinAmount,attr:{id:'DayMinAmount_'+ID}" size="5" class="bold DayMinAmount" id="DayMinAmount"></td>
+                                            <td>
+                                                <!-- ko if: $index()+1 == 5 -->
+                                                <input type="text" name="DayMaxAmount" data-bind="value:MaxAmount,attr:{id:'DayMaxAmount_'+ID}" size=" 5" class="bold hidden" disabled="disabled" id="DayMaxAmount"><b>UP</b>
+                                                <!--/ko-->
+                                                <!-- ko if: $index()+1 != 5 -->
+                                                <input type="text" name="DayMaxAmount" data-bind="value:MaxAmount,attr:{id:'DayMaxAmount_'+ID}" size=" 5" class="bold " id="DayMaxAmount">
+                                                <!-- /ko -->
+                                            </td>
+                                            <td><input type="text" name="DayGapAmount" data-bind="value:GapAmount,attr:{id:'DayGapAmount_'+ID}" size="5" class="bold DayGapAmount" id="DayGapAmount"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                                <table class="CRS_table fleft mr2p" id="GroupWeekTemplate">
+                                    <thead class="bold">
+                                        <tr>
+                                            <td>Week Range</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>Gap</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--ko foreach:lstRuleSetGapSettingWeek-->
+                                        <tr>
+                                            <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,RuleSetGapSettingID:ID,IsChanged:IsChanged}"></td>
+                                            <td><input type="text" name="WeekMinAmount" data-bind="value:MinAmount,attr:{id:'WeekMinAmount_'+ID}" size="5" class="bold"></td>
+                                            <td>
+                                                <!-- ko if: $index()+1 == 5 -->
+                                                <input type="text" name="WeekMaxAmount" data-bind="value:MaxAmount,attr:{id:'WeekMaxAmount_'+ID}" size=" 5" class="bold hidden" disabled="disabled"> <b>UP</b>
+                                                <!--/ko-->
+                                                <!-- ko if: $index()+1 != 5 -->
+                                                <input type="text" name="WeekMaxAmount" data-bind="value:MaxAmount,attr:{id:'WeekMaxAmount_'+ID}" size=" 5" class="bold">
+                                                <!-- /ko -->
+                                            </td>
+                                            <td><input type="text" name="WeekGapAmount" data-bind="value:GapAmount,attr:{id:'WeekGapAmount_'+ID}" size="5" class="bold"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                                <table class="CRS_table" id="GroupMonthTemplate">
+                                    <thead class="bold">
+                                        <tr>
+                                            <td>Month Range</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>Gap</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--ko foreach:lstRuleSetGapSettingMonth-->
+                                        <tr>
+                                            <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,RuleSetGapSettingID:ID,IsChanged:IsChanged}"></td>
+                                            <td><input type="text" name="MonthMinAmount" data-bind="value:MinAmount,attr:{id:'MonthMinAmount_'+ID}" size="5" class="bold"></td>
+                                            <td>
+                                                <!-- ko if: $index()+1 == 5 -->
+                                                <input type="text" name="MonthMaxAmount" data-bind="value:MaxAmount,attr:{id:'MonthMaxAmount_'+ID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                                <!--/ko-->
+                                                <!-- ko if: $index()+1 != 5 -->
+                                                <input type="text" name="MonthMaxAmount" data-bind="value:MaxAmount,attr:{id:'MonthMaxAmount_'+ID}" size=" 5" class="bold">
+                                                <!-- /ko -->
+                                            </td>
+                                            <td><input type="text" name="MonthGapAmount" data-bind="value:GapAmount,attr:{id:'MonthGapAmount_'+ID}" size="5" class="bold"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div id="BaseMasterDiv">
+                            <span class="bold" style="margin-left: 16.5%; margin-top:10px; margin-bottom: 4px">Base Rate</span>
+                            <div id="BaseMasterDiv">
+                                <table class="CRS_table fright mr2p" id="GroupMonthTemplate">
+                                    <thead class="bold">
+                                        <tr>
+                                            <td>Month Range</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>Gap</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--ko foreach:lstRuleSetGapSettingMonth-->
+                                        <tr>
+                                            <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,RuleSetGapSettingID:ID,IsChanged:IsChanged}"></td>
+                                            <td><input type="text" name="BaseMonthMinAmount" data-bind="value:BaseMinAmount,attr:{id:'BaseMonthMinAmount_'+ID}" size="5" class="bold"></td>
+                                            <td>
+                                                <!-- ko if: $index()+1 == 5 -->
+                                                <input type="text" name="BaseMonthMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseMonthMaxAmount_'+ID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                                <!--/ko-->
+                                                <!-- ko if: $index()+1 != 5 -->
+                                                <input type="text" name="BaseMonthMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseMonthMaxAmount_'+ID}" size=" 5" class="bold">
+                                                <!-- /ko -->
+                                            </td>
+                                            <td><input type="text" name="BaseMonthGapAmount" data-bind="value:BaseGapAmount,attr:{id:'BaseMonthGapAmount_'+ID}" size="5" class="bold"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                                <table class="CRS_table fright mr2p" id="GroupWeekTemplate">
+                                    <thead class="bold">
+                                        <tr>
+                                            <td>Week Range</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>Gap</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--ko foreach:lstRuleSetGapSettingWeek-->
+                                        <tr>
+                                            <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,RuleSetGapSettingID:ID,IsChanged:IsChanged}"></td>
+                                            <td><input type="text" name="BaseWeekMinAmount" data-bind="value:BaseMinAmount,attr:{id:'BaseWeekMinAmount_'+ID}" size="5" class="bold"></td>
+                                            <td>
+                                                <!-- ko if: $index()+1 == 5 -->
+                                                <input type="text" name="BaseWeekMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseWeekMaxAmount_'+ID}" size=" 5" class="bold hidden" disabled="disabled"> <b>UP</b>
+                                                <!--/ko-->
+                                                <!-- ko if: $index()+1 != 5 -->
+                                                <input type="text" name="BaseWeekMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseWeekMaxAmount_'+ID}" size=" 5" class="bold">
+                                                <!-- /ko -->
+                                            </td>
+                                            <td><input type="text" name="BaseWeekGapAmount" data-bind="value:BaseGapAmount,attr:{id:'BaseWeekGapAmount_'+ID}" size="5" class="bold"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                                <table class="CRS_table fright mr2p" id="GroupDayTemplate">
+                                    <thead class="bold">
+                                        <tr>
+                                            <td>Day Range</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>Gap</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--ko foreach:lstRuleSetGapSettingDay-->
+                                        <tr>
+                                            <td class="RangeIntervalID" data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,RuleSetGapSettingID:ID,IsChanged:IsChanged}"></td>
+                                            <td><input type="text" name="BaseDayMinAmount" data-bind="value:BaseMinAmount,attr:{id:'BaseDayMinAmount_'+ID}" size="5" class="bold DayMinAmount"></td>
+                                            <td>
+                                                <!-- ko if: $index()+1 == 5 -->
+                                                <input type="text" name="BaseDayMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseDayMaxAmount_'+ID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                                <!--/ko-->
+                                                <!-- ko if: $index()+1 != 5 -->
+                                                <input type="text" name="BaseDayMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseDayMaxAmount_'+ID}" size=" 5" class="bold ">
+                                                <!-- /ko -->
+                                            </td>
+                                            <td><input type="text" name="BaseDayGapAmount" data-bind="value:BaseGapAmount,attr:{id:'BaseDayGapAmount_'+ID}" size="5" class="bold DayGapAmount" id="BaseDayGapAmount"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+
+        </div><br />
+        <!--/ko-->
+
+    </div>
+    <div id="RuleSetGroupTemplate" class="RuleSetGroupTemplate">
+
+    </div>
+    <div>
+
+        <input type="button" name="Search" class="search-button" value="Add New Rule " id="AddRuleSetTemplate">
+        <input type="button" name="Search" class="search-button" value="Save" id="UpdateRuleSetTemplate">
+
+
+    </div>
+
+</div>
+<div class="hidden">
+    <div class="border RuleSetDefaultTemplate DefaultTemplate" id="RuleSetDefaultTemplate" default="DefaultTemplate">
+        <div class="side-section-top pointer">
+            <img class="collapse RuleSetGroupCollapse" src="~/images/Search-collapse.png" alt="collapse">
+            <h2 class="open"><span class="RuleSetGroupTitle">RULE 1 (Total Cost)</span></h2>
+        </div>
+        <div class="crs-blk padding15">
+            <div>
+                <span class="fleft cmp mr2p">
+                    <span class="bold">Competitors</span>
+                    <select name="RuleSetTemplateCompanies" class="two-cols-select RuleSetTemplateCompanies" multiple="multiple" size="6" onchange="AutoPopulateGroupCompanies(this)" id="RuleSetTemplateCompanies" data-bind="    attr: { selecteditem: '' }">
+                        <!-- ko foreach: ruleSetGroupCompanies -->
+                        <option data-bind="html:Name, attr:{value:ID,isBrand:IsBrand}"></option>
+                        <!-- /ko -->
+                    </select>
+                </span>
+            </div>
+            <div>
+                <div id="TotalMasterDiv">
+                    <span class="bold" style="margin-left: 5px; margin-bottom: 4px;">Total Rate</span>
+                    <div>
+                        <table class="CRS_table fleft mr2p" id="GroupDayTemplate">
+                            <thead class="bold">
+                                <tr>
+                                    <td>Day Range</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Gap</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:RuleSetGapSettingsDay-->
+                                <tr>
+                                    <td class="RangeIntervalID" data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,IsChanged:IsChanged}"></td>
+                                    <td><input type="text" name="DayMinAmount" data-bind="value:MinAmount,attr:{id:'DayMinAmount_'+RangeIntervalID}" size="5" class="bold DayMinAmount"></td>
+                                    <td>
+                                        <!-- ko if: $index()+1 == 5 -->
+                                        <input type="text" name="DayMaxAmount" data-bind="value:MaxAmount,attr:{id:'DayMaxAmount_'+RangeIntervalID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                        <!--/ko-->
+                                        <!-- ko if: $index()+1 != 5 -->
+                                        <input type="text" name="DayMaxAmount" data-bind="value:MaxAmount,attr:{id:'DayMaxAmount_'+RangeIntervalID}" size=" 5" class="bold ">
+                                        <!-- /ko -->
+                                    </td>
+                                    <td><input type="text" name="DayGapAmount" data-bind="value:GapAmount,attr:{id:'DayGapAmount_'+RangeIntervalID}" size="5" class="bold DayGapAmount"></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                        <table class="CRS_table fleft mr2p" id="GroupWeekTemplate">
+                            <thead class="bold">
+                                <tr>
+                                    <td>Week Range</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Gap</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:RuleSetGapSettingsWeek-->
+                                <tr>
+                                    <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,IsChanged:IsChanged}"></td>
+                                    <td><input type="text" name="WeekMinAmount" data-bind="value:MinAmount,attr:{id:'WeekMinAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                    <td>
+                                        <!-- ko if: $index()+1 == 5 -->
+                                        <input type="text" name="WeekMaxAmount" data-bind="value:MaxAmount,attr:{id:'WeekMaxAmount_'+RangeIntervalID}" size=" 5" class="bold hidden" disabled="disabled"> <b>UP</b>
+                                        <!--/ko-->
+                                        <!-- ko if: $index()+1 != 5 -->
+                                        <input type="text" name="WeekMaxAmount" data-bind="value:MaxAmount,attr:{id:'WeekMaxAmount_'+RangeIntervalID}" size=" 5" class="bold">
+                                        <!-- /ko -->
+                                    </td>
+                                    <td><input type="text" name="WeekGapAmount" data-bind="value:GapAmount,attr:{id:'WeekGapAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                        <table class="CRS_table" id="GroupMonthTemplate">
+                            <thead class="bold">
+                                <tr>
+                                    <td>Month Range</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Gap</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:RuleSetGapSettingsMonth-->
+                                <tr>
+                                    <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,IsChanged:IsChanged}"></td>
+                                    <td><input type="text" name="MonthMinAmount" data-bind="value:MinAmount,attr:{id:'MonthMinAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                    <td>
+                                        <!-- ko if: $index()+1 == 5 -->
+                                        <input type="text" name="MonthMaxAmount" data-bind="value:MaxAmount,attr:{id:'MonthMaxAmount_'+RangeIntervalID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                        <!--/ko-->
+                                        <!-- ko if: $index()+1 != 5 -->
+                                        <input type="text" name="MonthMaxAmount" data-bind="value:MaxAmount,attr:{id:'MonthMaxAmount_'+RangeIntervalID}" size=" 5" class="bold">
+                                        <!-- /ko -->
+                                    </td>
+                                    <td><input type="text" name="MonthGapAmount" data-bind="value:GapAmount,attr:{id:'MonthGapAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div id="BaseMasterDiv">
+                    <span class="bold" style="margin-left: 16.5%; margin-top: 10px; margin-bottom: 4px">Base Rate</span>
+                    <div>
+                        <table class="CRS_table fright mr2p" id="GroupMonthTemplate">
+                            <thead class="bold">
+                                <tr>
+                                    <td>Month Range</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Gap</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:RuleSetGapSettingsMonth-->
+                                <tr>
+                                    <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,IsChanged:IsChanged}"></td>
+                                    <td><input type="text" name="BaseMonthMinAmount" data-bind="value:BaseMinAmount,attr:{id:'BaseMonthMinAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                    <td>
+                                        <!-- ko if: $index()+1 == 5 -->
+                                        <input type="text" name="BaseMonthMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseMonthMaxAmount_'+RangeIntervalID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                        <!--/ko-->
+                                        <!-- ko if: $index()+1 != 5 -->
+                                        <input type="text" name="BaseMonthMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseMonthMaxAmount_'+RangeIntervalID}" size=" 5" class="bold">
+                                        <!-- /ko -->
+                                    </td>
+                                    <td><input type="text" name="BaseMonthGapAmount" data-bind="value:BaseGapAmount,attr:{id:'BaseMonthGapAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                        <table class="CRS_table fright mr2p" id="GroupWeekTemplate">
+                            <thead class="bold">
+                                <tr>
+                                    <td>Week Range</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Gap</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:RuleSetGapSettingsWeek-->
+                                <tr>
+                                    <td data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,IsChanged:IsChanged}"></td>
+                                    <td><input type="text" name="BaseWeekMinAmount" data-bind="value:BaseMinAmount,attr:{id:'BaseWeekMinAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                    <td>
+                                        <!-- ko if: $index()+1 == 5 -->
+                                        <input type="text" name="BaseWeekMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseWeekMaxAmount_'+RangeIntervalID}" size=" 5" class="bold hidden" disabled="disabled"> <b>UP</b>
+                                        <!--/ko-->
+                                        <!-- ko if: $index()+1 != 5 -->
+                                        <input type="text" name="BaseWeekMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseWeekMaxAmount_'+RangeIntervalID}" size=" 5" class="bold" />
+                                        <!-- /ko -->
+                                    </td>
+                                    <td><input type="text" name="BaseWeekGapAmount" data-bind="value:BaseGapAmount,attr:{id:'BaseWeekGapAmount_'+RangeIntervalID}" size="5" class="bold"></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+
+                        <table class="CRS_table fright mr2p" id="GroupDayTemplate">
+                            <thead class="bold">
+                                <tr>
+                                    <td>Day Range</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Gap</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:RuleSetGapSettingsDay-->
+                                <tr>
+                                    <td class="RangeIntervalID" data-bind="html:$index()+1,attr:{RangeIntervalID:RangeIntervalID,IsChanged:IsChanged}"></td>
+                                    <td><input type="text" name="BaseDayMinAmount" data-bind="value:BaseMinAmount,attr:{id:'BaseDayMinAmount_'+RangeIntervalID}" size="5" class="bold DayMinAmount" id="BaseDayMinAmount"></td>
+                                    <td>
+                                        <!-- ko if: $index()+1 == 5 -->
+                                        <input type="text" name="BaseDayMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseDayMaxAmount_'+RangeIntervalID}" size=" 5" class="bold hidden" disabled="disabled"><b>UP</b>
+                                        <!--/ko-->
+                                        <!-- ko if: $index()+1 != 5 -->
+                                        <input type="text" name="BaseDayMaxAmount" data-bind="value:BaseMaxAmount,attr:{id:'BaseDayMaxAmount_'+RangeIntervalID}" size=" 5" class="bold ">
+                                        <!-- /ko -->
+                                    </td>
+                                    <td><input type="text" name="BaseDayGapAmount" data-bind="value:BaseGapAmount,attr:{id:'BaseDayGapAmount_'+RangeIntervalID}" size="5" class="bold DayGapAmount"></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div><br />
+</div>
+</div>
+

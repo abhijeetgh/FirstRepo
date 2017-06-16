@@ -1,0 +1,193 @@
+﻿<div id="mtab2">
+    <div class="side-section-top pointer">
+        <img class="collapse" src="~/images/Search-collapse.png" alt="collapse"><h2 class="open"><span class="uppercase">Recent Searches</span></h2>
+    </div>
+    <div class="side-section-body">
+        <form method="post">
+            <table>
+                <tbody>
+                    <tr class="label-row">
+                        <td colspan="1"></td>
+                        <td colspan="1" align="right" id="SearchFilters"><img class="plus" src="images/plus.png" alt="+" />Search Filters</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table width="99%" id="tableSearchFilters" style="display:none;">
+                <!-- Toggle this table on search filter its hidden-->
+                <tbody>
+                    <tr class="label-row">
+                        <td>Source</td>
+                        <td>Brand Location</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="pointer select-ul relative capitalize " id="recentSources">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    @if (ViewBag.ScrapperSources != null)
+                                    {
+                                        foreach (var sources in ViewBag.ScrapperSources)
+                                        {
+                                            <li value="@sources.ID">@sources.Name</li>
+                                        }
+                                    }
+                                </ul>
+                            </ul>
+                        </td>
+                        <td id="recentLocationsTD">
+                            <ul class="pointer select-ul relative capitalize" id="recentLocations">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    <!-- ko foreach: locations -->
+                                    <li data-bind="attr:{ value:LocationBrandID  },html:Location"></li>
+                                    <!-- /ko -->
+                                </ul>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="label-row">
+                        <td>Length</td>
+                        <td>Status</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="pointer select-ul relative capitalize" id="recentLengths">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    @if (ViewBag.RentalLengths != null)
+                                    {
+                                        foreach (var lor in ViewBag.RentalLengths)
+                                        {
+                                            <li value="@lor.ID">@lor.Code</li>
+                                        }
+                                    }
+                                </ul>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="pointer select-ul relative capitalize" id="recentStatuses">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    <!-- ko foreach: Status-->
+                                    <!-- ko if: ID != 6 -->
+                                    <!-- ko if: ID == 1 -->
+                                    <li data-bind="attr:{ value:ID }"> IN PROGRESS</li>
+                                    <!-- /ko -->
+                                    <!-- ko if: ID == 4 -->
+                                    <li data-bind="attr:{ value:ID }"> COMPLETE</li>
+                                    <!-- /ko -->
+                                    <!-- ko if: ID == 5 -->
+                                    <li data-bind="attr:{ value:ID }"> FAILED</li>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </ul>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="label-row">
+                        <td>User</td>
+                        <td><span id="recentSearchTypeLabel">Search Type</span>
+                            <span id="recentSummaryTypeLabel" style="display:none">Summary Type</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="pointer select-ul relative capitalize " id="recentUsers">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    @if (ViewBag.Users != null)
+                                    {
+                                        foreach (var user in ViewBag.Users)
+                                        {
+                                            <li value="@user.Id">@user.FirstName  @user.LastName</li>
+                                        }
+                                    }
+                                </ul>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="pointer select-ul relative capitalize" id="recentSearchType">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    <li value="1">Default</li>
+                                    <li value="2">Quick View</li>
+                                </ul>
+                            </ul>
+                            <ul class="pointer select-ul relative capitalize" style="display:none" id="recentSummaryType">
+                                <li value="0">All</li>
+                                <ul class="drop-down hidden">
+                                    <li value="0">All</li>
+                                    <li value="3">Default</li>
+                                    <li value="1">Automation</li>
+                                    <li value="2">FTB</li>
+                                </ul>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2" id="bindSearchSummary" class="relative">
+                            <div class="loader_container_shops">
+                                <div class="loader-bga"></div>
+                                <div class="loader mhide thide">
+                                    <img src="images/ajax_loader_blue_small.gif" />
+                                </div>
+                            </div>
+                            <ul class="ffour-cols-select pastSearchul pointer" size="5" id="pastSearches" data-bind="foreach:SearchSummary">
+                                <li data-bind="visible:($parent.SearchSummary != null && $parent.SearchSummary().length), attr:{ class:SearchTypeClass, id:'selectedSummaryID_'+SearchSummaryID,value:SearchSummaryID,SourcesId:SourcesIDs,LocationId:LocationIDs,RentalLengthsId:RentalLengthsIDs,StatusId:StatusIDs,UserId:UserID,carClassId:CarClassIDs,locationBrandId:LocationsBrandIDs,brandIDs:BrandIDs, StartTime:StartTime, EndTime:EndTime,IsQuickView:IsQuickView?'true':'false',HasQuickViewChild:HasQuickViewChild?'true':'false',RentalLengthName:RentalLengthName,IsFTBSummary:IsFTBSummary?'true':'false',IsAutomationSummary:IsAutomationSummary?'true':'false'},click:function(data){selectedSearchSummary(data)}">
+                                    <span data-bind="html:SummaryText">
+                                    </span>
+                                    <span data-bind="attr:{class:StatusClass},html:StatusName"></span>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="right">
+                            <input name="userId" type="hidden" value="52">
+                            <input type="button" name="Search" class="search-button" value="Delete " id="Delete">
+                        </td>
+                    </tr>
+                    <tr class="label-row">
+                        <td colspan="2">Summary</td>
+                    </tr>
+                    <tr>
+                        <td class="mw100" colspan="2">
+                            <input type="hidden" id="lastModifiedDate" value="" />
+                            <div id="search-summary" class="bold">
+                                <p id="search-sum-time-of"><span class="summary-label">Time of:</span><span class="content-holder searchSummary" id="summaryTimeOf"></span></p>
+                                <p id="search-sum-s-date"><span class="summary-label">Start Date:</span><span class="content-holder searchSummary" id="summaryStartDate"></span></p>
+                                <p id="search-sum-e-date"><span class="summary-label">End Date:</span><span class="content-holder searchSummary" id="summaryEndDate"></span></p>
+                                <p id="search-sum-user"><span class="summary-label">User:</span><span class="content-holder searchSummary" id="summaryUser"></span></p>
+                                <p id="search-sum-locs"><span class="summary-label">Locations:</span><span class="content-holder searchSummary" id="summaryLocation"></span></p>
+                                <p id="search-sum-car-class"><span class="summary-label">Car Classes:</span><span class="content-holder searchSummary" id="summaryCarClass"></span></p>
+                                <p id="search-sum-lor"><span class="summary-label">Lengths:</span><span class="content-holder searchSummary" id="summaryLength"></span></p>
+                                <p id="search-sum-sources"><span class="summary-label">Sources:</span><span class="content-holder searchSummary" id="summarySource"></span></p>
+                                <p id="search-sum-sources" class="hidden"><span class="summary-label">Reason of failure:</span><span class="content-holder searchSummary" id="summaryFailure"></span></p>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="right">
+
+                            <input type="button" name="Search" class="search-button" value="View Results" id="viewResult">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+    </div>
+</div>

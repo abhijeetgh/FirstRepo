@@ -1,0 +1,32 @@
+.gt-top {
+  background: #e5e5e5;
+  font-size: 1.2em;
+  padding: 13px 15px;
+}
+.tacontainer
+{
+width:auto;
+}
+.tacontainer select
+{
+padding:7px;
+
+box-sizing:content-box;
+display:block;
+height:auto ;
+
+}
+.taright
+{
+margin:0 15px 
+}
+.xm textarea
+{
+margin-top:10px
+}
+.selected,
+.drop-down li:hover,
+.drop-down1 li:hover {
+    background: #328efe;
+    color: #fff;
+}

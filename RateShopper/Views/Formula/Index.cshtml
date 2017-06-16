@@ -1,0 +1,141 @@
+﻿@model RateShopper.Domain.DTOs.FormulaDTODetails
+
+@{
+    ViewBag.Title = "Formula";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/formulas.css")
+@Scripts.Render("~/scripts/Formula.js")
+<div class="loader_container_main">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="formulas" class="pageminht">
+    <div class="gt-top">
+        <span class="uppercase bold">Formulas</span>
+    </div>
+    <div class="padding15 fcontainer">
+        @*@if (ViewBag.Message != null)
+            {*@
+        <label style="font-weight:bold;color:green;" id="lblMessage">@ViewBag.Message</label>
+        @* } *@
+        <div class="fleft dd">
+            <ul class="wide-body-side-container table-ul-right">
+                <li>
+                    Select Brand
+                    <ul name="source" id="dimension-source" class="dropdown relative" style="width:100px;">
+                        <li class="pointer" style="display:block;">EZ Rent A Car</li>
+                        <ul class="hidden drop-down1" id="ddlBrand-Formula">
+                            @if (ViewBag.Companies != null)
+                            {
+                                foreach (var company in ViewBag.Companies)
+                                {
+                                    <li id="@company.ID" value="@company.Code"><a style="display:block; " href='@Url.Action("GetFormulasOfCompany", "Formula", routeValues: new { id = @company.ID })'> @company.Name</a></li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="bold fright">
+            Please note: &nbsp;
+            <div class="fright">
+                <span class="content-holder ">
+                    (rt=baserate, total= estimated total, nd= number of days,len=number of days(1-4) or 1 for week or month)
+                </span><br />
+                <span class="content-holder ">
+                    a. All characters typed should be in lowercase only <br />
+                    b. Every open parenthesis should have subsequent closing parenthesis<br />
+                    c. Mathematical operators to be used are '+', '-', '*', '/' only
+                </span>
+            </div>
+        </div>
+        <div class="clear"></div>
+        @using (Ajax.BeginForm("SaveFormula", "Formula", ajaxOptions: new AjaxOptions { HttpMethod = "POST" }))
+        {
+            @Html.Hidden("UserID", 0, new { id = "formula_UserID" })
+            @Html.Hidden("BrandID", 0, new { id = "formula_BrandID" })
+            <table class="w100">
+                <thead>
+                    <tr class="center">
+                        <td>LOCATION</td>
+                        <td>SALES TAX<br />(sales)</td>
+                        <td>AIRPORT FEE<br />(airport)</td>
+                        <td>ARENA<br />(arena)</td>
+                        <td>SURCHARGE/DAY<br />(surcharge)</td>
+                        <td>VLRF/DAY<br />(vlrf)</td>
+                        <td>CFC/DAY<br />(cfc)</td>
+                        <td class="uppercase">Total cost to base rate formula</td>
+                        <td class="uppercase">Base rate to total cost formula</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.LstFormulaDTO != null)
+                    {
+                        for (int i = 0; i < Model.LstFormulaDTO.Count; i++)
+                        {
+                            <tr class="row">
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model.LstFormulaDTO[i].LocationName)
+                                    @Html.Hidden("LstFormulaDTO[" + i + "].FormulaID", Model.LstFormulaDTO[i].FormulaID)
+                                    @Html.Hidden("LstFormulaDTO[" + i + "].LocationBrandID", Model.LstFormulaDTO[i].LocationBrandID)
+                                    @*@Html.Hidden("LstFormulaDTO[" + i + "].IsEdited", 0, new { @class = "isEdited" })*@
+                                    @Html.HiddenFor(x => x.LstFormulaDTO[i].IsEdited, new { @class = "isEdited" })
+                                </td>
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.LocationBrandID)
+                                    </td>*@
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].SalesTax", String.Format("{0:n4}", Model.LstFormulaDTO[i].SalesTax), new { id = "SalesTax_" + i, @class = "numeric", autocomplete = "off" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].AirportFee", String.Format("{0:n4}", Model.LstFormulaDTO[i].AirportFee), new { id = "AirportFee_" + i, @class = "numeric", autocomplete = "off" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].Arena", String.Format("{0:n4}", Model.LstFormulaDTO[i].Arena), new { id = "Arena_" + i, @class = "numeric", autocomplete = "off" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].Surcharge", String.Format("{0:n4}", Model.LstFormulaDTO[i].Surcharge), new { id = "Surcharge_" + i, @class = "numeric", autocomplete = "off" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].VLRF", String.Format("{0:n4}", Model.LstFormulaDTO[i].VLRF), new { id = "VLRF_" + i, @class = "numeric", autocomplete = "off" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].CFC", String.Format("{0:n4}", Model.LstFormulaDTO[i].CFC), new { id = "CFC_" + i, @class = "numeric", autocomplete = "off" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].TotalCostToBase", Model.LstFormulaDTO[i].TotalCostToBase, new { autocomplete = "off", @class = "TotalCostToBase" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("LstFormulaDTO[" + i + "].BaseToTotalCost", Model.LstFormulaDTO[i].BaseToTotalCost, new { autocomplete = "off", @class = "BaseToTotalCost" })
+                                </td>
+                            </tr>
+                        }
+                        if (Model.LstFormulaDTO.Count == 0)
+                        {
+                            <tr class="norecord">
+                                <td colspan="9" style="text-align:center">No Records Found.</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <input type="submit" value="Save" class="search-button" id="btnFormulaSave" />
+        }
+    </div>
+    <input type="hidden" value="@ViewBag.SelectedCompanyID" id="selectedCompanyID" />
+</div>
+<div class="clear">
+    @{Html.RenderPartial("ChildFooter");}
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+
+

@@ -1,0 +1,196 @@
+﻿
+<div class="popup-top">
+    <span class="uppercase bold"> Tethered rates</span>
+    <img src="images/tether_ratesClose.png" id="closepopup" class="fright pointer closeP" alt="close">
+</div>
+<div class="tv1 bold">
+    Source: <span class="src normal" id="TetherSource"></span>
+    Location:<span class="loc normal" id="locationID"></span>
+</div>
+<div class="tv1 bold fleft">
+    Length:<span class="length normal" id="TetherLength"></span>
+    <span class="dt normal" id="TetherDate"></span>
+    <span class="dt normal" id="ClassicCarClass"></span>
+
+</div>
+<div id="popup-btn" class="fright">
+    <input type="button" id="reset" class="search-button" value="Preload">
+    <input type="button" id="copytoall" class="search-button" value="Copy to All">
+    <input type="button" id="closeTetherPopup" class="search-button orng  pointer closeP" value="Submit">
+</div>
+<div class="tethered_tabs clear">
+    <a href="" id="tab1" class="red">Tethered Rates</a>
+    <span class="seprator">|</span>
+    <a href="" id="tab2">Tethered Values</a>
+</div>
+<div class="tethered_rate_tables clear" id="divTetherd">
+    <table class="tablep1 tableTetherValueDaily" id="tetherValues">
+        <tbody></tbody>
+        <thead>
+            <tr>
+                <td rowspan="2">
+                    CAR CLASS
+                </td>
+                <td colspan="2" brandid="1" brandcode="" id="leftTetherTitle"></td>
+                <td colspan="2" brandid="1" brandcode="" id="rightTetherTitle"></td>
+            </tr>
+            <tr>
+
+                <td>
+                    Base
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    Base
+                </td>
+                <td>
+                    Total
+                </td>
+
+            </tr>
+        </thead>
+
+        <tbody id="tableTetherValue">
+            <!-- ko foreach:TetherRateData -->
+            <tr>
+                <td><span class="carClassSelector" data-bind="html: carClass,attr:{id:'carclassID_'+ID,CarClassID:ID,IsTeatherValueinPercentage:IsTeatherValueinPercentage}"></span><input type="hidden" data-bind="value:carClass ,attr:{id:'hiddencarclassID_'+ID}" /></td>
+                <td>
+                    <!--ko if: EZBaseRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EZBaseRate,attr:{id:'EZBaseRateID_'+ID}"></span><input type="hidden" data-bind="value:EZBaseRate ,attr:{id:'hiddenEZBaseRateID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EZTotalRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EZTotalRate,attr:{id:'EZTotalRateID_'+ID}"></span><input type="hidden" data-bind="value:EZTotalRate ,attr:{id:'hiddenEZTotalRateID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EDBaseRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EDBaseRate,attr:{id:'EDBaseRateID_'+ID,defaulltValue:EDBaseRate,GlobalLimit:GlobalLimit}"></span><input type="hidden" data-bind="value:EZBaseRate ,attr:{id:'hiddenEDBaseRateID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EDTotalRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EDTotalRate,attr:{id:'EDTotalRateID_'+ID}"></span><input type="hidden" data-bind="value:EZTotalRate ,attr:{id:'hiddenEDTotalRateID_'+ID}" />
+                </td>
+            </tr>
+            <!--/ko-->
+        </tbody>
+    </table>
+    <table class="tablep1 tableTetherValueClassic" id="tetherValues">
+        <tbody></tbody>
+        <thead>
+            <tr>
+                <td rowspan="2">
+                    Date
+                </td>
+                <td colspan="2" brandid="1" brandcode=""  id="leftClassicTetherTitle"></td>
+                <td colspan="2" brandid="1" brandcode="" id="rightClassicTetherTitle"></td>
+            </tr>
+            <tr>
+
+                <td>
+                    Base
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    Base
+                </td>
+                <td>
+                    Total
+                </td>
+
+            </tr>
+        </thead>
+
+        <tbody id="tableTetherClassicValue">
+            <!-- ko foreach:TetherRateDataClassic -->
+            <tr data-bind="attr:{formatDate:DateFormat}">
+                <td>
+                    <span class="carClassSelector" data-bind="html: ClassicDates ,attr:{id:'carclassID_'+ID,CarClassID:ID,IsTeatherValueinPercentage:IsTeatherValueinPercentage}"></span>
+                    <input type="hidden" data-bind="value:carClass ,attr:{id:'hiddencarclassID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EZBaseRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EZBaseRate,attr:{id:'EZBaseRateID_'+ID}"></span><input type="hidden" data-bind="value:EZBaseRate ,attr:{id:'hiddenEZBaseRateID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EZTotalRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EZTotalRate,attr:{id:'EZTotalRateID_'+ID}"></span><input type="hidden" data-bind="value:EZTotalRate ,attr:{id:'hiddenEZTotalRateID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EDBaseRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EDBaseRate,attr:{id:'EDBaseRateID_'+ID,defaulltValue:EDBaseRate,GlobalLimit:GlobalLimit,index:$index}"></span><input type="hidden" data-bind="value:EZBaseRate ,attr:{id:'hiddenEDBaseRateID_'+ID}" />
+                </td>
+                <td>
+                    <!--ko if: EDTotalRate!="" -->
+                    $
+                    <!--/ko-->
+                    <span data-bind="html: EDTotalRate,attr:{id:'EDTotalRateID_'+ID}"></span><input type="hidden" data-bind="value:EZTotalRate ,attr:{id:'hiddenEDTotalRateID_'+ID}" />
+                </td>
+            </tr>
+            <!--/ko-->
+        </tbody>
+    </table>
+    <table class="tablep2" id="TehterTableValue">
+        <thead class="uppercase">
+            <tr>
+                <td>Car Classes</td>
+                <td>Tethered Values</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>All Car Classes</td>
+                <td>
+                    <input type="text" id="PercentageID_All" value="" /> % or
+                    <input type="text" id="DollerID_All" value="" /> $
+                    <input type="hidden" id="hiddenCurrentTxtName" value="" />
+                </td>
+            </tr>
+            <!-- ko foreach: TetherRateEditableData -->
+            <tr>
+                <td><span data-bind="html: carClass"></span></td>
+                <td>
+                    <input type="text" name="percentageValue" class="percentageValue" data-bind="attr: { id: 'PercentageID_' + ID ,carClassID:ID,defaultPercentValue:PercentageValue},value:PercentageValue" /> % or
+                    <input type="text" name="dollerValue" class="dollerValue" data-bind="attr:{id:'DollerID_'+ID,carClassID:ID,defaultDollerValue:DollarValue},value:DollarValue " /> $
+
+                </td>
+            </tr>
+            <!-- /ko -->
+
+        </tbody>
+    </table>
+
+    <div class="clear">
+    </div>
+    <div class="clear"></div>
+    <input type="hidden" id="hdnTetherBrandLocationId" />
+    <input type="hidden" id="hdnTetherBrandExtraDayRate" value="0" />
+</div>
+<script type="text/javascript">
+    var TSDAjaxURL = {
+        GetExtraDayRate: '@Url.Action("GetExtraDayRate", "TSDAudit")',
+        TSDUpdateRate: '@Url.Action("TSDUpdate", "TSDAudit")',
+        GetLocationBrandDet: '@Url.Action("GetLocationBrand", "TSDAudit")',
+    }
+</script>
+
+
+

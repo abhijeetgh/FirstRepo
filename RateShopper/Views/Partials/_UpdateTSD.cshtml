@@ -1,0 +1,159 @@
+﻿<div class="popup-top">
+    <span class="uppercase bold"> Update Rates </span>
+    <span id="error-update" class="error-msg" style=" display: none; margin-bottom: 10px; text-align: center;font-size:13px">Please review the fields highlighted in Red.</span>
+    <span id="updateAllNotification" style="padding-left: 100px; color: green; font-weight: bold; display: none;">Sending Rates to TSD..</span>
+    <img src="images/tether_ratesClose.png" id="closeUpdateAll" class="fright pointer closeP" onclick="CloseTSDUpdate()" alt="close">
+    <span id="globalLimitError" class="error-msg" style=" display: none; margin-bottom: 10px; text-align: center;font-size:13px"></span>
+</div>
+
+<div>
+    <div class="loader_container_updateAll" style="display: none;" id="updateAllSpinner">
+        <div class="loader-updateAll"></div>
+        <div class="updateAllloader">
+            <img src="images/ajax_loader_blue_small.gif">
+        </div>
+    </div>
+
+    <div class="tv1 bold table-ul-right">
+        <span>Start:</span><input type="text" readonly placeholder="mm/dd/yyyy" name="StartDate" class="date-picker dp" id="tsdStartDate" autocomplete="off">
+        <span>End:</span> <input type="text" readonly placeholder="mm/dd/yyyy" name="EndDate" class="date-picker dp" id="tsdEndDate" autocomplete="off">
+        <span>Length:</span>
+        <ul id="UpdateAllTSDLength" class="relative pointer">
+            <li selected="selected"></li>
+            <ul class="hidden drop-down1" style="display:none"></ul>
+        </ul>
+    </div>
+
+    <div class="days_section clear" style="padding-top:10px;">
+        <div class="row1 fleft lgdc">
+            <input type="checkbox" class="UpdateAll_weeklyAll" id="weekUpdateAll" />All
+            <ul class="UpdateAll_weekly_large Days_ul mhide mobtodeshide" style="cursor: pointer;" id="leftGridDays">
+                <li value="1" day="Monday">Mon</li>
+                <li value="2" day="Tuesday">Tue</li>
+                <li value="3" day="Wednesday">Wed</li>
+                <li value="4" day="Thursday">Thu</li>
+                <li value="5" day="Friday">Fri</li>
+                <li value="6" day="Saturday">Sat</li>
+                <li value="0" day="Sunday">Sun</li>
+            </ul>
+            <select class="mshow mlgd mobtodesshow" multiple="multiple" size="1" style="width:60px" id="leftGridDays_m">
+
+                <option value="1" day="Monday">Mon</option>
+                <option value="2" day="Tuesday">Tue</option>
+                <option value="3" day="Wednesday">Wed</option>
+                <option value="4" day="Thursday">Thu</option>
+                <option value="5" day="Friday">Fri</option>
+                <option value="6" day="Saturday">Sat</option>
+                <option value="0" day="Sunday">Sun</option>
+
+            </select>
+        </div>
+
+        <div class="selectdays_row2 baserate_section_two fleft rgdc" style="">
+            <ul class="UpdateAll_weekly_large Days_ul mhide mobtodeshide" style="cursor: pointer;" id="rightGridDays">
+                <li value="1" day="Monday">Mon</li>
+                <li value="2" day="Tuesday">Tue</li>
+                <li value="3" day="Wednesday">Wed</li>
+                <li value="4" day="Thursday">Thu</li>
+                <li value="5" day="Friday">Fri</li>
+                <li value="6" day="Saturday">Sat</li>
+                <li value="0" day="Sunday">Sun</li>
+            </ul>
+
+            <select class="mshow mlgd mobtodesshow" multiple="multiple" size="1" style="width:60px" id="rightGridDays_m">
+
+                <option value="1" day="Monday">Mon</option>
+                <option value="2" day="Tuesday">Tue</option>
+                <option value="3" day="Wednesday">Wed</option>
+                <option value="4" day="Thursday">Thu</option>
+                <option value="5" day="Friday">Fri</option>
+                <option value="6" day="Saturday">Sat</option>
+                <option value="0" day="Sunday">Sun</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="tethered_rate_tables clear" id="divUpdateAll" style="padding-top:5px;">
+
+        <table class="tablep1" id="TSDUpdateAll">
+            <thead class="uppercase">
+                <tr>
+                    <td>Car Classes</td>
+                    <td>BASE EDIT</td>
+                    <td>TOTAL EDIT</td>
+                    <td class="baserate_section_two">BASE EDIT</td>
+                    <td class="baserate_section_two">TOTAL EDIT</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: allCarClasses -->
+                <tr>
+                    <td><span data-bind="html: Code"></span></td>
+                    <td><input type="text" name="baseValue" class="BaseEdit" data-bind="attr: { id: 'Base_' + ID ,carClassID:ID,texttype:'left'}" /></td>
+                    <td><input type="text" name="totalValue" class="TotalEdit" data-bind="attr:{id:'Total_'+ID,carClassID:ID,texttype:'left'}" /></td>
+                    <td class="baserate_section_two"><input type="text" name="baseValuert" class="BaseEditrt" data-bind="attr: { id: 'Basert_' + ID ,carClassID:ID,texttype:'right'}" /></td>
+                    <td class="baserate_section_two"><input type="text" name="totalValuert" class="TotalEditrt" data-bind="attr:{id:'Totalrt_'+ID,carClassID:ID,texttype:'right'}" /></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <div class="wide-body-side-container margint5 clear fleft">
+            <div class="side-section-body-new">
+                <div class="weblink_new" style="border:none">
+                    <div class="fleft LORSection">
+                        <span class="bold rateCode">LOR</span>
+                        <span class="bold" id="UpdateTSDRateCode" style="display: none;">
+                            STD
+                        </span>
+                        <ul name="tsdSystemSelect_Weblink" size="14" id="updateAllLOR" class="ui-selectable" style="display: inline-block;">
+                            <li value="1" class="ui-selectee selected prevSelected" style="cursor: pointer">D1</li>
+                            <li value="2" class="ui-selectee" style="cursor: pointer">D2</li>
+                            <li value="3" class="ui-selectee" style="cursor: pointer">D3</li>
+                            <li value="4" class="ui-selectee" style="cursor: pointer">D4</li>
+                            <li value="5" class="ui-selectee" style="cursor: pointer; display: none;">W5</li>
+                            <li value="6" class="ui-selectee" style="cursor: pointer; display: none;">W6</li>
+                            <li value="7" class="ui-selectee" style="cursor: pointer; display: none;">W7</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mshow">
+                    <div class="fleft">
+                        <span class="bold rateCode ">LOR</span>
+                        <span class="bold" id="UpdateTSDRateCode" style="display: none;">
+                            STD
+                        </span>
+                        <div class="portrait">
+                            <select name="source" class="two-cols-select mwidth lor-m" multiple="multiple" size="1" id="UpdateAllLOR_m"></select>
+                        </div>
+                        <div class="landscape">
+                            <select name="source" class="two-cols-select mwidth middle lor-m" multiple="multiple" size="1" id="UpdateAllLOR_ml"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="tleft LORSection">
+                    <span class="bold">
+                        Extra Day Rate:
+                    </span>
+                    <span id="updateAllLengthText" class="bold"> Daily Rate</span> <span class="red" id="updateCalc">*</span>
+                    <input type="text" class="EDR " id="updateAllExtraDayRate" style="width:32px" oldvalue="">
+                </div>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <div class="fright padding15">
+            <input type="button" id="preloadTSD" onclick="PreloadTSDData()" class="search-button" value="Preload">
+            <input type="button" id="tsdApply" class="search-button orng" onclick="TSDApply()" value="Update All">
+        </div>
+        <div class="clear">
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    var TSDUpdateAllURL = {
+        UpdateAll: '@Url.Action("UpdateAllTSD", "TSDAudit")',
+        InsertUpdateTSDUpdateAllURL: '@Url.Action("InsertUpdateTSDUpdateAll", "Search")'
+    }
+</script>

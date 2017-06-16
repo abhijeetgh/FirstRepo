@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "RateCode";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/RateCodeManagement.css")
+@Scripts.Render("~/Scripts/RateCodeManagement.js")
+<div class="loader_container_main">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="rateCode_management" class="pageminht">
+    <div class="gt-top">
+        <span class="uppercase bold">Rate Code Management</span>
+    </div>
+    <div class="padding15">
+        <span class="relative">
+            <input type="text" class="lmsearch" placeholder="Search Rate Code" id="searchRateCode" />
+            <img src="~/images/lens.png" class="lmlens" alt="lens" />
+        </span>
+        <input type="submit" class="search-button" value="Create Rate Code" id="btnAddRateCode" />
+        <span id="lblMessage" style="display:none; font-weight:bold;width:300px;margin-left:185px;">Please review all fields hi-lighted in red</span>
+    </div>
+
+    <div class="clear"></div>
+    <div class="lmcontent">
+        <div id="divListing" class="fleft" style="overflow:auto; max-height:780px;">
+            <table id="tblRateCodes">
+                <thead class="uppercase">
+                    <tr id="no_rows" style="display:none;">
+                        <td style="width: 152px;">Rate Code</td>
+                        <td style="width: 120px;">Name</td>
+                        <td>Delete</td>
+                    </tr>
+                    <tr id="ratecodeheaders">
+                        <td onclick="ApplySorting(this,'Code')" class="Asc" style="cursor: pointer;width:152px;">Rate Code<div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div></td>
+                        <td onclick="ApplySorting(this,'Name')" class="Asc" style="cursor: pointer;width:120px;">Name<div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div></td>
+                        <td>Delete</td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:rateCodes()">
+                    <tr data-bind="click: $root.EditRateCode, attr:{ value:ID, id:'rateCodeId_'+ID }" title="Edit" class="pointer">
+                        <td data-bind="html:Code" class="code"></td>
+                        <td data-bind="html:Name" style="width:120px;"></td>
+                        <td>
+                            <img src="~/images/ar_tab2.png" alt="" title="Delete" style="cursor:pointer;margin-left:5px;" data-bind="click: $root.DeleteRateCode" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+        <div class="fleft" id="rcontainer" style="width:54%">
+            <h3 class="uppercase" id="HaddingTitle">Create Rate Code</h3>
+            <form method="post" name="lmform" id="lmform">
+                <div class="bold textfields">                    
+                        <div id="ratecodecreate">
+                            <span>
+                                Code<label style="color:red">*</label><br />
+                                <input type="text" id="txtCode" maxlength="6" placeholder="e.g. 'D1'" />
+                            </span>
+                            <span>
+                                Description<br />
+                                <input type="text" id="txtDescription" maxlength="20" />
+                            </span>
+                            <span>
+                                Name<label style="color:red">*</label><br />
+                                <input type="text" id="txtName" maxlength="50" />
+                            </span>
+                            <span id="span_isActive">
+                                Active
+                                <input type="checkbox" id="chkbkIsActive" checked="checked" style="margin-left:10px" />
+                            </span>
+                            <div>
+                                Supported Brand<label style="color:red">*</label>
+                                <div id="divSupportedBrands" class="ut">
+                                    @if (ViewBag.Companies != null)
+                                    {
+                                        foreach (var companies in ViewBag.Companies)
+                                        {
+                                            <input type="checkbox" id="chkbxSupportedBrand_@companies.ID" value="@companies.ID" />
+                                            <label for="chkbxSupportedBrand_@companies.ID" style="margin-right:10px;">@companies.Code</label>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div>
+                    <h3 class="bold record_heading uppercase">Apply Date Range to Rate Code</h3>
+                    <div class="fleft bold textfields" style="width:55%;">
+                        <div class="rate-fetch-parameter-inner-box">
+                            <div class="start-date standardShopDiv">
+                                <span class="relative">
+                                    Start Date
+                                    <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="RatecodeStartDate" class="date-picker dp" id="RatecodeStartDate" autocomplete="off" />
+                                </span>
+                                <span class="relative">
+                                    End Date
+                                    <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="RatecodeEndDate" class="date-picker dp" id="RatecodeEndDate" autocomplete="off" />
+                                </span>
+
+                                <input type="button" class="search-button" id="btnApply" value="Apply" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fleft" style="width:45%;">
+                        <table id="tblRateCodeDateDetails">
+                            <thead class="uppercase">
+                                <tr id="tr_rows">
+                                    <td style="width: 100px;">Start Date</td>
+                                    <td style="width: 100px;">End Date</td>
+                                    <td>Actions</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach:rateCodeDateRange-->
+                                <tr title="EditRateCodeDateRange" data-bind="click:$root.EditRateCodeDateRange ,attr:{id:'edit_'+ID}" class="pointer">
+                                    <td data-bind="html:StartDate ,attr:{id:'tdstartdate_'+ID}" style="width:100px" id="tdStartDate"></td>
+                                    <td data-bind="html:EndDate,attr:{id:'tdEnddate_'+ID} " style="width:100px;" id="tdEndDate"></td>
+                                    <td>
+                                        <img src="~/images/ar_tab2.png" alt="" title="Delete" style="cursor:pointer;margin-left:5px;" data-bind="click: $root.DeleteRateCodeDateRange " />
+                                    </td>
+                                </tr>    
+                                <!--/ko-->    
+                                <tr data-bind="visible:rateCodeDateRange().length==0">
+                                    <td style="text-align:center;font-weight:bold;text-transform:none;" colspan="3">Date Range Not Configured</td>
+                                </tr>                        
+                            </tbody>
+                        </table>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <input type="button" class="search-button disable-button" disabled="disabled" value="Cancel" id="btnCancel" />
+                <input type="button" class="search-button orng btnDisabled" disabled="disabled" value="Save" id="btnSaveRateCode" />
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear">
+        @{Html.RenderPartial("ChildFooter");}
+        <div id="footer-links">
+            @{Html.RenderPartial("MasterFooter");}
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/css/jquery-ui-timepicker-addon.css")
+
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetRateCodes: '@Url.Action("GetRateCodes", "RateCode")',
+        GetRateCode: '@Url.Action("GetRateCode", "RateCode")',
+        DeleteRateCode: '@Url.Action("DeleteRateCode", "RateCode")',
+        SaveRateCode: '@Url.Action("SaveRateCode", "RateCode")'
+    }
+</script>

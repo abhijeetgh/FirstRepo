@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+<div class="auto-console-div"> REZ CENTRAL UPDATE 
+    <span id="tsdNotification" style="padding-left: 100px; color: green; font-weight: bold; display: none;">Sending Rates to TSD..</span>
+    </div>
+<div class="container">
+    <div class="pageminht" style="min-height: 795px;">
+        <div style="float:left; width:27%; margin-left:10px; ">
+            <div class="daystorun">
+                <div class="daystorun-inner-box">
+                    <div class="start-date relative">
+                        <span>Start Date</span>
+                        <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="runStartDate" class="date-picker dp" id="runStartDate" autocomplete="off">
+
+                    </div>
+                    <div class="end-date relative">
+                        <span>End Date</span>
+                        <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="runEndDate" class="date-picker dp" id="runEndDate" autocomplete="off">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div style=" float: left; margin-right: 13px; margin-top: 15px; width: 190px">
+                <span style="font-weight: bold; color: #3b3b3b; "><input type="checkbox" id="openEndDate"> Open Ended Rates </span>
+            </div>
+            <div>
+                <div class="clear"></div>
+                <div class="sourc-loc-inner-box">
+                    <div class="location">
+                        <div class="location-inner-box">
+                            <span>Brand Location</span>
+                            <div class="locationbox" id="locationdiv">
+                                <ul name="locations" class="two-cols-select relative" size="5" id="locations">
+                                    <li>
+                                        <span class="innersearch">
+                                            <input class="left" type="text" id="searchLocation">
+                                        </span>
+                                    </li>
+                                    <ul class="list-complt">
+                                        <select name="locations" class="" size="5" id="locations" multiple="multiple" onchange="GetLocationSpecificCarClasses(this)">
+                                            <!-- ko foreach: Location -->
+                                            <option data-bind="attr:{brandid:BrandId,value:BrandLocationId,locationCode:LocationCode  },html:Alias"></option>
+                                            <!-- /ko -->
+                                            @*@if (ViewBag.LocationBrands != null)
+                                                {
+                                                    foreach (var locationBrand in ViewBag.LocationBrands)
+                                                    {
+                                                        <option value="@locationBrand.BrandLocationId" brandid="@locationBrand.BrandId" id="@locationBrand.BrandLocationId">@locationBrand.Alias</option>
+                                                    }
+
+                                                }*@
+                                        </select>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sourc-inner-box" style="float:left">
+                    <div class="source">
+                        <div class="source-inner-box">
+                            <span>Rate Code</span>
+                            <div class="sourcebox" id="rentallengthdiv">
+                                <ul name="lengths" class="mright0 two-cols-select relative" id="lengths">
+                                    <select name="lengths" class="two-cols-select" multiple="multiple" size="7" id="lengths">
+                                        @if (ViewBag.RateCodes != null)
+                                        {
+                                            foreach (var rateCode in ViewBag.RateCodes)
+                                            {
+                                                <option value="@rateCode.Code" id="@rateCode.ID">@rateCode.Code</option>
+                                            }
+                                        }
+                                    </select>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="sourc-loc-inner-box">
+                <div class="location">
+                    <div class="location-inner-box">
+                        <span>System</span>
+                        <div class="locationbox" id="Systemdiv">
+                            <ul name="System" class="two-cols-select relative" id="System">
+                                <select name="System" class="two-cols-select" size="6" id="System">
+                                    <option value="WEBLINK" selected="selected">WebLink</option>
+                                </select>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div style="float:left;margin-top:20px;">
+                <input type="button" id="updaterezcentral" class="search-button orng  pointer" value="Update">
+                <input type="button" id="reset" class="search-button" value="Reset">
+                <input type="button" id="preload" class="search-button" value="Preload">
+            </div>
+        </div>
+
+        <div id="DivRezRateSection" class="overflowA" style=" float:right; width:72%;max-height:780px">
+            <div id="DivFirstTable" style="width: 49%; float: left;">
+                <div class="row1 fleft lgdc" id="RezWeekdaysSelection">
+                    <input type="checkbox" class="UpdateAll_weeklyAll" id="UpdateRezCentralAll" />All
+                    <ul class="UpdateAll_weekly_large Days_ul mhide mobtodeshide" style="cursor: pointer;" id="leftGridDays">
+                        @foreach (var wdays in ViewBag.WeekDays)
+                        {
+                            <li value="@wdays.ID" day="@wdays.Day.Substring(0, 3)">@wdays.Day.Substring(0, 3)</li>
+                        }
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <table class="tablep1" id="TSDUpdateRezLeftAll">
+                    <thead class="uppercase">
+                        <tr>
+                            <td>CAR CLASS</td>
+                            <td>DAILY RATE</td>
+                            <td>WEEKLY RATE</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var carclass in ViewBag.CarClasses)
+                        {
+                            <tr carcode="@carclass.Code" carclassid="@carclass.ID">
+                                <td><span carclassid="@carclass.ID">@carclass.Code</span></td>
+                                <td><input type="text" id="DailyLeft_@carclass.Code" name="DailyValue" class="DailyRate" /></td>
+                                <td><input type="text" id="WeeklyLeft_@carclass.Code" name="WeeklyValue" class="WeeklyRate" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="loader_container_location">
+                <div class="loader-bga"></div>
+                <div class="loader mhide thide">
+                    <img src="images/ajax_loader_blue_large.gif" style="height: 150px;" />
+                </div>
+            </div>
+            <div id="DivSecondTable" style="width:49%;float:right;">
+                <div class="row1 fleft lgdc" id="RezWeekdaysSelection">
+                    <ul class="UpdateAll_weekly_large Days_ul mhide mobtodeshide" style="cursor: pointer;" id="rightGridDays">
+                        @foreach (var wdays in ViewBag.WeekDays)
+                        {
+                            <li value="@wdays.ID" day="@wdays.Day.Substring(0, 3)">@wdays.Day.Substring(0, 3)</li>
+                        }
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <table class="tablep1" id="TSDUpdateRezRightAll">
+                    <thead class="uppercase">
+                        <tr>
+                            <td>CAR CLASS</td>
+                            <td>DAILY RATE</td>
+                            <td>WEEKLY RATE</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var carclass in ViewBag.CarClasses)
+                        {
+                            <tr carcode="@carclass.Code" carclassid="@carclass.ID">
+                                <td><span carclassid="@carclass.ID">@carclass.Code</span></td>
+                                <td><input type="text" id="DailyRight_@carclass.Code" name="DailyValue" class="DailyRate" /></td>
+                                <td><input type="text" id="WeeklyRight_@carclass.Code" name="WeeklyValue" class="WeeklyRate" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="clear">
+                <label style="color:red;font-weight:bold;" id="rateupdatenotification"></label>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer-links">
+    @{Html.RenderPartial("MasterFooter");}
+</div>
+
+
+@*@Styles.Render("~/css/jquery-ui-timepicker-addon.css")*@
+@Styles.Render("~/css/automation.css")
+@Styles.Render("~/css/RezCentral.css")
+@*@Scripts.Render("~/bundles/RezCentralUpdateBundleJS")*@
+@Scripts.Render("~/Scripts/RezCentralUpdate.js")
+@*@Scripts.Render("~/Scripts/jquery-ui-timepicker-addon.js")*@
+
+
+<script>
+    var RezCentralURLSettings = {
+        PushRates: '@Url.Action("PushRates", "RezCentral")',
+        GetLocations: '@Url.Action("GetLocations", "RezCentral")',
+        GetLocationCarClasses: '@Url.Action("GetLocationCarClasses", "RezCentral")',
+        PullRates: '@Url.Action("PullRates", "RezCentral")'
+    }
+</script>
+

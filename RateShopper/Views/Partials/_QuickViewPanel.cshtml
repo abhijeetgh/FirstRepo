@@ -1,0 +1,305 @@
+﻿@{
+    ViewBag.Title = "_QuickViewPanel";
+}
+<div class="section-panel">
+    <a class="float-right collapse-anchor" id="toggleList">
+        <img class="collapse" src="images/Search-collapse.png" alt="collapse" style="cursor: pointer;" id="collapseList">
+    </a>
+    <h2 class="collapse-panel-header"><span class="uppercase">QUICK VIEW</span></h2>
+</div>
+<div class="quick-view-panel" id="quickViewList">
+    <input type="hidden" value="0" id="selectedCompetitors" />
+    <input type="hidden" value="0" id="selectedTrackingCarClasses" />
+    <div class="control-panel complete-width">
+        <div class=" float-left w50 wm100">
+            <ul class="table-ul-right">
+                <li>
+                    Location
+                    <ul id="qvlocation" class="relative pointer">
+                        <li value="0">Any Location</li>
+                        <ul class="hidden drop-down1">
+                            <li value="0" class="selected">Any Location</li>
+                            @if (ViewBag.LocationBrands != null)
+                            {
+                                foreach (var locationBrand in ViewBag.LocationBrands)
+                                {
+                                    <li value="@locationBrand.BrandLocationId" id="@locationBrand.BrandLocationId">@locationBrand.Alias</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+                </li>
+                <li>
+                    User
+                    <ul id="qvuser" class="relative pointer">
+                        <li value="0">Any User</li>
+                        <ul class="hidden drop-down1">
+                            <li value="0">Any User</li>
+                            @if (ViewBag.Users != null)
+                            {
+                                foreach (var user in ViewBag.Users)
+                                {
+                                    <li value="@user.Id" id="@user.Id">@(user.FirstName + " " + user.LastName)</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+                </li>
+                <li>
+                    <button id="btnRefreshQuickViewGrid" class="refresh-quickview-grid">Refresh QuickViews</button>
+                </li>
+                <li>
+                    <span id="lblQuickViewGridMessage" style="padding-left:10px; color: green; display:none; font-weight:bold;"></span>
+
+                </li>
+            </ul>
+        </div>
+        <div class="quick-view-actions float-right bottom10">
+            <ul class="action-list">
+                <li>
+                    <a class="float-left" href="javascript:void(0);">
+                        <span class="align-middle"> Run  </span>
+                        <span class="controls run"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="float-left" href="javascript:void(0);">
+                        <span class="align-middle"> Delete </span>
+                        <span class="controls del"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="float-left" href="javascript:void(0);">
+                        <span class="align-middle"> Edit </span>
+                        <span class="controls edit"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="float-left" href="javascript:void(0);">
+                        <span class="align-middle">  Show Report </span>
+                        <span class="controls SRP"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="float-left" href="javascript:void(0);">
+                        <span class="align-middle">Show Results </span>
+                        <span class="controls SRE"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="float-left" href="javascript:void(0);">
+                        <span class="align-middle">Results Reviewed</span>
+                        <span class="controls review"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="table-container">
+        <div class="loader_container_quickviewgrid" style="position:relative;display:none;">
+            <div class="loader-bg"></div>
+            <div class="loader mhide thide" style="top:250px;">
+                <img src="images/ajax_loader_blue_large.gif" height="150" />
+            </div>
+        </div>
+        <table class="table table-bordered complete-width  quick-view-table" cellspacing="0">
+            <thead>
+                <tr class="quick-view-table-header">
+                    <th class="actions" style="min-width:150px;">ACTIONS</th>
+                    <th onclick="ApplySorting(this,'Status')" class="Asc pointer" data-bind="visible:quickViewData().length>0">
+                        <span>STATUS</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">
+                        <span>STATUS</span>
+                    </th>
+                    <th class="date-created pointer Asc" onclick="ApplySorting(this, 'CreatedDateTime')" data-bind="visible:quickViewData().length>0">
+                        <span>DATE CREATED</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">
+                        <span>DATE CREATED</span>
+                    </th>
+                    <th onclick="ApplySorting(this, 'Sources')" class="Asc pointer" data-bind="visible:quickViewData().length>0">
+                        <span>SOURCE</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">
+                        <span>SOURCE</span>
+                    </th>
+                    <th onclick="ApplySorting(this, 'LocationBrands')" class="Asc pointer" data-bind="visible:quickViewData().length>0">
+                        <span>LOCATION</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">
+                        <span>LOCATION</span>
+                    </th>
+                    <th>
+                        SHOP DATES
+                    </th>
+
+                    <th>LENGTHS</th>
+                    @*<th>CAR CLASSES</th>*@
+                    <th>TRACKING CAR CLASSES</th>
+                    <th class="companies-monitored">COMPANIES MONITORED</th>
+                    <th onclick="ApplySorting(this, 'LastRunTime')" class="Asc pointer" data-bind="visible:quickViewData().length>0">
+                        <span>LAST RUN TIMES</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">LAST RUN TIMES</th>
+                    <th onclick="ApplySorting(this, 'NextRunTime')" class="Asc pointer" data-bind="visible:quickViewData().length>0">
+                        <span>NEXT RUN TIMES</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">NEXT RUN TIMES</th>
+                    <th onclick="ApplySorting(this, 'User')" class="Asc pointer" data-bind="visible:quickViewData().length>0">
+                        <span>SUBMITTED BY</span><div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div>
+                    </th>
+                    <th data-bind="visible:quickViewData().length==0">SUBMITTED BY</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:quickViewData()">
+                <tr data-bind="attr:{id:'qv_row_'+ID,searchSummaryId:SearchSummaryId,childSearchSummaryId:ChildSummaryId}">
+                    <td class="actions">
+
+                        <ul class="action-list">
+                            <li>
+                                <a class="float-left enable" href="javascript:void(0);" data-bind="click: $root.RerunQuickView, visible:Status!='IN PROGRESS'">
+                                    <span class="controls run" title="Run"></span>
+                                </a>
+                                <a class="float-left disable" href="javascript:void(0);" style="cursor: default; opacity: 0.5;" data-bind="visible:Status=='IN PROGRESS'">
+                                    <span class="controls run" style="cursor: default;"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="float-left" href="javascript:void(0);" data-bind="click: $root.DeleteQuickView">
+                                    <span class="controls del" title="Delete"></span>
+                                </a>
+                                @*<a class="float-left disable" href="javascript:void(0);" style="cursor: default; opacity: 0.5;" data-bind="visible:Status=='IN PROGRESS'">
+                                    <span class="controls del" style="cursor: default;"></span>
+                                </a>*@
+                            </li>
+                            <li>
+                                <a class="float-left enable" href="javascript:void(0);" data-bind="click: $root.EditQuickView, visible:Status!='IN PROGRESS'">
+                                    <span class="controls edit" title="Edit"></span>
+                                </a>
+                                <a class="float-left disable" href="javascript:void(0);" style="cursor: default; opacity: 0.5;" data-bind="visible:Status=='IN PROGRESS'">
+                                    <span class="controls edit" style="cursor: default;"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="float-left enable" href="javascript:void(0);" data-bind="click: $root.ShowQuickDailyView, visible:(Status!='IN PROGRESS' && Status!='FAILED' && ChildSummaryId>0), attr:{summaryid:SearchSummaryId}">
+                                    <span class="controls SRE" title="Show Results"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="float-left enable" href="javascript:void(0);" data-bind="click: $root.ShowQuickViewReport, visible:(Status!='IN PROGRESS' && Status!='FAILED' && ChildSummaryId>0 && IsReportReviewed!=true )">
+                                    <span class="controls SRP" title="Show Report"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="float-left enable" href="javascript:void(0);" data-bind="click: $root.ShowQuickViewReport, visible:(Status!='IN PROGRESS' && Status!='FAILED' && IsReportReviewed==true)">
+                                    <span class="controls review" title="Reviewed"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                    <td data-bind="html:Status, attr:{id:'qv_status_'+ID}"></td>
+                    <td class="date-created" data-bind="html:CreatedDateTime"></td>
+                    <td data-bind="html:Sources"></td>
+                    <td data-bind="html:LocationBrands"></td>
+                    <td data-bind="html:Dates"></td>
+                    <td data-bind="html:RentalLengths" class="carClassesMonitored"></td>
+                    <td><span data-bind="html:CarClasses, attr:{id:'qv_carclasses_'+ID}"></span></td>
+                    <td class="companies-monitored"><span data-bind="html:Competitors, attr:{id:'qv_competitor_'+ID}"></span></td>
+                    <td data-bind="html:LastRunTime, attr:{id:'qv_lastrun_'+ID}"></td>
+                    <td data-bind="html:NextRunTime, attr:{id:'qv_nextrun_'+ID}"></td>
+                    <td data-bind="html:User"></td>
+                </tr>
+            </tbody>
+            <tbody data-bind="visible:(quickViewData().length==0)">
+                <tr class="bold red"><td colspan="12" style="font-size:1.17em">No QuickView jobs found</td> </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="section-panel">
+    <div class="float-right collapse-anchor" id="toggleResult">
+        <img class="collapse " src="images/expand.png" alt="collapse" style="cursor: pointer;" id="collapseReport">
+    </div>
+    <h2 class="collapse-panel-header"><span class="uppercase">SHOW REPORT</span></h2>
+</div>
+<div class="" id="quickViewReport">
+
+
+    <div class="table-container">
+        <div class="padding15" style="white-space:nowrap">
+
+            <span>
+                <span class="lcolor cn"></span>
+                Rates unchanged
+            </span>
+            <span>
+                <span class="lcolor cn quickCellReviewed"></span>
+                Reviewed unchanged rates
+            </span>
+            <span>
+                <span class="lcolor cn1"></span>
+                Rates increased
+            </span>
+            <span>
+                <span class="lcolor cn1 quickCellReviewed"></span>
+                Reviewed increased rates
+            </span>
+            <span class="wm35">
+                <span class="lcolor cn2"></span>
+                Rates decreased
+            </span>
+            <span>
+                <span class="lcolor cn2 quickCellReviewed"></span>
+                Reviewed decreased rates
+            </span>
+
+        </div>
+        <table class="quick-view-reports-table complete-width" cellspacing="0" id="quickViewReportGrid">
+            <thead>
+                <tr>
+                    <th></th>
+                    <!-- ko foreach:quickViewRentalLengths-->
+                    <th>
+                        <span data-bind="html:RentalLength,attr:{RentalId:RentalLengthId}"></span>
+                    </th>
+                    <!-- /ko -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach:quickViewReportData-->
+                <tr>
+                    <td class="prevent-grey dates" data-bind="html:Day"></td>
+                    <!-- ko foreach:quickViewResult-->
+                    <td data-bind="attr:{class:ColorCode},click:ViewDailyRecord" style="position:relative;">
+                        <span data-bind="attr:{class:PositionCss, Id:'spn_'+ ResultId,IsMovedUp:IsMovedUp, IsChanged:IsChanged,SearchSummaryId:SearchSummaryId,IsReviewed:IsReviewed,formatDate:ResultDate,RentalLengthId:RentalId}">
+                        </span>
+                    </td>
+                    <!-- /ko -->
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <div class="red bold" style="display:none;text-align:center" id="noReportRecord">
+            No Records Found
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var quickURLSettings = {
+        GetQuickViewReport: '@Url.Action("FetchQuickViewResult", "QuickView")',
+        IgnoreAndNextUrl: '@Url.Action("IgnoreAndNext", "QuickView")',
+        GetQuickViewCompetitors: '@Url.Action("GetQuickViewCompetitors", "Search")',
+        SaveQuickViewSchedule: '@Url.Action("SaveQuickViewSchedule", "Search")',
+        SaveQuickView: '@Url.Action("SaveQuickView", "Search")',
+        GetQuickViewGridData: '@Url.Action("GetQuickViewGridData", "Search")',
+        DeleteQuickView: '@Url.Action("DeleteQuickView", "Search")',
+        GetlengthDateCombination: '@Url.Action("GetlengthDateCombination", "QuickView")'
+
+    }
+</script>

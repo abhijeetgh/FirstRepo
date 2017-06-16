@@ -1,0 +1,209 @@
+﻿@{
+    string temp = "temp";
+}
+
+<div class="panel-container">
+    <div id="view2">
+        <div class="edit-del-box">
+            <div class="Sch-loc-status-user-box fleft">
+                <input type="button" class="search-button scheduleNewJob" id="ftbNewJob" value="Schedule New job" />
+                <button id="refreshAutomationJob" class="search-button">Refresh Scheduled Jobs</button>
+                <ul class="table-ul-right">
+                    <li>
+                        <span id="spanDelete" style="padding-left:10px; color: green; display:none; font-weight:bold;">Job Deleted Successfully.</span>
+                        <span id="spanError" style="padding-left:10px; color: red; display:none; font-weight:bold;">Something went wrong. Please try again!</span>
+                        <span id="spanNoNextRun" style="padding-left:10px; color: red; display:none; font-weight:bold;">Please edit the Job. Start Failed!</span>
+                        <span id="lblMessage" style="padding-left:10px; display:none; font-weight:bold;">Summary shop deleted successfully</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="fleft" style="width: 65%; margin-top: 15px; ">
+                <ul class="table-ul-right">
+                    <li>
+                        Location
+                        <ul id="location" class="relative pointer">
+                            <li value="0">Any Location</li>
+                            <ul class="hidden drop-down1" style="overflow-x: hidden;display: none;">
+                                @if (ViewBag.LocationBrands != null)
+                                {
+                                    foreach (var locationBrand in ViewBag.LocationBrands)
+                                    {
+                                        <li value="@locationBrand.BrandLocationId" id="@locationBrand.BrandLocationId">@locationBrand.Alias</li>
+                                    }
+                                }
+                            </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        User
+                        <ul id="user" class="relative pointer" style="width: 140px;">
+                            <li value="0">Any User</li>
+                            <ul class="hidden drop-down1" style="display: none; overflow-x:hidden;">
+                                <li value="0">Any User</li>
+                                @if (ViewBag.Users != null)
+                                {
+                                    foreach (var user in ViewBag.Users)
+                                    {
+                                        <li value="@user.Id" id="@user.Id">@(user.FirstName + " " + user.LastName)</li>
+                                    }
+                                }
+                            </ul>
+                        </ul>
+                    </li>
+                    <li><input id="chkFinished" type="checkbox" class="checkboxMargin">Finished</li>
+                    <li><input id="chkInProgress" type="checkbox" class="checkboxMargin">In Progress</li>
+                    <li><input id="chkStopped" type="checkbox" class="checkboxMargin">Stopped</li>
+                    <li><input id="chkScheduled" type="checkbox" class="checkboxMargin">Scheduled</li>
+
+                </ul>
+            </div>
+            <div class="review-delete-box fright">
+                <ul>
+                    <li class="start-icon" title="Start"><span>Start</span></li>
+                    <li class="stop-icon" title="Stop"><span>Stop</span></li>
+                    <li class="edit-icon" title="Edit"><span>Edit</span></li>
+                    <li class="delete-icon" title="Delete"><span>Delete</span> </li>
+                    <li class="initiateSum-icon" title="Initiate"><span>Initiate Shop</span></li>
+                    <li class="show-icon" title="Results"><span>Show Summary</span></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="data-panel ftbjobtable">
+            <div class="table-responsive" id="divftbtable">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-tr-sch-new-job resultsHeader">
+                            <th style="min-width:177px;"> Job Actions</th>
+                            <!-- ko foreach: headersFirstGrp -->
+                            <th data-bind="attr:{value:sortPropertyName, asc:asc, id:sortPropertyName}, click: $parent.sort" style="cursor:pointer;">
+                                <span data-bind="text: title"></span><img class="ard" src="~/images/ardown.png" alt="arrow">
+                                <img class="aru" src="~/images/arup.png" alt="arrow" style="display:none;">
+                            </th>
+                            <!-- /ko -->
+                            <th>Run Dates</th>
+                            <th>MONTH AND YEAR</th>
+                            <th>Location </th>
+                            <th>Lengths</th>
+                            <th>Car Classes</th>
+                            <!-- ko foreach: headersSecondGrp -->
+                            <th data-bind="attr:{value:sortPropertyName, asc:asc, id:sortPropertyName}, click: $parent.sort" style="cursor:pointer;">
+                                <span data-bind="text: title"></span><img class="ard" src="~/images/ardown.png" alt="arrow">
+                                <img class="aru" src="~/images/arup.png" alt="arrow" style="display:none;">
+                            </th>
+                            <!-- /ko -->
+                            <th style="min-width: 150px;">Summary Actions</th>
+                            <th style="min-width:162px;">
+                                <span>SOURCE</span>
+                            </th>
+                            <th>Summary Status</th>
+                        </tr>
+                        <tr class="table-tr-sch-new-job noResultsHeader">
+                            <th>Job Actions</th>
+                            <th>Job Status</th>
+                            <th>Next Run Time</th>
+                            <th>Run Dates</th>
+                            <th>MONTH AND YEAR</th>
+                            <th>Location </th>
+                            <th>Lengths</th>
+                            <th>Car Classes</th>
+                            <th>Submitted By</th>
+                            <th>Summary Actions</th>
+                            <th>
+                                <span>SOURCE</span>
+                            </th>
+                            <th>Summary Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach: jobDetails -->
+                        <tr class="table-tr-sch-new-job-content" data-bind="attr:{id: Id, ExecutionInProgress:ExecutionInProgress}">
+                            <td>
+                                <ul>
+                                    <li><span class="icon stop" title="Stop" data-bind="attr:{id:stopId}, visible: IsEnabled && (Status != 'FINISHED')"></span></li>
+                                    <li><span class="icon start" title="Start" data-bind="attr:{id:startId}, visible: !IsEnabled && (Status != 'FINISHED')"></span></li>
+                                    <li><span class="icon start" data-bind=" visible: (Status == 'FINISHED')" style="cursor: default !important;opacity:0.2;"></span></li>
+                                    <li><span class="icon edit" title="Edit" data-bind="attr:{id:editId}"></span></li>
+                                    <li><span class="icon del" title="Delete" data-bind="attr:{id:deleteId}"></span></li>
+                                    @*<li><span class="icon pending" title="Results (unreviewed)" data-bind="attr:{id:pendingId}, visible: IsReviewPending && AreReviewButtonsRequired"></span></li>
+                                        <li><span class="icon review" title="Results" data-bind="visible: !IsReviewPending && AreReviewButtonsRequired, attr:{id:pendingId}"></span></li>*@
+                                </ul>
+                            </td>
+                            <td data-bind="html: Status"></td>
+                            <td data-bind="html: NextRunDateAsString, attr:{value: NextRunDateTime}"></td>
+                            <td data-bind="html: RunDates"></td>
+                            <td data-bind="html: Month_Year"></td>
+                            <td data-bind="html: LocationBrands, attr:{value: LocationBrandsIds}"></td>
+                            <td data-bind="html: RentalLengthsWithSpaces"></td>
+                            <td data-bind="html: CarClassWithSpaces"></td>
+                            <td data-bind="html: CreatedBy, attr:{value: CreatedByID}"></td>
+                            <td>
+                                <ul>
+                                    <li><span class="icon initiateSum" title="Initiate Summary Shop" style="cursor:pointer;" data-bind="click:InitiateSummary, visible:(SearchStatusId() != 1 && SearchStatusId() != 2)"></span></li>
+                                    <li><span class="icon initiateSum" style="opacity:0.2; cursor:default !important;" data-bind="visible: SearchStatusId() == 1 || SearchStatusId() == 2"></span></li>
+                                    <li><span class="icon del" title="Delete" data-bind="click:DeleteSummaryShop, attr:{style:'visibility:'+(SearchStatusId() > 0?'':'hidden')}"></span></li>
+                                    <li><span class="icon show" title="Show Summary Result" style="cursor:pointer;" data-bind="click:ViewSummary, attr:{searchid:SearchId, style:'visibility:'+(ShowViewReportIcon()?'':'hidden')}"></span></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-ul-right ddlSource">
+                                    <li>
+                                        <ul class="relative pointer" style="min-width:140px;">
+                                            <li value="0">- Select Source -</li>
+                                            <ul class="hidden drop-down1" style="display: none;" data-bind="attr:{id:'ddlSource_'+Id}">
+                                                @if (ViewBag.ScrapperSources != null)
+                                                {
+                                                    foreach (var sources in ViewBag.ScrapperSources)
+                                                    {
+                                                        <li value="@sources.ID" srccode="@sources.Code" prvcode="@sources.ProviderCode" providerid="@sources.ProviderId" isgov="@Convert.ToString(sources.IsGov)" data-bind="attr:{class:(Sources==@sources.ID)?'selected':''}">@sources.Name</li>
+
+                                                    }
+                                                }
+                                            </ul>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td data-bind="html: SearchStatus()"></td>
+
+                        </tr>
+                        <!-- /ko -->
+                        <tr class="table-tr-sch-new-job-content bold red"><td class="noResults" colspan="12">No Job Schedule found.</td></tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup_bg_master" style="display:none;"></div>
+<div id="popupShowSplitIntervals" style="" class="ui-draggable ui-draggable-handle">
+    <div class="popup-top">
+        <span>Rate Shopper</span>
+        <img src="~/images/tether_ratesClose.png" id="closepopup" class="fright pointer closeP" alt="close">
+        <div class="clear"></div>
+    </div>
+    <div class="padding15" data-bind="foreach:jobSplitDetails">
+
+        <div style="padding-bottom:10px;">
+            <span class="bold">Brand Location: </span><span data-bind="html:LocationBrand">ATL-AD</span>
+            <span class="bold" style="margin-left: 18px;">Month: </span><span data-bind="html:Month_Year">June 2016</span>
+        </div>
+        <div class="mtb10">
+            <ul class="splitdetails">
+                <!-- ko foreach:SplitDetails-->
+                <li>
+                    <input type="radio" name="splitinterval" data-bind="attr:{searchid:SearchId, statusid:StatusId, sourceId:SourceId, createdbyid:ShopCreatedById, startday:StartDay, endday:EndDay, checked:($index()==0)?true:false, id:'splitid_'+$index()}">
+                    <label for="splitid_1" data-bind="attr:{for:'splitid_'+$index()}, html:Label">1st - 10th day of month</label>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div class="mtb10" style="margin-top:20px;">
+            <input type="button" class="search-button" id="viewSummary" value="View Summary" style="margin:0px;" data-bind="visible:IsViewSummary, click:PopupViewSummary" />
+            <input type="button" class="search-button" id="initiateSummary" value="Initiate Summary" data-bind="attr:{jobid:JobId}, visible:!IsViewSummary && !IsDeleteSummary, click:PopupInitiateSummary" style="margin:0px;" />
+            <input type="button" class="search-button" id="deletesummary" value="Delete Summary" data-bind="attr:{jobid:JobId}, visible:IsDeleteSummary, click:DeleteSummary" style="margin:0px;" />
+            <label id="lblSplitMessage" class="bold red" style="display:none;padding-left:50px">No data found</label>
+        </div>
+    </div>
+</div>

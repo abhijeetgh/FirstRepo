@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "TSD Audit";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/tsd_audits.css")
+@Scripts.Render("~/Scripts/TSDAudit.js")
+<div class="loader_container_main" style="display:none;">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="tsd_audits" class="pageminht">
+    <div class="gt-top">
+        <span class="bold">TSD AUDITS</span>
+    </div>
+    <div class="padding15">
+        <div style="margin: 9px 0px;">
+
+            <ul class="wide-body-side-container table-ul-right">
+
+                <li>
+                    <span class="bold">Select Brand:</span>
+                    <ul name="source" id="dimension-source" class="dropdown relative pointer" style="width:100px;">
+                        <li>EZ Rent A Car</li>
+                        <ul class="hidden drop-down1" id="ddlBrand-TSD">
+                            <li id="0" value="All">All</li>
+                            @if (ViewBag.Companies != null)
+                            {
+                                foreach (var company in ViewBag.Companies)
+                                {
+                                    <li id="@company.ID" value="@company.Code">@company.Name</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="tacontainer fleft">
+            <div class="side-section-top" style="background:#2988b9 none repeat scroll 0 0;">
+
+                <h2 class="open"><span class="">TSD XML Audits</span></h2>
+            </div>
+            <div>
+                <select name="tsdAudits" size="38" id="lstTSDAudits" style="min-width:300px;">
+                    @if (ViewBag.AuditLogs != null)
+                    {
+                        foreach (var log in ViewBag.AuditLogs)
+                        {
+                            <option value="log_@log.ID">@log.Name @log.LocationCode @log.StrLogDateTime</option>
+                        }
+                    }
+                </select>
+
+            </div>
+
+        </div>
+        <div class="taright fleft">
+            <div class="xm">
+                <div class="fleft  bold">
+                    <p>Response Code: <span id="spnResponseCode" style="font-weight:normal;"></span></p>
+                    <p>Message: <span id="spnResponseMessage" style="font-weight:normal;"></span></p>
+                    <p>
+                        Status: <span id="spnStatus" class="uppercase" style="font-weight:normal;"></span><br />
+                        <span id="spnErrorMessageContainer" style="display:none;">Error: <span id="spnErrorMessage" style="font-weight:normal;"></span></span>
+                    </p>
+                </div>
+                <span id="resetAuditSelection" class="fright pointer" style="margin-top:25px;"><img src="images/filter.png">Reset Selection</span>
+                <div class="clear"></div>
+                <textarea name="auditXml" rows="40" cols="70" class="normal" id="txtRequestXML" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>   
+</div>
+<div class="clear">
+    @{Html.RenderPartial("ChildFooter");}
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetAuditDetails: '@Url.Action("GetAuditDetails", "TSDAudit")',
+        GetAuditLogs: '@Url.Action("GetAuditLogs","TSDAudit")'
+    }
+</script>
+

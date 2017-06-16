@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/company_management.css")
+@Scripts.Render("~/Scripts/CompanyManagement.js")
+<div class="loader_container_main">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="Company_management">
+    <div class="gt-top">
+        <span class="uppercase bold">Company Management</span>
+    </div>
+    <div class="padding15">
+        <span class="relative">
+            <input type="text" class="lmsearch" placeholder="Search By Code" id="searchCompany" />
+            <img src="~/images/lens.png" class="lmlens" alt="lens" />
+        </span>
+        <input type="button" class="search-button" value="Create Company" id="btnAddCompany" />
+        <span id="lblMessage" style="display:none; font-weight:bold;width:300px; margin-left:110px;">Please review all fields hi-lighted in red</span>
+    </div>
+
+    <div class="clear"></div>
+    <div class="lmcontent">
+        <div class="fleft" style="overflow:auto; max-height:780px;" id="divListing">
+            <table id="tblCompanies">
+                <thead class="uppercase">
+                    <tr id="no_rows" style="display:none;">
+                        <td style="width:130px;">Name</td>
+                        <td style="width:70px;">Code</td>
+                        <td>Delete</td>
+                    </tr>
+                    <tr id="companyheaders">
+                        <td onclick="ApplySorting(this,'Name')" class="Asc" style="cursor: pointer;width:130px;">Name<div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div></td>
+                        <td onclick="ApplySorting(this,'Code')" class="Asc" style="cursor: pointer;">Code<div><img class="ard" src="~/images/ardown.png" alt="arrow" /></div></td>
+                        <td>Delete</td>
+                    </tr>
+
+                </thead>
+                <tbody data-bind="foreach: companies()">
+                    <tr data-bind="click: $root.EditCompany, attr:{ value:ID, id:'company_'+ID }" title="Edit" class="pointer">
+                        <td data-bind="html:Name" style="width:130px;"></td>
+                        <td data-bind="html:Code" class="code" style="width:70px;"></td>
+                        <td>
+                            @*<img src="~/images/ar_tab2.png" alt="" title="Edit" style="cursor:pointer" data-bind="click: $root.EditLocation, attr:{ value:ID }" />*@
+                            <img src="~/images/ar_tab2.png" alt="" title="Delete" style="cursor:pointer;margin-left:5px;" data-bind="click: $root.DeleteCompany,attr:{ value:ID }" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+        <div class="fleft" id="rcontainer" style="width:50%;">
+            <form method="post" name="lmform" id="lmform">
+                @*<span id="lblMessage" style="display:none; font-weight:bold;width:300px; margin-bottom:10px;">Please review all fields hi-lighted in red</span>*@
+                <div class="bold cmcontainer">
+
+                    <h4 class="bold uppercase" id="HaddingTitle">CREATE COMPANY</h4>
+                    <div class="textfields">
+                        <span>
+                            Name<label style="color:red">*</label> <br />
+                            <input type="text" id="txtName-company" />
+                        </span>
+                        <span>
+                            Code<label style="color:red">*</label> <br />
+                            <input type="text" id="txtCode-company" maxlength="2" />
+                        </span>
+                        <img src="~/images/default_logo.png" class="cmbrand pointer" alt="brand-logo" id="imgLogo" width="75" height="70" title="Click to Upload"/>
+                        <input type="file" id="FileUpload" style="display:none;" />                        
+                    </div>
+
+
+                </div>
+                <div class="cmcontainer" id="divCompanyLocations">
+                    <h4 class="bold uppercase fleft">Locations</h4>
+                    <span id="spanLocationsError" class="fleft" style="color: red; display:none; font-weight:bold;width:542px;margin-left:12px;">Please specify company's presence inside/outside terminal for selected location(s).</span>
+                    <div class="clear" style="margin:0px;"></div>
+                    <div class="checkbox-holder">
+                        @if (ViewBag.CompanyLocations != null)
+                        {
+                            foreach (var location in ViewBag.CompanyLocations)
+                            {
+                                <div style="float: left; margin: 8px 0px;" class="divLocation">
+                                    <input type="checkbox" id="chkLL_@location.LocationID" class="chkLocation" />
+                                    <label for="chkLL_@location.LocationID" style="margin-right:0px;width:35px;">@location.LocationName</label>
+                                    <span style="width:150px;" class="spanIO">
+                                        <label><input type="radio" name="@location.LocationName" value="inside" class="middle rdoIO">Inside</label>
+                                        <label><input type="radio" name="@location.LocationName" value="outside" class="middle rdoIO">Outside</label>
+                                    </span>
+                                </div>
+
+                            }
+                        }
+                        <div style="clear:both"></div>
+                    </div>                    
+                </div>
+
+                <input type="button" class="search-button disable-button" disabled="disabled" value="Cancel" id="btnCancel" />
+                <input type="button" class="search-button orng btnDisabled" disabled="disabled" value="Save" id="btnSaveCompany" />
+                <input type="hidden" value="~/" id="hdnLogoInitial" />
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="clear">
+        @{Html.RenderPartial("ChildFooter");}
+        <div id="footer-links">
+            @{Html.RenderPartial("MasterFooter");}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetAllCompanies: '@Url.Action("GetAllCompanies", "Company")',
+        GetCompany: '@Url.Action("GetCompany", "Company")',
+        DeleteCompany: '@Url.Action("DeleteCompany", "Company")',
+        SaveCompany: '@Url.Action("SaveCompany", "Company")',
+        Upload: '@Url.Action("Upload", "Company")',
+        DeleteUploadedImage: '@Url.Action("DeleteUploadedImage", "Company")',
+    }
+</script>

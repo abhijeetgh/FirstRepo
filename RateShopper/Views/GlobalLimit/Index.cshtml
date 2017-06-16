@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/global_limit.css")
+@Scripts.Render("~/Scripts/globallimit.js")
+<div class="loader_container_main" style="display:none;">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="formulas" class="pageminht">
+    <div class="gt-top">
+        <span class="uppercase bold">global Limits</span>
+    </div>
+    <div class="padding15 fcontainer">
+        <span id="lblMessage" style="display:none; font-weight:bold;width:300px;">Please review all fields hi-lighted in red</span> 
+        <div>
+            <ul class="wide-body-side-container table-ul-right">
+                <li>
+                    Brand Location:
+                    <ul name="source" id="dimension-source" class="dropdown relative pointer">
+                        <li class="pointer">Choose Brand Location..</li>
+                        <ul class="hidden drop-down1" id="ddlBrand-GlobalLimit">
+                            @if (ViewBag.LocationBrands != null)
+                            {
+                                foreach (var locationBrand in ViewBag.LocationBrands)
+                                {
+                                    <li value="@locationBrand.ID" id="@locationBrand.ID">@locationBrand.LocationBrandAlias</li>
+                                }
+                            }
+                </ul>
+            </ul>
+
+                </li>
+            </ul>
+
+        </div>
+        <div data-bind="foreach:{data:globallimits(), as:'GL'}">
+            <div class="globallimits" data-bind="attr:{id:'GL_'+GL.GlobalLimitID},visible:(GL.GlobalLimitID==0 && $parent.globallimits().length==1)||GL.GlobalLimitID>0">
+                <div class="bold spn1" data-bind="visible:GL.GlobalLimitID>0">Update Limits for Date Range <span data-bind="html:GL.StartDate">06/18/2011</span> through <span data-bind="html:GL.EndDate"></span></div>
+                <div class="bold spn1" data-bind="visible:GL.GlobalLimitID==0">Create Global Limit for <span data-bind="attr:{id:'spanBrandName_'+GL.GlobalLimitID}"></span></div>
+                <div data-bind="attr:{id:'lblMessage_'+GL.GlobalLimitID}" style="font-weight:bold;display:none;">Please review all fields hi-lighted in red</div>                
+                <div class="padding15 record" data-bind="visible:GL.GlobalLimitID==0">
+                    Start Date:<span class="relative">
+                                   <input placeholder="mm/dd/yyyy" type="text" name="StartDate" class="left date-picker dp" data-bind="attr:{id:'StartDate_'+GL.GlobalLimitID}" autocomplete="off" readonly="readonly">
+                        @*<img class="startdate calender" src="~/images/Search-calender.png">*@
+                        @*<input type="text" readonly="readonly" name="startDate" class="date-picker" id="StartDate" autocomplete="off">
+                            <img class="calender" src="images/Search-calender.png" id="startDateimg" style="cursor:pointer">*@
+                    </span>
+                    End Date:<span class="relative"><input placeholder="mm/dd/yyyy" type="text" name="EndDate" class="left date-picker dp" data-bind="attr:{id:'EndDate_'+GL.GlobalLimitID}" autocomplete="off" readonly="readonly">
+                    @*<img class="enddate calender" src="~/images/Search-calender.png"></span>*@
+
+
+                </div>                
+                
+        <table class="uppercase w100">
+            <thead>
+                <tr class="center">
+                    <td>Car Class</td>
+                    <td>Day Min</td>
+                    <td>Day Max</td>
+                    <td>Week Min</td>
+                    <td>Week Max</td>
+                    <td>Month Min</td>
+                    <td>Month Max</td>
+                </tr>
+
+            </thead>
+                    <tbody data-bind="foreach:{data:GL.LstGlobalLimitDetails, as:'GLD'}" class="globaldetails">
+                        <tr data-bind="attr:{id:GLD.GlobalDetailsID, data_class:GLD.CarClassID}" data-edit="0">
+                            <td data-bind="html:CarClass" class="carclass">ECAR</td>
+                            <td><input type="text" data-bind="attr:{value:GLD.DayMin, id:'DayMin'+GL.GlobalLimitID+GLD.CarClassID}" name="DayMin" /></td>
+                            <td><input type="text" data-bind="attr:{value:GLD.DayMax, id:'DayMax'+GL.GlobalLimitID+GLD.CarClassID}" name="DayMax" /></td>
+                            <td><input type="text" data-bind="attr:{value:GLD.WeekMin, id:'WeekMin'+GL.GlobalLimitID+GLD.CarClassID}" name="WeekMin" /></td>
+                            <td><input type="text" data-bind="attr:{value:GLD.WeekMax, id:'WeekMax'+GL.GlobalLimitID+GLD.CarClassID}" name="WeekMax" /></td>
+                            <td><input type="text" data-bind="attr:{value:GLD.MonthlyMin, id:'MonthlyMin'+GL.GlobalLimitID+GLD.CarClassID}" name="MonthlyMin" /></td>
+                            <td><input type="text" data-bind="attr:{value:GLD.MonthlyMax, id:'MonthlyMax'+GL.GlobalLimitID+GLD.CarClassID}" name="MonthlyMax" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+                <input type="button" value="Delete" class="search-button" data-bind="visible:GL.GlobalLimitID>0, click:$root.deleteGlobalLimit" />
+                <input type="button" value="Copy & Create" class="search-button" data-bind="visible:GL.GlobalLimitID>0, click:$root.copyAndCreate" />
+                <input type="button" value="New" class="search-button" data-bind="visible:GL.GlobalLimitID>0 && $index() == $parent.globallimits().length-2, click:$root.createNew" />
+                <input type="button" value="Save" class="search-button orng btnDisabled" disabled="disabled" data-bind="click:$root.saveGlobalLimit" />
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="clear">
+    @{Html.RenderPartial("ChildFooter");}
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetGlobalLimits: '@Url.Action("GetGlobalLimits", "GlobalLimit")',
+        DeleteGlobalLimit: '@Url.Action("DeleteGlobalLimit", "GlobalLimit")',
+        SaveGlobalLimit: '@Url.Action("SaveGlobalLimit", "GlobalLimit")'
+    }
+</script>

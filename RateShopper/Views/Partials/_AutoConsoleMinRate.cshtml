@@ -1,0 +1,104 @@
+﻿
+<div class="popup-top">
+    <span class="uppercase bold">Rate Limits</span>
+    <img src="images/tether_ratesClose.png" id="closepopupMinRate" class="fright pointer closeP" alt="close">
+</div>
+<div class="ui-draggable ui-draggable-handle" id="MinRates">
+
+    <div class="padding15">
+        <div class="fleft">
+            <div class="row1" style="margin-bottom:10px; text-align:center">
+                <input type="checkbox" class="minrate_chkAlldays" id="weekUpdateAll" />All
+                <ul class="RateLimit_days Days_ul" style="cursor: pointer;" id="leftGridDays">
+                    @if (ViewBag.WeekDays != null)
+                    {
+                        foreach (var WeekDay in ViewBag.WeekDays)
+                        {
+                            <li value="@WeekDay.ID" day="@WeekDay.Day">@WeekDay.Day.Substring(0, 3)</li>
+
+                        }
+                    }
+                </ul>
+            </div>
+            <table id="searchResultRatesOne" class="table">
+                <thead>
+                    <tr>
+                        <th>Car Class</th>
+                        <th>Day Min</th>
+                        <th>Day Max</th>
+                        <th>Week Min</th>
+                        <th>Week Max</th>
+                        <th style="display:none;">Month Min</th>
+                        <th style="display:none;">Month Max</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach:MinRateList -->
+                    <tr>
+                        <td><span class="carClasses" data-bind="html:CarCode,attr:{CarClassID:CarClassID}"></span></td>
+                        <td><input type="number" min="0" style="width: 70px" class="min" name="day" data-bind="attr:{id:'DayMin_'+CarClassID ,value:DayMin}" /></td>
+                        <td><input type="number" min="0" style="width: 70px" class="max" name="day" data-bind="attr:{id:'DayMax_'+CarClassID ,value:DayMax}" /></td>
+                        <td><input type="number" min="0" style="width: 70px" class="min" name="week" data-bind="attr:{id:'WeekMin_'+CarClassID,value:WeekMin}" /></td>
+                        <td><input type="number" min="0" style="width: 70px" class="max" name="week" data-bind="attr:{id:'WeekMax_'+CarClassID,value:WeekMax}" /></td>
+                        <td style="display:none;"><input type="number" min="0" style="width: 70px" class="min" name="month" data-bind="attr:{id:'MonthMin_'+CarClassID,value:MonthMin}" /></td>
+                        <td style="display:none;"><input type="number" min="0" style="width: 70px" class="max" name="month" data-bind="attr:{id:'MonthMax_'+CarClassID,value:MonthMax}" /></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+        <div class="fleft minrate_section_two" style="margin-left:50px;">
+            <div class="selectdays_row2" style="margin-bottom:10px;text-align:center;">
+                <ul class="RateLimit_days Days_ul" style="cursor: pointer; margin-left: 0px!important" id="rightGridDays">
+                    @if (ViewBag.WeekDays != null)
+                    {   
+                        foreach (var WeekDay in ViewBag.WeekDays)
+                        {
+                            <li value="@WeekDay.ID" day="@WeekDay.Day">@WeekDay.Day.Substring(0, 3)</li>
+
+                        }
+                    }
+                </ul>
+            </div>
+            <table id="searchResultRatesTwo" class="table">
+                <thead>
+                    <tr>
+                        <th>Car Class</th>
+                        <th>Day Min</th>
+                        <th>Day Max</th>
+                        <th>Week Min</th>
+                        <th>Week Max</th>
+                        <th style="display:none;">Month Min</th>
+                        <th style="display:none;">Month Max</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach:MinRateList -->
+                    <tr>
+                        <td><span class="carClasses" data-bind="html:CarCode,attr:{CarClassID:CarClassID}"></span></td>
+                        <td><input type="number" min="0" style="width: 70px" class="min" name="day2" data-bind="attr:{id:'Day2Min_'+CarClassID ,value:Day2Min}" /></td>
+                        <td><input type="number" min="0" style="width: 70px" class="max" name="day2" data-bind="attr:{id:'Day2Max_'+CarClassID ,value:Day2Max}" /></td>
+                        <td><input type="number" min="0" style="width: 70px" class="min" name="week2" data-bind="attr:{id:'Week2Min_'+CarClassID,value:Week2Min}" /></td>
+                        <td><input type="number" min="0" style="width: 70px" class="max" name="week2" data-bind="attr:{id:'Week2Max_'+CarClassID,value:Week2Max}" /></td>
+                        <td style="display:none;"><input type="number" min="0" style="width: 70px" class="min" name="month2" data-bind="attr:{id:'Month2Min_'+CarClassID,value:Month2Min}" /></td>
+                        <td style="display:none;"><input type="number" min="0" style="width: 70px" class="max" name="month2" data-bind="attr:{id:'Month2Max_'+CarClassID,value:Month2Max}" /></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+        <div class=""></div>
+        <div class="clear" style="padding-top:15px;">
+            <input type="button" class="search-button orng fright" id="MinRateSave" value="Save">
+            <input type="button" class="search-button fright" id="MinRatePreload" value="Preload">
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript">
+    var MinRates = {
+        PreLoadMinRates: '@Url.Action("PreLoadMinRates", "AutomationConsole")',
+        GetSelectedMinRateURL: '@Url.Action("GetSelectedMinRate", "AutomationConsole")'
+    }
+</script>

@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+<div class="loader_container_main">
+    <div class="loader-bg"></div>
+    <div class="loader">
+        <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+    </div>
+</div>
+<div id="location_management">
+    <div class="gt-top">
+        <span class="uppercase bold">User Management</span>
+    </div>
+    <div class="padding15">
+        <span class="relative">
+            <input type="text" class="lmsearch" id="searchUser" tabindex="-1" placeholder="Search by user name" />
+            <img src="~/images/lens.png" class="lmlens" alt="lens" />
+        </span>
+        <input type="button" class="search-button pointer" tabindex="-1" value="Create User" id="AddUser" />
+        <span id="spanSave" class="errormsg" style="color: green;">The user saved successfully.</span>
+        <span id="lblMessage" class="errormsg" style="color: rgb(255, 0, 0);">Please review the fields highlighted in Red. <span id="lblMessageCheckUserName" class="" style="color: rgb(255, 0, 0); font-weight: bold;">The Username exists.</span></span>
+
+        <span id="lblDeleteMessage" class="errormsg" style=" color: rgb(255, 0, 0);">Active shops running in the background for the user. User details can not be deleted.</span>
+    </div>
+
+    <div class="clear"></div>
+    <div class="lmcontent">
+        <div class="fleft overflowA" style="max-height:700px;" id="user_m">
+            <table id="tblUsers">
+                <thead class="uppercase">
+                    <tr id="WithSorHeader">
+                        <td class="pointer" sort="Desc" onclick="ApplySorting(this,'firstname')">First Name<img class="ard" src="~/images/ardown.png" alt="arrow" /><img class="ard" src="~/images/arup.png" style="display:none" alt="arrow" /></td>
+                        <td class="pointer" sort="Desc" onclick="ApplySorting(this,'lastname')">Last Name  <img class="ard" src="~/images/ardown.png" alt="arrow" /><img class="ard" src="~/images/arup.png" style="display:none" alt="arrow" /></td>
+                        <td class="pointer" sort="Desc" onclick="ApplySorting(this, 'username')">User Name  <img class="ard" src="~/images/ardown.png" alt="arrow" /><img class="ard" src="~/images/arup.png" style="display:none" alt="arrow" /></td>
+                        <td>Delete</td>
+                    </tr>
+                    <tr id="WithoutSorHeader" style="display:none;">
+                        <td>First Name</td>
+                        <td>Last Name </td>
+                        <td>User Name  </td>
+                        <td>Delete</td>
+                    </tr>
+                </thead>
+                <tbody class="capatalize">
+                    <!-- ko foreach: UserList -->
+                    <tr data-bind="attr:{UserID:UserID,UserRoleID:UserRoleID,id:'username_'+UserID},click:function(data){selectedUser(data)}" class="pointer">
+                        <td><span data-bind="html:FirstName.charAt(0).toUpperCase()+FirstName.substr(1)" id="firstname"></span></td>
+                        <td><span data-bind="html:LastName.charAt(0).toUpperCase()+LastName.substr(1)" id="lastname"></span></td>
+                        <td><span data-bind="html:UserName" name="username" class="username"></span></td>
+                        <td><img src="~/images/ar_tab2.png" class="pointer" title="Delete" alt="Delete" /></td>
+                    </tr>
+                    <!--/ko-->
+
+                </tbody>
+            </table>
+            <div class="clear"></div>
+            @*<div class="table-bottom">
+                    <img src="~/images/lm_leftar.png" alt="arr" />
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                    <img src="~/images/lm_rightar.png" alt="arr" />
+                    Showing
+                    <select name="showRecords" id="showRecords">
+                        <option>30</option>
+                    </select>
+                    Of 100 Records
+                </div>*@
+        </div>
+        <div class="fleft" id="rcontainer" style="width:50%">
+            <span id="updateMesage" style=" display :none; font-weight: bold; width: 100%">Note: Only enter data in the password fields if you intend to change the user's password.</span>
+            <h3 class="uppercase" id="HaddingTitle">CREATE USER</h3>
+            @*<h3>Profile</h3>*@
+            <form method="post" name="lmform" id="lmform">
+                <div class="bold" id="UserDetail">
+                    <div>
+                        <span>
+                            User Name<label style="color:red">*</label>
+                            <input type="text" id="UserName" tabindex="1" placeholder="User Name" />
+                        </span>
+                        <span>
+                            First Name<label style="color:red">*</label>
+                            <input type="text" id="FirstName" tabindex="2" placeholder="First Name" />
+                        </span>
+                        <span>
+                            Last Name<label style="color:red">*</label>
+                            <input type="text" id="LastName" tabindex="3" placeholder="Last Name" />
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            Email Address
+                            <input type="text" id="EmailID" tabindex="4" autocomplete="off" placeholder="Email Address" />
+                        </span>
+                        <span>
+                            Password
+                            <input type="password" id="txtPassword" tabindex="5" autocomplete="off" placeholder="****" />
+                        </span>
+                        <span>
+                            Confirm Password
+                            <input type="password" id="txtConfirmPassword" tabindex="6" placeholder="****" />
+                        </span>
+                    </div>
+                    <div>
+
+                        User Type<label style="color:red">*</label>
+                        <div class="ut">
+                            <input type="hidden" id="UserRoleID" />
+                            <input type="radio" id="userType" name="userType" value="Normal" userroleid="2" tabindex="7" />Regular User
+                            <input type="radio" id="userType" name="userType" value="Admin" userroleid="1" tabindex="8" />System Administrator
+                            <input type="checkbox" id="AutomationUser" value="Automation User" tabindex="9" />Automation User
+                            <input type="checkbox" id="ActivateTether" value="Activate Tethering" tabindex="10" />Activate Tethering
+                            <input type="checkbox" id="DisableTSDUpdate" value="Disable TSD Update" tabindex="11" />Disable TSD Update
+                            @if (ViewBag.UserPermission != null)
+                            {
+                                int i = 11;
+                                foreach (var userpermission in ViewBag.UserPermission)
+                                {
+                                    i++;
+                                    <input type="checkbox" id="@userpermission.PermissionKey" class="dynamicpermission" value="@userpermission.ID" tabindex="@i" />@userpermission.Permission
+                                }
+                            }
+                            <input type="hidden" id="selectedPermission" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="ucontainer">
+                    <h4 class="bold fleft">Sources</h4>
+                    <span id="spanSourceError" class="fleft" style="display: none; color: red; font-weight: bold; width: 300px; margin-left: 12px;">Please select sources</span>
+                    <div class="clear" style="margin:0px;"></div>
+                    <div class="checkbox-holder" id="Source">
+                        <input type="hidden" id="selectedSourceID" />
+                        @if (ViewBag.ScrapperSource != null)
+                        {
+                            foreach (var scrapperSource in ViewBag.ScrapperSource)
+                            {
+                                <div style="float:left;margin:8px 0px;">
+                                    <input type="checkbox" id="ScrapperCheckbox_@scrapperSource.ID" class="Source" value="@scrapperSource.ID" code="@scrapperSource.Code" />
+                                    <label for="ScrapperCheckbox_@scrapperSource.ID">@scrapperSource.Name</label>
+                                </div>
+                            }
+                        }
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+                <div class="checkbox-holder lmcontainer" id="BrandLocations">
+                    <h4 class="bold fleft">Locations</h4>
+                    <span id="spanLocationError" class="fleft" style=" display:none;color: red; font-weight: bold; width: 300px; margin-left: 12px;">Please select locations</span>
+                    <div class="clear" style="margin:0px;"></div>
+                    <div class="checkbox-holder" id="LocationBrand">
+                        <input type="hidden" id="selectedLocationBrandID" />
+                        @if (ViewBag.LocationBrand != null)
+                        {
+                            foreach (var locationBrand in ViewBag.LocationBrand)
+                            {
+                                string DominentFlag = "false";
+                                if (locationBrand.IsFTBDominantBrand)
+                                    {
+                                        DominentFlag = "true";
+                                    }
+                                <div style="float:left;margin:8px 0px;">
+                                    <input type="checkbox" id="LocationBrandCheckbox_@locationBrand.ID" class="LocationBrand" value="@locationBrand.ID" locationid="@locationBrand.LocationID" brandid="@locationBrand.BrandID" isdominentbrand="@DominentFlag" />
+                                    <label for="LocationBrandCheckbox_@locationBrand.ID">@locationBrand.LocationBrandAlias</label>
+                                </div>
+                            }
+                        }
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+                <div class="checkbox-holder" id="mainDivPriceMgr" style="height: 175px;">
+                    <h4 class="bold fleft">Pricing Manger of Locations</h4>
+                    <div class="clear" style="margin:0px;"></div>
+                    <div class="location">
+                        <div class="location-inner-box">
+                            <div style="border: 1px solid #bebebe;width: 145px;overflow: hidden;float: left" id="locationdiv">
+                                <input type="hidden" id="PriceMgrLocationBrand" />
+                                <ul name="locations" class="mright0 two-cols-select relative" size="5" id="locations">
+                                    <li>
+                                        <span style="color: #3b3b3b; float: left; font-weight: bold; padding: 6px 0; width: 100%;">
+                                            <input class="left" type="text" style="width: 110px; margin: 0 5px; padding: 0px; border-radius:0px; " id="searchLocation">
+                                        </span>
+                                    </li>
+                                    <ul class="list-complt">
+                                        <select name="locations" style="border: 0px; padding: 0 8px; width: 100%; box-sizing: border-box; background: #fbfbfb; border-radius: 5px;" multiple="Multiple" size="5" id="FTBPriceMgrLocations">
+                                            <option value="0">Not Available</option>
+                                        </select>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="button" id="reset" class="search-button disable-button" value="Cancel" disabled="disabled" />
+                <input type="button" id="save" class="search-button orng btnDisabled" value="Save" disabled="disabled" />
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="clear">
+        @{Html.RenderPartial("ChildFooter");}
+        <div id="footer-links">
+            @{Html.RenderPartial("MasterFooter");}
+        </div>
+    </div>
+</div>
+@Styles.Render("~/css/location_management.css")
+@Scripts.Render("~/Scripts/User-functions.js")
+<script type="text/javascript">
+    var AjaxURLSettings = {
+        GetUserURL: '@Url.Action("GetUserList", "User")',
+        selectedUserDataURL: '@Url.Action("selectedUserData", "User")',
+        InsertUpdateUserURL: '@Url.Action("InsertUpdateUser", "User")',
+        DeleteUserURL: '@Url.Action("DeleteUser", "User")'
+    }
+</script>

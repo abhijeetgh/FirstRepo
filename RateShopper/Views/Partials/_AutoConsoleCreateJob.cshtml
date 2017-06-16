@@ -1,0 +1,530 @@
+﻿
+<div id="view1">
+    <div><span id="error-span" class="error-msg" style=" display: none; margin-bottom: 10px; text-align: center;"></span></div>
+    <div class="jobschedule">
+        <span>JOB SCHEDULE</span>
+        <div class="frequency">
+            <span class="freq-text bold">Frequency</span>
+            <ul class="freq-ul">
+                @if (ViewBag.Frequencies != null)
+                {
+                    foreach (var Frequency in ViewBag.Frequencies)
+                    {
+                        <li>
+                            <input type="radio" id="@Frequency.UIControlID.Trim()" freqid="@Frequency.ID" name="freq">
+                            @Html.Raw(Frequency.Name)
+                        </li>
+
+                    }
+                }
+            </ul>
+        </div>
+        <div class="daystorun">
+            <div class="daystorun-inner-box">
+                <span class="daystorun-text bold">Days to Run</span>
+                <div class="start-date relative">
+                    <span>Start Date</span>
+                    <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="runStartDate" class="date-picker dp" id="runStartDate" autocomplete="off">
+
+                </div>
+                <div class="end-date relative">
+                    <span>End Date</span>
+                    <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="runEndDate" class="date-picker dp" id="runEndDate" autocomplete="off">
+
+                </div>
+            </div>
+        </div>
+        <div class="customTime days custom-select-hours">
+            <div class="relative select_tym">
+                <span>Select Hours</span>
+                <input type="text" id="customInputHours" name="customHours" readonly="readonly" class="custom-time ib">
+                <div id="customInputHoursSelect" class="ui-dialog ui-widget-content ui-corner-aall" style="width:140px; z-index: 99; left: 251px; top: 160px;">
+                    <div class="ui-dialog-content ui-widget-content custom-select" style="height:130px;overflow:auto">
+                        <label><input type="checkbox" value="0"><span> Midnight</span></label>
+                        <label><input type="checkbox" value="1"><span> 1 AM</span></label>
+                        <label><input type="checkbox" value="2"><span> 2 AM</span></label>
+                        <label><input type="checkbox" value="3"><span> 3 AM</span></label>
+                        <label><input type="checkbox" value="4"><span> 4 AM</span></label>
+                        <label><input type="checkbox" value="5"><span> 5 AM</span></label>
+                        <label><input type="checkbox" value="6"><span> 6 AM</span></label>
+                        <label><input type="checkbox" value="7"><span> 7 AM</span></label>
+                        <label><input type="checkbox" value="8"><span> 8 AM</span></label>
+                        <label><input type="checkbox" value="9"><span> 9 AM</span></label>
+                        <label><input type="checkbox" value="10"><span> 10 AM</span></label>
+                        <label><input type="checkbox" value="11"><span> 11 AM</span></label>
+                        <label><input type="checkbox" value="12"><span> Noon</span></label>
+                        <label><input type="checkbox" value="13"><span> 1 PM</span></label>
+                        <label><input type="checkbox" value="14"><span> 2 PM</span></label>
+                        <label><input type="checkbox" value="15"><span> 3 PM</span></label>
+                        <label><input type="checkbox" value="16"><span> 4 PM</span></label>
+                        <label><input type="checkbox" value="17"><span> 5 PM</span></label>
+                        <label><input type="checkbox" value="18"><span> 6 PM</span></label>
+                        <label><input type="checkbox" value="19"><span> 7 PM</span></label>
+                        <label><input type="checkbox" value="20"><span> 8 PM</span></label>
+                        <label><input type="checkbox" value="21"><span> 9 PM</span></label>
+                        <label><input type="checkbox" value="22"><span> 10 PM</span></label>
+                        <label><input type="checkbox" value="23"><span> 11 PM</span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="select_tym relative custom-select-minutes">
+                <span>Select Minutes</span>
+                <input type="text" id="customInputMinutes" name="customMinutes" readonly="readonly" class="custom-time ib">
+                <div id="customInputMinutesSelect" class="ui-dialog ui-widget-content ui-corner-aall" style="width: 140px; z-index: 99; left: 251px; top: 197px;">
+                    <div class="ui-dialog-content ui-widget-content custom-select" style="height:100px;overflow:auto">
+                        <label><input type="checkbox" value="0"><span> :00</span></label>
+                        <label><input type="checkbox" value="5"><span> :05</span></label>
+                        <label><input type="checkbox" value="10"><span> :10</span></label>
+                        <label><input type="checkbox" value="15"><span> :15</span></label>
+                        <label><input type="checkbox" value="20"><span> :20</span></label>
+                        <label><input type="checkbox" value="25"><span> :25</span></label>
+                        <label><input type="checkbox" value="30"><span> :30</span></label>
+                        <label><input type="checkbox" value="35"><span> :35</span></label>
+                        <label><input type="checkbox" value="40"><span> :40</span></label>
+                        <label><input type="checkbox" value="45"><span> :45</span></label>
+                        <label><input type="checkbox" value="50"><span> :50</span></label>
+                        <label><input type="checkbox" value="55"><span> :55</span></label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="runTime days">
+            <div class="relative">
+                <span class="span_align">Set Run Time</span>
+                <input id="jobTime" type="text" name="jobTime" value="12:00 am" readonly="readonly" class="e1day e1week e1month">
+            </div>
+        </div>
+        <div class="runDayofMonth days">
+            <div class="relative">
+                <span class="span_align">Set Run Day</span>
+                <select name="jobDay" id="jobDay" class="e1month hasDatepicker">
+                    <option value="1" selected="selected">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="days daysTodays">
+            <div class="days-inner-box">
+                <span>Days</span> <span class="all-text">
+                    <input type="checkbox" class="jobScheduleWeekDays" onclick="selectAllCheckBoxClick(this, 'jobScheduleWeekDays')">
+                    All
+                </span>
+                <div class="weekdaysbox" id="jobScheduleWeekDays">
+                    <ul class="two-cols-select relative">
+                        <select class="two-cols-select rightRuleSetDays jobScheduleWeekDays e15min e1day e30min e1week e1hour custom-time" multiple="multiple" size="6" onchange="checkUncheckWeekDays('jobScheduleWeekDays')">
+                            @if (ViewBag.WeekDays != null)
+                            {
+                                foreach (var WeekDay in ViewBag.WeekDays)
+                                {
+                                    <option value="@WeekDay.ID">@WeekDay.Day</option>
+                                }
+                            }
+                        </select>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rateparameter">
+        <span>RATE FETCH PARAMETERS</span>
+        <div class="rate-fetch-parameter">
+            <div class="stand-horizon-box">
+                <span class="ratefetch-text" style="display:none;">
+                    <input type="radio" name="shopType" id="rb-standardShop" checked="checked">
+                    Standard Shop
+                </span> <span class="horizon-text" style="display:none;">
+                    <input type="radio" name="shopType" id="rb-horizonShop">
+                    Horizon Shop
+                </span>
+            </div>
+            <div class="rate-fetch-parameter-inner-box">
+                <div class="start-date standardShopDiv">
+                    <span>Start Date</span>
+                    <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="startDate" class="date-picker dp standardShop" id="startDate" autocomplete="off">
+
+                </div>
+                <div class="start-date horizonShopDiv">
+                    <span>Start Date Offset</span>
+                    <input class="ib horizonShop" id="startDateOffset" type="number" min="1" />
+                </div>
+                <div class="end-date">
+                    <span>Pickup Time</span>
+                    <ul id="pickupHour" name="pickupHour" class="select-ul relative pointer">
+                        <li value="11:00 am">11:00am</li>
+                        <ul class="hidden drop-down" style="display: none;">
+                            <li value="12:00 am">12:00am</li>
+                            <li value="12:30 am">12:30am</li>
+                            <li value="1:00 am">1:00am</li>
+                            <li value="1:30 am">1:30am</li>
+                            <li value="2:00 am">2:00am</li>
+                            <li value="2:30 am">2:30am</li>
+                            <li value="3:00 am">3:00am</li>
+                            <li value="3:30 am">3:30am</li>
+                            <li value="4:00 am">4:00am</li>
+                            <li value="4:30 am">4:30am</li>
+                            <li value="5:00 am">5:00am</li>
+                            <li value="5:30 am">5:30am</li>
+                            <li value="6:00 am">6:00am</li>
+                            <li value="6:30 am">6:30am</li>
+                            <li value="7:00 am">7:00am</li>
+                            <li value="7:30 am">7:30am</li>
+                            <li value="8:00 am">8:00am</li>
+                            <li value="8:30 am">8:30am</li>
+                            <li value="9:00 am">9:00am</li>
+                            <li value="9:30 am">9:30am</li>
+                            <li value="10:00 am">10:00am</li>
+                            <li value="10:30 am">10:30am</li>
+                            <li value="11:00 am">11:00am</li>
+                            <li value="11:30 am">11:30am</li>
+                            <li value="12:00 pm">12:00pm</li>
+                            <li value="12:30 pm">12:30pm</li>
+                            <li value="1:00 pm">1:00pm</li>
+                            <li value="1:30 pm">1:30pm</li>
+                            <li value="2:00 pm">2:00pm</li>
+                            <li value="2:30 pm">2:30pm</li>
+                            <li value="3:00 pm">3:00pm</li>
+                            <li value="3:30 pm">3:30pm</li>
+                            <li value="4:00 pm">4:00pm</li>
+                            <li value="4:30 pm">4:30pm</li>
+                            <li value="5:00 pm">5:00pm</li>
+                            <li value="5:30 pm">5:30pm</li>
+                            <li value="6:00 pm">6:00pm</li>
+                            <li value="6:30 pm">6:30pm</li>
+                            <li value="7:00 pm">7:00pm</li>
+                            <li value="7:30 pm">7:30pm</li>
+                            <li value="8:00 pm">8:00pm</li>
+                            <li value="8:30 pm">8:30pm</li>
+                            <li value="9:00 pm">9:00pm</li>
+                            <li value="9:30 pm">9:30pm</li>
+                            <li value="10:00 pm">10:00pm</li>
+                            <li value="10:30 pm">10:30pm</li>
+                            <li value="11:00 pm">11:00pm</li>
+                            <li value="11:30 pm">11:30pm</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="rate-fetch-parameter-inner-box">
+                <div class="start-date standardShopDiv">
+                    <span>End Date</span>
+                    <input type="text" placeholder="mm/dd/yyyy" readonly="readonly" name="endDate" class="date-picker dp standardShop" id="endDate" autocomplete="off">
+                </div>
+                <div class="end-date horizonShopDiv">
+                    <span>End Date Offset</span>
+                    <input class="ib horizonShop" id="endDateOffset" type="number" min="1" />
+                </div>
+                <div class="end-date">
+                    <span>Dropoff Time</span>
+                    <ul name="dropOffHour" id="dropOffHour" class="select-ul relative pointer">
+                        <li value="11:00 am">11:00am</li>
+                        <ul class="hidden drop-down" style="display: none;">
+                            <li value="12:00 am">12:00am</li>
+                            <li value="12:30 am">12:30am</li>
+                            <li value="1:00 am">1:00am</li>
+                            <li value="1:30 am">1:30am</li>
+                            <li value="2:00 am">2:00am</li>
+                            <li value="2:30 am">2:30am</li>
+                            <li value="3:00 am">3:00am</li>
+                            <li value="3:30 am">3:30am</li>
+                            <li value="4:00 am">4:00am</li>
+                            <li value="4:30 am">4:30am</li>
+                            <li value="5:00 am">5:00am</li>
+                            <li value="5:30 am">5:30am</li>
+                            <li value="6:00 am">6:00am</li>
+                            <li value="6:30 am">6:30am</li>
+                            <li value="7:00 am">7:00am</li>
+                            <li value="7:30 am">7:30am</li>
+                            <li value="8:00 am">8:00am</li>
+                            <li value="8:30 am">8:30am</li>
+                            <li value="9:00 am">9:00am</li>
+                            <li value="9:30 am">9:30am</li>
+                            <li value="10:00 am">10:00am</li>
+                            <li value="10:30 am">10:30am</li>
+                            <li value="11:00 am">11:00am</li>
+                            <li value="11:30 am">11:30am</li>
+                            <li value="12:00 pm">12:00pm</li>
+                            <li value="12:30 pm">12:30pm</li>
+                            <li value="1:00 pm">1:00pm</li>
+                            <li value="1:30 pm">1:30pm</li>
+                            <li value="2:00 pm">2:00pm</li>
+                            <li value="2:30 pm">2:30pm</li>
+                            <li value="3:00 pm">3:00pm</li>
+                            <li value="3:30 pm">3:30pm</li>
+                            <li value="4:00 pm">4:00pm</li>
+                            <li value="4:30 pm">4:30pm</li>
+                            <li value="5:00 pm">5:00pm</li>
+                            <li value="5:30 pm">5:30pm</li>
+                            <li value="6:00 pm">6:00pm</li>
+                            <li value="6:30 pm">6:30pm</li>
+                            <li value="7:00 pm">7:00pm</li>
+                            <li value="7:30 pm">7:30pm</li>
+                            <li value="8:00 pm">8:00pm</li>
+                            <li value="8:30 pm">8:30pm</li>
+                            <li value="9:00 pm">9:00pm</li>
+                            <li value="9:30 pm">9:30pm</li>
+                            <li value="10:00 pm">10:00pm</li>
+                            <li value="10:30 pm">10:30pm</li>
+                            <li value="11:00 pm">11:00pm</li>
+                            <li value="11:30 pm">11:30pm</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="source-loc-length-car-box">
+                <div class="provider-box" style="display:none;">
+                    <span>Providers</span>
+                    <ul name="API" id="ddlAPI" class="select-ul relative pointer">
+                        <li value="SS">Scrapping service</li>
+                        <ul class="hidden drop-down">
+                            @if (ViewBag.Providers != null)
+                            {
+                                foreach (var provider in ViewBag.Providers)
+                                {
+                                    <li value="@provider.ID" prvcode="@provider.Code">@provider.Name</li>
+                                }
+                            }
+                        </ul>
+                    </ul>
+
+                </div>
+                <div class="clear"></div>
+                <div class="sourc-loc-inner-box">
+                    <div class="source">
+                        <div class="source-inner-box">
+                            <span>Source</span> <span class="all-text">
+                                <input type="checkbox" id="source-all" name="source-all" disabled="disabled">
+                                All
+                            </span>
+                            <div class="sourcebox" id="sourcediv">
+                                <ul name="source" class="two-cols-select relative" size="5" id="source">
+                                    <select name="source" class="two-cols-select" size="6" id="source" onchange="getSourceBaseChangeTetherSettings(this)">
+                                        @if (ViewBag.ScrapperSources != null)
+                                        {
+                                            foreach (var ScrapperSource in ViewBag.ScrapperSources)
+                                            {
+                                                <option value="@ScrapperSource.ID" srccode="@ScrapperSource.Code" prvcode="@ScrapperSource.ProviderCode" providerid="@ScrapperSource.ProviderId" isgov="@Convert.ToString(ScrapperSource.IsGov)">@ScrapperSource.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sourc-loc-inner-box">
+                    <div class="location">
+                        <div class="location-inner-box">
+                            <span>Location</span> <span class="all-text cb-wrap">
+                                <input type="checkbox" class="all-text" id="locations-all" name="locations-all" disabled="disabled">
+                                <label for="locations-all">All</label>
+                            </span>
+                            <div class="locationbox" id="locationdiv">
+                                <ul name="locations" class="mright0 two-cols-select relative" size="5" id="locations">
+                                    <div class="loader_container_location">
+                                        <div class="loader-bga"></div>
+                                        <div class="loader mhide thide">
+                                            <img src="images/ajax_loader_blue_small.gif" />
+                                        </div>
+                                    </div>
+                                    <li>
+                                        <span class="innersearch">
+                                            <input class="left" type="text" id="searchLocation">
+
+                                        </span>
+                                    </li>
+                                    <ul class="list-complt">
+                                        <select name="locations" class="two-cols-select" size="5" id="locations" onchange="GetLocationSpecificCarClasses(this)">
+                                            <!-- ko foreach: locations -->
+                                            <option data-bind="html:Location, attr:{ value:LocationID ,BrandId:LocationBrandID ,LocationCode:LocationCode, companyid: BrandId, LOR: LOR }">ATL</option>
+                                            <!-- /ko -->
+                                        </select>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="source-loc-length-car-box">
+                <div class="sourc-loc-inner-box">
+                    <div class="source">
+                        <div class="source-inner-box">
+                            <span>Length</span>
+                            <span class="all-text length LORcheckboxes" id="LORcheckboxes">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="lengths-all" name="lengths-all">
+                                        <label for="lengths-all">All</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lengths-day" name="lengths-day">
+                                        <label for="lengths-day">D</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lengths-week" name="lengths-week">
+                                        <label for="lengths-week">W</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="lengths-month" name="lengths-month">
+                                        <label for="lengths-month">M</label>
+                                    </li>
+                                </ul>
+                            </span>
+                            <div class="sourcebox" id="rentallengthdiv">
+                                <ul name="lengths" class="two-cols-select relative" id="lengths">
+                                    <select name="lengths" class="two-cols-select" multiple="multiple" size="6" id="lengths" onchange="checkUncheckParent(this)">
+                                        @if (ViewBag.RentalLengths != null)
+                                        {
+                                            foreach (var lor in ViewBag.RentalLengths)
+                                            {
+                                                <option value="@lor.MappedID" rid="@lor.ID" @((lor.MappedID > 8 && lor.MappedID < 14) ? "style=display:none" : "")>@lor.Code</option>
+                                            }
+                                        }
+                                    </select>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sourc-loc-inner-box">
+                    <div class="location">
+                        <div class="location-inner-box">
+                            <span>Car class</span> <span class="all-text">
+                                <input type="checkbox" id="carClass-all" name="carClass-all" onclick="selectAllCheckBoxClick(this, 'carClass')">
+                                All
+                            </span>
+                            <div class="locationbox" id="carclassdiv">
+                                <ul name="carClass" class="mright0 two-cols-select relative" id="carClass">
+                                    <div class="loader_container_carclass ">
+                                        <div class="loader-bga"></div>
+                                        <div class="loader mhide thide">
+                                            <img src="images/ajax_loader_blue_small.gif" />
+                                        </div>
+                                    </div>
+                                    <select name="carClass" class="two-cols-select" multiple="multiple" size="6" id="carClass" onchange="checkUncheckCarClasses(this)">
+                                        <!-- ko foreach: carClasses -->
+                                        <option data-bind="html: Code, attr:{ value:ID }">ECAR</option>
+                                        <!-- /ko -->
+                                    </select>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ratesuggestion">
+        <span>RATE SUGGESTIONS</span>
+        <div class="pricegap-box">
+            <ul>
+                <li> <span class="pricegap-text bold">Price gap</span></li>
+                <li><span class="setminratebtn"><input type="button" id="SetMinRate" class="pointer" value="Set Rate Limits" /></span></li>
+                @*
+                    <li class="spacing-top-bottom"><span><input type="checkbox" id="wideGap" />Wide Gap</span></li>*@
+                <li class="spacing-top-bottom">
+                    <span><input type="checkbox" name="rulesetfilter" value="WideGap" id="wideGap" /> Wide Gap</span>
+                </li>
+                <li>
+                    <div id="RulesetCompeteSelection" style=" border: 1px solid #bfbfbf; width: 120px; height: 62px;">
+                        <span class="pricegap-text bold" style="margin-left:5px;padding:5px">Compete on</span>
+                        <span style="margin:5px;padding:5px;"><input type="radio" name="rulesetfilter" value="RdTotalCost" id="RdTotalCost" /> Total Cost</span><br />
+                        <span style="margin:5px;padding:5px;"><input type="radio" name="rulesetfilter" value="RdBaseCost" id="RdBaseCost" /> Base Cost</span>
+                    </div>
+                </li>
+                <li class="spacing-top-bottom">
+                    <span><input type="checkbox" name="rulesetfilter" value="IsGOV" id="IsGov" disabled="disabled" /> Is GOV</span>
+                </li>
+
+                <div id="divAutomationRulesetAvailable">
+                    <span id="NotFoundAutomationConsoleRuleSet" class="spacing-top-bottom" style="color:red; display:none">No RuleSet found.</span>
+                    <span id="AutomationConsoleRuleSetLink" class="spacing-top-bottom" style="display:none;"><a href="#" id="AutomationConsoleRuleSetLink" />Automation RuleSet Link</a></span>
+                </div>
+                <li class="spacing-top-bottom"> <span><input type="checkbox" id="activeTethering" />Active Tethering</span></li>
+                <li><span class="setminratebtn "><input type="button" id="TetherRate" class="pointer" value="Tethered Rates" /></span></li>
+                <li class="spacing-top-bottom"> <span><input type="checkbox" id="activeOpaqueRate" />Active Opaque Rate</span></li>
+                <li><span class="setminratebtn "><input type="button" id="btnOpaqueRate" class="pointer" value="Opaque Rates" /></span></li>
+            </ul>
+
+            <div class="days sendforupdate">
+                <div class="days-inner-box">
+                    <span>Send for Update</span> <span class="all-text">
+                        <input type="checkbox" class="sendUpdateWeekDays" onclick="selectAllCheckBoxClick(this, 'sendUpdateWeekDays')">
+                        All
+                    </span>
+                    <div class="weekdaysbox" id="sendUpdateWeekDays">
+                        <ul class="two-cols-select relative">
+                            <select class="two-cols-select rightRuleSetDays sendUpdateWeekDays" multiple="multiple" size="6" onchange="checkUncheckWeekDays('sendUpdateWeekDays')">
+                                @if (ViewBag.WeekDays != null)
+                                {
+                                    foreach (var WeekDay in ViewBag.WeekDays)
+                                    {
+                                        <option value="@WeekDay.ID">@WeekDay.Day</option>
+                                    }
+                                }
+                            </select>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+        <div style="clear:both;"></div>
+        <div class="save-box">
+            <span class="save"><input type="button" value="Save" style="cursor: pointer;" id="SaveCreateJob" /></span>
+            <button class="search-button scheduleNewJob" style="margin: 0px 10px !important; padding:10px !important;">Schedule New Job</button>
+            <span id="spanSave" style="padding: 10px 20px; color: green; display: none; font-weight: bold;">Job saved successfully.</span>
+            <span class="righseltext resetForm" onclick="resetFormSelection()"><img src="images/filter.png">Reset Selection</span>
+        </div>
+
+
+
+    </div>
+</div>
+@{
+    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+    //This line below line commented due to circular reference error while seriliazing and next below shop line is added to serialize specific properties
+    //var rentalLength = jss.Serialize(ViewBag.RentalLengths);
+    var rentalLength = jss.Serialize(((IEnumerable<RateShopper.Domain.Entities.RentalLength>)ViewBag.RentalLengths).Select(d => new RateShopper.Domain.DTOs.RentalLengthDTO { MappedID = d.MappedID, Code = d.Code, ID = d.ID, AssociateMappedId = d.AssociateMappedId, DisplayOrder = d.DisplayOrder, IsSearchEnable = d.IsSearchEnable }).AsEnumerable());
+}
+<script>
+    var allRentalLengths = JSON.parse('@Html.Raw(rentalLength)');
+</script>

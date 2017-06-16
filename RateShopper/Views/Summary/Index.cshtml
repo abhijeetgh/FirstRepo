@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Summary";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+<div class="container pageminht">
+    <div class="panel-container pageminht">
+        <div class="loader_container_main" style="display:none;">
+            <div class="loader-bg"></div>
+            <div class="loader">
+                <img src="images/ajax_loader_blue_large.gif" style="height: 150px;" />
+            </div>
+        </div>
+        <div id="main">
+            <div>
+                <div class="search-results">
+
+                    <div class="left-col-toggle pointer">
+                        <img src="images/search-toggle-e.png" alt="toggle" />
+                    </div>
+                    <div id="left-col">
+                        @{Html.RenderPartial("~/Views/Partials/_SearchSelectionPanel.cshtml");}
+                        @{Html.RenderPartial("~/Views/Partials/_SearchSummaryPanel.cshtml");}
+                    </div>
+                    <div id="right-col">
+                        @{Html.RenderPartial("~/Views/Partials/_SummarySearchGridResult.cshtml");}
+                    </div>
+                    <div class="clear"></div>
+                </div>                
+            </div>
+        </div>        
+    </div>
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+@Styles.Render("~/css/search.css")
+@Scripts.Render("~/bundles/SummaryBundleJS")
+<script>
+    var SummayShopAjaxURLSettings = {
+        GetCarClasses: '@Url.Action("GetCarClasses", "Summary")',        
+        GetLocations: '@Url.Action("GetLocations", "Summary")',
+        GetLocationCarClasses: '@Url.Action("GetLocationCarClasses", "Summary")',
+        InitiateSummarySearch: '@Url.Action("InitiateSummarySearch", "Summary")',
+        DeleteSummaryShop: '@Url.Action("DeleteSummaryShop", "Summary")',
+        GetFTBSummary: '@Url.Action("GetFTBSummaryData", "Summary")',
+        FTBSummaryList: '@Url.Action("FTBGetSearchSummary", "Summary")'
+    }
+</script>

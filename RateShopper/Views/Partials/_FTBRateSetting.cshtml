@@ -1,0 +1,105 @@
+﻿<!-- ko foreach: FTBRateDTO -->
+<!-- ko foreach: DicFTBRateDetails -->
+<div class="fright" data-bind="visible:!(!value[0].IsSplitMonth && $index()>0), attr:{class:$index()>0?'fright splittedsection':'fright'}">
+    <ul class="table-ul-right split-month-box">
+        <div class="fleft divCopymonth" style="margin-top:7px;">
+            <li>
+                <span class="bold">Copy From: </span>
+                <ul class="relative pointer dropdown copyfrom">
+                    <li value="0">Select Month</li>
+                    <ul class="hidden drop-down1" data-bind="foreach:$parent.LstCopyMonths()">
+                        <li value="1" data-bind="html:MonthWithYear, attr:{month:Month,year:Year, issplit:IsSplitMonth?'true':'false',copyforindex:$parentContext.$index()+1, labels:Labels }"></li>
+                    </ul>
+                </ul>
+
+            </li>
+        </div>
+        <div class="splitoptions">
+            <!-- ko foreach:$parent.SplitLabels-->
+            <li style="display:none;">
+                <input type="radio" data-bind="attr:{id:'splitid_'+$index()+'_'+$parentContext.$index(), value:SplitIndex, name:'splitmonth'+$parentContext.$index(), checked:($index()==0)?true:false}">
+                <label for="splitid_1" data-bind="attr:{for:'splitid_'+$index()+'_'+$parentContext.$index(),}, html:Label">1st - 10th day of month</label>
+            </li>
+            <!-- /ko -->
+            <input type="submit" class="search-button copysave validatepastdate" value="Copy & Save" />
+        </div>
+        <div class="clear"></div>
+    </ul>
+    <input type="button" class="search-button" id="targetMgtPopup" value="Target Management" data-bind="attr:{style:$index()>=1?'visibility:hidden':''}" />
+</div>
+<div class="clear" data-bind="visible:!(!value[0].IsSplitMonth && $index()>0), attr:{class:$index()>0?'clear splittedsection':'clear'}"></div>
+<div id="ftb-rating-table_1" class="ftb-rating-table" data-bind="visible:!(!value[0].IsSplitMonth && $index()>0), attr:{class:$index()>0?'ftb-rating-table splittedsection':'ftb-rating-table', id:'ftb-rating-table_'+value[0].FTBRatesId, index:$index()}">
+    <span class="splittedsection" data-bind="visible:value[0].IsSplitMonth"><span data-bind="attr:{class:'splitted_date_range_'+$index()}">Date Range 01/01/2016 through </span><input placeholder="mm/dd/yyyy" data-bind="visible:$index()>=1?false:true, attr:{id:'splitDatePicker_'+$index()}" type="text" name="splitDatePicker" class="left date-picker dp" autocomplete="off" readonly="readonly" style="width:160px;"></span>
+    <table class="uppercase table-bordered">
+        <thead>
+            <tr>
+                <td>CAR CLASS</td>
+                <td>SUNDAY <label style="color:red">*</label></td>
+                <td>MONDAY <label style="color:red">*</label></td>
+                <td>TUESDAY <label style="color:red">*</label></td>
+                <td>WEDNESDAY <label style="color:red">*</label></td>
+                <td>THURSDAY <label style="color:red">*</label></td>
+                <td>FRIDAY <label style="color:red">*</label></td>
+                <td>SATURDAY <label style="color:red">*</label></td>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:value">
+            <tr data-bind="attr:{id:FTBRateDetailsId, data_class:CarClassId, data_splitIndex:SplitIndex}" data-edit="0">
+                <td>
+                    <input type="checkbox" id="split" data-bind="attr:{id:'chkCarClass'+SplitIndex+'_'+CarClassId, class:'carclasscheckbox'}, checked:FTBRateDetailsId>0">
+                    <label for="split" data-bind="attr:{for:'chkCarClass'+SplitIndex+'_'+CarClassId}, html:CarClass">ECAR</label>
+                </td>
+                <td><input type="text" maxlength="8" name="Sunday" data-bind="attr:{value:Sunday, id:'txtSunday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+                <td><input type="text" maxlength="8" name="Monday" data-bind="attr:{value:Monday, id:'txtMonday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+                <td><input type="text" maxlength="8" name="Tuesday" data-bind="attr:{value:Tuesday, id:'txtTuesday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+                <td><input type="text" maxlength="8" name="Wednesday" data-bind="attr:{value:Wednesday, id:'txtWednesday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+                <td><input type="text" maxlength="8" name="Thursday" data-bind="attr:{value:Thursday, id:'txtThursday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+                <td><input type="text" maxlength="8" name="Friday" data-bind="attr:{value:Friday, id:'txtFriday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+                <td><input type="text" maxlength="8" name="Saturday" data-bind="attr:{value:Saturday, id:'txtSaturday_'+SplitIndex+'_'+CarClassId}, enable:FTBRateDetailsId>0"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- /ko -->
+<!-- /ko -->
+
+
+<div id="ftbBottomBar">
+    <div class="fleft">
+
+        <input type="submit" id="btnCancelFTBRates" class="search-button validatepastdate" value="Cancel" />
+        <input type="submit" id="btnSaveFTBRates" class="search-button orng validatepastdate" value="Save" />
+        <span class="ftbSelect">
+            <span class="bold rateCode">LOR</span>
+            <span class="bold" id="lorRateCode" style="display:none">
+                STD
+            </span>
+            <ul name="ftbSelect" size="14" id="ftbLORSelect" class="ui-selectable">
+                @*@if (ViewBag.RentalLengths != null)
+                {
+                    foreach (var lor in ViewBag.RentalLengths)
+                    {
+                        <li value="@lor.MappedID">@lor.Code</li>
+                    }
+                }*@
+            </ul>
+        </span>
+    </div>
+    <div class="blackout fright">
+        <input type="checkbox" id="chkBlackout">
+        <label class="bold" for="chkBlackout">Black out period</label>
+        <input type="hidden" id="oldBlackoutCheckbox" />
+        <span class="blackOut" style="position:relative;">
+            Start Date
+            <input placeholder="mm/dd/yyyy" type="text" name="startDate" class="left date-picker dp" id="blackoutStartDate" autocomplete="off" readonly="readonly">
+            <input type="hidden" id="oldBlackoutStartDate" />
+        </span>
+        <span class="blackOut" style="position:relative;">
+            End Date
+            <input placeholder="mm/dd/yyyy" type="text" name="endDate" class="left date-picker dp" id="blackoutEndDate" autocomplete="off" readonly="readonly">
+            <input type="hidden" id="oldBlackoutEndDate" />
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>

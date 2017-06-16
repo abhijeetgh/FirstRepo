@@ -1,0 +1,117 @@
+#gt-btn {
+    margin: 15px;
+}
+
+.orng {
+    background: #d46f33 !important;
+    margin-left: 10px;
+}
+
+#globalTether table {
+    float: left;
+    border-spacing: 0;
+    border: 1px solid #b6b6b6;
+    border-right: 0;
+}
+
+#globalTether ul {
+    list-style: none;
+    margin: 8px 15px;
+}
+
+#globalTether input[type="text"] {
+    padding: 4px;
+    width: 28%;
+}
+
+#globalTether .gtleft td:nth-child(2) {
+    width: 200px;
+}
+
+#globalTether thead td {
+    background: #2988b9;
+    color: #fff;
+}
+
+#globalTether table td {
+    border-right: 1px solid #b6b6b6;
+}
+
+#globalTether thead td {
+    border-bottom: 1px solid #b6b6b6;
+    font-weight: bold;
+}
+
+#globalTether td {
+    padding: 10px 20px;
+}
+
+#globalTether .wide-body-side-container select {
+    padding: 0.7em 0;
+    background: #fbfbfb;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.gt-top {
+    background: #e5e5e5;
+    font-size: 1.2em;
+    padding: 13px 15px;
+}
+
+
+.lens {
+    position: absolute;
+    top: 30%;
+    right: 10%;
+}
+
+.gtleft {
+    padding: 0 30px 0 15px;
+    margin-bottom: 30px;
+    min-height: 700px;
+}
+
+.btnDisabled {
+    cursor: default;
+    background: #FFCC99 !important;
+}
+
+/*#tblLocations td:nth-child(odd){
+    background:
+
+}*/
+.selected,
+.drop-down li:hover,
+.drop-down1 li:hover {
+    background: #328efe;
+    color: #fff;
+}
+
+#tblTetheredLocations tr:nth-child(even), #tblTetherRates tr:nth-child(1), .grey_bg {
+    background: #f4f4f4;
+}
+
+#tblTetherRates tr {
+    background: #fff;
+}
+
+.error-msg {
+    color: #f00;
+    font-weight: bold;
+    display: none;
+}
+
+.spnTetheredLocations {
+    margin-left: 5px; 
+    color:#4375E0; 
+    text-decoration: underline !important;
+}
+
+.spnTetheredLocationsClicked {
+    color:chocolate !important;
+}
+
+.table-ul-right li {
+    margin-right:0px !important;
+}

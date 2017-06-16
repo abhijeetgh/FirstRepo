@@ -1,0 +1,52 @@
+﻿@model RateShopper.Domain.Entities.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm("Login", "Account", new { RedirectTo = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <table class="login-container" cellspacing="0" border="0">
+                <thead>
+                    <tr class="border">
+                        <th colspan="2" align="left">Rate Management System</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="login-label">@Html.LabelFor(m => m.UserName)</td>
+                        <td>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                            <span style="color:red;">@Html.ValidationMessageFor(m => m.UserName)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="login-label">@Html.LabelFor(m => m.Password)</td>
+                        <td>
+                            @Html.PasswordFor(m => m.Password, new { @class = "input" })
+                            <span style="color:red;">@Html.ValidationMessageFor(m => m.Password)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Login" name="btnLogin" id="BtnLogin" class="btnLogin"></td>
+                    </tr>
+
+                    <tr><td colspan="2"><span style="color:red;">@Html.ValidationSummary(true)</span></td></tr>
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
+
+@Styles.Render("~/css/login.css")
+@Scripts.Render("~/scripts/login.js")

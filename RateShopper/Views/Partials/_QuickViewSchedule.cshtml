@@ -1,0 +1,367 @@
+﻿<div class="quickview-schedule-popup">
+    <div class="schedule-section-top pointer bold">
+        <span class="uppercase">Set as quick view </span>
+        <img src="images/tether_ratesClose.png" title="Show Reports" class="float-right close-quick-view-popup">
+    </div>
+    <form class="quickview-schedule-input">
+        <label id="quickviewmessage"></label>
+        <div class="complete-width">
+            <div>
+                <div style="width:29%; float:left;">
+                    <div class="quick-view-schedule-container quickviewschedule">
+                        <label>
+                            Quick View Schedule
+                        </label><br />
+                        <input type="radio" name="scheduletime" value="0" id="rdosch_0"><label for="rdosch_0" style="font-weight:normal">Run Now</label> <br />
+                        <input type="radio" name="scheduletime" value="30" id="rdosch_30"><label for="rdosch_30" style="font-weight:normal">Run After 30 Minutes</label><br />
+                        <input type="radio" name="scheduletime" value="60" id="rdosch_60"><label for="rdosch_60" style="font-weight:normal">Run After An Hour</label><br />
+                        <input type="radio" name="scheduletime" value="120" id="rdosch_120" checked="checked"><label for="rdosch_120" style="font-weight:normal">Run After Two Hours</label><br />
+                        <input type="radio" name="scheduletime" value="1" id="rdosch_1"><label for="rdosch_1" style="font-weight:normal">Custom Time</label><br />
+                    </div>
+                    <div class="custom-time-container customtimecontainer" style="display:none;margin-top:15px;">
+                        <div class="float-left hours-time-container">
+
+
+                            <div class="relative select_tym">
+                                <span>Select Hours</span>
+                                <input type="text" id="customInputHours" name="customHours" readonly="readonly" class="custom-time ib" title="">
+                                <div id="customInputHoursSelect" class="ui-dialog ui-widget-content ui-corner-aall" style="width: 100px; z-index: 99; left: 0px; top: 40px; display: block;">
+                                    <div class="ui-dialog-content ui-widget-content custom-select" style="height:100px;overflow:auto">
+                                        <label><input type="radio" value="00" name="rdoHours" /><span> Midnight</span></label>
+                                        <label><input type="radio" value="01" name="rdoHours" /><span> 1 AM</span></label>
+                                        <label><input type="radio" value="02" name="rdoHours" /><span> 2 AM</span></label>
+                                        <label><input type="radio" value="03" name="rdoHours" /><span> 3 AM</span></label>
+                                        <label><input type="radio" value="04" name="rdoHours" /><span> 4 AM</span></label>
+                                        <label><input type="radio" value="05" name="rdoHours" /><span> 5 AM</span></label>
+                                        <label><input type="radio" value="06" name="rdoHours" /><span> 6 AM</span></label>
+                                        <label><input type="radio" value="07" name="rdoHours" /><span> 7 AM</span></label>
+                                        <label><input type="radio" value="08" name="rdoHours" /><span> 8 AM</span></label>
+                                        <label><input type="radio" value="09" name="rdoHours" /><span> 9 AM</span></label>
+                                        <label><input type="radio" value="10" name="rdoHours" /><span> 10 AM</span></label>
+                                        <label><input type="radio" value="11" name="rdoHours" /><span> 11 AM</span></label>
+                                        <label><input type="radio" value="12" name="rdoHours" /><span> Noon</span></label>
+                                        <label><input type="radio" value="13" name="rdoHours" /><span> 1 PM</span></label>
+                                        <label><input type="radio" value="14" name="rdoHours" /><span> 2 PM</span></label>
+                                        <label><input type="radio" value="15" name="rdoHours" /><span> 3 PM</span></label>
+                                        <label><input type="radio" value="16" name="rdoHours" /><span> 4 PM</span></label>
+                                        <label><input type="radio" value="17" name="rdoHours" /><span> 5 PM</span></label>
+                                        <label><input type="radio" value="18" name="rdoHours" /><span> 6 PM</span></label>
+                                        <label><input type="radio" value="19" name="rdoHours" /><span> 7 PM</span></label>
+                                        <label><input type="radio" value="20" name="rdoHours" /><span> 8 PM</span></label>
+                                        <label><input type="radio" value="21" name="rdoHours" /><span> 9 PM</span></label>
+                                        <label><input type="radio" value="22" name="rdoHours" /><span> 10 PM</span></label>
+                                        <label><input type="radio" value="23" name="rdoHours" /><span> 11 PM</span></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="float-left minutes-time-container" style="width:125px;">
+
+                            <div class="select_tym relative custom-select-minutes">
+                                <span>Select Minutes</span>
+                                <input type="text" id="customInputMinutes" name="customMinutes" readonly="readonly" class="custom-time ib">
+                                <div id="customInputMinutesSelect" class="ui-dialog ui-widget-content ui-corner-aall" style="width: 100px; z-index: 99; left: 0px; top: 40px; display: block;">
+                                    <div class="ui-dialog-content ui-widget-content custom-select" style="height:100px;overflow:auto">
+                                        <label><input type="radio" value="00" name="rdoMinutes" /><span> :00</span></label>
+                                        <label><input type="radio" value="05" name="rdoMinutes" /><span> :05</span></label>
+                                        <label><input type="radio" value="10" name="rdoMinutes" /><span> :10</span></label>
+                                        <label><input type="radio" value="15" name="rdoMinutes" /><span> :15</span></label>
+                                        <label><input type="radio" value="20" name="rdoMinutes" /><span> :20</span></label>
+                                        <label><input type="radio" value="25" name="rdoMinutes" /><span> :25</span></label>
+                                        <label><input type="radio" value="30" name="rdoMinutes" /><span> :30</span></label>
+                                        <label><input type="radio" value="35" name="rdoMinutes" /><span> :35</span></label>
+                                        <label><input type="radio" value="40" name="rdoMinutes" /><span> :40</span></label>
+                                        <label><input type="radio" value="45" name="rdoMinutes" /><span> :45</span></label>
+                                        <label><input type="radio" value="50" name="rdoMinutes" /><span> :50</span></label>
+                                        <label><input type="radio" value="55" name="rdoMinutes" /><span> :55</span></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="float-left" style="width:70%;">
+                    <div style="border: 1px solid #bfbfbf; width: 100%; padding-bottom: 7px; padding-top: 5px;">
+                        <div class="float-left w33" style="margin-left:7px;">
+                            <label>
+                                Quick View Tracking Competitors
+                            </label>
+                            <div class="loader_container_quickviewcompetitors" style="position:relative;display:none;">
+                                @*<div class="loader-bga"></div>*@
+                                <div class="loader mhide thide" style="top:100px;">
+                                    <img src="images/ajax_loader_blue_small.gif" />
+                                </div>
+                            </div>
+                            <select id="lstQuickViewCompetitors" size="6" onclick="AddPopulateCompanies(this)" multiple="multiple" data-bind="    foreach: competitors()" class="float-right quick-view-competitor-list complete-width ">
+                                <option data-bind="attr:{ value:ID, selected:SelectedForQuickView, code:Code}, html:Name"></option>
+                            </select>
+
+                        </div>
+                        <div class="float-left w33" style="padding-left:15px">
+                            <label>
+                                Car Class <br />Tracking
+                            </label>
+                            <select id="lstCarClasses" size="6" multiple="multiple" data-bind="foreach: trackingCarClasses()" class="quick-view-competitor-list complete-width">
+                                <option data-bind="attr:{value:ID, selected:SelectedForQuickView, code:Code}, html:Code"></option>
+                            </select>
+                        </div>
+                        <div class="float-left quick-view-schedule-container " style="margin-left:115px">
+                            <label>
+                                Moniter based on
+                            </label><br />
+                            <input type="radio" id="RBTotalRate" checked="checked" name="rate" />&nbsp;<label style="font-weight:normal" for="RBTotalRate">Total Rate</label> <br />
+                            <input type="radio" id="RBBaseRate" name="rate" />&nbsp;<label style="font-weight:normal" for="RBBaseRate">Base Rate</label>
+                            <br />
+                            <br />
+                            <input type="checkbox" id="EmailNotification" />&nbsp;<label style="font-weight:normal">Email Notification</label>
+                            <br />
+
+                            <ul class="wide-body-side-container table-ul-right" style="margin-top:20px">
+
+                                <li style="width:165px">
+                                    Pickup Time
+
+                                    <ul id="shoppickuptime" name="shoppickuptime" class="dropdown relative pointer time-dropdown">
+                                        <li value="11:00 am">11:00am</li>
+                                        <ul class="hidden drop-down">
+                                            <li val="00:00" value="12:00 am">12:00am</li>
+                                            <li val="00:30" value="12:30 am">12:30am</li>
+                                            <li val="01:00" value="1:00 am">1:00am</li>
+                                            <li val="01:30" value="1:30 am">1:30am</li>
+                                            <li val="02:00" value="2:00 am">2:00am</li>
+                                            <li val="02:30" value="2:30 am">2:30am</li>
+                                            <li val="03:00" value="3:00 am">3:00am</li>
+                                            <li val="03:30" value="3:30 am">3:30am</li>
+                                            <li val="04:00" value="4:00 am">4:00am</li>
+                                            <li val="04:30" value="4:30 am">4:30am</li>
+                                            <li val="05:00" value="5:00 am">5:00am</li>
+                                            <li val="05:30" value="5:30 am">5:30am</li>
+                                            <li val="06:00" value="6:00 am">6:00am</li>
+                                            <li val="06:30" value="6:30 am">6:30am</li>
+                                            <li val="07:00" value="7:00 am">7:00am</li>
+                                            <li val="07:30" value="7:30 am">7:30am</li>
+                                            <li val="08:00" value="8:00 am">8:00am</li>
+                                            <li val="08:30" value="8:30 am">8:30am</li>
+                                            <li val="09:00" value="9:00 am">9:00am</li>
+                                            <li val="09:30" value="9:30 am">9:30am</li>
+                                            <li val="10:00" value="10:00 am">10:00am</li>
+                                            <li val="10:30" value="10:30 am">10:30am</li>
+                                            <li val="11:00" value="11:00 am">11:00am</li>
+                                            <li val="11:30" value="11:30 am">11:30am</li>
+                                            <li val="12:00" value="12:00 pm">12:00pm</li>
+                                            <li val="12:30" value="12:30 pm">12:30pm</li>
+                                            <li val="13:00" value="1:00 pm">1:00pm</li>
+                                            <li val="13:30" value="1:30 pm">1:30pm</li>
+                                            <li val="14:00" value="2:00 pm">2:00pm</li>
+                                            <li val="14:30" value="2:30 pm">2:30pm</li>
+                                            <li val="15:00" value="3:00 pm">3:00pm</li>
+                                            <li val="15:30" value="3:30 pm">3:30pm</li>
+                                            <li val="16:00" value="4:00 pm">4:00pm</li>
+                                            <li val="16:30" value="4:30 pm">4:30pm</li>
+                                            <li val="17:00" value="5:00 pm">5:00pm</li>
+                                            <li val="17:30" value="5:30 pm">5:30pm</li>
+                                            <li val="18:00" value="6:00 pm">6:00pm</li>
+                                            <li val="18:30" value="6:30 pm">6:30pm</li>
+                                            <li val="19:00" value="7:00 pm">7:00pm</li>
+                                            <li val="19:30" value="7:30 pm">7:30pm</li>
+                                            <li val="20:00" value="8:00 pm">8:00pm</li>
+                                            <li val="20:30" value="8:30 pm">8:30pm</li>
+                                            <li val="21:00" value="9:00 pm">9:00pm</li>
+                                            <li val="21:30" value="9:30 pm">9:30pm</li>
+                                            <li val="22:00" value="10:00 pm">10:00pm</li>
+                                            <li val="22:30" value="10:30 pm">10:30pm</li>
+                                            <li val="23:00" value="11:00 pm">11:00pm</li>
+                                            <li val="23:30" value="11:30 pm">11:30pm</li>
+                                        </ul>
+                                    </ul>
+                                    @*<ul name="source" id="dimension-source" class="dropdown relative pointer LocationMgmtDropdown">
+                                        <li value="EZ">EZ Rent A Car</li>
+                                        <ul class="hidden drop-down1" id="ddlBrand-loc">
+                                            <li id="10002" value="EZ" class="selected">EZ Rent A Car</li>
+                                            <li id="10003" value="AD">Advantage</li>
+                                        </ul>
+                                    </ul>*@
+
+                                </li>
+                            </ul>
+                            <br />
+                            <ul class="wide-body-side-container table-ul-right">
+
+                                <li style="width:166px">
+                                    Dropoff Time
+
+                                    <ul name="dropofftime" id="dropofftime" class="dropdown relative pointer time-dropdown">
+                                        <li value="11:00 am">11:00am</li>
+                                        <ul class="hidden drop-down">
+                                            <li val="00:00" value="12:00 am">12:00am</li>
+                                            <li val="00:30" value="12:30 am">12:30am</li>
+                                            <li val="01:00" value="1:00 am">1:00am</li>
+                                            <li val="01:30" value="1:30 am">1:30am</li>
+                                            <li val="02:00" value="2:00 am">2:00am</li>
+                                            <li val="02:30" value="2:30 am">2:30am</li>
+                                            <li val="03:00" value="3:00 am">3:00am</li>
+                                            <li val="03:30" value="3:30 am">3:30am</li>
+                                            <li val="04:00" value="4:00 am">4:00am</li>
+                                            <li val="04:30" value="4:30 am">4:30am</li>
+                                            <li val="05:00" value="5:00 am">5:00am</li>
+                                            <li val="05:30" value="5:30 am">5:30am</li>
+                                            <li val="06:00" value="6:00 am">6:00am</li>
+                                            <li val="06:30" value="6:30 am">6:30am</li>
+                                            <li val="07:00" value="7:00 am">7:00am</li>
+                                            <li val="07:30" value="7:30 am">7:30am</li>
+                                            <li val="08:00" value="8:00 am">8:00am</li>
+                                            <li val="08:30" value="8:30 am">8:30am</li>
+                                            <li val="09:00" value="9:00 am">9:00am</li>
+                                            <li val="09:30" value="9:30 am">9:30am</li>
+                                            <li val="10:00" value="10:00 am">10:00am</li>
+                                            <li val="10:30" value="10:30 am">10:30am</li>
+                                            <li val="11:00" value="11:00 am">11:00am</li>
+                                            <li val="11:30" value="11:30 am">11:30am</li>
+                                            <li val="12:00" value="12:00 pm">12:00pm</li>
+                                            <li val="12:30" value="12:30 pm">12:30pm</li>
+                                            <li val="13:00" value="1:00 pm">1:00pm</li>
+                                            <li val="13:30" value="1:30 pm">1:30pm</li>
+                                            <li val="14:00" value="2:00 pm">2:00pm</li>
+                                            <li val="14:30" value="2:30 pm">2:30pm</li>
+                                            <li val="15:00" value="3:00 pm">3:00pm</li>
+                                            <li val="15:30" value="3:30 pm">3:30pm</li>
+                                            <li val="16:00" value="4:00 pm">4:00pm</li>
+                                            <li val="16:30" value="4:30 pm">4:30pm</li>
+                                            <li val="17:00" value="5:00 pm">5:00pm</li>
+                                            <li val="17:30" value="5:30 pm">5:30pm</li>
+                                            <li val="18:00" value="6:00 pm">6:00pm</li>
+                                            <li val="18:30" value="6:30 pm">6:30pm</li>
+                                            <li val="19:00" value="7:00 pm">7:00pm</li>
+                                            <li val="19:30" value="7:30 pm">7:30pm</li>
+                                            <li val="20:00" value="8:00 pm">8:00pm</li>
+                                            <li val="20:30" value="8:30 pm">8:30pm</li>
+                                            <li val="21:00" value="9:00 pm">9:00pm</li>
+                                            <li val="21:30" value="9:30 pm">9:30pm</li>
+                                            <li val="22:00" value="10:00 pm">10:00pm</li>
+                                            <li val="22:30" value="10:30 pm">10:30pm</li>
+                                            <li val="23:00" value="11:00 pm">11:00pm</li>
+                                            <li val="23:30" value="11:30 pm">11:30pm</li>
+                                        </ul>
+                                    </ul>
+                                    @*<ul name="source" id="dimension-source" class="dropdown relative pointer LocationMgmtDropdown">
+                <li value="EZ">EZ Rent A Car</li>
+                <ul class="hidden drop-down1" id="ddlBrand-loc">
+                    <li id="10002" value="EZ" class="selected">EZ Rent A Car</li>
+                    <li id="10003" value="AD">Advantage</li>
+                </ul>
+            </ul>*@
+
+                                </li>
+                            </ul>                          
+                            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="quickview_group quick-view-schedule-container">
+                        <div id="QuickViewGroupContainer">
+
+                        </div>
+                        <div id="QuickViewUpdateGroupContainer" style="display:none">
+                            <!--ko foreach:quickViewGroupData-->
+                            <table id="tblQuickViewGroup" data-bind="attr:{groupId:groupId}">
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Competitors
+                                        </label>
+                                    </td>
+                                    <!--ko foreach: QuickViewCarClassGroups-->
+                                    <td>
+                                        <label data-bind="text:'Group '+($index()+1)"></label>
+                                    </td>
+                                    <!--/ko-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select id="lstCompetitors" size="6" multiple="multiple" data-bind="attr:{selectedItem:CompetitorIds,companyids:CompetitorIds,GroupIndex:($index()+1)}" class="" style="width:200px" onchange="AutoPopulateQuickViewGroupCompanies(this)">
+                                            <!-- ko foreach: lstQuickViewGroupCompany -->
+                                            <option data-bind="html:CompanyName, attr:{value:CompanyID}" selected="selected"></option>
+                                            <!-- /ko -->
+                                        </select>
+                                    </td>
+                                    <!--ko foreach: QuickViewCarClassGroups-->
+                                    <td class="top3">
+                                        @*<label style="font-weight:normal">Gap</label><br />
+                                            <input type="text" data-bind="attr:{value:GapValueGroup,id:'GapValueGroup_'+($index()+1),groupgapid:Id}" /><br /><br />*@
+                                        <input type="hidden" data-bind="attr:{groupgapid:Id,id:'carClassGroupId'+($index()+1)}" />
+                                        <label style="font-weight:normal">Deviation</label><br />
+                                        <input type="text" data-bind="attr:{value:DeviationValueGroup,id:'DeviationValueGroup_'+($index()+1)},groupgapid:Id" />
+                                    </td>
+                                    <!--/ko-->
+                                </tr>
+                            </table>
+                            <!--/ko-->
+                        </div>
+                        <input type="button" class="search-button" id="AddQuickViewGroup" value="Add Group" />
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <div style="margin-top:5px;">
+                <div>
+                    <span style="font-size:12px;">
+                        Note: <br />
+                        Group 1 - ECAR, CCAR, ICAR, SCAR, FCAR, XXAR <br />
+                        Group 2 - All car classes other than Group 1
+                    </span>
+                </div>
+                <div class="qv-btn">
+                    <button class="save-button" id="btnQuickViewSave" style="margin-left:0px;">Save</button>
+                    <button class="cancel-button close-quick-view-popup" id="btnQuickViewCancel">Cancel</button>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+
+
+    </form>
+
+</div>
+<table id="tblQuickViewGroup" class="defaultQuickViewGroup" style="display:none;">
+    <tr>
+        <td>
+            <label>
+                Competitors
+            </label>
+        </td>
+        </td>
+        @{
+            for (int i = 1; i <= 2; i++)
+            {
+                <td>
+                    <label>
+                        Group @i
+                    </label>
+                </td>
+            }
+        }
+    </tr>
+    <tr>
+        <td>
+            <select id="lstCompetitors" size="6" multiple="multiple" class="" style="width:200px" onchange="AutoPopulateQuickViewGroupCompanies(this)"></select>
+        </td>
+        @{
+            for (int i = 1; i <= 2; i++)
+            {
+                <td class="top3">
+                    @*<label style="font-weight:normal">Gap</label><br />
+                        <input type="text" id="GapValueGroup_@i" /><br /><br />*@
+                    <label style="font-weight:normal">Deviation</label><br />
+                    <input type="text" id="DeviationValueGroup_@i" />
+                </td>
+            }
+        }
+    </tr>
+</table>

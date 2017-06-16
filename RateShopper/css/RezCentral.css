@@ -1,0 +1,65 @@
+﻿.tablep1 {
+    float: left;
+    border-spacing: 0;
+    margin: 11px 0px;
+    border: 1px solid #b6b6b6;
+    border-right: 0;
+    /*min-width: 440px;*/
+}
+
+/*.tablep1 tr:nth-child(odd) {
+    background: #f4f4f4;
+}*/
+#RezWeekdaysSelection .selected {
+    background: #fe8881;
+}
+#DivRezRateSection thead td {
+    background: #2988b9;
+    color: #fff;
+    border-bottom: 1px solid #b6b6b6;
+}
+
+#DivRezRateSection input[type=text] {
+    padding: 4px;
+    text-align:center;
+    width: 75%;
+}
+
+.sourc-loc-inner-box {
+    float: left;
+    margin-right: 13px;
+    margin-top: 15px;
+    width: 150px;
+}
+
+.sourc-inner-box {
+    float: right;
+    margin-right: 13px;
+    margin-top: 15px;
+    width: 150px;
+}
+
+.sourc-inner-box span {
+    color: #3b3b3b;
+    float: left;
+    font-weight: bold;
+    padding: 6px 0;
+    width: 100%;
+}
+
+#RezWeekdaysSelection .Days_ul {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+#RezWeekdaysSelection .Days_ul li {
+    border: 1px solid #c4c4c4;
+    display: inline;
+    float: left;
+    font-weight: normal;
+    margin: 0;
+    padding: 6px;
+}

@@ -1,0 +1,112 @@
+﻿<form method="post">
+    <div id="result-section">
+        <div class="body-section-top pointer bold">
+            <span class="uppercase" id="headersection">Summary Results</span>
+            <span class="LOR red" style="display:none">LOR was changed.</span>
+            <span class="fright">
+                <input type="hidden" name="viewToggleSearchParam" id="viewToggleSearchParam" value="">
+            </span>
+        </div>
+
+        <div class="wide-body-side-container">
+            <div class="side-section-body-new">
+                <ul class="w100 table-ul-right mhide bold dailyFilter">
+
+                    <li>
+                        Source
+                        <ul id="dimension-source" class="relative pointer">
+                            <li></li>
+                            <ul class="hidden drop-down1">
+                                <li></li>
+                            </ul>
+                        </ul>
+
+                    </li>
+                    <li class="classic_hide next-prev-width">
+                        <a href="#" class="left-arrow dailyViewPrevDay" style="display: none;"><img class=" middle" src="images/Search-left_arrow.jpg"></a>
+                        <img class="right-arrow dailyViewPrevDayDisabled middle" style="opacity:0.4" src="images/Search-left_arrow.jpg">
+                        <span class="uppercase showSelectedDate"></span>
+                        <a href="#" class="right-arrow dailyViewNextDay"><img class="middle" src="images/Search-right_arrow.jpg"></a>
+                        <img class="right-arrow dailyViewNextDayDisabled middle" style="display: none; opacity: 0.4" src="images/Search-right_arrow.jpg">
+                        <!--</div>-->
+                    </li>
+                    <li>
+                        Location
+                        <ul id="location" class="relative pointer">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li></li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <!--  Hide this item in quick view serach -->
+                    <li class="noQuickView">
+
+                        <span class="bold">
+                            Length
+                        </span>
+                        <ul id="length" class="relative pointer">
+                            <li value="" selected="selected"></li>
+                            <ul class="hidden drop-down1">
+                                <li value=""></li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>Date Range  : </span>
+                        <span style="font-weight: normal;" id="ShopStartDate"></span>&nbsp;-&nbsp;
+                        <span style="font-weight:normal;" id="ShopEndDate"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="daily_view">
+            <div class="body-section-body">
+                <input type="hidden" name="day" value="">
+                <input type="hidden" name="search" value="142707">
+                <input type="hidden" name="increment" value="">
+                <table id="daily-rates-table" class="dailytable grid">
+                    <thead>
+                        <tr>
+                            <td id="all-car-classes" style="cursor:pointer;" class="ui-selectee">All Car Classes</td>
+                            <!-- ko foreach:headers -->
+                            <td class="company-logo relative" align="center">
+                                <img data-bind=" css: companyID, attr:{src:logo, alt:companyName}">
+                                <!-- ko if:inside() != null || inside() != undefined  -->
+                                <span data-bind="css : inside() == true ? 'spn_i' : 'spn_o', attr:{ title : inside() == true ? 'Inside' : 'Outside'}"></span>
+                                <!-- /ko -->
+                            </td>
+                            <!-- /ko -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach:rates -->
+                        <tr>
+                            <td align="center" class="car-class-img ui-selectee">
+                                <img data-bind=" attr:{classId: carClassID, src:carClassLogo, alt:carClass}" class="carClassLogo">
+                            </td>
+
+                            <!-- ko foreach:companyDetails -->
+                            <td data-bind="attr:{companyID:companyID}" class="companyRates">
+                                <span data-bind="html:baseValue, css:moveUpDownCSS" class="daily-rate"></span><span class="perDay" data-bind="html:perDay, css:moveUpDownCSS"></span><br>
+                                <span class="tv" data-bind="html:totalValue, css:islowest()== true ? 'highlight': islowestAmongCompetitors() == true ? 'highlightGreen' : ''"><span class="total-cost"></span></span>
+                            </td>
+                            <!-- /ko -->
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+
+
+            </div>
+            <span class="spanlastdayshop red bold" style="display: none;padding-left:50px; white-space: nowrap;" id="lastShopDay">Last Shop Day</span>
+        </div>
+        <div id="noRecords" style="display:none;">
+            <span class="red bold" style="text-align:center ;padding-left:150px">No Results found</span>
+        </div>
+    </div>
+    <select name="lorDummy" id="dummyLor" style="display:none"></select>
+    <input type="hidden" id="hdnUseRateCode" />
+
+</form>

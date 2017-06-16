@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+<div class="popup_bg" id="popupMark" style="display:none;"></div>
+<div id="srpopup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_MarkResults.cshtml");}
+</div>
+
+<div class="auto-console-div"> AUTOMATION CONSOLE </div>
+<div class="container">
+    <div class="pageminht">
+        <ul class="rtabs">
+            <li class="view2"><a id="jobScheduled">Job Schedules</a></li>
+            <li class="view1"><a id="newJob">Create/ Edit Job</a></li>
+        </ul>
+        <div class="panel-container">
+            <div class="loader_container_main" style="display: none; padding:0px;">
+                <div class="loader-bg"></div>
+                <div class="loader">
+                    <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;">
+                </div>
+            </div>
+            @{Html.RenderPartial("~/Views/Partials/_AutoConsoleCreateJob.cshtml");}
+            @{Html.RenderPartial("~/Views/Partials/_AutoConsoleViewJobs.cshtml");}
+        </div>
+    </div>
+    <div id="footer-links">
+        @{Html.RenderPartial("MasterFooter");}
+    </div>
+</div>
+<div id="mr_popup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_AutoConsoleMinRate.cshtml");}
+</div>
+<div id="mr_Tether_popup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_AutoConsoleTethering.cshtml");}
+</div>
+<div id="mr_Opaque_popup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_OpaqueRates.cshtml");}
+</div>
+<div id="mr_AutoConsoleRuleSet_popup" style="display:none">
+    @{Html.RenderPartial("~/Views/Partials/_AutoConsoleRuleSet.cshtml");}
+</div>
+@Styles.Render("~/css/jquery-ui-timepicker-addon.css")
+@Styles.Render("~/css/responsive-tabs.css")
+@Styles.Render("~/css/automation.css")
+@Scripts.Render("~/bundles/AutomationConsoleBundleJS")
+@*@Scripts.Render("~/Scripts/AutomationConsoleTethering.js")*@
+@*@Scripts.Render("~/Scripts/AutomationConsoleRuleSet.js")
+@Scripts.Render("~/Scripts/RuleSet-functions.js")*@
+<script>
+    var AjaxURLSettings = {
+        GetScrapperSources: '@Url.Action("GetScrapperSources", "AutomationConsole")',
+        GetLocations: '@Url.Action("GetLocations", "AutomationConsole")',
+        GetCarClasses: '@Url.Action("GetCarClasses", "AutomationConsole")',
+        SaveJob: '@Url.Action("SaveJob", "AutomationConsole")',
+        GetJobDetails: '@Url.Action("GetJobDetails", "AutomationConsole")',
+
+        //replace all ruleset URL
+        GetRuleSetUrl: '@Url.Action("GetRuleSet", "Ruleset")',
+        GetAutomationRuleSetUrl: '@Url.Action("GetAutomationRuleSet", "Ruleset")',
+        GetRuleSetDefaultSettingUrl: '@Url.Action("GetRuleSetDefaultSetting", "Ruleset")',
+        GetWeekDaysUrl: '@Url.Action("GetWeekDays", "Ruleset")',
+        GetBrandLocationUrl: '@Url.Action("GetBrandLocation", "Ruleset")',
+        GetCompaniesUrl: '@Url.Action("GetCompanies", "Ruleset")',
+        GetCarClassesUrl: '@Url.Action("GetCarClasses", "Ruleset")',
+        GetRentalLengthsUrl: '@Url.Action("GetRentalLengths", "Ruleset")',
+        GetSelectedRuleSetDataUrl: '@Url.Action("GetSelectedRuleSetData", "Ruleset")',
+        CreateUpdateRuleSetUrl: '@Url.Action("CreateUpdateRuleSet", "Ruleset")',
+        DeleteSelectedRuleSetDataUrl: '@Url.Action("DeleteSelectedRuleSetData", "Ruleset")',
+        GetSelectedRuleSetDataUrl: '@Url.Action("GetSelectedRuleSetData", "Ruleset")',
+        GetLocationCarClassesUrl: '@Url.Action("GetLocationCarClasses", "Search")',
+        GetCompetitorsUrl: '@Url.Action("GetCompetitors", "Location")',
+        GetOpaqueRateUrl: '@Url.Action("GetEditJobOpaqueRates", "AutomationConsole")'
+    }
+</script>

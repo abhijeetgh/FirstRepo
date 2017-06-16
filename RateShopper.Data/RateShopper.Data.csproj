@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5810210B-6422-4E8C-ACF5-5FA9D0DE8265}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RateShopper.Data</RootNamespace>
+    <AssemblyName>RateShopper.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EZRACRateShopperContext.cs" />
+    <Compile Include="IBaseContext.cs" />
+    <Compile Include="IEZRACRateShopperContext.cs" />
+    <Compile Include="Mapping\BaseAuditableEntityConfiguration.cs" />
+    <Compile Include="Mapping\BaseEntityConfiguration.cs" />
+    <Compile Include="Mapping\CallbackResponseMap.cs" />
+    <Compile Include="Mapping\CarClassMap.cs" />
+    <Compile Include="Mapping\CompanyMap.cs" />
+    <Compile Include="Mapping\FormulaMap.cs" />
+    <Compile Include="Mapping\FTBRateMap.cs" />
+    <Compile Include="Mapping\FTBRatesDetailMap.cs" />
+    <Compile Include="Mapping\FTBRatesSplitMonthDetailsMap.cs" />
+    <Compile Include="Mapping\FTBRatesTSDLogsMap.cs" />
+    <Compile Include="Mapping\FTBScheduledJobMap.cs" />
+    <Compile Include="Mapping\FTBTargetMap.cs" />
+    <Compile Include="Mapping\FTBTargetsDetailMap.cs" />
+    <Compile Include="Mapping\GlobalLimitDetailMap.cs" />
+    <Compile Include="Mapping\GlobalLimitMap.cs" />
+    <Compile Include="Mapping\GlobalTetherSettingMap.cs" />
+    <Compile Include="Mapping\JobTypeFrequencyMapperMap.cs" />
+    <Compile Include="Mapping\LocationBrandCarClassMap.cs" />
+    <Compile Include="Mapping\LocationBrandMap.cs" />
+    <Compile Include="Mapping\LocationBrandRentalLengthMap.cs" />
+    <Compile Include="Mapping\LocationCompanyMap.cs" />
+    <Compile Include="Mapping\LocationMap.cs" />
+    <Compile Include="Mapping\LocationPricingManagerMap.cs" />
+    <Compile Include="Mapping\PostJSONRequestLogMap.cs" />
+    <Compile Include="Mapping\PostJSONResponseLogMap.cs" />
+    <Compile Include="Mapping\PostXMLLogsMap.cs" />
+    <Compile Include="Mapping\ProvidersMap.cs" />
+    <Compile Include="Mapping\QuickviewCarClassGroupMap.cs" />
+    <Compile Include="Mapping\QuickViewGapDevSettingsMap.cs" />
+    <Compile Include="Mapping\QuickViewGroupCompaniesMap.cs" />
+    <Compile Include="Mapping\QuickViewGroupMap.cs" />
+    <Compile Include="Mapping\QuickViewMap.cs" />
+    <Compile Include="Mapping\QuickViewResultsMap.cs" />
+    <Compile Include="Mapping\RangeIntervalMap.cs" />
+    <Compile Include="Mapping\RateCodeDateRangeMap.cs" />
+    <Compile Include="Mapping\RateCodeMap.cs" />
+    <Compile Include="Mapping\RateSystemMap.cs" />
+    <Compile Include="Mapping\RentalLengthMap.cs" />
+    <Compile Include="Mapping\RuleSetCarClassesMap.cs" />
+    <Compile Include="Mapping\RuleSetDefaultSettingMap.cs" />
+    <Compile Include="Mapping\RuleSetGapSettingMap.cs" />
+    <Compile Include="Mapping\RuleSetGroupCompanyMap.cs" />
+    <Compile Include="Mapping\RuleSetGroupMap.cs" />
+    <Compile Include="Mapping\RuleSetMap.cs" />
+    <Compile Include="Mapping\RuleSetsAppliedMap.cs" />
+    <Compile Include="Mapping\RuleSetRentalLengthMap.cs" />
+    <Compile Include="Mapping\RuleSetWeekDayMap.cs" />
+    <Compile Include="Mapping\ScheduledJobFrequencyMap.cs" />
+    <Compile Include="Mapping\ScheduledJobMap.cs" />
+    <Compile Include="Mapping\ScheduledJobMinRatesMap.cs" />
+    <Compile Include="Mapping\ScheduledJobOpaqueValuesMap.cs" />
+    <Compile Include="Mapping\ScheduledJobRuleSetsMap.cs" />
+    <Compile Include="Mapping\ScheduledJobTetheringsMap.cs" />
+    <Compile Include="Mapping\ScrapperSourceMap.cs" />
+    <Compile Include="Mapping\ScrappingServersMap.cs" />
+    <Compile Include="Mapping\SearchJobUpdateAllMap.cs" />
+    <Compile Include="Mapping\SearchResultMap.cs" />
+    <Compile Include="Mapping\SearchResultProcessedDataMap.cs" />
+    <Compile Include="Mapping\SearchResultRawDataMap.cs" />
+    <Compile Include="Mapping\SearchResultSuggestedRateMap.cs" />
+    <Compile Include="Mapping\SearchSummaryMap.cs" />
+    <Compile Include="Mapping\SplitMonthDetailsMap.cs" />
+    <Compile Include="Mapping\StatusMap.cs" />
+    <Compile Include="Mapping\sysdiagramMap.cs" />
+    <Compile Include="Mapping\TSDTransactionMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Mapping\UserLocationBrandsMap.cs" />
+    <Compile Include="Mapping\UserPermissionMapperMap.cs" />
+    <Compile Include="Mapping\UserPermissionsMap.cs" />
+    <Compile Include="Mapping\UserRoleMap.cs" />
+    <Compile Include="Mapping\UserScrapperSourcesMap.cs" />
+    <Compile Include="Mapping\WeekDayMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RateShopper.Domain\RateShopper.Domain.csproj">
+      <Project>{d862ab63-93e8-48d8-a7a2-3fb13ca08414}</Project>
+      <Name>RateShopper.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

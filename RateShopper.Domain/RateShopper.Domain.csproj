@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D862AB63-93E8-48D8-A7A2-3FB13CA08414}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RateShopper.Domain</RootNamespace>
+    <AssemblyName>RateShopper.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>CustomizedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constant\EmailPathConstants.cs" />
+    <Compile Include="DTOs\AllRuleSetsForLocationBrandDTO.cs" />
+    <Compile Include="DTOs\AppliedRuleSetsDTO.cs" />
+    <Compile Include="DTOs\AutoConsoleJobEditDTO.cs" />
+    <Compile Include="DTOs\AutomationConsoleViewJobsDTO.cs" />
+    <Compile Include="DTOs\BaseModel.cs" />
+    <Compile Include="DTOs\Enumerations.cs" />
+    <Compile Include="DTOs\FormulaDTO.cs" />
+    <Compile Include="DTOs\FTBAutomationJobsDTO.cs" />
+    <Compile Include="DTOs\FTBJobEditDTO.cs" />
+    <Compile Include="DTOs\FTBJobShopDateDetails.cs" />
+    <Compile Include="DTOs\FTBMonthsDTO.cs" />
+    <Compile Include="DTOs\FTBRatesDTO.cs" />
+    <Compile Include="DTOs\FTBRatesSplitMonthDetailsDTO.cs" />
+    <Compile Include="DTOs\FTBTargetDTO.cs" />
+    <Compile Include="DTOs\GlobalLimitDataDTO.cs" />
+    <Compile Include="DTOs\GlobalLimitDTO.cs" />
+    <Compile Include="DTOs\JobFrequencyTypesDTO.cs" />
+    <Compile Include="DTOs\LocationBrandDetailsDTO.cs" />
+    <Compile Include="DTOs\LocationCompanyDTO.cs" />
+    <Compile Include="DTOs\JobHistoryDTO.cs" />
+    <Compile Include="DTOs\MangeRuleSetDTO.cs" />
+    <Compile Include="DTOs\CarClassDTO.cs" />
+    <Compile Include="DTOs\CompanyDTO.cs" />
+    <Compile Include="DTOs\GlobalTetherValuesDTO.cs" />
+    <Compile Include="DTOs\LocationDTO.cs" />
+    <Compile Include="DTOs\MapTableResult.cs" />
+    <Compile Include="DTOs\MinRatesDTO.cs" />
+    <Compile Include="DTOs\RezPreloadPayloadDTO .cs" />
+    <Compile Include="DTOs\RezPreloadRateDTO.cs" />
+    <Compile Include="DTOs\ProviderRequest.cs" />
+    <Compile Include="DTOs\ProvidersDTO.cs" />
+    <Compile Include="DTOs\PushJSONRequestDTO.cs" />
+    <Compile Include="DTOs\QuickViewDTO.cs" />
+    <Compile Include="DTOs\QuickViewEmailDTO.cs" />
+    <Compile Include="DTOs\QuickViewLengthDateCombinationDTO.cs" />
+    <Compile Include="DTOs\RateCodeDateRangeDTO.cs" />
+    <Compile Include="DTOs\RateCodeDTO.cs" />
+    <Compile Include="DTOs\RateHighwayDTO.cs" />
+    <Compile Include="DTOs\RateHighwaySetting.cs" />
+    <Compile Include="DTOs\RentalLengthDTO.cs" />
+    <Compile Include="DTOs\ResponseModel.cs" />
+    <Compile Include="DTOs\RezCentralDTO.cs" />
+    <Compile Include="DTOs\RuleSetDTO.cs" />
+    <Compile Include="DTOs\ScheduledJobOpaqueValuesDTO.cs" />
+    <Compile Include="DTOs\ScheduledJobRuleSetDTO.cs" />
+    <Compile Include="DTOs\ScheduledJobTetheringsDTO.cs" />
+    <Compile Include="DTOs\ScheduleJobDTO.cs" />
+    <Compile Include="DTOs\ScrapperSourceDTO.cs" />
+    <Compile Include="DTOs\SearchResultDTO.cs" />
+    <Compile Include="DTOs\SearchSummaryDTO.cs" />
+    <Compile Include="DTOs\SearchViewAppliedRuleSetDTO.cs" />
+    <Compile Include="DTOs\SplitMonthDetailsDTO.cs" />
+    <Compile Include="DTOs\TravelClickDTO.cs" />
+    <Compile Include="DTOs\TSDDTO.cs" />
+    <Compile Include="DTOs\TSDReservationDTO.cs" />
+    <Compile Include="DTOs\UserBrandLocationDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
+    <Compile Include="DTOs\WeekDaysDTO.cs" />
+    <Compile Include="Entities\BaseAuditableEntity.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\CallbackResponse.cs" />
+    <Compile Include="Entities\CarClass.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Formula.cs" />
+    <Compile Include="Entities\FTBRate.cs" />
+    <Compile Include="Entities\FTBRatesDetail.cs" />
+    <Compile Include="Entities\FTBRatesSplitMonthDetails.cs" />
+    <Compile Include="Entities\FTBRatesTSDLogs.cs" />
+    <Compile Include="Entities\FTBScheduledJob.cs" />
+    <Compile Include="Entities\FTBTarget.cs" />
+    <Compile Include="Entities\FTBTargetsDetail.cs" />
+    <Compile Include="Entities\GlobalLimit.cs" />
+    <Compile Include="Entities\GlobalLimitDetail.cs" />
+    <Compile Include="Entities\GlobalTetherSetting.cs" />
+    <Compile Include="Entities\JobTypeFrequencyMapper.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\LocationBrand.cs" />
+    <Compile Include="Entities\LocationBrandCarClass.cs" />
+    <Compile Include="Entities\LocationBrandRentalLength.cs" />
+    <Compile Include="Entities\LocationCompany.cs" />
+    <Compile Include="Entities\LocationPricingManager.cs" />
+    <Compile Include="Entities\PostJSONRequestLog.cs" />
+    <Compile Include="Entities\PostJSONResponseLog.cs" />
+    <Compile Include="Entities\PostXMLLogs.cs" />
+    <Compile Include="Entities\Providers.cs" />
+    <Compile Include="Entities\QuickView.cs" />
+    <Compile Include="Entities\QuickviewCarClassGroup.cs" />
+    <Compile Include="Entities\QuickViewGapDevSettings.cs" />
+    <Compile Include="Entities\QuickViewGroup.cs" />
+    <Compile Include="Entities\QuickViewGroupCompanies.cs" />
+    <Compile Include="Entities\QuickViewResults.cs" />
+    <Compile Include="Entities\RangeInterval.cs" />
+    <Compile Include="Entities\RateCode.cs" />
+    <Compile Include="Entities\RateCodeDateRange.cs" />
+    <Compile Include="Entities\RateSystem.cs" />
+    <Compile Include="Entities\RentalLength.cs" />
+    <Compile Include="Entities\RuleSet.cs" />
+    <Compile Include="Entities\RuleSetDefaultSetting.cs" />
+    <Compile Include="Entities\RuleSetGapSetting.cs" />
+    <Compile Include="Entities\RuleSetGroup.cs" />
+    <Compile Include="Entities\RuleSetGroupCompany.cs" />
+    <Compile Include="Entities\RuleSetsApplied.cs" />
+    <Compile Include="Entities\RuleSetCarClasses.cs" />
+    <Compile Include="Entities\RuleSetRentalLength.cs" />
+    <Compile Include="Entities\RuleSetWeekDay.cs" />
+    <Compile Include="Entities\ScheduledJob.cs" />
+    <Compile Include="Entities\ScheduledJobFrequency.cs" />
+    <Compile Include="Entities\ScheduledJobMinRates.cs" />
+    <Compile Include="Entities\ScheduledJobOpaqueValues.cs" />
+    <Compile Include="Entities\ScheduledJobRuleSets.cs" />
+    <Compile Include="Entities\ScheduledJobTetherings.cs" />
+    <Compile Include="Entities\ScrapperSource.cs" />
+    <Compile Include="Entities\LocationBrandModel.cs" />
+    <Compile Include="Entities\ScrappingServers.cs" />
+    <Compile Include="Entities\SearchJobUpdateAll.cs" />
+    <Compile Include="Entities\SearchResult.cs" />
+    <Compile Include="Entities\SearchResultProcessedData.cs" />
+    <Compile Include="Entities\SearchResultRawData.cs" />
+    <Compile Include="Entities\SearchResultSuggestedRate.cs" />
+    <Compile Include="Entities\SearchSummary.cs" />
+    <Compile Include="Entities\SearchViewModel.cs" />
+    <Compile Include="Entities\SearchViewModelClassic.cs" />
+    <Compile Include="Entities\SplitMonthDetails.cs" />
+    <Compile Include="Entities\Statuses.cs" />
+    <Compile Include="Entities\sysdiagram.cs" />
+    <Compile Include="Entities\TSDModel.cs" />
+    <Compile Include="Entities\TSDTransaction.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserLocationBrands.cs" />
+    <Compile Include="Entities\UserPermissionMapper.cs" />
+    <Compile Include="Entities\UserPermissions.cs" />
+    <Compile Include="Entities\UserRole.cs" />
+    <Compile Include="Entities\UserScrapperSources.cs" />
+    <Compile Include="Entities\WeekDay.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

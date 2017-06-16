@@ -1,0 +1,205 @@
+/*FTB job Schedule popup*/
+.popup-top {
+    background: #e5e5e5;
+    font-size: 1.2em;
+    padding: 13px 10px;
+}
+
+.popup_bg_master {
+    background-color: #000;
+    opacity: 0.2;
+}
+
+#popup-main {
+    width: 100% !important;
+    position: absolute;
+    z-index: 100;
+    overflow: auto;
+    touch-action: auto !important;
+    left: -3px;
+    top: 0;
+    height:100%;
+}
+
+#popup-main-inner {
+    margin: 0 auto;
+    width: 400px;
+    background: #fff;
+    margin-top: 5%;
+    border: 1px solid black;
+    padding: 1px;
+}
+
+.heading {
+    font-weight: bold;
+    padding: 10px 10px;
+    font-size: 13px;
+}
+
+.jobScheduleBody {
+    width: 100%;
+    padding: 10px;
+}
+
+li {
+    display: inline;
+}
+
+.jobScheduleLi li > span {
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.jobScheduleLi li:before {
+    content: "•";
+    padding-right: 8px;
+    background-color: red;
+    color: red;
+}
+
+.jobScheduleLi li.blue-square:before {
+    color: #2988b9;
+    background-color: #2988b9;
+}
+
+.jobScheduleLi li.grey-square:before {
+    color: lightgray;
+    background-color: lightgray;
+}
+
+.ftb-auto-location {
+    float: left;
+    margin-right: 13px;
+    margin-top: 15px;
+    width: 166px;
+    margin-bottom: 10px;
+}
+
+.job-shedule-form {
+    display: inline-block;
+}
+
+    .job-shedule-form input {
+        margin-right: 4px;
+    }
+
+    .job-shedule-form .activate-tether {
+        display: inline-block;
+        width: 100%;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .job-shedule-form .frequency > span,
+    .start-date > span,
+    .run-time > span {
+        color: #3b3b3b;
+        float: left;
+        font-weight: bold;
+        padding: 6px 0;
+        width: 100%;
+    }
+
+.start-date > span,
+.run-time > span {
+    display: inline-block;
+    width: auto;
+    padding-right: 12px;
+}
+
+.frequency .freq-ul {
+    padding-top: 15px;
+}
+
+    .frequency .freq-ul li {
+        color: #6c6c6c;
+        float: left;
+        font-size: 14px;
+        list-style-type: none;
+        padding: 8px 0;
+        width: 30%;
+    }
+
+        .frequency .freq-ul li input[type="checkbox"] {
+            margin-right: 9px;
+        }
+
+.frequency .freq-text {
+    color: #6c6c6c;
+    display: block;
+    float: left;
+    padding: 9px 0;
+    width: 100%;
+}
+
+.frequency, .activate-tether, .start-date, .run-time, .ftb-auto-days {
+    padding: 10px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+    .run-time input[type="text"] {
+        padding: 4px;
+    }
+
+.days .days-inner-box .daysbox {
+    border: 1px solid #bebebe;
+    width: 145px;
+    overflow: hidden;
+    float: left;
+}
+
+.job-shedule-form > input[type="submit"] {
+    display: block;
+}
+
+/*.location .location-inner-box .locationbox {
+    height: 110px;
+}
+.location .location-inner-box .locationbox ul, .location .location-inner-box .locationbox select {
+        height: 100%;
+    }*/
+.loader-ftbScheduleJob {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
+.ftbScheduleJobloader {
+    position: absolute;
+    top: 56%;
+    left: 48%;
+    z-index: 100;
+}
+
+.blue {
+    color: #2988b9;
+}
+
+.red {
+    color: red;
+}
+
+
+#popupShowSplitIntervals {
+    position: absolute;
+    top: 30%;
+    left: 38%;
+    background: #fff;
+    border: 1px solid #000;
+    width: 350px;
+    z-index: 1000;
+    display: none;
+}
+
+#popupShowSplitIntervals .popup-top {
+    background: #e5e5e5;
+    font-size: 1.2em;
+    padding: 5px 10px;
+}
+
+    #popupShowSplitIntervals li {
+        display:block;
+        margin: 7px 0 0;
+    }

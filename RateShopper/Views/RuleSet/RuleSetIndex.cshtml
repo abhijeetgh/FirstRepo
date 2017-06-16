@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Manage Rule Sets";
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+@Styles.Render("~/css/master.css")
+@Styles.Render("~/css/manage_rules.css")
+
+<div id="MainRuleSetPage" class="MainRuleSetPage">
+    <div class="loader_container_main">
+        <div class="loader-bg"></div>
+        <div class="loader">
+            <img src="~/images/ajax_loader_blue_large.gif" style="height: 150px;" />
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="pageminht">
+            <div class="gt-top">
+                <span class="uppercase bold">Manage Rule Sets</span>
+            </div>
+            <div class="left-col-toggle pointer fleft">
+                <img src="~/images/search-toggle-e.png" alt="toggle" />
+            </div>
+            <!-- Start of Left Half -->
+            @{Html.RenderPartial("~/Views/Partials/_LeftPanelRuleSet.cshtml");}
+
+            <!-- Start of right Half -->
+            @{Html.RenderPartial("~/Views/Partials/_RightPanelRuleSet.cshtml");}
+        </div>
+        <div class="clear">
+            @{Html.RenderPartial("ChildFooter");}
+            <div id="footer-links">
+                @{Html.RenderPartial("MasterFooter");}
+            </div>
+        </div>
+    </div>
+    @*<div id="right-col">
+        <div class="side-section-body-new" id="RuleSetDefaultTemplate" >*@
+</div>
+@*</div>
+    </div>*@
+@Scripts.Render("~/Scripts/RuleSet-functions.js")
+
+<script>
+    var AjaxURLSettings = {
+        GetRuleSetUrl: '@Url.Action("GetRuleSet", "Ruleset")',
+        GetRuleSetDefaultSettingUrl: '@Url.Action("GetRuleSetDefaultSetting", "Ruleset")',
+        GetWeekDaysUrl: '@Url.Action("GetWeekDays", "Ruleset")',
+        GetBrandLocationUrl: '@Url.Action("GetBrandLocation", "Ruleset")',
+        GetCompaniesUrl: '@Url.Action("GetCompanies", "Ruleset")',
+        GetCarClassesUrl: '@Url.Action("GetCarClasses", "Ruleset")',
+        GetRentalLengthsUrl: '@Url.Action("GetRentalLengths", "Ruleset")',
+        GetSelectedRuleSetDataUrl: '@Url.Action("GetSelectedRuleSetData", "Ruleset")',
+        CreateUpdateRuleSetUrl: '@Url.Action("CreateUpdateRuleSet", "Ruleset")',
+        DeleteSelectedRuleSetDataUrl: '@Url.Action("DeleteSelectedRuleSetData", "Ruleset")',
+        GetSelectedRuleSetDataUrl: '@Url.Action("GetSelectedRuleSetData", "Ruleset")',
+        GetLocationCarClassesUrl: '@Url.Action("GetLocationCarClasses", "Search")',
+        GetCompetitorsUrl:'@Url.Action("GetCompetitors", "Location")'
+    }
+</script>
